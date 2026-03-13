@@ -1,6 +1,6 @@
 #!/bin/sh
 
-src_dir="$XDG_CONFIG_HOME/zshrc/settings/powerlevel10k"
+src_dir="$(dirname "$(realpath "$0")")"
 dst_dir="$HOME"
 src="$src_dir/.p10k.zsh"
 dst="$dst_dir/.p10k.zsh"

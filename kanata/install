@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # Define paths
-REPO_DIR="$HOME/.config/zshrc/settings/kanata"
+REPO_DIR="$(dirname "$(realpath "$0")")"
 SYSTEMD_DIR="$HOME/.config/systemd/user"
 KANATA_CONF_DIR="$HOME/.config/kanata"
 SERVICE_NAME="kanata.service"

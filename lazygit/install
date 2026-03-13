@@ -1,6 +1,6 @@
 #!/bin/sh
 
-src_dir="$XDG_CONFIG_HOME/zshrc/settings/lazygit"
+src_dir="$(dirname "$(realpath "$0")")"
 dst_dir="$XDG_CONFIG_HOME/lazygit"
 src="$src_dir/config.yml"
 dst="$dst_dir/config.yml"

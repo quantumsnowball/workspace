@@ -1,6 +1,6 @@
 #!/bin/sh
 
-src_dir="$XDG_CONFIG_HOME/zshrc/settings/ripgrep"
+src_dir="$(dirname "$(realpath "$0")")"
 dst_dir="$HOME"
 src="$src_dir/.rgignore"
 dst="$dst_dir/.rgignore"

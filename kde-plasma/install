@@ -1,6 +1,6 @@
 #!/bin/bash
 
-src_dir="$XDG_CONFIG_HOME/zshrc/settings/kde-plasma"
+src_dir="$(dirname "$(realpath "$0")")"
 dst_dir="$XDG_CONFIG_HOME"
 
 ln -sfv "$src_dir/kglobalshortcutsrc" "$dst_dir/kglobalshortcutsrc"
