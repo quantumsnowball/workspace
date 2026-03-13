@@ -1,0 +1,7 @@
+# mkdir command. See wiki if you want it to select created dir
+map A :push %mkdir<space>
+
+# touch
+map a :push %touch<space>
+
+

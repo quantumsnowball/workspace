@@ -1,0 +1,20 @@
+project_name := "windows-manager"
+script_path := "~/.config/zshrc/settings/kde-plasma/kwin-scripts/windows-manager"
+
+
+# Installs/updates, unloads the old instance, and starts the new one
+load:
+    kpackagetool6 --type=KWin/Script -u {{script_path}} || kpackagetool6 --type=KWin/Script -i {{script_path}}
+    dbus-send --session --print-reply --dest=org.kde.KWin /Scripting \
+        org.kde.kwin.Scripting.unloadScript string:"{{project_name}}"
+    dbus-send --session --print-reply  --dest=org.kde.KWin /Scripting \
+        org.kde.kwin.Scripting.start
+
+# Stops the script and removes it from the system
+unload:
+    dbus-send --session --print-reply --dest=org.kde.KWin /Scripting \
+        org.kde.kwin.Scripting.unloadScript string:"{{project_name}}"
+    kpackagetool6 --type=KWin/Script -r {{project_name}}
+
+log:
+    journalctl -f QT_CATEGORY=js QT_CATEGORY=kwin_scripting

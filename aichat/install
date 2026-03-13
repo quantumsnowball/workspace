@@ -1,0 +1,10 @@
+#!/bin/sh
+
+src_dir="$XDG_CONFIG_HOME/zshrc/settings/aichat"
+dst_dir="$XDG_CONFIG_HOME/aichat"
+src="$src_dir/config.yaml"
+dst="$dst_dir/config.yaml"
+
+mkdir -p $dst_dir
+ln -sf $src $dst
+ls -l $dst

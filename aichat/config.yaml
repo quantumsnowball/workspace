@@ -1,0 +1,11 @@
+# see https://github.com/sigoden/aichat/blob/main/config.example.yaml
+
+# env variables:
+#   create .env file at the same directory of config.yaml:
+#   GEMINI_API_KEY=<api key>
+#   ALL_PROXY=<http proxy>
+
+model: gemini:gemini-2.5-flash
+clients:
+- type: gemini
+

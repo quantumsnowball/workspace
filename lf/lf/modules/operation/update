@@ -1,0 +1,15 @@
+# define a custom 'rename' command without prompt for overwrite
+# cmd rename %[ -e $1 ] && printf "file exists" || mv $f $1
+# map r push :rename<space>
+map r :rename; cmd-delete-home
+map RR :rename; cmd-end
+map Rr :rename; cmd-end; cmd-delete-home
+
+
+# use enter for shell commands
+# map <enter> shell
+map ; shell
+
+# v at current dir of lf
+map v $nvim
+

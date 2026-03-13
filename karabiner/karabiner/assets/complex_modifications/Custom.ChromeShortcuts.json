@@ -1,0 +1,40 @@
+{
+    "title": "Custom Mapping : Chrome Shortcuts",
+    "rules": [
+        {
+            "description": "[Custom] Ctrl+F -> Cmd+F (Find)",
+            "manipulators": [
+                {
+                    "type": "basic",
+                    "from": {
+                        "key_code": "f",
+                        "modifiers": {
+                            "mandatory": [
+                                "control"
+                            ],
+                            "optional": [
+                                "any"
+                            ]
+                        }
+                    },
+                    "to": [
+                        {
+                            "key_code": "f",
+                            "modifiers": [
+                                "left_command"
+                            ]
+                        }
+                    ],
+                    "conditions": [
+                        {
+                            "type": "frontmost_application_if",
+                            "bundle_identifiers": [
+                                "com.google.Chrome"
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<keyboard name="A80-TightNum-Center" script="latin" bottom_row="false">
+  <row>
+    <!-- row 1 -->
+    <key c="1" se="!" sw="`" nw="~" />
+    <key c="2" se="@" s="enter"/>
+    <key c="3" se="#" s="enter"/>
+    <key c="4" se="$" s="enter"/>
+    <key c="5" se="%" s="switch_forward" n="menu"/>
+    <key c="6" sw="^" s="config" n="fn"/>
+    <key c="7" sw="&amp;" s="enter"/>
+    <key c="8" sw="*" s="enter"/>
+    <key c="9" sw="(" se="-" ne="_" s="enter"/>
+    <key c="0" sw=")" se="=" ne="+"/>
+  </row>
+  <row>
+    <!-- row 2 -->
+    <key c="q" e="tab"/>
+    <key c="w" />
+    <key c="e" />
+    <key c="r" s="redo" w="backspace" />
+    <key c="t" />
+    <key c="y" />
+    <key c="u" s="undo" e="tab" />
+    <key c="i" se="[" ne="{" />
+    <key c="o" se="]" ne="}" />
+    <key c="p" se="\\" ne="|" w="backspace" />
+  </row>
+  <row>
+    <!-- row 3 -->
+    <key c="a" e="tab" shift="0.5" />
+    <key c="s" />
+    <key c="d" />
+    <key c="f" w="backspace"/>
+    <key c="g" e="-" w="-" n="|" s="_" ne="/" sw="/" nw="\\" se="\\"/>
+    <key c="h" e="tab" />
+    <key c="j" />
+    <key c="k" se=";" ne=":" />
+    <key c="l" se="'" ne="&quot;" w="backspace"/>
+  </row>
+  <row>
+    <!-- row 4 -->
+    <key c="esc" n="shift" s="delete" e="tab" width="1.5" />
+    <key c="z" s="switch_clipboard" />
+    <key c="x" s="cut" n="selectAll" />
+    <key c="c" s="copy" n="selectAll" />
+    <key c="v" s="pasteAsPlainText" n="selectAll" />
+    <key c="b" se="," ne="&lt;" />
+    <key c="n" se="." ne="&gt;" />
+    <key c="m" se="/" ne="\?" />
+    <key c="backspace" n="shift" s="delete" w="backspace" width="1.5" />
+  </row>
+  <row height="0.95">
+    <!-- row 5 -->
+    <key c="ctrl" 
+      s="alt"
+      e="tab"
+      n="shift"
+      width="1.7" 
+    />
+    <key c="," 
+      n="page_up"
+      s="page_down"
+      e="end"
+      w="home"
+      width="1.5" 
+    />
+    <key c="space" 
+      n="up"
+      s="down"
+      e="right"
+      w="left"
+      width="3.6" 
+    />
+    <key c="." 
+      n="page_up"
+      s="page_down"
+      e="end"
+      w="home"
+      width="1.5" 
+    />
+    <key c="enter" 
+      w="backspace"
+      s="delete"
+      n="shift"
+      s="ctrl"
+      width="1.7" 
+    />
+  </row>
+</keyboard>

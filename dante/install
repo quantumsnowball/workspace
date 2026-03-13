@@ -1,0 +1,5 @@
+#!/bin/sh
+
+sudo ln -sf "$HOME/.config/zshrc/settings/dante/danted.conf" "/etc/danted.conf"
+sudo ls -l "/etc/danted.conf"
+

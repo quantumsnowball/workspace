@@ -1,0 +1,12 @@
+source "~/.config/lf/modules/general"
+source "~/.config/lf/modules/info"
+source "~/.config/lf/modules/layout"
+source "~/.config/lf/modules/jumping"
+source "~/.config/lf/modules/preview"
+source "~/.config/lf/modules/operation/create"
+source "~/.config/lf/modules/operation/read"
+source "~/.config/lf/modules/operation/update"
+source "~/.config/lf/modules/operation/delete"
+source "~/.config/lf/modules/zip"
+
+source "~/.config/lf/keymaps"

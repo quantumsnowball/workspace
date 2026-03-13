@@ -1,0 +1,10 @@
+#!/bin/sh
+
+src_dir="$XDG_CONFIG_HOME/zshrc/settings/fontconfig"
+dst_dir="$XDG_CONFIG_HOME/fontconfig"
+src="$src_dir/fonts.conf"
+dst="$dst_dir/fonts.conf"
+
+mkdir -p $dst_dir
+ln -sf $src $dst
+ls -l $dst

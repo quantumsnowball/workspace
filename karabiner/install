@@ -1,0 +1,10 @@
+#!/bin/sh
+
+src_dir="$XDG_CONFIG_HOME/zshrc/settings/karabiner"
+dst_dir="$XDG_CONFIG_HOME"
+src="$src_dir/karabiner"
+dst="$dst_dir/karabiner"
+
+mkdir -p $dst_dir
+ln -sf $src $dst
+ls -l $dst

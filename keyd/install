@@ -1,0 +1,10 @@
+#!/bin/sh
+
+src_dir="$XDG_CONFIG_HOME/zshrc/settings/keyd"
+dst_dir="/etc/keyd"
+src="$src_dir/default.conf"
+dst="$dst_dir/default.conf"
+
+sudo mkdir -p $dst_dir
+sudo ln -sf $src $dst
+sudo ls -l $dst

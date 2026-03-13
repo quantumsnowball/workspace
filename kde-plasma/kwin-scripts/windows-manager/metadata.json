@@ -1,0 +1,19 @@
+{
+    "KPlugin": {
+        "Name": "Windows Manager",
+        "Description": "KDE Windows Manager",
+        "Icon": "preferences-system-windows",
+        "Authors": [
+            {
+                "Email": "quantum.snowball@gmail.com",
+                "Name": "Quantum Snowball"
+            }
+        ],
+        "Id": "windows-manager",
+        "Version": "1.0",
+        "License": "GPLv3"
+    },
+    "X-Plasma-API": "javascript",
+    "X-Plasma-MainScript": "code/main.js",
+    "KPackageStructure": "KWin/Script"
+}

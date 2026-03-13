@@ -1,0 +1,10 @@
+#!/bin/sh
+
+src_dir="$XDG_CONFIG_HOME/zshrc/settings/conda"
+dst_dir="$CONDA_PREFIX/etc/conda/activate.d"
+src="$src_dir/env_vars.sh"
+dst="$dst_dir/env_vars.sh"
+
+mkdir -p $dst_dir
+ln -sf $src $dst
+ls -l $dst

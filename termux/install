@@ -1,0 +1,10 @@
+#!/bin/sh
+
+src_dir="$XDG_CONFIG_HOME/zshrc/settings/termux"
+dst_dir="$HOME/.termux"
+src="$src_dir/termux.properties"
+dst="$dst_dir/termux.properties"
+
+mkdir -p $dst_dir
+ln -sf $src $dst
+ls -l $dst

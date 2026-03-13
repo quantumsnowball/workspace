@@ -1,0 +1,10 @@
+#!/bin/sh
+
+src_dir="$XDG_CONFIG_HOME/zshrc/settings/ptpython"
+dst_dir="$XDG_CONFIG_HOME/ptpython"
+src="$src_dir/config.py"
+dst="$dst_dir/config.py"
+
+mkdir -p $dst_dir
+ln -sf $src $dst
+ls -l $dst

@@ -1,0 +1,6 @@
+#!/bin/sh
+
+cp "$HOME/.config/zshrc/settings/tinyproxy/tinyproxy.conf" "$HOME/.config/zshrc/settings/tinyproxy/.tinyproxy.conf"
+sudo ln -sf "$HOME/.config/zshrc/settings/tinyproxy/.tinyproxy.conf" "/etc/tinyproxy/tinyproxy.conf"
+sudo ls -l "/etc/tinyproxy/tinyproxy.conf"
+

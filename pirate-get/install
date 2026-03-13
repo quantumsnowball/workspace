@@ -1,0 +1,10 @@
+#!/bin/sh
+
+src_dir="$XDG_CONFIG_HOME/zshrc/settings/pirate-get"
+dst_dir="$XDG_CONFIG_HOME/pirate-get"
+src="$src_dir/pirate-get"
+dst="$dst_dir/pirate-get"
+
+mkdir -p $dst_dir
+ln -sf $src $dst
+ls -l $dst

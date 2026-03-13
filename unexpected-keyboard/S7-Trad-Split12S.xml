@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<keyboard name="S7-Trad-Split12S" script="latin" bottom_row="false">
+  <row>
+    <key c="tab" sw="`" nw="~" width="0.9" />
+    <key c="q" n="1" nw="!" />
+    <key c="w" n="2" nw="@" />
+    <key c="e" n="3" nw="#" />
+    <key c="r" n="4" nw="$" se="redo" />
+    <key c="t" n="5" nw="%" />
+    <key c="tab"
+      width="2.0"
+    />
+    <key c="fn" 
+      n="config"
+      s="switch_forward"
+      width="1.0"
+    />
+    <key c="pasteAsPlainText" />
+    <key c="paste" 
+      width="2.0"
+    />
+    <key c="copy" 
+      width="2.0"
+    />
+    <key c="cut" />
+    <key c="backspace" 
+      e="delete"
+      width="3.0" 
+    />
+    <key c="y" n="6" ne="^" sw="copy" />
+    <key c="u" n="7" ne="&amp;" sw="undo" />
+    <key c="i" n="8" ne="*" />
+    <key c="o" n="9" ne="(" />
+    <key c="p" n="0" ne=")" sw="pasteAsPlainText" />
+    <key c="-" s="_" n="+" w="=" e="|"  width="1.1" />
+  </row>
+  <row>
+    <key c="esc" width="1.0" />
+    <key c="a" se="selectAll" />
+    <key c="s" />
+    <key c="d" />
+    <key c="f" />
+    <key c="g" />
+    <key c="ctrl" 
+      w="alt"
+      width="4.0" 
+    />
+    <key c="selectAll" 
+      width="4.0" 
+    />
+    <key c="enter" 
+      width="4.0" 
+    />
+    <key c="h" />
+    <key c="j" />
+    <key c="k" />
+    <key c="l" />
+    <key c=";" sw=":" se="'" ne="&quot;" />
+    <key c="\\" sw="[" se="]" nw="{" ne="}" width="1.0" />
+  </row>
+  <row>
+    <key c="shift" width="2.1" />
+    <key c="z" s="switch_clipboard" />
+    <key c="x" s="cut" />
+    <key c="c" s="copy" />
+    <key c="v" s="paste" />
+    <key c="space" 
+      n="up"
+      s="down"
+      e="right"
+      w="left"
+      width="12.0" 
+    />
+    <key c="b" />
+    <key c="n"  />
+    <key c="m" />
+    <key c="," sw="&lt;" />
+    <key c="." sw="," se="/" ne="?" sw="&gt;" />
+    <key c="shift"
+      n="page_up"
+      s="page_down"
+      e="end"
+      w="home"
+      width="0.9" 
+    />
+  </row>
+</keyboard>
+
+

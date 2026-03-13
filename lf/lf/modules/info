@@ -1,0 +1,17 @@
+# show file size
+set info size
+
+# show dir counts
+set dircounts
+
+# toggle hidden
+map H set hidden!
+
+# eza status line
+cmd on-select &{{
+    lf -remote "send $id set statfmt \"$(eza -ld --color=always "$f")\""
+}}
+
+# show the result of execution of previous commands
+map ` !true
+

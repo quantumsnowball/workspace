@@ -1,0 +1,10 @@
+#!/bin/sh
+
+src_dir="$XDG_CONFIG_HOME/zshrc/settings/pudb"
+dst_dir="$XDG_CONFIG_HOME/pudb"
+src="$src_dir/pudb.cfg"
+dst="$dst_dir/pudb.cfg"
+
+mkdir -p $dst_dir
+ln -sf $src $dst
+ls -l $dst

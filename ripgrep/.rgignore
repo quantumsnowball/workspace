@@ -1,0 +1,11 @@
+# all match
+node_modules/
+site-packages/
+.git/
+.npm/
+*[Cc]ache*/
+*[Ii]cons*/
+*yarn.lock*
+# full path
+/.fonts/
+/.pyenv/

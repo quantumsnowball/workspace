@@ -1,0 +1,34 @@
+gui:
+  theme:
+    selectedLineBgColor:
+      - '#004400'
+quitOnTopLevelReturn: true
+git:
+  merging:
+    args: "--no-ff"
+  pagers:
+    - pager: diff-so-fancy
+      colorArg: always
+  log:
+    showGraph: 'always'
+    showWholeGraph: true
+  branchLogCmd: 'git log --graph --all --color=always --abbrev-commit --decorate --date=relative --pretty=oneline {{branchName}} --'
+  allBranchesLogCmds:
+    - git log --graph --all --color=always --abbrev-commit --decorate --date=relative  --pretty=oneline
+customCommands:
+  - key: 'F'
+    description: 'fast-forward selected branch up to current branch'
+    command: 'git fetch . {{.CheckedOutBranch.Name}}:{{.SelectedLocalBranch.Name}}'
+    context: 'localBranches'
+    prompts:
+      - type: 'confirm'
+        title: 'Confirm:'
+        body: 'Fast-forward `{{.SelectedLocalBranch.Name}}` up to `{{.CheckedOutBranch.Name}}`?'
+  - key: 's'
+    description: 'Prune all stale tracking branches'
+    command: 'git remote prune origin'
+    context: 'remotes'
+    prompts:
+      - type: 'confirm'
+        title: 'Confirm:'
+        body: 'Prune all stale tracking branches for remote `{{.SelectedRemote.Name}}`?'

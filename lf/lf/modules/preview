@@ -1,0 +1,6 @@
+# i to bat preview
+map i $bat --paging=always $f
+
+# Use the `dim` attribute instead of underline for the cursor in the preview pane
+set cursorpreviewfmt "\033[7;2m"
+

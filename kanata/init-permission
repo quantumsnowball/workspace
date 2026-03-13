@@ -1,0 +1,18 @@
+#!/bin/bash
+
+# Create the user group
+sudo groupadd uinput
+
+# Add your user to the input and uinput groups
+sudo usermod -aG input $USER
+sudo usermod -aG uinput $USER
+
+# Create a 'udev' rule so the system allows non-root access to uinput
+echo 'KERNEL=="uinput", MODE="0660", GROUP="uinput", OPTIONS+="static_node=uinput"' | sudo tee /etc/udev/rules.d/99-uinput.rules
+
+# Reload udev to apply the new rule
+sudo modprobe uinput
+
+# Finish
+echo "Please log out and log back in for change to take effect"
+

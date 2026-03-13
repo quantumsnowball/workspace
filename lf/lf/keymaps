@@ -1,0 +1,14 @@
+# cut
+map x cut
+
+# clear
+map <esc> clear
+
+# reload
+map r reload
+
+# rename
+map R rename
+
+# show keymaps
+map ? maps

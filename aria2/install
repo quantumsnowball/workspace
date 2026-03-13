@@ -1,0 +1,10 @@
+#!/bin/sh
+
+src_dir="$XDG_CONFIG_HOME/zshrc/settings/aria2"
+dst_dir="$HOME/.aria2"
+src="$src_dir/aria2.conf"
+dst="$dst_dir/aria2.conf"
+
+mkdir -p $dst_dir
+ln -sf $src $dst
+ls -l $dst

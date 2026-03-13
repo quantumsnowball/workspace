@@ -1,0 +1,10 @@
+#!/bin/sh
+
+src_dir="$XDG_CONFIG_HOME/zshrc/settings/less"
+dst_dir="$HOME"
+src="$src_dir/.lesskey"
+dst="$dst_dir/.lesskey"
+
+mkdir -p $dst_dir
+ln -sf $src $dst
+ls -l $dst
