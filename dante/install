@@ -1,5 +1,7 @@
 #!/bin/sh
 
-sudo ln -sf "$HOME/.config/zshrc/settings/dante/danted.conf" "/etc/danted.conf"
+src_dir="$(dirname "$(realpath "$0")")"
+
+sudo ln -sf "$src_dir/danted.conf" "/etc/danted.conf"
 sudo ls -l "/etc/danted.conf"
 

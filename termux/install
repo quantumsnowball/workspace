@@ -1,6 +1,6 @@
 #!/bin/sh
 
-src_dir="$XDG_CONFIG_HOME/zshrc/settings/termux"
+src_dir="$(dirname "$(realpath "$0")")"
 dst_dir="$HOME/.termux"
 src="$src_dir/termux.properties"
 dst="$dst_dir/termux.properties"

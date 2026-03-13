@@ -1,6 +1,6 @@
 #!/bin/sh
 
-src_dir="$XDG_CONFIG_HOME/zshrc/settings/pirate-get"
+src_dir="$(dirname "$(realpath "$0")")"
 dst_dir="$XDG_CONFIG_HOME/pirate-get"
 src="$src_dir/pirate-get"
 dst="$dst_dir/pirate-get"

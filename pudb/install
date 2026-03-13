@@ -1,6 +1,6 @@
 #!/bin/sh
 
-src_dir="$XDG_CONFIG_HOME/zshrc/settings/pudb"
+src_dir="$(dirname "$(realpath "$0")")"
 dst_dir="$XDG_CONFIG_HOME/pudb"
 src="$src_dir/pudb.cfg"
 dst="$dst_dir/pudb.cfg"

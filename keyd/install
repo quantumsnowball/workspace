@@ -1,6 +1,6 @@
 #!/bin/sh
 
-src_dir="$XDG_CONFIG_HOME/zshrc/settings/keyd"
+src_dir="$(dirname "$(realpath "$0")")"
 dst_dir="/etc/keyd"
 src="$src_dir/default.conf"
 dst="$dst_dir/default.conf"

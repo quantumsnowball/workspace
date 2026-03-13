@@ -1,6 +1,6 @@
 #!/bin/sh
 
-src_dir="$XDG_CONFIG_HOME/zshrc/settings/aichat"
+src_dir="$(dirname "$(realpath "$0")")"
 dst_dir="$XDG_CONFIG_HOME/aichat"
 src="$src_dir/config.yaml"
 dst="$dst_dir/config.yaml"

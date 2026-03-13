@@ -1,6 +1,6 @@
 #!/bin/sh
 
-src_dir="$XDG_CONFIG_HOME/zshrc/settings/conda"
+src_dir="$(dirname "$(realpath "$0")")"
 dst_dir="$CONDA_PREFIX/etc/conda/activate.d"
 src="$src_dir/env_vars.sh"
 dst="$dst_dir/env_vars.sh"
