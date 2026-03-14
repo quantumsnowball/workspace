@@ -2,7 +2,7 @@
 
 ## BUG: google chrome failed to get Chrome Safe Store from kwalletd6
 
-Solution:
+Solution 1:
 1. must tell google to use kwallet6, run:
 
 `google-chrome-stable --password-store=kwallet6`
@@ -20,3 +20,11 @@ Change: `Exec=/usr/bin/google-chrome-stable %U`
 To: `Exec=/usr/bin/google-chrome-stable --password-store=kwallet6 %U`
 
 (Note: There are usually three Exec= lines in the file; update all of them.)
+
+Solution 2:
+
+use ~/.config/chrome-flags.conf with the following content
+
+```
+--password-store=kwallet6
+```
