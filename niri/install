@@ -1,0 +1,10 @@
+#!/bin/sh
+
+src_dir="$(dirname "$(realpath "$0")")"
+dst_dir="$XDG_CONFIG_HOME/niri"
+src="$src_dir/config.kdl"
+dst="$dst_dir/config.kdl"
+
+mkdir -p $dst_dir
+ln -sf $src $dst
+ls -l $dst
