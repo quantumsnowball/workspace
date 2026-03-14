@@ -118,22 +118,16 @@ input {
     position x=1280 y=0
 }
 
-// Settings that influence how windows are positioned and sized.
-// Find more information on the wiki:
-// https://yalter.github.io/niri/Configuration:-Layout
+// layout
 layout {
-    // Set gaps around windows in logical pixels.
-    gaps 16
+    // operation
+    empty-workspace-above-first
 
-    // When to center a column when changing focus, options are:
-    // - "never", default behavior, focusing an off-screen column will keep at the left
-    //   or right edge of the screen.
-    // - "always", the focused column will always be centered.
-    // - "on-overflow", focusing a column will center it if it doesn't fit
-    //   together with the previously focused column.
-    // center-focused-column "always"
+    // centering behavior
+    center-focused-column "on-overflow"
+    always-center-single-column
 
-    // You can customize the widths that "switch-preset-column-width" (Mod+R) toggles between.
+    // presets
     preset-column-widths {
         proportion 0.25
         proportion 0.33333
@@ -142,8 +136,6 @@ layout {
         proportion 0.75
         proportion 1.0
     }
-
-    // You can also customize the heights that "switch-preset-window-height" (Mod+Shift+R) toggles between.
     preset-window-heights { 
         proportion 0.25
         proportion 0.33333
