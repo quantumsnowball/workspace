@@ -3,6 +3,18 @@
 // Check the wiki for a full description of the configuration:
 // https://yalter.github.io/niri/Configuration:-Introduction
 
+// Add lines like this to spawn processes at startup.
+// Note that running niri as a session supports xdg-desktop-autostart,
+// which may be more convenient to use.
+// See the binds section below for more spawn examples.
+
+// Start up
+//  BUG: google chrome failed to get Chrome Safe Store from kwalletd6
+//      must tell google to use kwallet6, run:
+//      google-chrome-stable --password-store=kwallet6
+spawn-at-startup "/usr/lib/pam_kwallet_init" 
+
+
 // Input device configuration.
 // Find the full list of options on the wiki:
 // https://yalter.github.io/niri/Configuration:-Input
@@ -265,14 +277,6 @@ layout {
         // bottom 64
     }
 }
-
-// Add lines like this to spawn processes at startup.
-// Note that running niri as a session supports xdg-desktop-autostart,
-// which may be more convenient to use.
-// See the binds section below for more spawn examples.
-
-// This line starts waybar, a commonly used bar for Wayland compositors.
-// spawn-at-startup "waybar"
 
 // To run a shell command (with variables, pipes, etc.), use spawn-sh-at-startup:
 // spawn-sh-at-startup "qs -c ~/source/qs/MyAwesomeShell"
