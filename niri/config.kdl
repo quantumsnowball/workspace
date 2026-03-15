@@ -386,14 +386,15 @@ binds {
     // Suggested binds for running programs: terminal, app launcher, screen locker.
     Super+Semicolon { spawn "alacritty"; }
     Ctrl+Space { spawn "dms" "ipc" "spotlight" "open"; }
-    Super+grave { spawn "dms" "ipc" "lock" "lock"; }
-    Super+Delete { spawn "dms" "ipc" "powermenu" "open"; }
+    Super+Delete { spawn "dms" "ipc" "lock" "lock"; }
+    Ctrl+Alt+Delete { spawn "dms" "ipc" "powermenu" "open"; }
 
     // overview
-    Super+Escape repeat=false { toggle-overview; }
+    Super+Tab repeat=false { toggle-overview; }
 
     // close window
     Super+Backspace repeat=false { close-window; }
+    Super+grave repeat=false { close-window; }
 
     // free windows focus
     Super+H     { focus-column-left; }
