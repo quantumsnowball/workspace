@@ -346,6 +346,12 @@ window-rule {
     clip-to-geometry true
 }
 
+// all windows slightly transparent
+window-rule {
+    opacity 0.95
+}
+
+
 binds {
     // Use spawn-sh to run a shell command. Do this if you need pipes, multiple commands, etc.
     // Note: the entire command goes as a single argument. It's passed verbatim to `sh -c`.
