@@ -394,6 +394,10 @@ binds {
     Super+J     { focus-window-or-workspace-down; }
     Super+K     { focus-window-or-workspace-up; }
     Super+L     { focus-column-right; }
+    Super+Left  { focus-column-left; }
+    Super+Down  { focus-window-or-workspace-down; }
+    Super+Up    { focus-window-or-workspace-up; }
+    Super+Right { focus-column-right; }
     Super+Home { focus-column-first; }
     Super+End  { focus-column-last; }
 
@@ -402,6 +406,10 @@ binds {
     Super+Shift+J     { move-window-down-or-to-workspace-down; }
     Super+Shift+K     { move-window-up-or-to-workspace-up; }
     Super+Shift+L     { move-column-right; }
+    Super+Shift+Left  { move-column-left; }
+    Super+Shift+Down  { move-window-down-or-to-workspace-down; }
+    Super+Shift+Up    { move-window-up-or-to-workspace-up; }
+    Super+Shift+Right  { move-column-right; }
     Super+Shift+Home { move-column-to-first; }
     Super+Shift+End  { move-column-to-last; }
 
@@ -427,6 +435,7 @@ binds {
     Super+R { reset-window-height; }
     Super+F { maximize-column; }
     Super+Shift+F { fullscreen-window; }
+    Super+M { maximize-window-to-edges; }
 
     // adjust layout
     Super+BracketLeft  { consume-or-expel-window-left; }
