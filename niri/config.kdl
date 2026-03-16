@@ -124,7 +124,7 @@ layout {
     empty-workspace-above-first
 
     // centering behavior
-    center-focused-column "on-overflow"
+    center-focused-column "never"
     always-center-single-column
 
     // presets
