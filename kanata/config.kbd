@@ -31,7 +31,8 @@
   m_d M-down
   m_l M-left
   m_r M-right
-  m_b M-bspc
+  m_bs M-bspc
+  m_del M-del
 )
 
 ;; define layers
@@ -53,7 +54,7 @@
 )
 (deflayer media-layer
   _   
-  _   C-f1 C-f2 C-f3 C-f4 lrld  _    _    _    _    _    _    _   @m_b    _  
+  _   C-f1 C-f2 C-f3 C-f4 lrld  _    _    _    _    _    _    _   @m_bs @m_del
   _     _    _    _    _    _    _    _    _    _    _  prev  next  _     _  
   _      _    _    _    _    _    _    _    _    _    _  volu   _         _  
   _       _    _    _    _    _    _    _    _   pp   vold    _    @m_u   _  
