@@ -351,6 +351,9 @@ window-rule {
     opacity 0.95
 }
 
+environment {
+    QT_QPA_PLATFORMTHEME "kde"
+}
 
 binds {
     // Use spawn-sh to run a shell command. Do this if you need pipes, multiple commands, etc.
@@ -385,6 +388,7 @@ binds {
 
     // Suggested binds for running programs: terminal, app launcher, screen locker.
     Super+Semicolon { spawn "alacritty"; }
+    Super+O { spawn "dolphin"; }
     Ctrl+Space { spawn "dms" "ipc" "spotlight" "open"; }
     Super+Delete { spawn "dms" "ipc" "lock" "lock"; }
     Ctrl+Alt+Delete { spawn "dms" "ipc" "powermenu" "open"; }
