@@ -14,6 +14,8 @@
 //      google-chrome-stable --password-store=kwallet6
 spawn-at-startup "/usr/lib/pam_kwallet_init" 
 
+// noctalia shell
+spawn-at-startup "qs" "-c" "noctalia-shell"
 
 // Input device configuration.
 // Find the full list of options on the wiki:
@@ -390,9 +392,9 @@ binds {
     Super+Semicolon { spawn "alacritty" "-e" "/bin/sh" "-c" "tmux attach || tmux"; }
     Super+Shift+Semicolon { spawn "alacritty" "-e" "/bin/zsh"; }
     Super+O { spawn "dolphin"; }
-    Ctrl+Space { spawn "dms" "ipc" "spotlight" "open"; }
-    Super+Delete { spawn "dms" "ipc" "lock" "lock"; }
-    Ctrl+Alt+Delete { spawn "dms" "ipc" "powermenu" "open"; }
+    // Ctrl+Space { spawn "dms" "ipc" "spotlight" "open"; }
+    // Super+Delete { spawn "dms" "ipc" "lock" "lock"; }
+    // Ctrl+Alt+Delete { spawn "dms" "ipc" "powermenu" "open"; }
 
     // overview
     Super+Tab repeat=false { toggle-overview; }
@@ -468,10 +470,10 @@ binds {
 
 // DMS configs
 // Add to the end of ~/.config/niri/config.kdl
-include "dms/colors.kdl"
-include "dms/layout.kdl"
-include "dms/alttab.kdl"
-include "dms/binds.kdl"
-include "dms/cursor.kdl"
-include "dms/outputs.kdl"
-include "dms/windowrules.kdl"
+// include "dms/colors.kdl"
+// include "dms/layout.kdl"
+// include "dms/alttab.kdl"
+// include "dms/binds.kdl"
+// include "dms/cursor.kdl"
+// include "dms/outputs.kdl"
+// include "dms/windowrules.kdl"
