@@ -408,9 +408,9 @@ binds {
     Super+Semicolon { spawn "alacritty" "-e" "/bin/sh" "-c" "tmux attach || tmux"; }
     Super+Shift+Semicolon { spawn "alacritty" "-e" "/bin/zsh"; }
     Super+O { spawn "dolphin"; }
-    // Ctrl+Space { spawn "dms" "ipc" "spotlight" "open"; }
-    // Super+Delete { spawn "dms" "ipc" "lock" "lock"; }
-    // Ctrl+Alt+Delete { spawn "dms" "ipc" "powermenu" "open"; }
+    Ctrl+Space { spawn "qs" "-c" "noctalia-shell" "ipc" "call" "launcher" "toggle"; }
+    Super+Delete { spawn "qs" "-c" "noctalia-shell" "ipc" "call" "lockScreen" "lock"; }
+    Ctrl+Alt+Delete { spawn "qs" "-c" "noctalia-shell" "ipc" "call" "sessionMenu" "toggle"; }
 
     // overview
     Super+Tab repeat=false { toggle-overview; }
