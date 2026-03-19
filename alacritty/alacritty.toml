@@ -8,7 +8,7 @@ args = ["-c", "tmux attach || tmux"]
 
 [window]
 dynamic_padding = true
-decorations = "full"
+decorations = "None"
 title = "Alacritty@CachyOS"
 opacity = 0.9
 decorations_theme_variant = "Dark"
