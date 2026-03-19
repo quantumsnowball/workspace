@@ -122,6 +122,8 @@ input {
 
 // layout
 layout {
+    background-color "transparent"
+
     // operation
     empty-workspace-above-first
 
@@ -272,6 +274,12 @@ layout {
     }
 }
 
+// mouse cursor
+cursor {
+    xcursor-theme "Breeze_Light"
+    xcursor-size 40
+}
+
 // To run a shell command (with variables, pipes, etc.), use spawn-sh-at-startup:
 // spawn-sh-at-startup "qs -c ~/source/qs/MyAwesomeShell"
 
@@ -309,6 +317,14 @@ animations {
 // Window rules let you adjust behavior for individual windows.
 // Find more information on the wiki:
 // https://yalter.github.io/niri/Configuration:-Window-Rules
+
+// prettify window and border
+window-rule  {
+    geometry-corner-radius 10
+    clip-to-geometry true
+    tiled-state true
+    draw-border-with-background false
+}
 
 // Work around WezTerm's initial configure bug
 // by setting an empty default-column-width.
