@@ -2,9 +2,13 @@
 
 src_dir="$(dirname "$(realpath "$0")")"
 dst_dir="$XDG_CONFIG_HOME/niri"
-src="$src_dir/config.kdl"
-dst="$dst_dir/config.kdl"
+src1="$src_dir/config.kdl"
+dst1="$dst_dir/config.kdl"
+src2="$src_dir/modules"
+dst2="$dst_dir/modules"
 
 mkdir -p $dst_dir
-ln -sf $src $dst
-ls -l $dst
+ln -sf $src1 $dst1
+ls -l $dst1
+ln -sf $src2 $dst2
+ls -l $dst2
