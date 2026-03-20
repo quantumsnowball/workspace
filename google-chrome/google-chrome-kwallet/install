@@ -1,0 +1,48 @@
+#!/bin/bash
+
+# Configuration
+SOURCE_FILE="$XDG_CONFIG_HOME/workspace/google-chrome/google-chrome-kwallet/google-chrome-kwallet"
+TARGET_DIR="/opt/google/chrome"
+TARGET_FILE="$TARGET_DIR/google-chrome-kwallet"
+
+echo "--- Google Chrome KWallet Wrapper Installer ---"
+
+# 1. Check if source exists
+if [ ! -f "$SOURCE_FILE" ]; then
+    echo "Error: Source file not found at $SOURCE_FILE"
+    exit 1
+fi
+
+# 2. Handle existing installation
+if [ -f "$TARGET_FILE" ]; then
+    echo "Found existing wrapper at $TARGET_FILE."
+    read -p "Do you want to delete the old version and reinstall? (y/N): " confirm
+    if [[ $confirm == [yY] || $confirm == [yY][eE][sS] ]]; then
+        echo "Removing old version..."
+        sudo rm "$TARGET_FILE"
+    else
+        echo "Installation cancelled."
+        exit 0
+    fi
+fi
+
+# 3. Perform Installation
+echo "Copying wrapper to $TARGET_DIR ..."
+sudo cp "$SOURCE_FILE" "$TARGET_FILE"
+
+echo "Setting root ownership and executable permissions..."
+sudo chown root:root "$TARGET_FILE"
+sudo chmod 755 "$TARGET_FILE"
+
+# 4. Verification
+if [ -x "$TARGET_FILE" ]; then
+    echo "-----------------------------------------------"
+    echo "SUCCESS: Wrapper installed to $TARGET_FILE"
+    echo "Flags being injected: --password-store=kwallet6"
+    echo "-----------------------------------------------"
+    echo "Next Step: Update your .desktop files to use the new path."
+else
+    echo "Error: Installation failed."
+    exit 1
+fi
+

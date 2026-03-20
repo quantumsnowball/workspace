@@ -1,0 +1,5 @@
+#!/bin/bash
+
+# Wrapper to force KWallet6 for Google Chrome
+exec /opt/google/chrome/google-chrome --password-store=kwallet6 "$@"
+

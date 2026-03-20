@@ -3,7 +3,7 @@ Version=1.0
 Type=Application
 Name={{ Text You Want to See in Launcher }}
 Comment=Open Google Chrome with this profile
-Exec=google-chrome-stable --profile-directory="{{ Profile Path in chrome://version }}"
+Exec=/opt/google/chrome/google-chrome-kwallet --profile-directory="{{ Profile Path in chrome://version }}"
 Icon=google-chrome
 Terminal=false
 StartupNotify=true
