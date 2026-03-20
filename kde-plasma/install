@@ -4,4 +4,3 @@ src_dir="$(dirname "$(realpath "$0")")"
 dst_dir="$XDG_CONFIG_HOME"
 
 ln -sfv "$src_dir/kglobalshortcutsrc" "$dst_dir/kglobalshortcutsrc"
-ln -sfv "$src_dir/kwinrc" "$dst_dir/kwinrc"
