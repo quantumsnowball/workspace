@@ -29,19 +29,20 @@ binds {
     // help
     Super+Shift+Slash { show-hotkey-overlay; }
 
-    // Suggested binds for running programs: terminal, app launcher, screen locker.
+    // call sh or ipc command
+    // noctalia-shell ipc ref: https://docs.noctalia.dev/getting-started/keybinds/#available-commands
     Super+Semicolon hotkey-overlay-title="Terminal: alacritty (tmux)" { spawn "alacritty" "-e" "/bin/sh" "-c" "tmux attach || tmux"; }
     Super+Shift+Semicolon hotkey-overlay-title="Terminal: alacritty" { spawn "alacritty" "-e" "/bin/zsh"; }
     Super+O hotkey-overlay-title="Explorer: Dolphin" { spawn "dolphin"; }
     Ctrl+Space hotkey-overlay-title="Launcher" { spawn "qs" "-c" "noctalia-shell" "ipc" "call" "launcher" "toggle"; }
     Super+Delete hotkey-overlay-title="Lock" { spawn "qs" "-c" "noctalia-shell" "ipc" "call" "lockScreen" "lock"; }
-    Ctrl+Alt+Delete hotkey-overlay-title="Power Menu" { spawn "qs" "-c" "noctalia-shell" "ipc" "call" "sessionMenu" "toggle"; }
+    Super+Backspace hotkey-overlay-title="Power Menu" { spawn "qs" "-c" "noctalia-shell" "ipc" "call" "sessionMenu" "toggle"; }
+    Ctrl+Alt+Delete hotkey-overlay-title="Logout" { quit skip-confirmation=true; }
 
     // overview
     Super+Tab repeat=false { toggle-overview; }
 
     // close window
-    Super+Backspace repeat=false { close-window; }
     Super+grave repeat=false { close-window; }
 
     // free windows focus
