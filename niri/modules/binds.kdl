@@ -30,12 +30,12 @@ binds {
     Super+Shift+Slash { show-hotkey-overlay; }
 
     // Suggested binds for running programs: terminal, app launcher, screen locker.
-    Super+Semicolon { spawn "alacritty" "-e" "/bin/sh" "-c" "tmux attach || tmux"; }
-    Super+Shift+Semicolon { spawn "alacritty" "-e" "/bin/zsh"; }
-    Super+O { spawn "dolphin"; }
-    Ctrl+Space { spawn "qs" "-c" "noctalia-shell" "ipc" "call" "launcher" "toggle"; }
-    Super+Delete { spawn "qs" "-c" "noctalia-shell" "ipc" "call" "lockScreen" "lock"; }
-    Ctrl+Alt+Delete { spawn "qs" "-c" "noctalia-shell" "ipc" "call" "sessionMenu" "toggle"; }
+    Super+Semicolon hotkey-overlay-title="Terminal: alacritty (tmux)" { spawn "alacritty" "-e" "/bin/sh" "-c" "tmux attach || tmux"; }
+    Super+Shift+Semicolon hotkey-overlay-title="Terminal: alacritty" { spawn "alacritty" "-e" "/bin/zsh"; }
+    Super+O hotkey-overlay-title="Explorer: Dolphin" { spawn "dolphin"; }
+    Ctrl+Space hotkey-overlay-title="Launcher" { spawn "qs" "-c" "noctalia-shell" "ipc" "call" "launcher" "toggle"; }
+    Super+Delete hotkey-overlay-title="Lock" { spawn "qs" "-c" "noctalia-shell" "ipc" "call" "lockScreen" "lock"; }
+    Ctrl+Alt+Delete hotkey-overlay-title="Power Menu" { spawn "qs" "-c" "noctalia-shell" "ipc" "call" "sessionMenu" "toggle"; }
 
     // overview
     Super+Tab repeat=false { toggle-overview; }
