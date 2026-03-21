@@ -443,6 +443,11 @@ Item {
                 }
             }
 
+            // Left spacer
+            Item {
+                Layout.fillWidth: true
+            }
+
             PlasmaComponents3.ToolButton {
                 id: virtualKeyboardButton
 
@@ -502,6 +507,7 @@ Item {
                 }
             }
 
+            // Right spacer
             Item {
                 Layout.fillWidth: true
             }
