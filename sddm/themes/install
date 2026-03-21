@@ -1,0 +1,51 @@
+#!/bin/bash
+
+# Configuration
+THEME_NAME="breeze-centered"
+SOURCE_THEME="$HOME/.config/workspace/sddm/themes/$THEME_NAME"
+TARGET_DIR="/usr/share/sddm/themes/$THEME_NAME"
+
+# 1. Check if source exists
+if [ ! -d "$SOURCE_THEME" ]; then
+    echo "❌ Error: Source theme not found at $SOURCE_THEME"
+    exit 1
+fi
+
+# 2. Handle existing target directory
+if [ -d "$TARGET_DIR" ]; then
+    read -p "⚠️  Theme '$THEME_NAME' already exists in system directory. Delete and replace? (y/N): " confirm
+    if [[ $confirm == [yY] ]]; then
+        echo "Removing existing theme..."
+        sudo rm -rf "$TARGET_DIR"
+    else
+        echo "Installation cancelled."
+        exit 0
+    fi
+fi
+
+# 3. Copy theme and set permissions
+echo "Copying theme to $TARGET_DIR..."
+sudo cp -r "$SOURCE_THEME" "/usr/share/sddm/themes/"
+sudo chmod -R 755 "$TARGET_DIR"
+
+echo "-------------------------------------------------------"
+echo "✅ Done! Theme files are in place."
+echo "-------------------------------------------------------"
+
+# 4. Instructions for Testing
+echo "STEP 1: TEST THE THEME"
+echo "Run this command to see if it loads correctly (requires an active X11/Wayland session):"
+echo "sddm-greeter-qt6 --test-mode --theme $TARGET_DIR"
+echo ""
+
+# 5. Instructions for Deployment
+echo "STEP 2: DEPLOY/ACTIVATE"
+echo "To make this your default login screen, edit or create this file:"
+echo "sudo vim /etc/sddm.conf"
+echo ""
+echo "Add these exact lines to the file:"
+echo "[Theme]"
+echo "Current=$THEME_NAME"
+echo ""
+echo "-------------------------------------------------------"
+
