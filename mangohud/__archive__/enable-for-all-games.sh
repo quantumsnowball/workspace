@@ -5,6 +5,7 @@ ENV_FILE='/etc/environment'
 # Define the lines to add
 LINES=(
     "MANGOHUD=1"
+    "LD_PRELOAD=/usr/lib/mangohud/libMangoHud.so"
     # "MANGOHUD_CONFIG=no_display"
 )
 

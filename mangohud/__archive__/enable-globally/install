@@ -1,0 +1,10 @@
+#!/bin/sh
+
+src_dir="$(dirname "$(realpath "$0")")"
+dst_dir="$XDG_CONFIG_HOME/environment.d"
+src="$src_dir/mangohud.conf"
+dst="$dst_dir/mangohud.conf"
+
+mkdir -p $dst_dir
+ln -sf $src $dst
+ls -l $dst
