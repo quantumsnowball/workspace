@@ -1,6 +1,7 @@
 [ActivityManager]
 _k_friendly_name=Activity Manager
 switch-to-activity-60573141-5c66-420b-a4e5-ca35639a8099=none,none,Switch to activity "Default"
+switch-to-activity-81d52117-5570-4068-b61f-62b4617b838f=none,none,Switch to activity "Default"
 
 [KDE Keyboard Layout Switcher]
 Switch to Last-Used Keyboard Layout=Meta+Alt+L,Meta+Alt+L,Switch to Last-Used Keyboard Layout
@@ -25,8 +26,8 @@ mute=Volume Mute,Volume Mute,Mute
 [ksmserver]
 Halt Without Confirmation=,,Shut Down Without Confirmation
 Lock Session=Screensaver,Meta+L\tScreensaver,Lock Session
-Log Out=Ctrl+Alt+Del,Ctrl+Alt+Del,Show Logout Screen
-Log Out Without Confirmation=,,Log Out Without Confirmation
+Log Out=Meta+Backspace,Ctrl+Alt+Del,Show Logout Screen
+Log Out Without Confirmation=Ctrl+Alt+Del,,Log Out Without Confirmation
 LogOut=,,Log Out
 Reboot=,,Reboot
 Reboot Without Confirmation=,,Reboot Without Confirmation
@@ -381,6 +382,7 @@ activate task manager entry 7=none,Meta+7,Activate Task Manager Entry 7
 activate task manager entry 8=none,Meta+8,Activate Task Manager Entry 8
 activate task manager entry 9=none,Meta+9,Activate Task Manager Entry 9
 activate widget 107=,none,Activate Pager Widget
+activate widget 53=,none,Activate Stop Peeking at Desktop Widget
 activate widget 76=,none,Activate Stop Peeking at Desktop Widget
 activate widget 81=none,none,Activate Minimize All Windows Widget
 activate widget 86=,none,Activate Application Launcher Widget
