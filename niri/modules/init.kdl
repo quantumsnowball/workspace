@@ -18,7 +18,8 @@ spawn-at-startup "/usr/lib/pam_kwallet_init"
 spawn-at-startup "qs" "-c" "noctalia-shell"
 
 // kded service
-spawn-at-startup "kded6"
+// WARNING: kded6 will break noctalia-shell's tray icon widget
+// spawn-at-startup "kded6" 
 
 // To run a shell command (with variables, pipes, etc.), use spawn-sh-at-startup:
 // spawn-sh-at-startup "qs -c ~/source/qs/MyAwesomeShell"
