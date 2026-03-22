@@ -4,4 +4,5 @@ include "modules/input.kdl"
 include "modules/output.kdl"
 include "modules/layout.kdl"
 include "modules/binds.kdl"
+include "modules/rules.kdl"
 

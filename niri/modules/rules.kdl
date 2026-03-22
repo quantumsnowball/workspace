@@ -1,0 +1,10 @@
+window-rule {
+    match title="^(Open|Choose|Save|Select)(.*)$"
+    match app-id="(xdg-desktop-portal)(.*)"
+    match app-id="filepicker"
+    match app-id="org.freedesktop.impl.portal.desktop.kde"
+    default-column-width { proportion 0.4; }
+    default-window-height { proportion 0.6; }
+    open-floating true
+    open-fullscreen false
+}
