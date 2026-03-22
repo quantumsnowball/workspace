@@ -17,6 +17,8 @@ spawn-at-startup "/usr/lib/pam_kwallet_init"
 // noctalia shell
 spawn-at-startup "qs" "-c" "noctalia-shell"
 
+// kded service
+spawn-at-startup "kded6"
 
 // To run a shell command (with variables, pipes, etc.), use spawn-sh-at-startup:
 // spawn-sh-at-startup "qs -c ~/source/qs/MyAwesomeShell"
@@ -44,5 +46,7 @@ screenshot-path "~/Pictures/Screenshots/Screenshot from %Y-%m-%d %H-%M-%S.png"
 // envs
 environment {
     QT_QPA_PLATFORMTHEME "kde"
+    QT_QPA_PLATFORMTHEME_QT6 "kde"
+    XDG_MENU_PREFIX "plasma-"
 }
 
