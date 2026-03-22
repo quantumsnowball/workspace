@@ -35,9 +35,11 @@ binds {
     Super+Shift+Semicolon hotkey-overlay-title="Terminal: alacritty" { spawn "alacritty" "-e" "/bin/zsh"; }
     Super+O hotkey-overlay-title="Explorer: Dolphin" { spawn "dolphin"; }
     Ctrl+Space hotkey-overlay-title="Launcher" { spawn "qs" "-c" "noctalia-shell" "ipc" "call" "launcher" "toggle"; }
-    Super+Delete hotkey-overlay-title="Lock" { spawn "qs" "-c" "noctalia-shell" "ipc" "call" "lockScreen" "lock"; }
     Super+Backspace hotkey-overlay-title="Power Menu" { spawn "qs" "-c" "noctalia-shell" "ipc" "call" "sessionMenu" "toggle"; }
     Ctrl+Alt+Delete hotkey-overlay-title="Logout" { quit skip-confirmation=true; }
+    Super+Delete hotkey-overlay-title="Lock & Power Off Monitor" { 
+        spawn-sh "qs -c noctalia-shell ipc call lockScreen lock && sleep 5 && niri msg action power-off-monitors"
+    }
 
     // overview
     Super+Tab repeat=false { toggle-overview; }
