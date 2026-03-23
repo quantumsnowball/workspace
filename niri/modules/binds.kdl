@@ -33,7 +33,10 @@ binds {
     // noctalia-shell ipc ref: https://docs.noctalia.dev/getting-started/keybinds/#available-commands
     Super+Semicolon hotkey-overlay-title="Terminal: alacritty (tmux)" { spawn "alacritty" "-e" "/bin/sh" "-c" "tmux attach || tmux"; }
     Super+Shift+Semicolon hotkey-overlay-title="Terminal: alacritty" { spawn "alacritty" "-e" "/bin/zsh"; }
-    Super+O hotkey-overlay-title="Explorer: Dolphin" { spawn "dolphin"; }
+    Super+E hotkey-overlay-title="Explorer: Dolphin" { spawn "dolphin"; }
+    Super+Y hotkey-overlay-title="YouTube" { spawn "gtk-launch" "chrome-YouTube"; }
+    Super+B hotkey-overlay-title="Chrome Browser" { spawn "gtk-launch" "chrome-default"; }
+    Super+S hotkey-overlay-title="Steam (with Mangohud)" { spawn "gtk-launch" "steam-with-mangohud"; }
     Ctrl+Space hotkey-overlay-title="Launcher" { spawn "qs" "-c" "noctalia-shell" "ipc" "call" "launcher" "toggle"; }
     Super+Backspace hotkey-overlay-title="Power Menu" { spawn "qs" "-c" "noctalia-shell" "ipc" "call" "sessionMenu" "toggle"; }
     Ctrl+Alt+Delete hotkey-overlay-title="Logout" { quit skip-confirmation=true; }
