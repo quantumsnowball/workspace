@@ -71,6 +71,12 @@ binds {
     Super+Shift+Right  { move-column-right; }
     Super+Shift+Home { move-column-to-first; }
     Super+Shift+End  { move-column-to-last; }
+    
+    // workspace movement
+    Super+Page_Down      { focus-workspace-down; }
+    Super+Page_Up        { focus-workspace-up; }
+    Super+Shift+Page_Down      { move-workspace-down; }
+    Super+Shift+Page_Up        { move-workspace-up; }
 
     // jump workspace
     Super+1 { focus-workspace 1; }
