@@ -164,6 +164,8 @@ layout {
 cursor {
     xcursor-theme "Breeze_Light"
     xcursor-size 40
+
+    hide-when-typing
 }
 
 // Animation settings.

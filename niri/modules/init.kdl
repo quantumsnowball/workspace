@@ -27,6 +27,7 @@ spawn-at-startup "qs" "-c" "noctalia-shell"
 hotkey-overlay {
     // Uncomment this line to disable the "Important Hotkeys" pop-up at startup.
     skip-at-startup
+    hide-not-bound
 }
 
 // Uncomment this line to ask the clients to omit their client-side decorations if possible.
@@ -47,6 +48,7 @@ screenshot-path "~/Pictures/Screenshots/Screenshot from %Y-%m-%d %H-%M-%S.png"
 // envs
 environment {
     // system
+    QT_QPA_PLATFORM "wayland"
     QT_QPA_PLATFORMTHEME "kde"
     QT_QPA_PLATFORMTHEME_QT6 "kde"
     XDG_MENU_PREFIX "plasma-"
