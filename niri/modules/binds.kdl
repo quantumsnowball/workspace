@@ -46,8 +46,9 @@ binds {
 
     // close window
     Super+grave repeat=false { close-window; }
+    Super+W repeat=false { close-window; }
 
-    // free windows focus
+    // windows focus
     Super+H     { focus-column-left; }
     Super+J     { focus-window-or-workspace-down; }
     Super+K     { focus-window-or-workspace-up; }
@@ -59,7 +60,7 @@ binds {
     Super+Home { focus-column-first; }
     Super+End  { focus-column-last; }
 
-    // free windows movement
+    // windows movement
     Super+Shift+H     { move-column-left; }
     Super+Shift+J     { move-window-down-or-to-workspace-down; }
     Super+Shift+K     { move-window-up-or-to-workspace-up; }
@@ -87,13 +88,12 @@ binds {
     Super+Ctrl+L { set-column-width "+5%"; }
     Super+Ctrl+K { set-window-height "-5%"; }
     Super+Ctrl+J { set-window-height "+5%"; }
-    Super+Space { expand-column-to-available-width; }
     Super+Ctrl+Backslash { switch-preset-column-width; }
     Super+Ctrl+Minus { switch-preset-window-height; }
     Super+R { reset-window-height; }
-    Super+F { maximize-column; }
-    Super+Shift+F { fullscreen-window; }
-    Super+M { maximize-window-to-edges; }
+    Super+M { maximize-column; }
+    Super+F { fullscreen-window; }
+    Super+Shift+F { maximize-window-to-edges; }
 
     // adjust layout
     Super+BracketLeft  { consume-or-expel-window-left; }
@@ -104,7 +104,8 @@ binds {
     Super+Shift+Return { center-column; }
     Super+V       { toggle-window-floating; }
     Super+Shift+V { switch-focus-between-floating-and-tiling; }
-    Super+W { toggle-column-tabbed-display; }
+    Super+T { toggle-column-tabbed-display; }
+    Super+G { expand-column-to-available-width; }
 
     // actions
     Super+P { screenshot; }
