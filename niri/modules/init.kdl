@@ -51,7 +51,7 @@ environment {
     QT_QPA_PLATFORM "wayland"
     // theme
     // 1. must be set 'kde' for chrome to auto pick kwallet to unloak
-    // 2. need to load before niri for some interface e.g. cachy-os konsole to work, need to written into /etc/environment
+    // 2. need to load before niri for some interface e.g. cachy-os konsole to work, use the environment.d/niri-kde install script to setup
     QT_QPA_PLATFORMTHEME "kde"
     QT_QPA_PLATFORMTHEME_QT6 "kde"
     XDG_MENU_PREFIX "plasma-"
