@@ -6,3 +6,5 @@ include "modules/layout.kdl"
 include "modules/binds.kdl"
 include "modules/rules.kdl"
 
+// generated pallette
+include "./noctalia.kdl"
