@@ -49,6 +49,9 @@ screenshot-path "~/Pictures/Screenshots/Screenshot from %Y-%m-%d %H-%M-%S.png"
 environment {
     // system
     QT_QPA_PLATFORM "wayland"
+    // theme
+    // 1. must be set 'kde' for chrome to auto pick kwallet to unloak
+    // 2. need to load before niri for some interface e.g. cachy-os konsole to work, need to written into /etc/environment
     QT_QPA_PLATFORMTHEME "kde"
     QT_QPA_PLATFORMTHEME_QT6 "kde"
     XDG_MENU_PREFIX "plasma-"
