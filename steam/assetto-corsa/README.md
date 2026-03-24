@@ -29,3 +29,18 @@ It is due to corrupted game files or when installing multiple copies of CSP into
 Solution is to delete the extensions directory entirely. If not sure that will delete any game files, wipe the whole game and reinstall CSP.
 You can just click the button in content manager, it will should be successful.
 
+
+# Resources
+
+## Car packs
+
+- World Drift Tour, WDT
+- Tando Buddies
+
+## Tracks
+
+- Skidpad 0.5
+
+## Apps
+
+- KirbyCam
