@@ -68,6 +68,10 @@ binds {
     Super+Alt+J { spawn-sh "niri msg action focus-window-or-workspace-down && niri msg action center-column"; }
     Super+Alt+K { spawn-sh "niri msg action focus-window-or-workspace-up && niri msg action center-column"; }
     Super+Alt+L { spawn-sh "niri msg action focus-column-right && niri msg action center-column"; }
+    Super+Alt+Left { spawn-sh "niri msg action focus-column-left && niri msg action center-column"; }
+    Super+Alt+Down { spawn-sh "niri msg action focus-window-or-workspace-down && niri msg action center-column"; }
+    Super+Alt+Up { spawn-sh "niri msg action focus-window-or-workspace-up && niri msg action center-column"; }
+    Super+Alt+Right { spawn-sh "niri msg action focus-column-right && niri msg action center-column"; }
 
     // windows movement
     Super+Shift+H     { move-column-left; }
