@@ -33,7 +33,7 @@ binds {
         spawn-sh "gtk-launch chrome-default & sleep 0.2 && niri msg action center-visible-columns";
     }
     Super+S hotkey-overlay-title="Steam (with Mangohud)" {
-        spawn-sh "gtk-launch steam-with-mangohud & sleep 0.5 && niri msg action center-visible-columns";
+        spawn-sh "notify-send -t 3000 'Steam' 'Launching Steam (with MangoHUD) ...' && gtk-launch steam-with-mangohud & sleep 1.0 && niri msg action center-visible-columns";
     }
     Ctrl+Space hotkey-overlay-title="Launcher" {
         spawn-sh "qs -c noctalia-shell ipc call launcher toggle";
