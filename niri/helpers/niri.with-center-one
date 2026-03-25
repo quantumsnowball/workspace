@@ -1,4 +1,4 @@
 #!/bin/sh
 
 
-niri msg action "$1" && niri msg action center-column
+niri msg action "$@" && niri msg action center-column
