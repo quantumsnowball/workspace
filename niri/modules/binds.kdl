@@ -63,6 +63,12 @@ binds {
     Super+Home { focus-column-first; }
     Super+End  { focus-column-last; }
 
+    // viewport scrolling like
+    Super+Alt+H { spawn-sh "niri msg action focus-column-left && niri msg action center-column"; }
+    Super+Alt+J { spawn-sh "niri msg action focus-window-or-workspace-down && niri msg action center-column"; }
+    Super+Alt+K { spawn-sh "niri msg action focus-window-or-workspace-up && niri msg action center-column"; }
+    Super+Alt+L { spawn-sh "niri msg action focus-column-right && niri msg action center-column"; }
+
     // windows movement
     Super+Shift+H     { move-column-left; }
     Super+Shift+J     { move-window-down-or-to-workspace-down; }
@@ -110,7 +116,7 @@ binds {
     Super+Comma  { consume-window-into-column; }
     Super+Period { expel-window-from-column; }
     Super+Return { center-visible-columns; }
-    Super+Shift+Return { center-column; }
+    Super+Alt+Return { center-column; }
     Super+V       { toggle-window-floating; }
     Super+Shift+V { switch-focus-between-floating-and-tiling; }
     Super+T { toggle-column-tabbed-display; }
