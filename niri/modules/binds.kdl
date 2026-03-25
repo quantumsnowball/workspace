@@ -29,19 +29,36 @@ binds {
     // help
     Super+Shift+Slash { show-hotkey-overlay; }
 
-    // call sh or ipc command
-    // noctalia-shell ipc ref: https://docs.noctalia.dev/getting-started/keybinds/#available-commands
-    Super+Semicolon hotkey-overlay-title="Terminal: alacritty (tmux)" { spawn "alacritty" "-e" "/bin/sh" "-c" "tmux attach || tmux"; }
-    Super+Shift+Semicolon hotkey-overlay-title="Terminal: alacritty" { spawn "alacritty" "-e" "/bin/zsh"; }
-    Super+E hotkey-overlay-title="Explorer: Dolphin" { spawn "dolphin"; }
-    Super+Y hotkey-overlay-title="YouTube" { spawn "gtk-launch" "chrome-YouTube"; }
-    Super+B hotkey-overlay-title="Chrome Browser" { spawn "gtk-launch" "chrome-default"; }
-    Super+S hotkey-overlay-title="Steam (with Mangohud)" { spawn "gtk-launch" "steam-with-mangohud"; }
-    Ctrl+Space hotkey-overlay-title="Launcher" { spawn "qs" "-c" "noctalia-shell" "ipc" "call" "launcher" "toggle"; }
-    Super+Backspace hotkey-overlay-title="Power Menu" { spawn "qs" "-c" "noctalia-shell" "ipc" "call" "sessionMenu" "toggle"; }
-    Ctrl+Alt+Delete hotkey-overlay-title="Logout" { quit skip-confirmation=true; }
+    // exec programs
+    Super+Semicolon hotkey-overlay-title="Terminal: alacritty (tmux)" {
+        spawn-sh "alacritty -e /bin/sh -c 'tmux attach || tmux' & sleep 0.2 && niri msg action center-visible-columns";
+    }
+    Super+Shift+Semicolon hotkey-overlay-title="Terminal: alacritty" {
+        spawn-sh "alacritty -e /bin/zsh & sleep 0.2 && niri msg action center-visible-columns";
+    }
+    Super+E hotkey-overlay-title="Explorer: Dolphin" {
+        spawn-sh "dolphin & sleep 0.2 && niri msg action center-visible-columns";
+    }
+    Super+Y hotkey-overlay-title="YouTube" {
+        spawn-sh "gtk-launch chrome-YouTube & sleep 0.2 && niri msg action center-visible-columns";
+    }
+    Super+B hotkey-overlay-title="Chrome Browser" {
+        spawn-sh "gtk-launch chrome-default & sleep 0.2 && niri msg action center-visible-columns";
+    }
+    Super+S hotkey-overlay-title="Steam (with Mangohud)" {
+        spawn-sh "gtk-launch steam-with-mangohud & sleep 0.5 && niri msg action center-visible-columns";
+    }
+    Ctrl+Space hotkey-overlay-title="Launcher" {
+        spawn-sh "qs -c noctalia-shell ipc call launcher toggle";
+    }
+    Super+Backspace hotkey-overlay-title="Power Menu" {
+        spawn-sh "qs -c noctalia-shell ipc call sessionMenu toggle";
+    }
     Super+Delete allow-when-locked=true hotkey-overlay-title="Lock / Power Off" { 
         spawn-sh "if loginctl show-session $XDG_SESSION_ID | grep -q 'LockedHint=yes'; then niri msg action power-off-monitors; else qs -c noctalia-shell ipc call lockScreen lock && sleep 5 && niri msg action power-off-monitors; fi"
+    }
+    Ctrl+Alt+Delete hotkey-overlay-title="Logout" {
+        quit skip-confirmation=true;
     }
 
     // overview
@@ -120,6 +137,7 @@ binds {
     Super+Comma  { consume-window-into-column; }
     Super+Period { expel-window-from-column; }
     Super+Return { center-column; }
+    Super+Alt+Return { center-visible-columns; }
     Super+V       { toggle-window-floating; }
     Super+Shift+V { switch-focus-between-floating-and-tiling; }
     Super+T { toggle-column-tabbed-display; }
