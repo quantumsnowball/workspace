@@ -195,7 +195,9 @@ window-rule  {
     clip-to-geometry true
 }
 
-// all windows slightly transparent
+// all windows slightly transparent, exception some app that has their own transparent configs
 window-rule {
+    exclude app-id="Alacritty"
+
     opacity 0.95
 }
