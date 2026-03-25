@@ -39,6 +39,11 @@ You can just click the button in content manager, it will should be successful.
 This will crash the working copy of the GE-Proton9-20 installation and failed to launch the gameplay window.
 So always enable mangohud on a per-game basis is the safest way.
 
+## If force feedback of wheel is not working
+
+Run `protontricks 244210 winecfg`, then:
+1. Check `dwrite` is enabled in Library, the mode should be 'native, builtin'. Usually will work, if not, then:
+2. Check `dinput8` is enabled in Library, the mode should be 'native, builtin'
 
 # Resources
 
