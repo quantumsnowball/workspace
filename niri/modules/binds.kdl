@@ -74,16 +74,16 @@ binds {
     Super+Alt+Right { spawn-sh "niri.with-center-one focus-column-right"; }
 
     // windows movement
-    Super+Shift+H     { move-column-left; }
-    Super+Shift+J     { move-window-down-or-to-workspace-down; }
-    Super+Shift+K     { move-window-up-or-to-workspace-up; }
-    Super+Shift+L     { move-column-right; }
-    Super+Shift+Left  { move-column-left; }
-    Super+Shift+Down  { move-window-down-or-to-workspace-down; }
-    Super+Shift+Up    { move-window-up-or-to-workspace-up; }
-    Super+Shift+Right  { move-column-right; }
-    Super+Shift+Home { move-column-to-first; }
-    Super+Shift+End  { move-column-to-last; }
+    Super+Shift+H     { spawn-sh "niri.with-center move-column-left"; }
+    Super+Shift+J     { spawn-sh "niri.with-center move-window-down-or-to-workspace-down"; }
+    Super+Shift+K     { spawn-sh "niri.with-center move-window-up-or-to-workspace-up"; }
+    Super+Shift+L     { spawn-sh "niri.with-center move-column-right"; }
+    Super+Shift+Left  { spawn-sh "niri.with-center move-column-left"; }
+    Super+Shift+Down  { spawn-sh "niri.with-center move-window-down-or-to-workspace-down"; }
+    Super+Shift+Up    { spawn-sh "niri.with-center move-window-up-or-to-workspace-up"; }
+    Super+Shift+Right { spawn-sh "niri.with-center move-column-right"; }
+    Super+Shift+Home  { spawn-sh "niri.with-center move-column-to-first"; }
+    Super+Shift+End   { spawn-sh "niri.with-center move-column-to-last"; }
     
     // workspace movement
     Super+Page_Down      { focus-workspace-down; }
