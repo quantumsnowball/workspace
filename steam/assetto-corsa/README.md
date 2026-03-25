@@ -20,6 +20,11 @@
         `STEAM_COMPAT_DATA_PATH=$HOME/.local/share/Steam/steamapps/compatdata/244210 %command%`
     6. Choose the same compatibility option as the main game, e.g. cachyos-proton or Proton Experimental.
 
+## Failsafe installation script from community
+
+Source: <https://github.com/sihawido/assettocorsa-linux-setup>
+This community script will use GE-Proton9-20 as of 2026-03-25 and will install successfully without the patch failure error
+Tested to be successful, but need to use GE-Proton9-20, any other newer proton tested and failed to run.
 
 # Trouble Shoot
 
@@ -28,6 +33,11 @@
 It is due to corrupted game files or when installing multiple copies of CSP into the extensions folder, corrupting some files.
 Solution is to delete the extensions directory entirely. If not sure that will delete any game files, wipe the whole game and reinstall CSP.
 You can just click the button in content manager, it will should be successful.
+
+## Beware of mangohud, NEITHER enable globally using MANGOHUD=1, nor replacing steam with 'mangohud steam' globally
+
+This will crash the working copy of the GE-Proton9-20 installation and failed to launch the gameplay window.
+So always enable mangohud on a per-game basis is the safest way.
 
 
 # Resources

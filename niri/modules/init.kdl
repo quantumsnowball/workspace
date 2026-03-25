@@ -32,6 +32,7 @@ environment {
     QT_QPA_PLATFORMTHEME_QT6 "kde"
     XDG_MENU_PREFIX "plasma-"
     // enable mangohud globally (Vulkan only)
-    MANGOHUD "1"
+    // BUG: Don't enable this flag, this will crash some game, e.g. Proton-GE 9.0, Assetto Corsa Content Manager launch game will fail 
+    // MANGOHUD "1"
 }
 
