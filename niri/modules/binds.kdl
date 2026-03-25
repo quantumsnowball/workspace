@@ -64,14 +64,14 @@ binds {
     Super+End   { spawn-sh "niri.with-center focus-column-last"; }
 
     // viewport scrolling like
-    Super+Alt+H { spawn-sh "niri msg action focus-column-left && niri msg action center-column"; }
-    Super+Alt+J { spawn-sh "niri msg action focus-window-or-workspace-down && niri msg action center-column"; }
-    Super+Alt+K { spawn-sh "niri msg action focus-window-or-workspace-up && niri msg action center-column"; }
-    Super+Alt+L { spawn-sh "niri msg action focus-column-right && niri msg action center-column"; }
-    Super+Alt+Left { spawn-sh "niri msg action focus-column-left && niri msg action center-column"; }
-    Super+Alt+Down { spawn-sh "niri msg action focus-window-or-workspace-down && niri msg action center-column"; }
-    Super+Alt+Up { spawn-sh "niri msg action focus-window-or-workspace-up && niri msg action center-column"; }
-    Super+Alt+Right { spawn-sh "niri msg action focus-column-right && niri msg action center-column"; }
+    Super+Alt+H     { spawn-sh "niri.with-center-one focus-column-left"; }
+    Super+Alt+J     { spawn-sh "niri.with-center-one focus-window-or-workspace-down"; }
+    Super+Alt+K     { spawn-sh "niri.with-center-one focus-window-or-workspace-up"; }
+    Super+Alt+L     { spawn-sh "niri.with-center-one focus-column-right"; }
+    Super+Alt+Left  { spawn-sh "niri.with-center-one focus-column-left"; }
+    Super+Alt+Down  { spawn-sh "niri.with-center-one focus-window-or-workspace-down"; }
+    Super+Alt+Up    { spawn-sh "niri.with-center-one focus-window-or-workspace-up"; }
+    Super+Alt+Right { spawn-sh "niri.with-center-one focus-column-right"; }
 
     // windows movement
     Super+Shift+H     { move-column-left; }
