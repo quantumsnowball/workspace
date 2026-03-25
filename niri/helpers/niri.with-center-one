@@ -1,0 +1,4 @@
+#!/bin/sh
+
+
+niri msg action "$1" && niri msg action center-column

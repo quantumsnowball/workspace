@@ -15,7 +15,11 @@ ln -sfn $src2 $dst2
 ls -l $dst2
 
 # niri helpers
-src3="$src_dir/helpers/niri.with-center"
-dst3="/usr/local/bin/niri.with-center"
-sudo ln -sf $src3 $dst3
-ls -l $dst3
+src="$src_dir/helpers/niri.with-center"
+dst="/usr/local/bin/niri.with-center"
+sudo ln -sf $src $dst
+ls -l $dst
+src="$src_dir/helpers/niri.with-center-one"
+dst="/usr/local/bin/niri.with-center-one"
+sudo ln -sf $src $dst
+ls -l $dst
