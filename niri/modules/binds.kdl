@@ -52,16 +52,16 @@ binds {
     Super+W repeat=false { close-window; }
 
     // windows focus
-    Super+H { spawn-sh "niri msg action focus-column-left && niri msg action center-visible-columns"; }
-    Super+J { spawn-sh "niri msg action focus-window-or-workspace-down && niri msg action center-visible-columns"; }
-    Super+K { spawn-sh "niri msg action focus-window-or-workspace-up && niri msg action center-visible-columns"; }
-    Super+L { spawn-sh "niri msg action focus-column-right && niri msg action center-visible-columns"; }
-    Super+Left { spawn-sh "niri msg action focus-column-left && niri msg action center-visible-columns"; }
-    Super+Down { spawn-sh "niri msg action focus-window-or-workspace-down && niri msg action center-visible-columns"; }
-    Super+Up { spawn-sh "niri msg action focus-window-or-workspace-up && niri msg action center-visible-columns"; }
-    Super+Right { spawn-sh "niri msg action focus-column-right && niri msg action center-visible-columns"; }
-    Super+Home { focus-column-first; }
-    Super+End  { focus-column-last; }
+    Super+H     { spawn-sh "niri.with-center focus-column-left"; }
+    Super+J     { spawn-sh "niri.with-center focus-window-or-workspace-down"; }
+    Super+K     { spawn-sh "niri.with-center focus-window-or-workspace-up"; }
+    Super+L     { spawn-sh "niri.with-center focus-column-right"; }
+    Super+Left  { spawn-sh "niri.with-center focus-column-left"; }
+    Super+Down  { spawn-sh "niri.with-center focus-window-or-workspace-down"; }
+    Super+Up    { spawn-sh "niri.with-center focus-window-or-workspace-up"; }
+    Super+Right { spawn-sh "niri.with-center focus-column-right"; }
+    Super+Home  { spawn-sh "niri.with-center focus-column-first"; }
+    Super+End   { spawn-sh "niri.with-center focus-column-last"; }
 
     // viewport scrolling like
     Super+Alt+H { spawn-sh "niri msg action focus-column-left && niri msg action center-column"; }
