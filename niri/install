@@ -2,13 +2,24 @@
 
 src_dir="$(dirname "$(realpath "$0")")"
 dst_dir="$XDG_CONFIG_HOME/niri"
-src1="$src_dir/config.kdl"
-dst1="$dst_dir/config.kdl"
-src2="$src_dir/modules"
-dst2="$dst_dir/modules"
 
+# niri config
 mkdir -p $dst_dir
-ln -sf $src1 $dst1
-ls -l $dst1
-ln -sf $src2 $dst2
-ls -l $dst2
+src="$src_dir/config.kdl"
+dst="$dst_dir/config.kdl"
+ln -sf $src $dst
+ls -l $dst
+src="$src_dir/modules"
+dst="$dst_dir/modules"
+ln -sfn $src $dst
+ls -l $dst
+
+# niri helpers
+src="$src_dir/helpers/niri.with-center"
+dst="/usr/local/bin/niri.with-center"
+sudo ln -sf $src $dst
+ls -l $dst
+src="$src_dir/helpers/niri.with-center-one"
+dst="/usr/local/bin/niri.with-center-one"
+sudo ln -sf $src $dst
+ls -l $dst

@@ -29,61 +29,78 @@ binds {
     // help
     Super+Shift+Slash { show-hotkey-overlay; }
 
-    // call sh or ipc command
-    // noctalia-shell ipc ref: https://docs.noctalia.dev/getting-started/keybinds/#available-commands
-    Super+Semicolon hotkey-overlay-title="Terminal: alacritty (tmux)" { spawn "alacritty" "-e" "/bin/sh" "-c" "tmux attach || tmux"; }
-    Super+Shift+Semicolon hotkey-overlay-title="Terminal: alacritty" { spawn "alacritty" "-e" "/bin/zsh"; }
-    Super+E hotkey-overlay-title="Explorer: Dolphin" { spawn "dolphin"; }
-    Super+Y hotkey-overlay-title="YouTube" { spawn "gtk-launch" "chrome-YouTube"; }
-    Super+B hotkey-overlay-title="Chrome Browser" { spawn "gtk-launch" "chrome-default"; }
-    Super+S hotkey-overlay-title="Steam (with Mangohud)" { spawn "gtk-launch" "steam-with-mangohud"; }
-    Ctrl+Space hotkey-overlay-title="Launcher" { spawn "qs" "-c" "noctalia-shell" "ipc" "call" "launcher" "toggle"; }
-    Super+Backspace hotkey-overlay-title="Power Menu" { spawn "qs" "-c" "noctalia-shell" "ipc" "call" "sessionMenu" "toggle"; }
-    Ctrl+Alt+Delete hotkey-overlay-title="Logout" { quit skip-confirmation=true; }
+    // exec programs
+    Super+Semicolon hotkey-overlay-title="Terminal: alacritty (tmux)" {
+        spawn-sh "alacritty -e /bin/sh -c 'tmux attach || tmux' & sleep 0.2 && niri msg action center-visible-columns";
+    }
+    Super+Shift+Semicolon hotkey-overlay-title="Terminal: alacritty" {
+        spawn-sh "alacritty -e /bin/zsh & sleep 0.2 && niri msg action center-visible-columns";
+    }
+    Super+E hotkey-overlay-title="Explorer: Dolphin" {
+        spawn-sh "dolphin & sleep 0.2 && niri msg action center-visible-columns";
+    }
+    Super+Y hotkey-overlay-title="YouTube" {
+        spawn-sh "gtk-launch chrome-YouTube & sleep 0.2 && niri msg action center-visible-columns";
+    }
+    Super+B hotkey-overlay-title="Chrome Browser" {
+        spawn-sh "gtk-launch chrome-default & sleep 0.2 && niri msg action center-visible-columns";
+    }
+    Super+S hotkey-overlay-title="Steam (with Mangohud)" {
+        spawn-sh "gtk-launch steam-with-mangohud & sleep 0.5 && niri msg action center-visible-columns";
+    }
+    Ctrl+Space hotkey-overlay-title="Launcher" {
+        spawn-sh "qs -c noctalia-shell ipc call launcher toggle";
+    }
+    Super+Backspace hotkey-overlay-title="Power Menu" {
+        spawn-sh "qs -c noctalia-shell ipc call sessionMenu toggle";
+    }
     Super+Delete allow-when-locked=true hotkey-overlay-title="Lock / Power Off" { 
         spawn-sh "if loginctl show-session $XDG_SESSION_ID | grep -q 'LockedHint=yes'; then niri msg action power-off-monitors; else qs -c noctalia-shell ipc call lockScreen lock && sleep 5 && niri msg action power-off-monitors; fi"
+    }
+    Ctrl+Alt+Delete hotkey-overlay-title="Logout" {
+        quit skip-confirmation=true;
     }
 
     // overview
     Super+Tab repeat=false { toggle-overview; }
 
     // close window
-    Super+grave repeat=false { close-window; }
-    Super+W repeat=false { close-window; }
+    Super+grave repeat=false { spawn-sh "niri.with-center close-window"; }
+    Super+W repeat=false     { spawn-sh "niri.with-center close-window"; }
 
     // windows focus
-    Super+H     { focus-column-left; }
-    Super+J     { focus-window-or-workspace-down; }
-    Super+K     { focus-window-or-workspace-up; }
-    Super+L     { focus-column-right; }
-    Super+Left  { focus-column-left; }
-    Super+Down  { focus-window-or-workspace-down; }
-    Super+Up    { focus-window-or-workspace-up; }
-    Super+Right { focus-column-right; }
-    Super+Home { focus-column-first; }
-    Super+End  { focus-column-last; }
+    Super+H     { spawn-sh "niri.with-center focus-column-left"; }
+    Super+J     { spawn-sh "niri.with-center focus-window-or-workspace-down"; }
+    Super+K     { spawn-sh "niri.with-center focus-window-or-workspace-up"; }
+    Super+L     { spawn-sh "niri.with-center focus-column-right"; }
+    Super+Left  { spawn-sh "niri.with-center focus-column-left"; }
+    Super+Down  { spawn-sh "niri.with-center focus-window-or-workspace-down"; }
+    Super+Up    { spawn-sh "niri.with-center focus-window-or-workspace-up"; }
+    Super+Right { spawn-sh "niri.with-center focus-column-right"; }
+    Super+Home  { spawn-sh "niri.with-center focus-column-first"; }
+    Super+End   { spawn-sh "niri.with-center focus-column-last"; }
 
     // viewport scrolling like
-    Super+Alt+H { spawn-sh "niri msg action focus-column-left && niri msg action center-column"; }
-    Super+Alt+J { spawn-sh "niri msg action focus-window-or-workspace-down && niri msg action center-column"; }
-    Super+Alt+K { spawn-sh "niri msg action focus-window-or-workspace-up && niri msg action center-column"; }
-    Super+Alt+L { spawn-sh "niri msg action focus-column-right && niri msg action center-column"; }
-    Super+Alt+Left { spawn-sh "niri msg action focus-column-left && niri msg action center-column"; }
-    Super+Alt+Down { spawn-sh "niri msg action focus-window-or-workspace-down && niri msg action center-column"; }
-    Super+Alt+Up { spawn-sh "niri msg action focus-window-or-workspace-up && niri msg action center-column"; }
-    Super+Alt+Right { spawn-sh "niri msg action focus-column-right && niri msg action center-column"; }
+    Super+Alt+H     { spawn-sh "niri.with-center-one focus-column-left"; }
+    Super+Alt+J     { spawn-sh "niri.with-center-one focus-window-or-workspace-down"; }
+    Super+Alt+K     { spawn-sh "niri.with-center-one focus-window-or-workspace-up"; }
+    Super+Alt+L     { spawn-sh "niri.with-center-one focus-column-right"; }
+    Super+Alt+Left  { spawn-sh "niri.with-center-one focus-column-left"; }
+    Super+Alt+Down  { spawn-sh "niri.with-center-one focus-window-or-workspace-down"; }
+    Super+Alt+Up    { spawn-sh "niri.with-center-one focus-window-or-workspace-up"; }
+    Super+Alt+Right { spawn-sh "niri.with-center-one focus-column-right"; }
 
     // windows movement
-    Super+Shift+H     { move-column-left; }
-    Super+Shift+J     { move-window-down-or-to-workspace-down; }
-    Super+Shift+K     { move-window-up-or-to-workspace-up; }
-    Super+Shift+L     { move-column-right; }
-    Super+Shift+Left  { move-column-left; }
-    Super+Shift+Down  { move-window-down-or-to-workspace-down; }
-    Super+Shift+Up    { move-window-up-or-to-workspace-up; }
-    Super+Shift+Right  { move-column-right; }
-    Super+Shift+Home { move-column-to-first; }
-    Super+Shift+End  { move-column-to-last; }
+    Super+Shift+H     { spawn-sh "niri.with-center move-column-left"; }
+    Super+Shift+J     { spawn-sh "niri.with-center move-window-down-or-to-workspace-down"; }
+    Super+Shift+K     { spawn-sh "niri.with-center move-window-up-or-to-workspace-up"; }
+    Super+Shift+L     { spawn-sh "niri.with-center move-column-right"; }
+    Super+Shift+Left  { spawn-sh "niri.with-center move-column-left"; }
+    Super+Shift+Down  { spawn-sh "niri.with-center move-window-down-or-to-workspace-down"; }
+    Super+Shift+Up    { spawn-sh "niri.with-center move-window-up-or-to-workspace-up"; }
+    Super+Shift+Right { spawn-sh "niri.with-center move-column-right"; }
+    Super+Shift+Home  { spawn-sh "niri.with-center move-column-to-first"; }
+    Super+Shift+End   { spawn-sh "niri.with-center move-column-to-last"; }
     
     // workspace movement
     Super+Page_Down      { focus-workspace-down; }
@@ -103,26 +120,26 @@ binds {
     Super+9 { focus-workspace 9; }
 
     // adjust windows
-    Super+Ctrl+H { set-column-width "-5%"; }
-    Super+Ctrl+L { set-column-width "+5%"; }
-    Super+Ctrl+K { set-window-height "-5%"; }
-    Super+Ctrl+J { set-window-height "+5%"; }
-    Super+Ctrl+Backslash { switch-preset-column-width; }
-    Super+Ctrl+Minus { switch-preset-window-height; }
+    Super+Ctrl+H { spawn-sh "niri.with-center set-column-width \"-5%\""; }
+    Super+Ctrl+L { spawn-sh "niri.with-center set-column-width \"+5%\""; }
+    Super+Ctrl+K { spawn-sh "niri.with-center set-window-height \"-5%\""; }
+    Super+Ctrl+J { spawn-sh "niri.with-center set-window-height \"+5%\""; }
+    Super+Ctrl+Backslash { spawn-sh "niri.with-center switch-preset-column-width"; }
+    Super+Ctrl+Minus     { spawn-sh "niri.with-center switch-preset-window-height"; }
+    Super+M       { spawn-sh "niri.with-center maximize-column"; }
+    Super+F       { spawn-sh "niri.with-center fullscreen-window"; }
+    Super+Shift+F { spawn-sh "niri.with-center maximize-window-to-edges"; }
     Super+R { reset-window-height; }
-    Super+M { maximize-column; }
-    Super+F { fullscreen-window; }
-    Super+Shift+F { maximize-window-to-edges; }
 
     // adjust layout
-    Super+BracketLeft  { consume-or-expel-window-left; }
-    Super+BracketRight { consume-or-expel-window-right; }
-    Super+Comma  { consume-window-into-column; }
-    Super+Period { expel-window-from-column; }
-    Super+Return { center-visible-columns; }
-    Super+Alt+Return { center-column; }
-    Super+V       { toggle-window-floating; }
-    Super+Shift+V { switch-focus-between-floating-and-tiling; }
+    Super+Return       { center-column; }
+    Super+Alt+Return   { center-visible-columns; }
+    Super+BracketLeft  { spawn-sh "niri.with-center consume-or-expel-window-left"; }
+    Super+BracketRight { spawn-sh "niri.with-center consume-or-expel-window-right"; }
+    Super+Comma        { spawn-sh "niri.with-center consume-window-into-column"; }
+    Super+Period       { spawn-sh "niri.with-center expel-window-from-column"; }
+    Super+V            { spawn-sh "niri.with-center toggle-window-floating"; }
+    Super+Shift+V      { spawn-sh "niri.with-center switch-focus-between-floating-and-tiling"; }
     Super+T { toggle-column-tabbed-display; }
     Super+G { expand-column-to-available-width; }
 
