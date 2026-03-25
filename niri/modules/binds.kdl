@@ -119,8 +119,7 @@ binds {
     Super+BracketRight { consume-or-expel-window-right; }
     Super+Comma  { consume-window-into-column; }
     Super+Period { expel-window-from-column; }
-    Super+Return { center-visible-columns; }
-    Super+Alt+Return { center-column; }
+    Super+Return { center-column; }
     Super+V       { toggle-window-floating; }
     Super+Shift+V { switch-focus-between-floating-and-tiling; }
     Super+T { toggle-column-tabbed-display; }
