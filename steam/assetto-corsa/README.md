@@ -10,15 +10,21 @@
 ## Run Content Manager
 
 - Install:
-    1. Place `Content Manager.exe` inside the game directory
-    2. Create a symlink to steam's loginusers.vdf, target to the pfx's config dir:
+    * Choose the same compatibility option as the main game, e.g. cachyos-proton or Proton Experimental.
+        Try a lower version if it doesn't work, e.g. GE-Proton9-20
+    * Place `Content Manager.exe` inside the game directory
+    * Create a symlink to steam's loginusers.vdf, target to the pfx's config dir:
         `ln -s ~/.steam/root/config/loginusers.vdf "$HOME/.local/share/Steam/steamapps/compatdata/244210/pfx/drive_c/Program Files (x86)/Steam/config/loginusers.vdf"`
-    3. Run winecfg, then install `dwrite` for force feed back to work correctly
-        `protontricks 244210 winecfg`
-    4. In Steam, create a non-steam game entry, pointing target to the url of `Content Manager.exe`. Beware of the space in path, need to double quote in steam settings.
-    5. Set the launch option of Content Manager to use the same proton prefix as the original game:
+    * Tell Steam how to launch Content Manger:
+        * In Steam, create a non-steam game entry, pointing target to the url of `Content Manager.exe`. Beware of the space in path, need to double quote in steam settings.
+        Then Set the launch option of Content Manager to use the same proton prefix as the original game:
         `STEAM_COMPAT_DATA_PATH=$HOME/.local/share/Steam/steamapps/compatdata/244210 %command%`
-    6. Choose the same compatibility option as the main game, e.g. cachyos-proton or Proton Experimental.
+        * Or you can use the Assetto Corsa launcher with custom launch options:
+        `c="%command%";sh -c "${c::-17}Content Manager Safe.exe'"`
+    * Run winecfg, then install `dwrite`, `dinput8` for force feed back to work correctly
+        `protontricks 244210 winecfg`
+    * Launch the game, in the init window, the user should already showing your AC user name, set the game director to:
+        `Z:\home\<username>\.local\share\Steam\steamapps\common\assettocorsa`
 
 ## Failsafe installation script from community
 
@@ -44,6 +50,11 @@ So always enable mangohud on a per-game basis is the safest way.
 Run `protontricks 244210 winecfg`, then:
 1. Check `dwrite` is enabled in Library, the mode should be 'native, builtin'. Usually will work, if not, then:
 2. Check `dinput8` is enabled in Library, the mode should be 'native, builtin'
+
+## More refs
+
+<https://github.com/sihawido/assettocorsa-linux-setup/issues/15>
+<https://github.com/ac-custom-shaders-patch/acc-extension-config/issues/316#issuecomment-2631129002>
 
 # Resources
 
