@@ -1,9 +1,9 @@
 #!/bin/sh
 
 src_dir="$(dirname "$(realpath "$0")")"
-dst_dir="$XDG_CONFIG_HOME/niri"
 
 # niri config
+dst_dir="$XDG_CONFIG_HOME/niri"
 mkdir -p $dst_dir
 src="$src_dir/config.kdl"
 dst="$dst_dir/config.kdl"
@@ -22,4 +22,12 @@ ls -l $dst
 src="$src_dir/helpers/niri.with-center-one"
 dst="/usr/local/bin/niri.with-center-one"
 sudo ln -sf $src $dst
+ls -l $dst
+
+# niri portals
+dst_dir="$XDG_CONFIG_HOME/xdg-desktop-portal"
+mkdir -p "$dst_dir"
+src="$src_dir/niri-portals.conf"
+dst="$dst_dir/niri-portals.conf"
+ln -sf $src $dst
 ls -l $dst
