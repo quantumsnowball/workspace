@@ -32,6 +32,34 @@ Source: <https://github.com/sihawido/assettocorsa-linux-setup>
 This community script will use GE-Proton9-20 as of 2026-03-25 and will install successfully without the patch failure error
 Tested to be successful, but need to use GE-Proton9-20, any other newer proton tested and failed to run.
 
+## Proton version tests
+
+* proton-cachyos-10.0.20260320 (steam linux runtime)
+    - AC: runs normally (after auto ProtonFixes) 
+    - CM: 
+        - launch normally, but failed to patch Assetto Corsa
+        - sometimes, it is successful! (but may be I created GE-Proton9-20 before, patched many things already); 
+* proton-cachyos-10.0-20260320-slr-x86_64_v3
+    - AC: runs normally (after auto ProtonFixes) 
+    - CM: can be successful (I created GE-Proton9-20 before, may be patched many things already) 
+        - ffb wheel work out of the box, may be this version comes with the correct dwrite and dinput8
+        - caution: Render Stats does not work! CPU, GPU usage is always zero! broken
+* Proton Hotfix (v10.1000-200)
+    - AC: failed to launch, pid mismatch error
+* Proton Experimental (v10.1000-200)
+    - AC: failed to launch, pid mismatch error
+* Proton9.0-4
+    - AC: failed to launch, pid mismatch error
+* GE-Proton10-34
+    - AC: runs normally (after auto ProtonFixes) 
+    - CM: launch normally, but failed to patch Assetto Corsa
+* GE-Proton9-27
+    - AC: failed to launch, pid mismatch error
+* GE-Proton9-20
+    - AC: runs normally (need to install missing fonts, segoeui.ttf)
+    - CM: SUCCESS, as suggested by community, this is the only versiion that is guarantee to work perfectly for AC+CM
+        - caution: DO NOT use mangohud on this version, CM will stuck at launch. If you need fps and usage monitor, use Render Stats app.
+
 # Trouble Shoot
 
 ## having some weird exception, in Settings > Assetto Corsa > Audio, or when search settings
