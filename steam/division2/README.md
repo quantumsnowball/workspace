@@ -16,3 +16,18 @@ Enabled Nvidia Low Latency mode in game should feel input latency significant sh
 
 Probably due to some ghost process of ubisoft connect or the game itself, so:
 - Make sure to kill all related ghost processes and start fresh. Run the shell script games.reset.division
+
+## White little box when launching ubisoft connect
+
+
+Just add this line to the niri conf, and it is fixed:
+
+`spawn-at-startup "xembedsniproxy"`
+
+That little white box was actually the ubisoft connect, but it is a x11 tray icon app.
+Using xembedsniproxy as suggest by the other answer, will solve this problem entirely.
+If you are also running KDE plasma alongside, you don't even need to install it.
+This module is already merged into part of KDE plasma so you just need to ensure it is already running when Niri starts.
+After that I can see the ubisoft conect tray icon, clickable and open up the app as usual.
+
+ref: <https://github.com/davidedmundson/xembed-sni-proxy>
