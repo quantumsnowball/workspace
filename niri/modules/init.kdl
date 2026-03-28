@@ -4,6 +4,9 @@ spawn-at-startup "qs" "-c" "noctalia-shell"
 // kwallet
 spawn-at-startup "/usr/lib/pam_kwallet_init" 
 
+// proper display x11 tray icon (fix the little white box issue)
+spawn-at-startup "xembedsniproxy"
+
 // kded service
 // WARNING: kded6 will break noctalia-shell's tray icon widget
 // spawn-at-startup "kded6" 
