@@ -23,13 +23,13 @@ binds {
     Super+Shift+Semicolon hotkey-overlay-title="Terminal: alacritty" {
         spawn-sh "alacritty -e /bin/zsh & sleep 0.2 && niri msg action center-visible-columns";
     }
-    Super+E hotkey-overlay-title="Explorer: Dolphin" {
+    Super+O hotkey-overlay-title="Explorer: Dolphin" {
         spawn-sh "dolphin & sleep 0.2 && niri msg action center-visible-columns";
     }
     Super+Y hotkey-overlay-title="YouTube" {
         spawn-sh "gtk-launch chrome-YouTube & sleep 0.2 && niri msg action center-visible-columns";
     }
-    Super+B hotkey-overlay-title="Chrome Browser" {
+    Super+I hotkey-overlay-title="Chrome Browser" {
         spawn-sh "gtk-launch chrome-default & sleep 0.2 && niri msg action center-visible-columns";
     }
     Super+S hotkey-overlay-title="Steam (with Mangohud)" {
