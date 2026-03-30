@@ -15,3 +15,15 @@ window-rule {
     open-floating true
     open-fullscreen false
 }
+
+// yazi float
+window-rule {
+    // match the custom class
+    match app-id="yazi-float"
+    // floating by default
+    open-floating true
+    // Set width and height to 50% of the screen
+    default-column-width { proportion 0.5; }
+    default-window-height { proportion 0.75; }
+}
+
