@@ -120,18 +120,4 @@ rules = [
 	# scripts and code
 	{ mime = "application/{x-shellscript,x-python,x-ruby,x-javascript}", fg = "#c2a05c" },
 	{ mime = "text/x-{c,c++}", fg = "#1f6f88" },
-
-	# config files
-	{ name = "*.json", fg = "#c2a05c" },
-	{ name = "*.yml", fg = "#1f6f88" },
-	{ name = "*.toml", fg = "#9464b6" },
-
-	# special files
-	{ name = "*", is = "orphan", bg = "#0a0e14" },
-
-	# dummy files
-	{ name = "*", is = "dummy", bg = "#0a0e14" },
-
-	# fallback
-	{ name = "*/", fg = "#1f6f88" },
 ]
