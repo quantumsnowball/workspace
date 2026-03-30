@@ -95,5 +95,6 @@ window-rule  {
 window-rule {
     // Alacritty
     exclude app-id="Alacritty"
+    exclude app-id="kitty"
     opacity 0.95
 }
