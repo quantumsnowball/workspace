@@ -1,0 +1,10 @@
+#!/bin/sh
+
+src_dir="$(dirname "$(realpath "$0")")"
+dst_dir="$XDG_CONFIG_HOME/yazi"
+
+mkdir -p $dst_dir
+for file in 'keymap.toml' 'theme.toml' 'yazi.toml'; do
+    ln -sf "$src_dir/$file" "$dst_dir/$file"
+    ls -l "$dst_dir/$file"
+done
