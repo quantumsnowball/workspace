@@ -1,0 +1,16 @@
+# Ensure you have the correct themes install
+#
+# Use flavors collection:
+#   cd ~/.config/yazi
+#   git clone https://github.com/yazi-rs/flavors
+#
+# Or, clone individual flavors repo into ~/.config/yazi/flavors
+#
+
+[flavor]
+dark = "ayu-dark"
+# dark = "flexoki-dark"
+# dark = "gruvbox-material"
+# dark = "onedark"
+# dark = "vscode-dark-modern"
+# dark = "catppuccin-frappe"
