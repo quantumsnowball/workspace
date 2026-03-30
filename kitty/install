@@ -1,0 +1,10 @@
+#!/bin/sh
+
+src_dir="$(dirname "$(realpath "$0")")"
+dst_dir="$XDG_CONFIG_HOME/kitty"
+src="$src_dir/kitty.conf"
+dst="$dst_dir/kitty.conf"
+
+mkdir -p $dst_dir
+ln -sf $src $dst
+ls -l $dst
