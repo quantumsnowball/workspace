@@ -17,11 +17,11 @@ binds {
     XF86MonBrightnessDown allow-when-locked=true { spawn "brightnessctl" "--class=backlight" "set" "10%-"; }
 
     // exec programs
-    Super+Semicolon hotkey-overlay-title="Terminal: alacritty (tmux)" {
-        spawn-sh "alacritty -e /bin/sh -c 'tmux attach || tmux' & sleep 0.2 && niri msg action center-visible-columns";
+    Super+Semicolon hotkey-overlay-title="Terminal: Kitty (tmux)" {
+        spawn-sh "kitty -e /bin/zsh -c 'tmux attach || tmux' & sleep 0.2 && niri msg action center-visible-columns";
     }
-    Super+Shift+Semicolon hotkey-overlay-title="Terminal: alacritty" {
-        spawn-sh "alacritty -e /bin/zsh & sleep 0.2 && niri msg action center-visible-columns";
+    Super+Shift+Semicolon hotkey-overlay-title="Terminal: Kitty" {
+        spawn-sh "kitty -e /bin/zsh & sleep 0.2 && niri msg action center-visible-columns";
     }
     Super+O hotkey-overlay-title="Explorer: Dolphin" {
         spawn-sh "dolphin & sleep 0.2 && niri msg action center-visible-columns";
