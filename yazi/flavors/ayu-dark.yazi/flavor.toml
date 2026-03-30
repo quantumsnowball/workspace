@@ -99,7 +99,7 @@ title_error = { fg = "#a85361" }
 [filetype]
 rules = [
 	# directories
-	{ name = "*/", fg = "#1f6f88" },
+	{ url = "*/", fg = "#a8ecff" },
 
 	# executables
 	{ name = "*", is = "exec", fg = "#7e9350" },
