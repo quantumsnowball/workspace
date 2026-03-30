@@ -1,0 +1,7 @@
+# Since Yazi selects the first matching key to run, prepend always has a higher priority than default,
+# and append always has a lower priority than default:
+[mgr]
+prepend_keymap = [
+	{ on = "Z", run = "plugin fzf", desc = "Jump to a file/directory via fzf" },
+	{ on = "z", run = "plugin zoxide", desc = "Jump to a directory via zoxide" },
+]
