@@ -102,7 +102,7 @@ rules = [
 	{ url = "*/", fg = "#a8ecff" },
 
 	# executables
-	{ name = "*", is = "exec", fg = "#7e9350" },
+	{ mime = "*", is = "exec", fg = "#b5ffa8" },
 
 	# images
 	{ mime = "image/*", fg = "#c2a05c" },
