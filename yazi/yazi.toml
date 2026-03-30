@@ -1,3 +1,9 @@
 [mgr]
 # larger preview area
 ratio = [ 2, 4, 7 ]
+
+[open]
+prepend_rules = [
+	# Folder
+	{ url = "*/", use = [ "open", "reveal" ] },
+]
