@@ -26,6 +26,9 @@ binds {
     Super+O hotkey-overlay-title="Explorer: Dolphin" {
         spawn-sh "dolphin & sleep 0.2 && niri msg action center-visible-columns";
     }
+    Super+Slash hotkey-overlay-title="Explorer: Yazi" {
+        spawn-sh "kitty -e /bin/zsh -c 'yazi' & sleep 0.2 && niri msg action center-visible-columns";
+    }
     Super+Y hotkey-overlay-title="YouTube" {
         spawn-sh "gtk-launch chrome-YouTube & sleep 0.2 && niri msg action center-visible-columns";
     }
