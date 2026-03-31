@@ -21,6 +21,7 @@
         `STEAM_COMPAT_DATA_PATH=$HOME/.local/share/Steam/steamapps/compatdata/244210 %command%`
         * Or you can use the Assetto Corsa launcher with custom launch options:
         `c="%command%";sh -c "${c::-17}Content Manager Safe.exe'"`
+        (note: don't miss the the single quote after .exe, it must exists to match the opening quote inside %command%)
     * Run winecfg, then install `dwrite`, `dinput8` for force feed back to work correctly
         `protontricks 244210 winecfg`
     * Launch the game, in the init window, the user should already showing your AC user name, set the game director to:
