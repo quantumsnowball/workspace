@@ -1,0 +1,9 @@
+#!/bin/sh
+
+src_dir="$(dirname "$(realpath "$0")")"
+dst_dir="$XDG_CONFIG_HOME"
+src="$src_dir/fish"
+dst="$dst_dir/fish"
+
+ln -sfn $src $dst
+ls -l $dst
