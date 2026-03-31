@@ -1,6 +1,6 @@
 [mgr]
 # current working dir
-cwd = { fg = "#5c6773" }
+cwd = { fg = "#ffffdd" }
 
 # Hovered
 hovered         = { reversed = true }
@@ -67,7 +67,7 @@ inactive = { fg = "#5c6773", bg = "#0a0e14" }
 
 [input]
 border = { fg = "#c2a05c" }
-value = { fg = "#5c6773" }
+value = { fg = "#ddffdd" }
 
 [completion]
 border = { fg = "#c2a05c", bg = "#0a0e14" }
