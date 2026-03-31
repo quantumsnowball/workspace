@@ -2,9 +2,11 @@ function fish_prompt --description 'Write out the prompt'
     set -l last_status $status
     set -l normal (set_color normal)
     set -l status_color (set_color brgreen)
-    set -l cwd_color (set_color $fish_color_cwd)
     set -l vcs_color (set_color brpurple)
-    set -l venv_color (set_color bryellow) # Color for the virtualenv
+    set -l user_color (set_color brred)
+    set -l host_color (set_color brblue)
+    set -l path_color (set_color bryellow)
+    set -l venv_color (set_color white)
     set -l prompt_status ""
 
     # Since we display the prompt on a new line allow the directory names to be longer.
@@ -14,9 +16,7 @@ function fish_prompt --description 'Write out the prompt'
     # Color the prompt differently when we're root
     set -l suffix '❯'
     if functions -q fish_is_root_user; and fish_is_root_user
-        if set -q fish_color_cwd_root
-            set cwd_color (set_color $fish_color_cwd_root)
-        end
+        set user_color (set_color brred) # Bold/Bright red for root
         set suffix '#'
     end
 
@@ -32,9 +32,10 @@ function fish_prompt --description 'Write out the prompt'
         set venv_prompt " " $venv_color "(" (basename "$VIRTUAL_ENV") ")" $normal
     end
 
-    # First line: Login, CWD, VCS, VENV, and Status
-    echo -s (prompt_login) ' ' $cwd_color (prompt_pwd) $vcs_color (fish_vcs_prompt) $venv_prompt $normal ' ' $prompt_status
-    
-    # Second line: Suffix
+    # --- Construct the First Line ---
+    echo -n -s $user_color $USER $normal "@" $host_color (prompt_hostname) $normal ' '
+    echo -s $path_color (prompt_pwd) $vcs_color (fish_vcs_prompt) $venv_prompt $normal ' ' $prompt_status
+
+    # --- Second Line ---
     echo -n -s $status_color $suffix ' ' $normal
 end
