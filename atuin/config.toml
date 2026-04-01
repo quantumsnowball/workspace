@@ -2,23 +2,38 @@
 # https://docs.atuin.sh/cli/configuration/config/
 # 
 
+# style
+# style = "full"
+
 # more like fzf
-invert = "true"
+# invert = "true"
+
+# help
+show_help = "false"
 
 # about half screen height
-inline_height = 25
+inline_height = 20
 
 # no number
 show_numeric_shortcuts = false
 
 # Default: "emacs"
 # can be: "emacs", "vim-normal", "vim-insert", and "auto"
-keymap_mode = "vim-insert"
+keymap_mode = "auto"
+
+# cursor
+keymap_cursor = {
+    vim_insert = "steady-bar",
+    vim_normal = "steady-block"
+}
 
 # Which search mode to use.
 # Default: "fuzzy"
 # can be: "prefix", "fulltext", "fuzzy", "daemon-fuzzy", and "skim" search modes.
 # search_mode = "fulltext"
+
+# don't need preview
+show_preview = "false"
 
 [ui]
 # columns
