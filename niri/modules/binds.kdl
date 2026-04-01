@@ -61,7 +61,7 @@ binds {
     Super+Tab repeat=false { toggle-overview; }
 
     // close window
-    Super+grave repeat=false { spawn-sh "niri.with-center close-window"; }
+    Super+Grave repeat=false { spawn-sh "niri.with-center close-window"; }
     Super+W repeat=false     { spawn-sh "niri.with-center close-window"; }
 
     // windows focus
@@ -143,5 +143,16 @@ binds {
     Super+P { screenshot; }
     Super+Shift+P { screenshot-screen; }
     Super+Shift+Ctrl+P { screenshot-window; }
+}
+
+// Special binds
+// https://niri-wm.github.io/niri/Configuration%3A-Recent-Windows.html#binds
+recent-windows {
+    // only keep Alt+Tab/Alt+Shift+Tab
+    binds {
+        Alt+Tab         { next-window; }
+        Alt+Shift+Tab   { previous-window; }
+        // free Alt+Grave and Alt+Shift+Grave
+    }
 }
 
