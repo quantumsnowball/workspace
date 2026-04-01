@@ -6,7 +6,7 @@
 invert = "true"
 
 # about half screen height
-inline_height = 30
+inline_height = 25
 
 # no number
 show_numeric_shortcuts = false
@@ -22,5 +22,9 @@ keymap_mode = "vim-insert"
 
 [ui]
 # columns
-columns = ["time", "host", "command"]
+columns = [
+    { type = "time", width = 8 },
+    { type = "host", width = 10 },
+    "command"
+]
 
