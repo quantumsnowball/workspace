@@ -20,3 +20,7 @@ keymap_mode = "vim-insert"
 # can be: "prefix", "fulltext", "fuzzy", "daemon-fuzzy", and "skim" search modes.
 # search_mode = "fulltext"
 
+[ui]
+# columns
+columns = ["time", "host", "command"]
+
