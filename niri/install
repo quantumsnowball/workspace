@@ -15,13 +15,14 @@ ln -sfn $src $dst
 ls -l $dst
 
 # niri helpers
+dst_dir="$HOME/.local/bin"
 src="$src_dir/helpers/niri.with-center"
-dst="/usr/local/bin/niri.with-center"
-sudo ln -sf $src $dst
+dst="$dst_dir/niri.with-center"
+ln -sf $src $dst
 ls -l $dst
 src="$src_dir/helpers/niri.with-center-one"
-dst="/usr/local/bin/niri.with-center-one"
-sudo ln -sf $src $dst
+dst="$dst_dir/niri.with-center-one"
+ln -sf $src $dst
 ls -l $dst
 
 # niri portals
