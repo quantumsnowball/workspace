@@ -13,3 +13,9 @@ prepend_keymap = [
 	{ on = ["t", "l"], run = "tab_swap 1",  desc = "Swap current tab with next tab" },
 	{ on = ["t", "q"], run = "close", desc = "Close the current tab, or quit if it's last" },
 ]
+
+# Close input by once Esc press (,gadon't use vim mode the input box)
+[[input.prepend_keymap]]
+on   = "<Esc>"
+run  = "close"
+desc = "Cancel input"
