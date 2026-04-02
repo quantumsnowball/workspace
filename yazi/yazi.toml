@@ -1,6 +1,7 @@
 [mgr]
 # larger preview area
-ratio = [ 2, 4, 7 ]
+ratio = [ 2, 5, 7 ]
+linemode = "size"
 
 [open]
 prepend_rules = [
