@@ -1,9 +1,8 @@
 #!/bin/sh
 
 cwd="$(dirname "$(realpath "$0")")"
-stow_dir="$cwd/lf"
-target_dir="$XDG_CONFIG_HOME/lf"
+stow_dir="$cwd/_config"
+target_dir="$XDG_CONFIG_HOME"
 
-# this will symlink every item inside stow_dir into target_dir
-mkdir -p $target_dir
+# symlink every items inside stow_dir into target_dir
 stow -d $stow_dir -t $target_dir --verbose .
