@@ -20,3 +20,11 @@ Status:children_add(function()
         " ",
     }
 end, 500, Status.RIGHT)
+
+-- Show username and hostname in header
+Header:children_add(function()
+    if ya.target_family() ~= "unix" then
+        return ""
+    end
+    return ui.Span(ya.user_name() .. "@" .. ya.host_name() .. ":"):fg("yellow")
+end, 500, Header.LEFT)
