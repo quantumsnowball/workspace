@@ -5,4 +5,4 @@ stow_dir="$cwd/_config"
 target_dir="$XDG_CONFIG_HOME"
 
 # symlink every items inside stow_dir into target_dir
-stow -d $stow_dir -t $target_dir --verbose .
+stow -d $stow_dir -t $target_dir --verbose "$@" .
