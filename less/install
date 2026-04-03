@@ -1,10 +1,6 @@
 #!/bin/sh
 
-src_dir="$(dirname "$(realpath "$0")")"
-dst_dir="$HOME"
-src="$src_dir/.lesskey"
-dst="$dst_dir/.lesskey"
-
-mkdir -p $dst_dir
-ln -sf $src $dst
-ls -l $dst
+. $XDG_CONFIG_HOME/workspace/stow \
+    "$(dirname "$(realpath "$0")")/_" \
+    "$HOME" \
+    "$@"
