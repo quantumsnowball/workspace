@@ -8,7 +8,7 @@ shift 2
 
 # runner
 run() {
-    printf "\nIn $target_dir\n"
+    printf "\nIn $target_dir/\n"
     stow -d $stow_dir -t $target_dir --verbose $@ . ;
 }
 
