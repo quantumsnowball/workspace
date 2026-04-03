@@ -1,0 +1,23 @@
+#!/bin/sh
+
+
+# args
+stow_dir="$1"
+target_dir="$2"
+shift 2
+
+# runner
+run() {
+    printf "\nIn $target_dir\n"
+    stow -d $stow_dir -t $target_dir --verbose $@ . ;
+}
+
+# symlink every items inside stow_dir into target_dir
+echo "Source: $stow_dir/ [ $(/bin/ls -pA "$stow_dir" | xargs) ]"
+echo "Target: $target_dir/ [ $(/bin/ls -pA "$stow_dir" | xargs) ]"
+# simulate
+run --simulate "$@"
+# prompt confirm
+printf "\nApply changes? [y/N]: " && read -r ans && [ "${ans:-n}" = "y" ] || exit
+# run
+run "$@"
