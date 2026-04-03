@@ -9,7 +9,7 @@ shift 2
 # runner
 run() {
     printf "\nIn $target_dir/\n"
-    stow -d $stow_dir -t $target_dir --verbose $@ . ;
+    stow -d "$stow_dir" -t "$target_dir" --verbose $@ . ;
 }
 
 # symlink every items inside stow_dir into target_dir
