@@ -1,16 +1,6 @@
 #!/bin/sh
 
-src_dir="$(dirname "$(realpath "$0")")"
-dst_dir="$HOME/.local/share/Steam/steamapps/compatdata/2221490/pfx/drive_c/users/steamuser/Documents/My Games/Tom Clancy's The Division 2"
+stow_dir="$(dirname "$(realpath "$0")")/_"
+target_dir="$HOME/.local/share/Steam/steamapps/compatdata/2221490/pfx/drive_c/users/steamuser/Documents/My Games/Tom Clancy's The Division 2"
 
-# graphics settings
-src="$src_dir/graphic settings.cfg"
-dst="$dst_dir/graphic settings.cfg"
-ln -sf "$src" "$dst"
-ls -l "$dst"
-
-# keybindings
-src="$src_dir/user.bindings"
-dst="$dst_dir/user.bindings"
-ln -sf "$src" "$dst"
-ls -l "$dst"
+. $XDG_CONFIG_HOME/workspace/stow "$stow_dir" "$target_dir" "$@"
