@@ -1,6 +1,6 @@
 #!/bin/sh
 
-. $XDG_CONFIG_HOME/workspace/stow \
-    "$(dirname "$(realpath "$0")")/_" \
-    "$XDG_CONFIG_HOME" \
-    "$@"
+stow_dir="$(dirname "$(realpath "$0")")/_"
+target_dir="$XDG_CONFIG_HOME"
+
+. $XDG_CONFIG_HOME/workspace/stow "$stow_dir" "$target_dir" "$@"
