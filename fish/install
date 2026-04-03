@@ -1,9 +1,6 @@
 #!/bin/sh
 
-src_dir="$(dirname "$(realpath "$0")")"
-dst_dir="$XDG_CONFIG_HOME"
-src="$src_dir/fish"
-dst="$dst_dir/fish"
+stow_dir="$(dirname "$(realpath "$0")")/_"
+target_dir="$XDG_CONFIG_HOME"
 
-ln -sfn $src $dst
-ls -l $dst
+. $XDG_CONFIG_HOME/workspace/stow "$stow_dir" "$target_dir" "$@"
