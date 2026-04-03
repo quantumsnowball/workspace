@@ -1,10 +1,6 @@
 #!/bin/sh
 
-src_dir="$(dirname "$(realpath "$0")")"
-dst_dir="$XDG_CONFIG_HOME/atuin"
+stow_dir="$(dirname "$(realpath "$0")")/_"
+target_dir="$XDG_CONFIG_HOME"
 
-mkdir -p $dst_dir
-for file in 'config.toml'; do
-    ln -sfn "$src_dir/$file" "$dst_dir/$file"
-    ls -l "$dst_dir/$file"
-done
+. $XDG_CONFIG_HOME/workspace/stow "$stow_dir" "$target_dir" "$@"
