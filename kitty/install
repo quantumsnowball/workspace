@@ -1,10 +1,6 @@
 #!/bin/sh
 
-src_dir="$(dirname "$(realpath "$0")")"
-dst_dir="$XDG_CONFIG_HOME/kitty"
-src="$src_dir/kitty.conf"
-dst="$dst_dir/kitty.conf"
+stow_dir="$(dirname "$(realpath "$0")")/_"
+target_dir="$XDG_CONFIG_HOME"
 
-mkdir -p $dst_dir
-ln -sf $src $dst
-ls -l $dst
+. $XDG_CONFIG_HOME/workspace/stow "$stow_dir" "$target_dir" "$@"
