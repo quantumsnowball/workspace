@@ -1,16 +1,6 @@
 #!/bin/sh
 
-cwd="$(dirname "$(realpath "$0")")"
-stow_dir="$cwd/_"
+stow_dir="$(dirname "$(realpath "$0")")/_"
 target_dir="$XDG_CONFIG_HOME"
-run() {
-    printf "\nIn $target_dir\n"
-    stow -d $stow_dir -t $target_dir --verbose $@ . ;
-}
 
-# symlink every items inside stow_dir into target_dir, simulate first, then prompt for confirm
-echo "Source: $stow_dir/ [ $(ls -pA "$stow_dir" | xargs) ]"
-echo "Target: $target_dir/ [ $(ls -pA "$stow_dir" | xargs) ]"
-run --simulate "$@"
-printf "\nApply changes? [y/N]: " && read -r ans && [ "${ans:-n}" = "y" ] || exit
-run "$@"
+. $XDG_CONFIG_HOME/workspace/stow "$stow_dir" "$target_dir" "$@"
