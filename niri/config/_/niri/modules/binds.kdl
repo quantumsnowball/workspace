@@ -99,10 +99,10 @@ binds {
     Super+Shift+End   { spawn-sh "niri.with-center move-column-to-last"; }
     
     // workspace movement
-    Super+Page_Down      { focus-workspace-down; }
-    Super+Page_Up        { focus-workspace-up; }
-    Super+Shift+Page_Down      { move-workspace-down; }
-    Super+Shift+Page_Up        { move-workspace-up; }
+    Super+BracketRight         { focus-workspace-down; }
+    Super+BracketLeft          { focus-workspace-up; }
+    Super+Shift+BracketRight   { move-workspace-down; }
+    Super+Shift+BracketLeft    { move-workspace-up; }
 
     // jump workspace
     Super+1 { focus-workspace 1; }
