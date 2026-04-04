@@ -1,34 +1,7 @@
 #!/bin/sh
 
-src_dir="$(dirname "$(realpath "$0")")"
 
-# niri config
-dst_dir="$XDG_CONFIG_HOME/niri"
-mkdir -p $dst_dir
-src="$src_dir/config.kdl"
-dst="$dst_dir/config.kdl"
-ln -sf $src $dst
-ls -l $dst
-src="$src_dir/modules"
-dst="$dst_dir/modules"
-ln -sfn $src $dst
-ls -l $dst
-
-# niri helpers
-dst_dir="$HOME/.local/bin"
-src="$src_dir/helpers/niri.with-center"
-dst="$dst_dir/niri.with-center"
-ln -sf $src $dst
-ls -l $dst
-src="$src_dir/helpers/niri.with-center-one"
-dst="$dst_dir/niri.with-center-one"
-ln -sf $src $dst
-ls -l $dst
-
-# niri portals
-dst_dir="$XDG_CONFIG_HOME/xdg-desktop-portal"
-mkdir -p "$dst_dir"
-src="$src_dir/niri-portals.conf"
-dst="$dst_dir/niri-portals.conf"
-ln -sf $src $dst
-ls -l $dst
+$XDG_CONFIG_HOME/workspace/niri/config/install "$@"
+$XDG_CONFIG_HOME/workspace/niri/script/install "$@"
+$XDG_CONFIG_HOME/workspace/niri/env/install "$@"
+$XDG_CONFIG_HOME/workspace/niri/portal/install "$@"
