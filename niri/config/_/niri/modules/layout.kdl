@@ -71,12 +71,11 @@ layout {
     // tab indicator
     tab-indicator {
         position "right"
-        width 16
-        corner-radius 8
-        gap 10
+        width 14
+        corner-radius 7
+        gap -3
         gaps-between-tabs 10
         length total-proportion=0.5
-        place-within-column
         hide-when-single-tab
     }
 }
