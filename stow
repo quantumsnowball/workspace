@@ -6,18 +6,35 @@ stow_dir="$1"
 target_dir="$2"
 shift 2
 
+# helpers
+color_path() {
+    local p="${1//\//${BLUE}\/${YELLOW}}"
+    printf "${YELLOW}%s${RESET}" "$p"
+}
+
 # runner
 run() {
-    printf "\nIn $target_dir/\n"
-    stow -d "$stow_dir" -t "$target_dir" --verbose $@ . ;
+    printf "\n${CYAN}In${RESET}: $(color_path $target_dir/)\n"
+    stow -d "$stow_dir" -t "$target_dir" --verbose "$@" . ;
 }
 
 # symlink every items inside stow_dir into target_dir
-echo "Source: $stow_dir/ [ $(/bin/ls -pA "$stow_dir" | xargs) ]"
-echo "Target: $target_dir/ [ $(/bin/ls -pA "$stow_dir" | xargs) ]"
+printf "\n${MAGENTA}>>> ${GREEN}Stowing ...${RESET}\n\n"
+printf "${CYAN}Source${RESET}: $(color_path $stow_dir/) [ ${CYAN}$(/bin/ls -pA "$stow_dir" | xargs)${RESET} ]\n"
+printf "${CYAN}Target${RESET}: $(color_path $target_dir/)\n"
+
 # simulate
+printf "\n${MAGENTA}>>> ${GREEN}Simulating ...${RESET}\n"
 run --simulate "$@"
+
 # prompt confirm
-printf "\nApply changes? [y/N]: " && read -r ans && [ "${ans:-n}" = "y" ] || exit
+printf "\n${MAGENTA}>>> ${RED}Apply changes? [y/N]:${RESET} " 
+read -r ans
+if [ "${ans:-n}" != "y" ]; then
+    printf "\n${MAGENTA}>>> ${RED}Aborted.${RESET}\n"
+    exit 0
+fi
+
 # run
+printf "\n${MAGENTA}>>> ${GREEN}Applying ...${RESET}\n"
 run "$@"
