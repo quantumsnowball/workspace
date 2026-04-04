@@ -1,0 +1,6 @@
+#!/bin/sh
+
+stow_dir="$(dirname "$(realpath "$0")")/_"
+target_dir="$HOME/.local/bin"
+
+. $XDG_CONFIG_HOME/workspace/stow "$stow_dir" "$target_dir" "$@"
