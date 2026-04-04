@@ -91,10 +91,8 @@ binds {
     Super+Shift+J     { spawn-sh "niri.with-center-one move-column-to-workspace-down"; }
     Super+Shift+K     { spawn-sh "niri.with-center-one move-column-to-workspace-up"; }
     Super+Shift+L     { spawn-sh "niri.with-center move-column-right"; }
-    Super+Shift+Left  { spawn-sh "niri.with-center move-column-left"; }
-    Super+Shift+Down  { spawn-sh "niri.with-center move-window-down-or-to-workspace-down"; }
-    Super+Shift+Up    { spawn-sh "niri.with-center move-window-up-or-to-workspace-up"; }
-    Super+Shift+Right { spawn-sh "niri.with-center move-column-right"; }
+    Super+Shift+Down  { spawn-sh "niri.with-center move-window-down"; }
+    Super+Shift+Up    { spawn-sh "niri.with-center move-window-up"; }
     Super+Shift+Home  { spawn-sh "niri.with-center move-column-to-first"; }
     Super+Shift+End   { spawn-sh "niri.with-center move-column-to-last"; }
     
