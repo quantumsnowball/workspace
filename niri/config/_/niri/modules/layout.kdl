@@ -64,6 +64,17 @@ layout {
         // You can also change the shadow color and opacity.
         color "#0007"
     }
+
+    // tab indicator
+    tab-indicator {
+        position "right"
+        width 16
+        corner-radius 8
+        gap 10
+        gaps-between-tabs 10
+        length total-proportion=0.5
+        place-within-column
+    }
 }
 
 // mouse cursor
