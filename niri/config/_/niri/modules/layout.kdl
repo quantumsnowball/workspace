@@ -65,6 +65,9 @@ layout {
         color "#0007"
     }
 
+    // tabs
+    default-column-display "tabbed"
+
     // tab indicator
     tab-indicator {
         position "right"
@@ -74,6 +77,7 @@ layout {
         gaps-between-tabs 10
         length total-proportion=0.5
         place-within-column
+        hide-when-single-tab
     }
 }
 
