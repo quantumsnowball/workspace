@@ -78,8 +78,8 @@ binds {
 
     // viewport scrolling like
     Super+Alt+H     { spawn-sh "niri.with-center-one focus-column-left"; }
-    Super+Alt+J     { spawn-sh "niri.with-center-one focus-window-or-workspace-down"; }
-    Super+Alt+K     { spawn-sh "niri.with-center-one focus-window-or-workspace-up"; }
+    Super+Alt+J     { spawn-sh "niri.with-center-one focus-workspace-down"; }
+    Super+Alt+K     { spawn-sh "niri.with-center-one focus-workspace-up"; }
     Super+Alt+L     { spawn-sh "niri.with-center-one focus-column-right"; }
     Super+Alt+Left  { spawn-sh "niri.with-center-one focus-column-left"; }
     Super+Alt+Down  { spawn-sh "niri.with-center-one focus-window-or-workspace-down"; }
