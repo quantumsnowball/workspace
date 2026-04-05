@@ -122,6 +122,7 @@ binds {
     Super+Ctrl+Minus     { spawn-sh "niri.with-center switch-preset-window-height"; }
     Super+M       { spawn-sh "niri.with-center maximize-column"; }
     Super+F       { spawn-sh "niri.with-center fullscreen-window"; }
+    Alt+Return       { spawn-sh "niri.with-center fullscreen-window"; }
     Super+Shift+F { spawn-sh "niri.with-center maximize-window-to-edges"; }
     Super+R { reset-window-height; }
 
