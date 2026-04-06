@@ -5,7 +5,15 @@
 #   GEMINI_API_KEY=<api key>
 #   ALL_PROXY=<http proxy>
 
-model: gemini:gemini-2.5-flash
+# model: gemini:gemini-2.5-flash
+# clients:
+# - type: gemini
+
+# define ollama model
+model: ollama:qwen2.5-coder:7b
+# define Ollama client
 clients:
-- type: gemini
+  - type: openai-compatible
+    name: ollama
+    api_base: http://localhost:11434/v1
 
