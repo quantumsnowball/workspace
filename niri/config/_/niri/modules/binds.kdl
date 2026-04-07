@@ -18,7 +18,7 @@ binds {
 
     // exec programs
     Super+Semicolon hotkey-overlay-title="Terminal: Kitty (tmux)" {
-        spawn-sh "kitty -e /bin/zsh -c 'tmux attach || tmux' & sleep 0.2 && niri msg action center-visible-columns";
+        spawn-sh "kitty -e 'tmux.launch-with-presets' & sleep 0.2 && niri msg action center-visible-columns";
     }
     Super+Shift+Semicolon hotkey-overlay-title="Terminal: Kitty" {
         spawn-sh "kitty -e /bin/zsh & sleep 0.2 && niri msg action center-visible-columns";
