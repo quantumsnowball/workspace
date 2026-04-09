@@ -1,4 +1,4 @@
-#!/usr/bin/env -S LD_PRELOAD=/usr/lib/libgtk4-layer-shell.so uv run
+#!/usr/bin/env -S uv run
 
 # /// script
 # dependencies = [
@@ -6,8 +6,13 @@
 # ]
 # ///
 
-import gi
+# For GTK4 Layer Shell to get linked before libwayland-client we must explicitly load it before importing with gi
+# ref: https://github.com/wmww/gtk4-layer-shell/blob/main/examples/simple-example.py
+from ctypes import CDLL
 
+CDLL("libgtk4-layer-shell.so")
+
+import gi  # noqa
 gi.require_version("Gtk", "4.0")
 gi.require_version("Gdk", "4.0")
 gi.require_version("Gtk4LayerShell", "1.0")
