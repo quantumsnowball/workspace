@@ -142,6 +142,10 @@ binds {
     Super+P { screenshot; }
     Super+Shift+P { screenshot-screen; }
     Super+Shift+Ctrl+P { screenshot-window; }
+
+    // OBS
+    // store obs websocket password in ~/.obsws_password
+    Shift+F1 { spawn-sh "obs-cmd -w obsws://localhost:4455/$(cat $HOME/.obsws_password) recording toggle"; }
 }
 
 // Special binds
