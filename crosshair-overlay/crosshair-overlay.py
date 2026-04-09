@@ -1,3 +1,11 @@
+#!/usr/bin/env -S LD_PRELOAD=/usr/lib/libgtk4-layer-shell.so uv run
+
+# /// script
+# dependencies = [
+#   "PyGObject",
+# ]
+# ///
+
 import gi
 
 gi.require_version("Gtk", "4.0")
