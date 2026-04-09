@@ -44,8 +44,9 @@ def on_activate(app):
     draw_area = Gtk.DrawingArea()
 
     def draw_func(area, cr, width, height):
+        # calibrate the center using https://centerofmyscreen.com/
+        cr.arc(width/2, height/2 - 14, 2, 0, 2 * 3.14159)
         cr.set_source_rgba(0, 1.0, 0, 1.0)  # Green
-        cr.arc(width/2, height/2, 2, 0, 2 * 3.14159)
         cr.fill()
 
     draw_area.set_draw_func(draw_func)
@@ -53,7 +54,7 @@ def on_activate(app):
 
     # 7. Size & Position
     # Layer shell centers by default if no anchors are set
-    win.set_default_size(10, 10)
+    win.set_default_size(4, 40)
     win.present()
 
 
