@@ -1,6 +1,6 @@
 [Desktop Entry]
 Type=Application
-Name=Pixel Crosshair (Enable)
+Name=Pixel Crosshair (Green)
 Comment=Enable Pixel Crosshair Overlay
 Exec=pixel-crosshair enable -c #00ff00
 Icon=pixel-crosshair.png

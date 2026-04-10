@@ -1,6 +1,6 @@
 [Desktop Entry]
 Type=Application
-Name=Pixel Crosshair (Disable)
+Name=Pixel Crosshair - Disable
 Comment=Disable Pixel Crosshair Overlay
 Exec=pixel-crosshair disable
 Icon=pixel-crosshair-bw.png
