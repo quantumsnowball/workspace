@@ -5,7 +5,7 @@ After=graphical-session.target
 [Service]
 Type=exec
 # Replace with absolute paths
-ExecStart=%h/.local/bin/pixel-crosshair run
+ExecStart=%h/.local/bin/pixel-crosshair run --color #%i
 Restart=always
 RestartSec=1
 # Ensures logs show up immediately

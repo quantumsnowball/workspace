@@ -1,8 +1,8 @@
 [Desktop Entry]
 Type=Application
-Name=Pixel Crosshair - Disable
+Name=Pixel Crosshair - Stop
 Comment=Disable Pixel Crosshair Overlay
-Exec=pixel-crosshair disable
+Exec=systemctl --user stop "pixel-crosshair@*.service"
 Icon=pixel-crosshair-bw.png
 Terminal=false
 Categories=Game;Utility;
