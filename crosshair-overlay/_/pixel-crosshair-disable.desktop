@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Name=Pixel Crosshair (Disable)
+Comment=Disable Pixel Crosshair Overlay
+Exec=pixel-crosshair disable
+Icon=crosshair
+Terminal=false
+Categories=Game;Utility;

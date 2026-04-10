@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Name=Pixel Crosshair (Enable)
+Comment=Enable Pixel Crosshair Overlay
+Exec=pixel-crosshair enable -c #00ff00
+Icon=crosshair
+Terminal=false
+Categories=Game;Utility;
