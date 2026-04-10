@@ -3,6 +3,6 @@ Type=Application
 Name=Pixel Crosshair (Enable)
 Comment=Enable Pixel Crosshair Overlay
 Exec=pixel-crosshair enable -c #00ff00
-Icon=crosshair
+Icon=pixel-crosshair.png
 Terminal=false
 Categories=Game;Utility;
