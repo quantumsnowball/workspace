@@ -1,0 +1,11 @@
+#!/bin/sh
+
+# Define script path
+SCRIPT="$XDG_CONFIG_HOME/workspace/crosshair-overlay/crosshair-overlay.py"
+
+# Try to unload existing instance
+crosshair-overlay-unload
+
+# Launch and disown so it stays alive after terminal closes
+"$SCRIPT" & disown
+printf "${YELLOW}Crosshair Overlay ENABLED${RESET}\n"

@@ -1,0 +1,11 @@
+#!/bin/sh
+
+# Define script path
+SCRIPT="$XDG_CONFIG_HOME/workspace/crosshair-overlay/crosshair-overlay.py"
+
+# Try to unload existing instance if it exists
+# pkill -0 just checks if a process exists without killing it
+if pkill -0 -f "$SCRIPT" 2>/dev/null; then
+    pkill -f "$SCRIPT"
+    printf "${RED}Crosshair Overlay DISABLED${RESET}\n"
+fi
