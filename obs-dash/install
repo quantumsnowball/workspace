@@ -3,4 +3,5 @@
 
 $XDG_CONFIG_HOME/workspace/obs-dash/desktop/install "$@"
 $XDG_CONFIG_HOME/workspace/obs-dash/icons/install "$@"
+$XDG_CONFIG_HOME/workspace/obs-dash/script/install "$@"
 $XDG_CONFIG_HOME/workspace/obs-dash/service/install "$@"

@@ -1,0 +1,11 @@
+#!/bin/sh
+
+# Target service
+SERVICE="obs-dash.service"
+
+# Toggle base on current active state
+if systemctl --user is-active --quiet "$SERVICE"; then
+    systemctl --user stop "$SERVICE"
+else
+    systemctl --user start "$SERVICE"
+fi
