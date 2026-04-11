@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Application
+Name=OBS Dash - Stop
+Comment=Disable OBS Dash Overlay
+Exec=systemctl --user stop obs-dash.service
+Icon=obs-dash-bw.png
+Terminal=false
+Categories=Game;Utility;
+

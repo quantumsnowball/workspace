@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Name=OBS Dash
+Comment=Enable OBS Dash Overlay
+Exec=systemctl --user start obs-dash.service
+Icon=obs-dash.png
+Terminal=false
+Categories=Game;Utility;
