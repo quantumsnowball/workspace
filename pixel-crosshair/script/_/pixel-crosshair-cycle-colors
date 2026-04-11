@@ -1,0 +1,33 @@
+#!/bin/sh
+
+# state file
+STATE_FILE="/tmp/pixel-crosshair-cycle-colors-index"
+
+# Define color presets
+COLORS=(
+    "#00ff00"
+    "#00ffff"
+    "#ff00ff"
+    "#ffff00"
+    "#ff0000"
+    "#0000ff"
+    ""
+)
+
+# Get current index
+INDEX=$(cat "$STATE_FILE" 2>/dev/null || echo 0)
+
+# extra the color without the # char
+COLOR="${COLORS[$INDEX]#\#}"
+
+# Stop existing instance
+systemctl --user stop "pixel-crosshair@*.service"
+
+# Strt service with the new color if available
+if [ "$COLOR" != "" ]; then
+    systemctl --user start "pixel-crosshair@$COLOR.service"
+fi
+
+# Save the new index to state file
+COUNT=${#COLORS[@]}
+echo "$(( (INDEX + 1) % COUNT ))" > "$STATE_FILE"

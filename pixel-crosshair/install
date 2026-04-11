@@ -3,4 +3,5 @@
 
 $XDG_CONFIG_HOME/workspace/pixel-crosshair/desktop/install "$@"
 $XDG_CONFIG_HOME/workspace/pixel-crosshair/icons/install "$@"
+$XDG_CONFIG_HOME/workspace/pixel-crosshair/script/install "$@"
 $XDG_CONFIG_HOME/workspace/pixel-crosshair/service/install "$@"
