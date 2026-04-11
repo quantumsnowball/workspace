@@ -149,7 +149,8 @@ binds {
     Shift+Alt+F1 { spawn-sh "obs-dash-toggle"; }
 
     // Pixel Crosshair
-    Shift+F2 { spawn-sh "pixel-crosshair-cycle-colors"; }
+    // Shift+F2 for toggle mangohud presets
+    Shift+Alt+F2 { spawn-sh "pixel-crosshair-cycle-colors"; }
 }
 
 // Special binds
