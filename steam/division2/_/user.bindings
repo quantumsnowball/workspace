@@ -73,14 +73,14 @@
 	},
 	{
 		myIndex = 0,
-		myKeyCombo = 33652747,
-		myKeyComboAlt = 33619979,
+		myKeyCombo = 98315,
+		myKeyComboAlt = 0,
 		myName = "KB_SELECT_PRIMARY",
 	},
 	{
 		myIndex = 0,
-		myKeyCombo = 98315,
-		myKeyComboAlt = 65547,
+		myKeyCombo = 65547,
+		myKeyComboAlt = 0,
 		myName = "KB_SELECT_SECONDARY",
 	},
 	{
