@@ -1,0 +1,15 @@
+[Unit]
+Description=Smooth Mouse
+After=graphical-session.target
+
+[Service]
+Type=exec
+# Replace with absolute paths
+ExecStart=uv run %h/.config/workspace/smooth-mouse/main.py 5 --debug
+Restart=always
+RestartSec=1
+# Ensures logs show up immediately
+Environment=PYTHONUNBUFFERED=1
+
+[Install]
+WantedBy=graphical-session.target
