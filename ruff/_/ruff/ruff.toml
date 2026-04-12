@@ -1,0 +1,14 @@
+[lint]
+# Q = flake8-quotes (surgical string fixing)
+# I = isort (import sorting)
+# F401 = unused imports
+select = ["Q", "I", "F401"]
+
+[lint.flake8-quotes]
+inline-quotes = "single"
+docstring-quotes = "single"
+multiline-quotes = "single"
+
+[format]
+quote-style = "single"
+
