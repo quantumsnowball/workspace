@@ -18,10 +18,6 @@ from evdev.ecodes import EV_REL, REL_WHEEL, REL_WHEEL_HI_RES
 from evdev.events import InputEvent
 from typer import Argument, Option
 
-logging.basicConfig(
-    level=logging.INFO,
-    format="%(levelname)s: %(message)s"
-)
 logger = logging.getLogger("SmoothMouse")
 
 
@@ -55,7 +51,7 @@ class WheelBuffer:
         self._dst_dev.write(EV_REL, code, value)
         self._dst_dev.syn()
         # debug
-        logger.debug(f"dst_dev: {' |-' if value > 0 else '-| '}")
+        logger.debug(f"{'     |---->' if value > 0 else '<----|     '}")
 
     def append(self, e: InputEvent) -> None:
         # choose your history
@@ -64,7 +60,7 @@ class WheelBuffer:
         interval = e.timestamp() - self._last_timestamp[e.code]
         self._last_timestamp[e.code] = e.timestamp()
         if interval < self._max_event_interval:
-            logger.debug("dropped: frequent noise signal")
+            logger.debug("     X     ")
             return
         # follow vote if already have enough history
         if len(history) > self._min_history_len:
@@ -118,10 +114,18 @@ def main(
     delay: Annotated[float, Option(help="Delay (seconds) before re-firing events")] = 0.1,
     min_history_len: Annotated[int, Option(help="Minimum event count required in history to compute majority vote")] = 2,
     max_event_interval: Annotated[float, Option(help="Time interval (seconds) of events to be dropped (temporal debounce)")] = 0.025,
+    debug: Annotated[bool, Option(help="Enable debug mode verbose output")] = False,
 ):
     """
     Anti-flicker mouse wheel filter for Linux.
     """
+    # logger
+    logging.basicConfig(
+        level=logging.DEBUG if debug else logging.INFO,
+        format="%(levelname)s: %(message)s"
+    )
+
+    # app
     mouse = SmoothMouse(
         id=id,
         delay=delay,
@@ -129,6 +133,7 @@ def main(
         max_event_interval=max_event_interval,
     )
 
+    # run
     logger.info(f"Starting SmoothMouse on event{id}...")
     try:
         mouse.run()
