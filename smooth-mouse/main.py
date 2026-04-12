@@ -18,7 +18,7 @@ from evdev.ecodes import EV_REL, REL_WHEEL, REL_WHEEL_HI_RES
 from evdev.events import InputEvent
 from typer import Argument, Option
 
-logger = logging.getLogger("SmoothMouse")
+logger = logging.getLogger('SmoothMouse')
 
 
 class WheelBuffer:
@@ -60,7 +60,7 @@ class WheelBuffer:
         interval = e.timestamp() - self._last_timestamp[e.code]
         self._last_timestamp[e.code] = e.timestamp()
         if interval < self._max_event_interval:
-            logger.debug("     X     ")
+            logger.debug('     X     ')
             return
         # follow vote if already have enough history
         if len(history) > self._min_history_len:
@@ -82,9 +82,9 @@ class SmoothMouse:
         min_history_len: int,
         max_event_interval: float,
     ) -> None:
-        self._src_dev = evdev.InputDevice(f"/dev/input/event{id}")
+        self._src_dev = evdev.InputDevice(f'/dev/input/event{id}')
         self._src_dev_events: Iterator[InputEvent] = self._src_dev.read_loop()
-        self._dst_dev = UInput.from_device(self._src_dev, name="Smooth Wheel Mouse")
+        self._dst_dev = UInput.from_device(self._src_dev, name='Smooth Wheel Mouse')
         self._wheel_buffer = WheelBuffer(
             self._dst_dev,
             delay=delay,
@@ -110,19 +110,19 @@ class SmoothMouse:
 
 
 def main(
-    id: Annotated[int, Argument(help="The event ID from evtest, e.g., /dev/input/event3 → id=3")],
-    delay: Annotated[float, Option(help="Delay (seconds) before re-firing events")] = 0.075,
-    min_history_len: Annotated[int, Option(help="Minimum event count required in history to compute majority vote")] = 2,
-    max_event_interval: Annotated[float, Option(help="Time interval (seconds) of events to be dropped (temporal debounce)")] = 0.01,
-    debug: Annotated[bool, Option(help="Enable debug mode verbose output")] = False,
+    id: Annotated[int, Argument(help='The event ID from evtest, e.g., /dev/input/event3 → id=3')],
+    delay: Annotated[float, Option(help='Delay (seconds) before re-firing events')] = 0.075,
+    min_history_len: Annotated[int, Option(help='Minimum event count required in history to compute majority vote')] = 2,
+    max_event_interval: Annotated[float, Option(help='Time interval (seconds) of events to be dropped (temporal debounce)')] = 0.01,
+    debug: Annotated[bool, Option(help='Enable debug mode verbose output')] = False,
 ):
-    """
+    '''
     Anti-flicker mouse wheel filter for Linux.
-    """
+    '''
     # logger
     logging.basicConfig(
         level=logging.DEBUG if debug else logging.INFO,
-        format="%(levelname)s: %(message)s"
+        format='%(levelname)s: %(message)s'
     )
 
     # app
@@ -134,14 +134,14 @@ def main(
     )
 
     # run
-    logger.info(f"Starting SmoothMouse on event{id}...")
+    logger.info(f'Starting SmoothMouse on event{id}...')
     try:
         mouse.run()
     except KeyboardInterrupt:
-        logger.info("\nSmoothMouse Stopped by user.")
+        logger.info('\nSmoothMouse Stopped by user.')
 
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     # find you device using 'evtest'
     # "/dev/input/event5"  # gamepad
     # "/dev/input/event16" # mouse
