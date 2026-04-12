@@ -20,50 +20,64 @@ MOUSE_PATH = "/dev/input/event5"  # gamepad
 
 
 class WheelBuffer:
-    def __init__(self, dst_dev: InputDevice, *, delay: float) -> None:
+    def __init__(
+        self,
+        dst_dev: InputDevice,
+        *,
+        delay: float,
+        min_history_len: int,
+    ) -> None:
         self._dst_dev = dst_dev
         self._delay = delay
         self._history = {
             REL_WHEEL: deque[int](),
             REL_WHEEL_HI_RES: deque[int](),
         }
+        self._min_history_len = min_history_len
 
     def _fire(self, code: int) -> None:
+        # pop value
         history = self._history[code]
-        # convert myself to majority vote here
-        mode_val = statistics.mode(history)
-        org_val = history.popleft()
-        # pick the desired value
-        val = mode_val
-        if mode_val != org_val:
-            print(f"{mode_val=}, {org_val=}")
+        val = history.popleft()
         # write to dst dev
         self._dst_dev.write(EV_REL, code, val)
         self._dst_dev.syn()
-        # print(f"{len(self._history[code])=}, {EV_REL=}, {code=}, {val=}")
+        # debug
+        print(f"dst_dev: {' |-' if val > 0 else '-| '}")
 
     def append(self, e: InputEvent) -> None:
-        self._history[e.code].append(e.value)
+        # choose your buffer
+        history = self._history[e.code]
+        # follow vote if already have enough history
+        val = statistics.mode(history) if len(history) > self._min_history_len else e.value
+        self._history[e.code].append(val)
+        # timer schedule the event
         t = threading.Timer(self._delay, self._fire, (e.code, ))
         t.start()
 
 
 class SmoothMouse:
-    def __init__(self) -> None:
+    def __init__(
+        self,
+        *,
+        delay: float = 0.1,
+        min_history_len: int = 2,
+    ) -> None:
         self._src_dev = evdev.InputDevice(MOUSE_PATH)
         self._src_dev_events: Iterator[InputEvent] = self._src_dev.read_loop()
         self._dst_dev = UInput.from_device(self._src_dev, name="Smooth Wheel Mouse")
-        self._wheel_buffer = WheelBuffer(self._dst_dev, delay=0.1)
+        self._wheel_buffer = WheelBuffer(self._dst_dev, delay=delay, min_history_len=min_history_len)
 
     def run(self) -> None:
         # intercept all src events
         self._src_dev.grab()
         # then process all src events
         for e in self._src_dev_events:
-            # print(f"{e.type=}, {e.code=}, {e.value=}")
             # filter out wheel scroll relevant events
             if e.type == EV_REL and (e.code == REL_WHEEL or e.code == REL_WHEEL_HI_RES):
                 self._wheel_buffer.append(e)
+                # debug
+                # print(f"src_dev: {' |-' if e.value > 0 else '-| '}")
                 continue
 
             # passthrough all other irrelevant events
