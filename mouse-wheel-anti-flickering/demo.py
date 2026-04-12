@@ -4,9 +4,10 @@
 # ]
 # ///
 
+import statistics
 import threading
 from collections import deque
-from typing import cast
+from typing import Iterator, cast
 
 import evdev
 from evdev import InputDevice, UInput
@@ -28,11 +29,18 @@ class WheelBuffer:
         }
 
     def _fire(self, code: int) -> None:
-        val = self._history[code].popleft()
-        # TODO: convert myself to majority vote here
+        history = self._history[code]
+        # convert myself to majority vote here
+        mode_val = statistics.mode(history)
+        org_val = history.popleft()
+        # pick the desired value
+        val = mode_val
+        if mode_val != org_val:
+            print(f"{mode_val=}, {org_val=}")
+        # write to dst dev
         self._dst_dev.write(EV_REL, code, val)
         self._dst_dev.syn()
-        print(f"{len(self._history[code])=}, {EV_REL=}, {code=}, {val=}")
+        # print(f"{len(self._history[code])=}, {EV_REL=}, {code=}, {val=}")
 
     def append(self, e: InputEvent) -> None:
         self._history[e.code].append(e.value)
@@ -43,16 +51,17 @@ class WheelBuffer:
 class SmoothMouse:
     def __init__(self) -> None:
         self._src_dev = evdev.InputDevice(MOUSE_PATH)
+        self._src_dev_events: Iterator[InputEvent] = self._src_dev.read_loop()
         self._dst_dev = UInput.from_device(self._src_dev, name="Smooth Wheel Mouse")
-        self._wheel_buffer = WheelBuffer(self._dst_dev, delay=1.0)
+        self._wheel_buffer = WheelBuffer(self._dst_dev, delay=0.1)
 
     def run(self) -> None:
+        # intercept all src events
         self._src_dev.grab()
-        for e in self._src_dev.read_loop():
-            e = cast(InputEvent, e)
+        # then process all src events
+        for e in self._src_dev_events:
             # print(f"{e.type=}, {e.code=}, {e.value=}")
-
-            # delay firing the wheel scrolling event by 1 secs
+            # filter out wheel scroll relevant events
             if e.type == EV_REL and (e.code == REL_WHEEL or e.code == REL_WHEEL_HI_RES):
                 self._wheel_buffer.append(e)
                 continue
