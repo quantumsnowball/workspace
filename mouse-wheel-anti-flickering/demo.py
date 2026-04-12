@@ -7,7 +7,7 @@
 import statistics
 import threading
 from collections import deque
-from typing import Iterator, cast
+from typing import Iterator
 
 import evdev
 from evdev import InputDevice, UInput
@@ -26,31 +26,43 @@ class WheelBuffer:
         *,
         delay: float,
         min_history_len: int,
+        max_event_interval: float,
     ) -> None:
         self._dst_dev = dst_dev
         self._delay = delay
         self._history = {
-            REL_WHEEL: deque[int](),
-            REL_WHEEL_HI_RES: deque[int](),
+            REL_WHEEL: deque[InputEvent](),
+            REL_WHEEL_HI_RES: deque[InputEvent](),
         }
         self._min_history_len = min_history_len
+        self._max_event_interval = max_event_interval
 
     def _fire(self, code: int) -> None:
         # pop value
         history = self._history[code]
-        val = history.popleft()
+        e = history.popleft()
         # write to dst dev
-        self._dst_dev.write(EV_REL, code, val)
+        self._dst_dev.write(EV_REL, code, e.value)
         self._dst_dev.syn()
         # debug
-        print(f"dst_dev: {' |-' if val > 0 else '-| '}")
+        print(f"dst_dev: {' |-' if e.value > 0 else '-| '}")
 
     def append(self, e: InputEvent) -> None:
         # choose your buffer
         history = self._history[e.code]
+        # reject too frequent event as noise
+        if len(history) > 0:
+            prev_e = history[-1]
+            if e.timestamp() - prev_e.timestamp() < self._max_event_interval:
+                print("DROPPED: event too frequent")
+                return
         # follow vote if already have enough history
-        val = statistics.mode(history) if len(history) > self._min_history_len else e.value
-        self._history[e.code].append(val)
+        if len(history) > self._min_history_len:
+            # modify the value of the event
+            history_value = [e.value for e in history]
+            e.value = statistics.mode(history_value)
+        # append the event to history
+        history.append(e)
         # timer schedule the event
         t = threading.Timer(self._delay, self._fire, (e.code, ))
         t.start()
@@ -62,11 +74,17 @@ class SmoothMouse:
         *,
         delay: float = 0.1,
         min_history_len: int = 2,
+        max_event_interval: float = 0.025,
     ) -> None:
         self._src_dev = evdev.InputDevice(MOUSE_PATH)
         self._src_dev_events: Iterator[InputEvent] = self._src_dev.read_loop()
         self._dst_dev = UInput.from_device(self._src_dev, name="Smooth Wheel Mouse")
-        self._wheel_buffer = WheelBuffer(self._dst_dev, delay=delay, min_history_len=min_history_len)
+        self._wheel_buffer = WheelBuffer(
+            self._dst_dev,
+            delay=delay,
+            min_history_len=min_history_len,
+            max_event_interval=max_event_interval,
+        )
 
     def run(self) -> None:
         # intercept all src events
