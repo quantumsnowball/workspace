@@ -1,5 +1,6 @@
 # /// script
 # dependencies = [
+#   "typer",
 #   "evdev",
 # ]
 # ///
@@ -7,12 +8,14 @@
 import statistics
 import threading
 from collections import deque
-from typing import Iterator
+from typing import Annotated, Iterator
 
 import evdev
+import typer
 from evdev import InputDevice, UInput
 from evdev.ecodes import EV_REL, REL_WHEEL, REL_WHEEL_HI_RES
 from evdev.events import InputEvent
+from typer import Argument, Option
 
 
 class WheelBuffer:
@@ -41,7 +44,7 @@ class WheelBuffer:
         self._dst_dev.write(EV_REL, code, e.value)
         self._dst_dev.syn()
         # debug
-        print(f"dst_dev: {' |-' if e.value > 0 else '-| '}")
+        typer.echo(f"dst_dev: {' |-' if e.value > 0 else '-| '}")
 
     def append(self, e: InputEvent) -> None:
         # choose your buffer
@@ -50,7 +53,7 @@ class WheelBuffer:
         if len(history) > 0:
             prev_e = history[-1]
             if e.timestamp() - prev_e.timestamp() < self._max_event_interval:
-                print("dropped: frequent noise signal")
+                typer.echo("dropped: frequent noise signal")
                 return
         # follow vote if already have enough history
         if len(history) > self._min_history_len:
@@ -67,13 +70,13 @@ class WheelBuffer:
 class SmoothMouse:
     def __init__(
         self,
-        event_id: int,
+        id: int,
         *,
-        delay: float = 0.1,
-        min_history_len: int = 2,
-        max_event_interval: float = 0.025,
+        delay: float,
+        min_history_len: int,
+        max_event_interval: float,
     ) -> None:
-        self._src_dev = evdev.InputDevice(f"/dev/input/event{event_id}")
+        self._src_dev = evdev.InputDevice(f"/dev/input/event{id}")
         self._src_dev_events: Iterator[InputEvent] = self._src_dev.read_loop()
         self._dst_dev = UInput.from_device(self._src_dev, name="Smooth Wheel Mouse")
         self._wheel_buffer = WheelBuffer(
@@ -100,9 +103,31 @@ class SmoothMouse:
             self._dst_dev.syn()
 
 
+def main(
+    id: Annotated[int, Argument(help="The event ID from evtest, e.g., /dev/input/event3 → id=3")],
+    delay: Annotated[float, Option(help="Delay (seconds) before re-firing events")] = 0.1,
+    min_history_len: Annotated[int, Option(help="Minimum event count required in history to compute majority vote")] = 2,
+    max_event_interval: Annotated[float, Option(help="Time interval (seconds) of events to be dropped (temporal debounce)")] = 0.025,
+):
+    """
+    Anti-flicker mouse wheel filter for Linux.
+    """
+    mouse = SmoothMouse(
+        id=id,
+        delay=delay,
+        min_history_len=min_history_len,
+        max_event_interval=max_event_interval,
+    )
+
+    typer.echo(f"Starting SmoothMouse on event{id}...")
+    try:
+        mouse.run()
+    except KeyboardInterrupt:
+        typer.echo("\nStopped by user.")
+
+
 if __name__ == "__main__":
     # find you device using 'evtest'
     # "/dev/input/event5"  # gamepad
     # "/dev/input/event16" # mouse
-    mouse = SmoothMouse(5)
-    mouse.run()
+    typer.run(main)
