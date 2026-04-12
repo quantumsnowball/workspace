@@ -37,8 +37,12 @@ class WheelBuffer:
         self._dst_dev = dst_dev
         self._delay = delay
         self._history = {
-            REL_WHEEL: deque[InputEvent](),
-            REL_WHEEL_HI_RES: deque[InputEvent](),
+            REL_WHEEL: deque[int](),
+            REL_WHEEL_HI_RES: deque[int](),
+        }
+        self._last_timestamp = {
+            REL_WHEEL: 0.0,
+            REL_WHEEL_HI_RES: 0.0
         }
         self._min_history_len = min_history_len
         self._max_event_interval = max_event_interval
@@ -46,29 +50,28 @@ class WheelBuffer:
     def _fire(self, code: int) -> None:
         # pop value
         history = self._history[code]
-        e = history.popleft()
+        value = history.popleft()
         # write to dst dev
-        self._dst_dev.write(EV_REL, code, e.value)
+        self._dst_dev.write(EV_REL, code, value)
         self._dst_dev.syn()
         # debug
-        logger.debug(f"dst_dev: {' |-' if e.value > 0 else '-| '}")
+        logger.debug(f"dst_dev: {' |-' if value > 0 else '-| '}")
 
     def append(self, e: InputEvent) -> None:
-        # choose your buffer
+        # choose your history
         history = self._history[e.code]
         # reject too frequent event as noise
-        if len(history) > 0:
-            prev_e = history[-1]
-            if e.timestamp() - prev_e.timestamp() < self._max_event_interval:
-                logger.debug("dropped: frequent noise signal")
-                return
+        interval = e.timestamp() - self._last_timestamp[e.code]
+        self._last_timestamp[e.code] = e.timestamp()
+        if interval < self._max_event_interval:
+            logger.debug("dropped: frequent noise signal")
+            return
         # follow vote if already have enough history
         if len(history) > self._min_history_len:
             # modify the value of the event
-            history_value = [e.value for e in history]
-            e.value = statistics.mode(history_value)
+            e.value = statistics.mode(history)
         # append the event to history
-        history.append(e)
+        history.append(e.value)
         # timer schedule the event
         t = threading.Timer(self._delay, self._fire, (e.code, ))
         t.start()
