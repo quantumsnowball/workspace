@@ -111,9 +111,9 @@ class SmoothMouse:
 
 def main(
     id: Annotated[int, Argument(help="The event ID from evtest, e.g., /dev/input/event3 → id=3")],
-    delay: Annotated[float, Option(help="Delay (seconds) before re-firing events")] = 0.1,
+    delay: Annotated[float, Option(help="Delay (seconds) before re-firing events")] = 0.075,
     min_history_len: Annotated[int, Option(help="Minimum event count required in history to compute majority vote")] = 2,
-    max_event_interval: Annotated[float, Option(help="Time interval (seconds) of events to be dropped (temporal debounce)")] = 0.025,
+    max_event_interval: Annotated[float, Option(help="Time interval (seconds) of events to be dropped (temporal debounce)")] = 0.01,
     debug: Annotated[bool, Option(help="Enable debug mode verbose output")] = False,
 ):
     """
