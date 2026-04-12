@@ -5,6 +5,7 @@
 # ]
 # ///
 
+import logging
 import statistics
 import threading
 from collections import deque
@@ -16,6 +17,12 @@ from evdev import InputDevice, UInput
 from evdev.ecodes import EV_REL, REL_WHEEL, REL_WHEEL_HI_RES
 from evdev.events import InputEvent
 from typer import Argument, Option
+
+logging.basicConfig(
+    level=logging.INFO,
+    format="%(levelname)s: %(message)s"
+)
+logger = logging.getLogger("SmoothMouse")
 
 
 class WheelBuffer:
@@ -44,7 +51,7 @@ class WheelBuffer:
         self._dst_dev.write(EV_REL, code, e.value)
         self._dst_dev.syn()
         # debug
-        typer.echo(f"dst_dev: {' |-' if e.value > 0 else '-| '}")
+        logger.debug(f"dst_dev: {' |-' if e.value > 0 else '-| '}")
 
     def append(self, e: InputEvent) -> None:
         # choose your buffer
@@ -53,7 +60,7 @@ class WheelBuffer:
         if len(history) > 0:
             prev_e = history[-1]
             if e.timestamp() - prev_e.timestamp() < self._max_event_interval:
-                typer.echo("dropped: frequent noise signal")
+                logger.debug("dropped: frequent noise signal")
                 return
         # follow vote if already have enough history
         if len(history) > self._min_history_len:
@@ -119,11 +126,11 @@ def main(
         max_event_interval=max_event_interval,
     )
 
-    typer.echo(f"Starting SmoothMouse on event{id}...")
+    logger.info(f"Starting SmoothMouse on event{id}...")
     try:
         mouse.run()
     except KeyboardInterrupt:
-        typer.echo("\nStopped by user.")
+        logger.info("\nSmoothMouse Stopped by user.")
 
 
 if __name__ == "__main__":
