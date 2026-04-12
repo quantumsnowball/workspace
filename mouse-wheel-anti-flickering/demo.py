@@ -14,10 +14,6 @@ from evdev import InputDevice, UInput
 from evdev.ecodes import EV_REL, REL_WHEEL, REL_WHEEL_HI_RES
 from evdev.events import InputEvent
 
-# find you device using 'evtest'
-MOUSE_PATH = "/dev/input/event5"  # gamepad
-# MOUSE_PATH = "/dev/input/event16" # mouse
-
 
 class WheelBuffer:
     def __init__(
@@ -54,7 +50,7 @@ class WheelBuffer:
         if len(history) > 0:
             prev_e = history[-1]
             if e.timestamp() - prev_e.timestamp() < self._max_event_interval:
-                print("DROPPED: event too frequent")
+                print("dropped: frequent noise signal")
                 return
         # follow vote if already have enough history
         if len(history) > self._min_history_len:
@@ -71,12 +67,13 @@ class WheelBuffer:
 class SmoothMouse:
     def __init__(
         self,
+        event_id: int,
         *,
         delay: float = 0.1,
         min_history_len: int = 2,
         max_event_interval: float = 0.025,
     ) -> None:
-        self._src_dev = evdev.InputDevice(MOUSE_PATH)
+        self._src_dev = evdev.InputDevice(f"/dev/input/event{event_id}")
         self._src_dev_events: Iterator[InputEvent] = self._src_dev.read_loop()
         self._dst_dev = UInput.from_device(self._src_dev, name="Smooth Wheel Mouse")
         self._wheel_buffer = WheelBuffer(
@@ -104,5 +101,8 @@ class SmoothMouse:
 
 
 if __name__ == "__main__":
-    mouse = SmoothMouse()
+    # find you device using 'evtest'
+    # "/dev/input/event5"  # gamepad
+    # "/dev/input/event16" # mouse
+    mouse = SmoothMouse(5)
     mouse.run()
