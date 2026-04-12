@@ -23,19 +23,20 @@ class WheelBuffer:
         self._dst_dev = dst_dev
         self._delay = delay
         self._history = {
-            REL_WHEEL: deque[InputEvent](),
-            REL_WHEEL_HI_RES: deque[InputEvent](),
+            REL_WHEEL: deque[int](),
+            REL_WHEEL_HI_RES: deque[int](),
         }
 
-    def _fire(self, e: InputEvent) -> None:
-        e = self._history[e.code].popleft()
-        self._dst_dev.write(e.type, e.code, e.value)
+    def _fire(self, code: int) -> None:
+        val = self._history[code].popleft()
+        # TODO: convert myself to majority vote here
+        self._dst_dev.write(EV_REL, code, val)
         self._dst_dev.syn()
-        print(f"{len(self._history[e.code])=}, {e.type=}, {e.code=}, {e.value=}")
+        print(f"{len(self._history[code])=}, {EV_REL=}, {code=}, {val=}")
 
     def append(self, e: InputEvent) -> None:
-        self._history[e.code].append(e)
-        t = threading.Timer(self._delay, self._fire, (e, ))
+        self._history[e.code].append(e.value)
+        t = threading.Timer(self._delay, self._fire, (e.code, ))
         t.start()
 
 
