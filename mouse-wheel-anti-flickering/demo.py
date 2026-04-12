@@ -5,46 +5,29 @@
 # ///
 
 import evdev
-from evdev import ecodes
+from evdev import UInput
 
 # find you device using 'evtest'
-MOUSE_PATH = "/dev/input/event16"
+MOUSE_PATH = "/dev/input/event5"  # gamepad
+# MOUSE_PATH = "/dev/input/event16" # mouse
 
 
-def test_mouse_flow():
-    try:
-        # Create the device object
-        device = evdev.InputDevice(MOUSE_PATH)
-        print(f"Successfully connected to: {device.name}")
-        print("Listening for events (Ctrl+C to stop)...")
-        print("-" * 50)
+def just_grab():
+    real_mouse = evdev.InputDevice(MOUSE_PATH)
+    real_mouse.grab()
+    fake_mouse = UInput.from_device(
+        real_mouse,
+        name="Smooth Wheel Mouse"
+    )
 
-        # We do NOT use device.grab() here so your mouse still works
-        # normally while we watch the output.
+    for e in real_mouse.read_loop():
+        # debug print
+        print(f"{e.type=}, {e.code=}, {e.value=}")
 
-        for event in device.read_loop():
-            # Filter for specific events to avoid spamming the console
-            # EV_REL = Relative movement (Mouse move, Scroll)
-            # EV_KEY = Buttons
-            if event.type == ecodes.EV_REL:
-                if event.code == ecodes.REL_WHEEL:
-                    print(f"[SCROLL] Value: {event.value}")
-                elif event.code == ecodes.REL_HWHEEL:
-                    print(f"[HORIZ-SCROLL] Value: {event.value}")
-                # Uncomment the line below if you want to see raw X/Y movement
-                # else: print(f"[MOVE] Code: {event.code} Value: {event.value}")
-
-            elif event.type == ecodes.EV_KEY:
-                state = "PRESSED" if event.value == 1 else "RELEASED"
-                print(f"[BUTTON] Code: {event.code} State: {state}")
-
-    except PermissionError:
-        print("Error: Permission denied. Try running with 'sudo' or check your user groups.")
-    except FileNotFoundError:
-        print(f"Error: Device {MOUSE_PATH} not found.")
-    except KeyboardInterrupt:
-        print("\nTest stopped.")
+        # passthrough all other irrelevant events
+        fake_mouse.write(e.type, e.code, e.value)
+        fake_mouse.syn()
 
 
 if __name__ == "__main__":
-    test_mouse_flow()
+    just_grab()
