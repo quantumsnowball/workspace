@@ -1,32 +1,5 @@
-#!/usr/bin/env bash
-
-# Define paths
-REPO_DIR="$(dirname "$(realpath "$0")")"
-SYSTEMD_DIR="$HOME/.config/systemd/user"
-KANATA_CONF_DIR="$HOME/.config/kanata"
-SERVICE_NAME="kanata.service"
-SERVICE_PATH="$SYSTEMD_DIR/$SERVICE_NAME"
-CONFIG_NAME="config.kbd"
-CONFIG_PATH="$KANATA_CONF_DIR/$CONFIG_NAME"
+#!/bin/sh
 
 
-echo "🛡️ Installing Kanata as a USER service..."
-
-# Create the directories
-mkdir -p "$SYSTEMD_DIR"
-mkdir -p "$KANATA_CONF_DIR"
-
-# Symlink the service file to the systemd directory
-ln -sf "$REPO_DIR/$SERVICE_NAME" "$SERVICE_PATH"
-ls -l "$SERVICE_PATH"
-
-# Symlink the config file so Kanata can find it in /etc
-ln -sf "$REPO_DIR/$CONFIG_NAME" "$CONFIG_PATH"
-ls -l "$CONFIG_PATH"
-
-# 4. Reload and Enable
-systemctl --user enable --now kanata
-systemctl --user daemon-reload
-
-echo "✅ Kanata is live! Check logs with: sudo journalctl -u kanata -f, or sysd.logs-for kanata -f"
-
+$XDG_CONFIG_HOME/workspace/kanata/config/install "$@"
+$XDG_CONFIG_HOME/workspace/kanata/service/install "$@"
