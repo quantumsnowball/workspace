@@ -7,12 +7,13 @@
 
 import logging
 import time
+from collections import defaultdict
 from typing import Annotated, Iterator
 
 import evdev
 import typer
 from evdev import UInput
-from evdev.ecodes import EV, EV_KEY, EV_SYN, bytype
+from evdev.ecodes import EV, EV_SYN, bytype
 from evdev.events import InputEvent
 from typer import Argument, Option
 
@@ -32,7 +33,7 @@ class Package:
     def send(self, dev: UInput) -> None:
         for e in self._events:
             dev.write(e.type, e.code, e.value)
-            logger.info(f'SENT: {EV[e.type]}, {bytype[e.type][e.code]}, {e.value=}')
+            logger.debug(f'SENT: {EV[e.type]}, {bytype[e.type][e.code]}, {e.value=}')
         dev.syn()
 
 
@@ -47,7 +48,7 @@ class PureKeyboard:
         self._src_dev_path = f'/dev/input/event{id}'
         self._src_dev = evdev.InputDevice(self._src_dev_path)
         self._dst_dev = UInput.from_device(self._src_dev, name='Pure Keyboard')
-        self._last_timestamp = 0.0
+        self._last_timestamp: dict[int, dict[int, float]] = defaultdict(lambda: defaultdict(float))
 
     @property
     def _packages(self) -> Iterator[Package]:
@@ -60,20 +61,26 @@ class PureKeyboard:
 
     def run(self) -> None:
         # small delay befoe grab, avoid command Enter release being capped
-        time.sleep(1.0)
+        time.sleep(0.5)
         # intercept all src events
         logger.info(f'Grabbed {self._src_dev_path}')
         self._src_dev.grab()
         # then process all src events
 
         for p in self._packages:
-            # TODO: detect bouncing event here and drop
+            # use the first event as the comparison target
             e = p[0]
-            # interval = e.timestamp() - self._last_timestamp
-            # self._last_timestamp = e.timestamp()
-            # if interval < self._max_event_interval:
-            #     logger.info(f'DROP: {EV[e.type]}, {bytype[e.type][e.code]}, {e.value=}')
-            #     continue
+
+            # scan for non EV_SYN event
+            if e.type != EV_SYN:
+                # calc the time interval from the last event with the same type and code
+                interval = e.timestamp() - self._last_timestamp[e.type][e.code]
+                # move the timestamp to new position
+                self._last_timestamp[e.type][e.code] = e.timestamp()
+                # if interval is too short, discard the packet
+                if interval < self._max_event_interval:
+                    logger.info(f'DROP: {EV[e.type]}, {bytype[e.type][e.code]}, {e.value=}')
+                    continue
 
             # passthrough all other irrelevant events
             p.send(self._dst_dev)
@@ -94,10 +101,7 @@ def main(
     )
 
     # app
-    keyboard = PureKeyboard(
-        id=id,
-        max_event_interval=max_event_interval,
-    )
+    keyboard = PureKeyboard(id=id, max_event_interval=max_event_interval)
 
     # run
     logger.info(f'Starting PureKeyboard on event{id}...')
