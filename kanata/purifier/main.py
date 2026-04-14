@@ -39,7 +39,7 @@ class Package:
     def send(self, dev: UInput) -> None:
         for e in self._events:
             dev.write(e.type, e.code, e.value)
-            logger.debug(f'SENT: {EV[e.type]}, {bytype[e.type][e.code]}, {e.value=}')
+            logger.debug(f'SENT: {e.timestamp()}, {EV[e.type]}, {bytype[e.type][e.code]}, {e.value=}')
         dev.syn()
 
 
@@ -88,7 +88,7 @@ class PureKeyboard:
                 self._last_timestamp[e.type][e.code] = e.timestamp()
                 # if interval is too short, discard the packet
                 if interval < self._max_event_interval:
-                    logger.info(f'DROP: {EV[e.type]}, {bytype[e.type][e.code]}, {e.value=}')
+                    logger.info(f'DROP: time={interval*1000:.2f}ms, {EV[e.type]}, {bytype[e.type][e.code]}, {e.value=}')
                     continue
 
             # passthrough all other irrelevant events
@@ -97,7 +97,7 @@ class PureKeyboard:
 
 def main(
     name: Annotated[str, Argument(help='The device name from evtest')],
-    max_event_interval: Annotated[float, Option(help='Time interval (seconds) of events to be dropped (temporal debounce)')] = 0.01,
+    max_event_interval: Annotated[float, Option(help='Time interval (seconds) of events to be dropped (temporal debounce)')] = 0.05,
     debug: Annotated[bool, Option(help='Enable debug mode verbose output')] = False,
 ):
     '''
