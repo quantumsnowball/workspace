@@ -17,7 +17,7 @@ from evdev.ecodes import EV, EV_MSC, EV_SYN, bytype
 from evdev.events import InputEvent
 from typer import Argument, Option
 
-logger = logging.getLogger('Pure')
+logger = logging.getLogger('Purifier')
 
 
 class Package:
@@ -43,7 +43,7 @@ class Package:
         dev.syn()
 
 
-class PureKeyboard:
+class Purifier:
     def __init__(
         self,
         name: str,
@@ -54,7 +54,7 @@ class PureKeyboard:
         paths = {InputDevice(path).name: path for path in evdev.list_devices()}
         self._src_dev_path = paths[name]
         self._src_dev = InputDevice(self._src_dev_path)
-        self._dst_dev = UInput.from_device(self._src_dev, name=f'Pure: {name}')
+        self._dst_dev = UInput.from_device(self._src_dev, name=f'Purifier: {name}')
         self._last_timestamp: dict[int, dict[int, float]] = defaultdict(lambda: defaultdict(float))
 
     @property
@@ -67,7 +67,7 @@ class PureKeyboard:
                 p = Package()
 
     def run(self) -> None:
-        logger.info(f'Starting Pure Keyboard on {self._src_dev_path} ...')
+        logger.info(f'Starting Purifier on {self._src_dev_path} ...')
         # small delay befoe grab, avoid command Enter release being capped
         # NOTE: please press enter key quickly
         time.sleep(0.5)
@@ -110,13 +110,13 @@ def main(
     )
 
     # device
-    keyboard = PureKeyboard(name, max_event_interval=max_event_interval)
+    keyboard = Purifier(name, max_event_interval=max_event_interval)
 
     # run
     try:
         keyboard.run()
     except KeyboardInterrupt:
-        logger.info('\nPureKeyboard Stopped by user.')
+        logger.info('\nPurifier Stopped by user.')
 
 
 if __name__ == '__main__':
