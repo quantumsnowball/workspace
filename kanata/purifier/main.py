@@ -67,6 +67,7 @@ class PureKeyboard:
 
     def run(self) -> None:
         # small delay befoe grab, avoid command Enter release being capped
+        # NOTE: please press enter key quickly
         time.sleep(0.5)
         # intercept all src events
         logger.info(f'Grabbed {self._src_dev_path}')
@@ -77,8 +78,8 @@ class PureKeyboard:
             # use the first event as the comparison target
             e = p[0]
 
-            # scan for non EV_SYN event
-            if e.type != EV_SYN:
+            # scan for non EV_SYN keydown event
+            if e.type != EV_SYN and e.value == 1:
                 # calc the time interval from the last event with the same type and code
                 interval = e.timestamp() - self._last_timestamp[e.type][e.code]
                 # move the timestamp to new position
