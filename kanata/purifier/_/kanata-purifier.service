@@ -1,0 +1,17 @@
+[Unit]
+Description=Kanata Purifier
+After=graphical-session.target
+BindsTo=kanata.service
+After=kanata.service
+
+[Service]
+Type=exec
+# Replace with absolute paths
+ExecStart=uv run %h/.config/workspace/kanata/purifier/main.py 'kanata'
+Restart=always
+RestartSec=1
+# Ensures logs show up immediately
+Environment=PYTHONUNBUFFERED=1
+
+[Install]
+WantedBy=graphical-session.target
