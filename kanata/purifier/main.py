@@ -17,7 +17,7 @@ from evdev.ecodes import EV, EV_MSC, EV_SYN, bytype
 from evdev.events import InputEvent
 from typer import Argument, Option
 
-logger = logging.getLogger('PureKeyboard')
+logger = logging.getLogger('Pure')
 
 
 class Package:
