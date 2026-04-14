@@ -13,7 +13,7 @@ from typing import Annotated, Iterator
 import evdev
 import typer
 from evdev import UInput
-from evdev.ecodes import EV, EV_SYN, bytype
+from evdev.ecodes import EV, EV_MSC, EV_SYN, bytype
 from evdev.events import InputEvent
 from typer import Argument, Option
 
@@ -21,13 +21,19 @@ logger = logging.getLogger('PureKeyboard')
 
 
 class Package:
-    def __init__(self) -> None:
+    def __init__(
+        self,
+        skip_list: tuple[int] = (EV_MSC,),
+    ) -> None:
+        self._skip_list = skip_list
         self._events = []
 
     def __getitem__(self, key) -> InputEvent:
         return self._events[key]
 
     def append(self, e: InputEvent) -> None:
+        if e.type in self._skip_list:
+            return
         self._events.append(e)
 
     def send(self, dev: UInput) -> None:
