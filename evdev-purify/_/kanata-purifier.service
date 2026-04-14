@@ -7,7 +7,7 @@ After=kanata.service
 [Service]
 Type=exec
 # Replace with absolute paths
-ExecStart=uv run %h/.config/workspace/kanata/purifier/main.py 'kanata'
+ExecStart=uv tool run evdev-purify keyboard kanata
 Restart=always
 RestartSec=1
 # Ensures logs show up immediately
