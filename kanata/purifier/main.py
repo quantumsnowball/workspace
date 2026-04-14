@@ -12,7 +12,7 @@ from typing import Annotated, Iterator
 
 import evdev
 import typer
-from evdev import UInput
+from evdev import InputDevice, UInput
 from evdev.ecodes import EV, EV_MSC, EV_SYN, bytype
 from evdev.events import InputEvent
 from typer import Argument, Option
@@ -46,14 +46,15 @@ class Package:
 class PureKeyboard:
     def __init__(
         self,
-        id: int,
+        name: str,
         *,
         max_event_interval: float,
     ) -> None:
         self._max_event_interval = max_event_interval
-        self._src_dev_path = f'/dev/input/event{id}'
-        self._src_dev = evdev.InputDevice(self._src_dev_path)
-        self._dst_dev = UInput.from_device(self._src_dev, name='Pure Keyboard')
+        paths = {InputDevice(path).name: path for path in evdev.list_devices()}
+        self._src_dev_path = paths[name]
+        self._src_dev = InputDevice(self._src_dev_path)
+        self._dst_dev = UInput.from_device(self._src_dev, name=f'Pure: {name}')
         self._last_timestamp: dict[int, dict[int, float]] = defaultdict(lambda: defaultdict(float))
 
     @property
@@ -66,6 +67,7 @@ class PureKeyboard:
                 p = Package()
 
     def run(self) -> None:
+        logger.info(f'Starting Pure Keyboard on {self._src_dev_path} ...')
         # small delay befoe grab, avoid command Enter release being capped
         # NOTE: please press enter key quickly
         time.sleep(0.5)
@@ -78,7 +80,7 @@ class PureKeyboard:
             # use the first event as the comparison target
             e = p[0]
 
-            # scan for non EV_SYN keydown event
+            # intercept for non EV_SYN keydown event
             if e.type != EV_SYN and e.value == 1:
                 # calc the time interval from the last event with the same type and code
                 interval = e.timestamp() - self._last_timestamp[e.type][e.code]
@@ -94,7 +96,7 @@ class PureKeyboard:
 
 
 def main(
-    id: Annotated[int, Argument(help='The event ID from evtest, e.g., /dev/input/event3 → id=3')],
+    name: Annotated[str, Argument(help='The device name from evtest')],
     max_event_interval: Annotated[float, Option(help='Time interval (seconds) of events to be dropped (temporal debounce)')] = 0.01,
     debug: Annotated[bool, Option(help='Enable debug mode verbose output')] = False,
 ):
@@ -107,11 +109,10 @@ def main(
         format='%(levelname)s: %(message)s'
     )
 
-    # app
-    keyboard = PureKeyboard(id=id, max_event_interval=max_event_interval)
+    # device
+    keyboard = PureKeyboard(name, max_event_interval=max_event_interval)
 
     # run
-    logger.info(f'Starting PureKeyboard on event{id}...')
     try:
         keyboard.run()
     except KeyboardInterrupt:
