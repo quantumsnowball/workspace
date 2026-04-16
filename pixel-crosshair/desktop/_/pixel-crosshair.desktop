@@ -1,8 +1,8 @@
 [Desktop Entry]
 Type=Application
-Name=Pixel Crosshair (Cyan)
+Name=Pixel Crosshair - Cycle Color
 Comment=Enable Pixel Crosshair Overlay
-Exec=systemctl --user start pixel-crosshair@00ffff.service
+Exec=pixel-crosshair-cycle-colors
 Icon=pixel-crosshair.png
 Terminal=false
 Categories=Game;Utility;
