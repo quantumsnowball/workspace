@@ -24,9 +24,15 @@ async def main() -> None:
     while (line := await process.stdout.readline()):
         event_dict: dict[str, str] = json.loads(line)
         key = next((k for k in event_dict.keys()))
-        if key in ['WindowOpenedOrChanged', ]:
+        if key in [
+            'WindowOpenedOrChanged',
+        ]:
             asyncio.create_task(center_visible_columns(1))
-        elif key in ['WindowFocusChanged', 'WindowClosed', ]:
+        elif key in [
+            'WindowFocusChanged',
+            'WindowLayoutsChanged',
+            'WindowClosed',
+        ]:
             asyncio.create_task(center_visible_columns(0.1))
 
 

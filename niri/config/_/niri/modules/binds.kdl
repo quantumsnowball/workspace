@@ -114,17 +114,17 @@ binds {
     Super+9 { focus-workspace 9; }
 
     // adjust windows
-    Super+Ctrl+H { spawn-sh "niri.with-center set-column-width \"-5%\""; }
-    Super+Ctrl+L { spawn-sh "niri.with-center set-column-width \"+5%\""; }
-    Super+Ctrl+K { spawn-sh "niri.with-center set-window-height \"-5%\""; }
-    Super+Ctrl+J { spawn-sh "niri.with-center set-window-height \"+5%\""; }
-    Super+Ctrl+Backslash { spawn-sh "niri.with-center switch-preset-column-width"; }
-    Super+Ctrl+Minus     { spawn-sh "niri.with-center switch-preset-window-height"; }
-    Super+M       { spawn-sh "niri.with-center maximize-column"; }
-    Super+F       { spawn-sh "niri.with-center fullscreen-window"; }
-    Alt+Return       { spawn-sh "niri.with-center fullscreen-window"; }
-    Super+Shift+F { spawn-sh "niri.with-center maximize-window-to-edges"; }
-    Super+R { reset-window-height; }
+    Super+Ctrl+H          { set-column-width "-5%"; }
+    Super+Ctrl+L          { set-column-width "+5%"; }
+    Super+Ctrl+K          { set-window-height "-5%"; }
+    Super+Ctrl+J          { set-window-height "+5%"; }
+    Super+Ctrl+Backslash  { switch-preset-column-width; }
+    Super+Ctrl+Minus      { switch-preset-window-height; }
+    Super+M               { maximize-column; }
+    Super+F               { fullscreen-window; }
+    Alt+Return            { fullscreen-window; }
+    Super+Shift+F         { maximize-window-to-edges; }
+    Super+R               { reset-window-height; }
 
     // adjust layout
     Super+Return             { center-column; }
