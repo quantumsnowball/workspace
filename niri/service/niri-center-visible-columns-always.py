@@ -1,30 +1,31 @@
 #!/usr/bin/env python
 
+import asyncio
 import json
-import subprocess
-import time
 
 
-def center_visible_columns(delay: int = 1) -> None:
-    time.sleep(delay)
-    subprocess.run(['niri', 'msg', 'action', 'center-visible-columns'], check=False)
+async def center_visible_columns(delay: int = 1) -> None:
+    await asyncio.sleep(delay)
+    process = await asyncio.create_subprocess_exec(
+        'niri', 'msg', 'action', 'center-visible-columns'
+    )
+    await process.wait()
     print('INFO: center-visible-columns DONE')
 
 
-def main() -> None:
-    process = subprocess.Popen(
-        ['niri', 'msg', '--json', 'event-stream'],
-        stdout=subprocess.PIPE,
-        stderr=subprocess.DEVNULL,
-        text=True
+async def main() -> None:
+    process = await asyncio.create_subprocess_exec(
+        'niri', 'msg', '--json', 'event-stream',
+        stdout=asyncio.subprocess.PIPE,
+        stderr=asyncio.subprocess.DEVNULL,
     )
 
     assert process.stdout is not None
-    while (line := process.stdout.readline()):
+    while (line := await process.stdout.readline()):
         event_dict = json.loads(line)
         if 'WindowOpenedOrChanged' in event_dict:
-            center_visible_columns()
+            asyncio.create_task(center_visible_columns())
 
 
 if __name__ == '__main__':
-    main()
+    asyncio.run(main())
