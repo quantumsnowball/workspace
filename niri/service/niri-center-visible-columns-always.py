@@ -2,15 +2,21 @@
 
 import asyncio
 import json
+from typing import Callable, Coroutine
 
 
-async def center_visible_columns(delay: float = 1) -> None:
-    await asyncio.sleep(delay)
+async def center_visible_columns() -> None:
     process = await asyncio.create_subprocess_exec(
         'niri', 'msg', 'action', 'center-visible-columns'
     )
     await process.wait()
-    print('INFO: center-visible-columns DONE')
+
+
+async def try_to(action: Callable[[], Coroutine], *, delay: float | None = None) -> None:
+    await action()
+    if delay is not None:
+        await asyncio.sleep(delay)
+        await action()
 
 
 async def main() -> None:
@@ -21,19 +27,16 @@ async def main() -> None:
     )
 
     assert process.stdout is not None
+    TRIGGER_EVENTS = {
+        'WindowOpenedOrChanged',
+        'WindowFocusChanged',
+        'WindowLayoutsChanged',
+        'WindowClosed',
+    }
     while (line := await process.stdout.readline()):
         event_dict: dict[str, str] = json.loads(line)
-        key = next((k for k in event_dict.keys()))
-        if key in [
-            'WindowOpenedOrChanged',
-        ]:
-            asyncio.create_task(center_visible_columns(1))
-        elif key in [
-            'WindowFocusChanged',
-            'WindowLayoutsChanged',
-            'WindowClosed',
-        ]:
-            asyncio.create_task(center_visible_columns(0.1))
+        if any(key in TRIGGER_EVENTS for key in event_dict):
+            asyncio.create_task(try_to(center_visible_columns))
 
 
 if __name__ == '__main__':
