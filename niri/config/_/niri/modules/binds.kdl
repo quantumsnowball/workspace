@@ -61,20 +61,20 @@ binds {
     Super+Tab repeat=false { toggle-overview; }
 
     // close window
-    Super+Grave repeat=false { spawn-sh "niri.with-center close-window"; }
-    Super+W repeat=false     { spawn-sh "niri.with-center close-window"; }
+    Super+Grave repeat=false { close-window; }
+    Super+W repeat=false     { close-window; }
 
     // windows focus
-    Super+H     { spawn-sh "niri.with-center focus-column-left"; }
-    Super+J     { spawn-sh "niri.with-center focus-window-or-workspace-down"; }
-    Super+K     { spawn-sh "niri.with-center focus-window-or-workspace-up"; }
-    Super+L     { spawn-sh "niri.with-center focus-column-right"; }
-    Super+Left  { spawn-sh "niri.with-center focus-column-left"; }
-    Super+Down  { spawn-sh "niri.with-center focus-window-or-workspace-down"; }
-    Super+Up    { spawn-sh "niri.with-center focus-window-or-workspace-up"; }
-    Super+Right { spawn-sh "niri.with-center focus-column-right"; }
-    Super+Home  { spawn-sh "niri.with-center focus-column-first"; }
-    Super+End   { spawn-sh "niri.with-center focus-column-last"; }
+    Super+H     { focus-column-left; }
+    Super+J     { focus-window-or-workspace-down; }
+    Super+K     { focus-window-or-workspace-up; }
+    Super+L     { focus-column-right; }
+    Super+Left  { focus-column-left; }
+    Super+Down  { focus-window-or-workspace-down; }
+    Super+Up    { focus-window-or-workspace-up; }
+    Super+Right { focus-column-right; }
+    Super+Home  { focus-column-first; }
+    Super+End   { focus-column-last; }
 
     // viewport scrolling like
     Super+Alt+H     { spawn-sh "niri.with-center-one focus-column-left"; }

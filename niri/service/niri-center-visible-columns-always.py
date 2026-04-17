@@ -4,7 +4,7 @@ import asyncio
 import json
 
 
-async def center_visible_columns(delay: int = 1) -> None:
+async def center_visible_columns(delay: float = 1) -> None:
     await asyncio.sleep(delay)
     process = await asyncio.create_subprocess_exec(
         'niri', 'msg', 'action', 'center-visible-columns'
@@ -26,6 +26,8 @@ async def main() -> None:
         key = next((k for k in event_dict.keys()))
         if key in ['WindowOpenedOrChanged', ]:
             asyncio.create_task(center_visible_columns(1))
+        elif key in ['WindowFocusChanged', 'WindowClosed', ]:
+            asyncio.create_task(center_visible_columns(0.1))
 
 
 if __name__ == '__main__':
