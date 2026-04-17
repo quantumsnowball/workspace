@@ -129,12 +129,12 @@ binds {
     // adjust layout
     Super+Return             { center-column; }
     Super+Alt+Return         { center-visible-columns; }
-    Super+Comma              { spawn-sh "niri.with-center consume-window-into-column"; }
+    Super+Comma              { consume-window-into-column; }
     Super+Period             { spawn-sh "niri.do expel-window-from-column focus-column-right focus-column-left center-visible-columns"; }
-    Super+Shift+Comma        { spawn-sh "niri.with-center consume-or-expel-window-left"; }
-    Super+Shift+Period       { spawn-sh "niri.with-center consume-or-expel-window-right"; }
-    Super+A                  { spawn-sh "niri.with-center toggle-window-floating"; }
-    Super+Shift+V            { spawn-sh "niri.with-center switch-focus-between-floating-and-tiling"; }
+    Super+Shift+Comma        { consume-or-expel-window-left; }
+    Super+Shift+Period       { consume-or-expel-window-right; }
+    Super+A                  { toggle-window-floating; }
+    Super+Shift+V            { switch-focus-between-floating-and-tiling; }
     Super+U                  { toggle-column-tabbed-display; }
     Super+G                  { expand-column-to-available-width; }
 
