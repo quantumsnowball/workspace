@@ -22,9 +22,10 @@ async def main() -> None:
 
     assert process.stdout is not None
     while (line := await process.stdout.readline()):
-        event_dict = json.loads(line)
-        if 'WindowOpenedOrChanged' in event_dict:
-            asyncio.create_task(center_visible_columns())
+        event_dict: dict[str, str] = json.loads(line)
+        key = next((k for k in event_dict.keys()))
+        if key in ['WindowOpenedOrChanged', ]:
+            asyncio.create_task(center_visible_columns(1))
 
 
 if __name__ == '__main__':
