@@ -77,24 +77,24 @@ binds {
     Super+End   { focus-column-last; }
 
     // viewport scrolling like
-    Super+Alt+H     { spawn-sh "niri.with-center-one focus-column-left"; }
-    Super+Alt+J     { spawn-sh "niri.with-center-one focus-workspace-down"; }
-    Super+Alt+K     { spawn-sh "niri.with-center-one focus-workspace-up"; }
-    Super+Alt+L     { spawn-sh "niri.with-center-one focus-column-right"; }
-    Super+Alt+Left  { spawn-sh "niri.with-center-one focus-column-left"; }
-    Super+Alt+Down  { spawn-sh "niri.with-center-one focus-window-or-workspace-down"; }
-    Super+Alt+Up    { spawn-sh "niri.with-center-one focus-window-or-workspace-up"; }
-    Super+Alt+Right { spawn-sh "niri.with-center-one focus-column-right"; }
+    Super+Alt+H     { focus-column-left; }               // TODO_with-center-one
+    Super+Alt+J     { focus-workspace-down; }            // TODO_with-center-one
+    Super+Alt+K     { focus-workspace-up; }              // TODO_with-center-one
+    Super+Alt+L     { focus-column-right; }              // TODO_with-center-one
+    Super+Alt+Left  { focus-column-left; }               // TODO_with-center-one
+    Super+Alt+Down  { focus-window-or-workspace-down; }  // TODO_with-center-one
+    Super+Alt+Up    { focus-window-or-workspace-up; }    // TODO_with-center-one
+    Super+Alt+Right { focus-column-right; }              // TODO_with-center-one
 
     // windows movement
-    Super+Shift+H     { spawn-sh "niri.with-center move-column-left"; }
-    Super+Shift+J     { spawn-sh "niri.with-center-one move-column-to-workspace-down"; }
-    Super+Shift+K     { spawn-sh "niri.with-center-one move-column-to-workspace-up"; }
-    Super+Shift+L     { spawn-sh "niri.with-center move-column-right"; }
-    Super+Shift+Down  { spawn-sh "niri.with-center move-window-down"; }
-    Super+Shift+Up    { spawn-sh "niri.with-center move-window-up"; }
-    Super+Shift+Home  { spawn-sh "niri.with-center move-column-to-first"; }
-    Super+Shift+End   { spawn-sh "niri.with-center move-column-to-last"; }
+    Super+Shift+H     { move-column-left; }
+    Super+Shift+J     { move-column-to-workspace-down; } // TODO_with-center-one
+    Super+Shift+K     { move-column-to-workspace-up; }   // TODO_with-center-one
+    Super+Shift+L     { move-column-right; }
+    Super+Shift+Down  { move-window-down; }
+    Super+Shift+Up    { move-window-up; }
+    Super+Shift+Home  { move-column-to-first; }
+    Super+Shift+End   { move-column-to-last; }
     
     // workspace movement
     Super+BracketRight         { focus-workspace-down; }
