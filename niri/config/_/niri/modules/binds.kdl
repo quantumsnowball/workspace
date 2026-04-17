@@ -18,28 +18,28 @@ binds {
 
     // exec programs
     Super+Semicolon hotkey-overlay-title="Terminal: Kitty (tmux)" {
-        spawn-sh "kitty -e 'tmux.launch-with-presets' & sleep 0.2 && niri msg action center-visible-columns";
+        spawn-sh "kitty -e 'tmux.launch-with-presets'";
     }
     Super+Shift+Semicolon hotkey-overlay-title="Terminal: Kitty" {
-        spawn-sh "kitty -e /bin/zsh & sleep 0.2 && niri msg action center-visible-columns";
+        spawn-sh "kitty -e /bin/zsh";
     }
     Super+Shift+Slash hotkey-overlay-title="Explorer: Yazi" {
-        spawn-sh "kitty -e /bin/zsh -c 'yazi' & sleep 0.2 && niri msg action center-visible-columns";
+        spawn-sh "kitty -e /bin/zsh -c 'yazi'";
     }
     Super+Slash hotkey-overlay-title="Explorer: Yazi (float)" {
-        spawn-sh "kitty --class yazi-float -e /bin/zsh -c 'yazi' & sleep 0.2  && niri msg action center-visible-columns";
+        spawn-sh "kitty --class yazi-float -e /bin/zsh -c 'yazi'";
     }
     Super+O hotkey-overlay-title="Explorer: Dolphin" {
-        spawn-sh "dolphin & sleep 2 && niri msg action center-visible-columns";
+        spawn-sh "dolphin";
     }
     Super+Y hotkey-overlay-title="YouTube" {
-        spawn-sh "gtk-launch chrome-YouTube & sleep 2 && niri msg action center-visible-columns";
+        spawn-sh "gtk-launch chrome-YouTube";
     }
     Super+I hotkey-overlay-title="Chrome Browser" {
-        spawn-sh "gtk-launch chrome-default & sleep 2 && niri msg action center-visible-columns";
+        spawn-sh "gtk-launch chrome-default";
     }
     Super+S hotkey-overlay-title="Steam (with Mangohud)" {
-        spawn-sh "notify-send -t 3000 'Steam' 'Launching Steam (with MangoHUD) ...' && gtk-launch steam-with-mangohud & sleep 2.0 && niri msg action center-visible-columns";
+        spawn-sh "notify-send -t 3000 'Steam' 'Launching Steam (with MangoHUD) ...' && gtk-launch steam-with-mangohud";
     }
     Ctrl+Space hotkey-overlay-title="Launcher" {
         spawn-sh "qs -c noctalia-shell ipc call launcher toggle";
