@@ -7,9 +7,6 @@ spawn-at-startup "/usr/lib/pam_kwallet_init"
 // enable auth agent (fix sudo mount in dolphin)
 spawn-at-startup "/usr/lib/polkit-kde-authentication-agent-1"
 
-// proper display x11 tray icon (fix the little white box issue)
-spawn-at-startup "xembedsniproxy"
-
 // kded service
 // WARNING: kded6 will break noctalia-shell's tray icon widget
 // spawn-at-startup "kded6" 

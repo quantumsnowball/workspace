@@ -1,0 +1,17 @@
+# proper display x11 tray icon (fix the little white box issue)
+#
+
+[Unit]
+Description=Handle legacy xembed system tray icons
+BindsTo=niri.service
+After=niri.service
+
+[Service]
+ExecStart=/usr/bin/xembedsniproxy
+Restart=on-failure
+Type=simple
+Slice=background.slice
+TimeoutSec=5sec
+
+[Install]
+WantedBy=niri.service
