@@ -1,6 +1,6 @@
 [Unit]
 Description=Niri Center Visible Columns
-After=graphical-session.target
+BindsTo=niri.service
 
 [Service]
 Type=exec

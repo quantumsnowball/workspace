@@ -4,7 +4,6 @@
 [Unit]
 Description=Handle legacy xembed system tray icons
 BindsTo=niri.service
-After=niri.service
 
 [Service]
 ExecStart=/usr/bin/xembedsniproxy
