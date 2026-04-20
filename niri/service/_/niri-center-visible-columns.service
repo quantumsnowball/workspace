@@ -11,4 +11,4 @@ RestartSec=1
 Environment=PYTHONUNBUFFERED=1
 
 [Install]
-WantedBy=graphical-session.target
+WantedBy=niri.service
