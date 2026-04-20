@@ -1,0 +1,14 @@
+# kwallet
+[Unit]
+Description=Unlock kwallet from pam credentials
+BindsTo=niri.service
+After=niri.service
+
+[Service]
+ExecStart=/usr/lib/pam_kwallet_init
+Type=simple
+Slice=background.slice
+Restart=no
+
+[Install]
+WantedBy=niri.service

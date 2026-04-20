@@ -1,9 +1,6 @@
 // noctalia shell
 spawn-at-startup "qs" "-c" "noctalia-shell"
 
-// kwallet
-spawn-at-startup "/usr/lib/pam_kwallet_init" 
-
 // enable auth agent (fix sudo mount in dolphin)
 spawn-at-startup "/usr/lib/polkit-kde-authentication-agent-1"
 
