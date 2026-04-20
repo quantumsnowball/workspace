@@ -1,9 +1,6 @@
 // noctalia shell
 spawn-at-startup "qs" "-c" "noctalia-shell"
 
-// enable auth agent (fix sudo mount in dolphin)
-spawn-at-startup "/usr/lib/polkit-kde-authentication-agent-1"
-
 // kded service
 // WARNING: kded6 will break noctalia-shell's tray icon widget
 // spawn-at-startup "kded6" 
