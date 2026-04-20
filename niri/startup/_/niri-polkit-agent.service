@@ -2,7 +2,6 @@
 [Unit]
 Description=KDE PolicyKit Authentication Agent
 BindsTo=niri.service
-After=niri.service
 
 [Service]
 ExecStart=/usr/lib/polkit-kde-authentication-agent-1
