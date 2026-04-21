@@ -40,6 +40,11 @@ End up I found that it is the `niri-xembedsniproxy.service` that I made earlier 
 Solution was to put it back to `spwan-at-startup` and let Niri handle its life cycle.
 Otherwise if xembedsniproxy refuses to die even niri is dead, it will hold up the `DBUS_SESSION_BUS_ADDRESS`.
 
+Also, later I found that the service `niri-center-visible-columns` is also causing the same problem.
+Especially the WantedBy='niri.service' settigns seems to cause conflict to `DBUS_SESSION_BUS_ADDRESS`.
+Until now I don't find a better systemd unit settings that can guarantee its birth and death with niri.service.
+So I will just make another `spwan-at-startup` and point directly to execute this python script with shebang.
+
 Analysis:
 
 plasmalogin tried to run this command:
@@ -72,4 +77,6 @@ As you can see, it check on DBUS_SESSION_BUS_ADDRESS, try to reuse it if it exis
 But if this check failed for some reason, such as when niri-xembedsniproxy.service was holding it.
 Then the procress will fail and KDE plasma failed to launch.
 By disabling this service, KDE plasma can login normally.
+Also any other service that call WantedBy or BindsTo niri.service may also cause problem.
+Disable these services will solve the problem.
 
