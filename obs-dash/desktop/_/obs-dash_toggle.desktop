@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Name=OBS Dash - Toggle, with Niri Dynamic Casting
+Comment=Toggle OBS Dash Overlay (with Niri Dynamic Casting)
+Exec=obs-dash-toggle
+Icon=obs-dash.png
+Terminal=false
+Categories=Game;Utility;

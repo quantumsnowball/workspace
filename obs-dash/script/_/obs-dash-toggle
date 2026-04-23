@@ -6,6 +6,8 @@ SERVICE="obs-dash.service"
 # Toggle base on current active state
 if systemctl --user is-active --quiet "$SERVICE"; then
     systemctl --user stop "$SERVICE"
+    niri msg action clear-dynamic-cast-target
 else
     systemctl --user start "$SERVICE"
+    niri msg action set-dynamic-cast-window
 fi
