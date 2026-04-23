@@ -147,10 +147,12 @@ binds {
     // store obs websocket password in ~/.obsws_password
     Shift+F1 { spawn-sh "obs-cmd -w obsws://localhost:4455/$(cat $HOME/.obsws_password) recording toggle"; }
     Shift+Alt+F1 { spawn-sh "obs-dash-toggle"; }
+    Shift+Ctrl+F1 { spawn-sh "obs-dash-toggle"; }
 
     // Pixel Crosshair
     // Shift+F2 for toggle mangohud presets
     Shift+Alt+F2 { spawn-sh "pixel-crosshair-cycle-colors"; }
+    Shift+Ctrl+F2 { spawn-sh "pixel-crosshair-cycle-colors"; }
 }
 
 // Special binds
