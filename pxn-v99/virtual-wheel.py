@@ -4,22 +4,26 @@
 # ]
 # ///
 
-from evdev import InputDevice, UInput
+from evdev import InputDevice, UInput, ecodes
 
-# 1. Replace with your actual device path (check /dev/input/by-id/)
-physical_wheel = InputDevice('/dev/input/event13')
+# Use your actual path
+phys_wheel = InputDevice('/dev/input/event13')
 
-# 2. Create virtual device with identical capabilities
-# We include 'events' to ensure FFB and specialized keys are copied
-virtual_wheel = UInput.from_device(physical_wheel, name='Virtual PXN-V99')
+# Create a virtual KEYBOARD instead of a virtual wheel
+# This avoids FFB conflicts entirely.
+v_kb = UInput(name='Virtual PXN-V99 Keyboard')
 
-print(f'Bridge active: {physical_wheel.name} -> {virtual_wheel.name}')
-print("Check 'evtest' or launch Assetto Corsa. Ctrl+C to stop.")
+print('Hybrid mode: Physical wheel handles FFB, script handles buttons.')
 
-try:
-    physical_wheel.grab()  # Take exclusive control
-    for event in physical_wheel.read_loop():
-        virtual_wheel.write_event(event)
-finally:
-    physical_wheel.ungrab()
-    virtual_wheel.close()
+# DO NOT use phys_wheel.grab() here.
+# This lets AC see the wheel for FFB while we 'eavesdrop' on buttons.
+for event in phys_wheel.read_loop():
+    if event.type == ecodes.EV_KEY:
+        # map A to Enter
+        if event.code == 288:
+            v_kb.write(ecodes.EV_KEY, ecodes.KEY_ENTER, event.value)
+            v_kb.syn()
+        # map B to Esc
+        elif event.code == 289:
+            v_kb.write(ecodes.EV_KEY, ecodes.KEY_ESC, event.value)
+            v_kb.syn()
