@@ -11,7 +11,7 @@ Repos:
         -  `uv tool install -e ".[gui]"`
     - use wget to download the moodels into model_weights/ directory
     - running lada uv tool outside the repo dir cannot see the model weight, need to set this env var:
-        - LADA_MODEL_WEIGHTS_DIR=$HOME/Repos/lada/model_weights
+        - LADA_MODEL_WEIGHTS_DIR=$HOME/Projects/lada/model_weights
         - use the install script to install to ~/.config/environment.d/ to auto at system startup
 
 # Trouble shoot
