@@ -1,0 +1,25 @@
+❯ evtest /dev/input/event31 | rg 'EV_KEY'
+  Event type 1 (EV_KEY)
+Event: time 1777233314.210495, type 1 (EV_KEY), code 288 (BTN_TRIGGER), value 1
+Event: time 1777233314.210495, type 1 (EV_KEY), code 289 (BTN_THUMB), value 1
+Event: time 1777233314.210495, type 1 (EV_KEY), code 290 (BTN_THUMB2), value 1
+Event: time 1777233314.210495, type 1 (EV_KEY), code 291 (BTN_TOP), value 1
+Event: time 1777233314.210495, type 1 (EV_KEY), code 292 (BTN_TOP2), value 1
+Event: time 1777233314.210495, type 1 (EV_KEY), code 293 (BTN_PINKIE), value 1
+Event: time 1777233314.210495, type 1 (EV_KEY), code 296 (BTN_BASE3), value 1
+Event: time 1777233314.210495, type 1 (EV_KEY), code 297 (BTN_BASE4), value 1
+Event: time 1777233314.210495, type 1 (EV_KEY), code 298 (BTN_BASE5), value 1
+Event: time 1777233314.210495, type 1 (EV_KEY), code 299 (BTN_BASE6), value 1
+Event: time 1777233314.210495, type 1 (EV_KEY), code 301 (?), value 1
+Event: time 1777233314.220498, type 1 (EV_KEY), code 288 (BTN_TRIGGER), value 0
+Event: time 1777233314.220498, type 1 (EV_KEY), code 289 (BTN_THUMB), value 0
+Event: time 1777233314.220498, type 1 (EV_KEY), code 290 (BTN_THUMB2), value 0
+Event: time 1777233314.220498, type 1 (EV_KEY), code 291 (BTN_TOP), value 0
+Event: time 1777233314.220498, type 1 (EV_KEY), code 292 (BTN_TOP2), value 0
+Event: time 1777233314.220498, type 1 (EV_KEY), code 293 (BTN_PINKIE), value 0
+Event: time 1777233314.220498, type 1 (EV_KEY), code 296 (BTN_BASE3), value 0
+Event: time 1777233314.220498, type 1 (EV_KEY), code 297 (BTN_BASE4), value 0
+Event: time 1777233314.220498, type 1 (EV_KEY), code 298 (BTN_BASE5), value 0
+Event: time 1777233314.220498, type 1 (EV_KEY), code 299 (BTN_BASE6), value 0
+Event: time 1777233314.220498, type 1 (EV_KEY), code 301 (?), value 0
+^C
