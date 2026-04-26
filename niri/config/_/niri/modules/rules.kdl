@@ -27,3 +27,8 @@ window-rule {
     default-window-height { proportion 0.75; }
 }
 
+// assetto corsa - content manager
+window-rule  {
+    match app-id="steam_app_244210"
+    open-floating false
+}
