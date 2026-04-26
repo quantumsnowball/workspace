@@ -3,6 +3,7 @@
 import asyncio
 import json
 import logging
+import re
 from typing import Callable, Coroutine
 
 logger = logging.getLogger(__file__)
@@ -50,13 +51,16 @@ def is_an_ignored_window_opened_or_changed(event: Event) -> bool:
     try:
         window = details['window']
         title, app_id = window['title'], window['app_id']
-        IGNORED_WINDOWS = {
-            ('Waiting…', 'steam_app_244210'),
-            ('Assetto Corsa', 'steam_app_244210'),
-        }
-        if (title, app_id) in IGNORED_WINDOWS:
-            logger.info(f'Ignored window: {title=}, {app_id=}')
-            return True
+        # define ignore windows regex pattern
+        IGNORED_WINDOWS = {(re.compile(entry[0]), re.compile(entry[1])) for entry in {
+            (r'^Waiting', r'steam_app_244210'),
+            (r'Assetto Corsa', r'steam_app_244210'),
+        }}
+        # if both title and app_id match, then the window is ignored
+        for title_pattern, app_id_pattern in IGNORED_WINDOWS:
+            if title_pattern.search(title) and app_id_pattern.search(app_id):
+                logger.info(f'Ignored window: {title=}, {app_id=}')
+                return True
     except KeyError:
         pass
     except Exception as e:
