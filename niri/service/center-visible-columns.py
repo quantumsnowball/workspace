@@ -95,4 +95,8 @@ async def main() -> None:
 
 
 if __name__ == '__main__':
-    asyncio.run(main())
+    try:
+        asyncio.run(main())
+    except KeyboardInterrupt:
+        print('\r', end='')
+        logger.info('Service stopped by user (Ctrl-C)')
