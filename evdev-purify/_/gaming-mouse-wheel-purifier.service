@@ -4,7 +4,6 @@ After=graphical-session.target
 
 [Service]
 Type=exec
-# Replace with absolute paths
 ExecStart=uv tool run evdev-purify mouse-wheel "WLS.Ltd Gaming TouchPad Mouse"
 
 Restart=always
