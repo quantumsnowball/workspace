@@ -1,12 +1,10 @@
 [Unit]
-Description=Kanata Purifier
+Description=FFB Wheel Purifier
 After=graphical-session.target
-BindsTo=kanata.service
-After=kanata.service
 
 [Service]
 Type=exec
-ExecStart=uv tool run evdev-purify keyboard kanata
+ExecStart=uv tool run evdev-purify ffb-wheel "PXN PXN-V99"
 Restart=always
 RestartSec=1
 # Ensures logs show up immediately
