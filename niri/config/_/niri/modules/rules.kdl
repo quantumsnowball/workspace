@@ -29,6 +29,8 @@ window-rule {
 
 // assetto corsa - content manager
 window-rule  {
-    match app-id="steam_app_244210"
+    // force title the 'Waiting…' window, this help fix the top left blackbox niri render bug
+    // but permanent solution is to uncheck 'Hibernate CM when racing'
+    match title="^Waiting" app-id="steam_app_244210"
     open-floating false
 }
