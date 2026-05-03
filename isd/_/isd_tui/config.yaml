@@ -201,6 +201,27 @@
 #     modal_keybinding: "-"
 #     direct_keybinding: null
 #     description: "Reset failed state of unit(s), including the restart counter."
+systemctl_commands:
+  - command: "start"
+    modal_keybinding: "s"
+    direct_keybinding: null
+    description: "Start unit(s)"
+  - command: "stop"
+    modal_keybinding: "x"
+    direct_keybinding: null
+    description: "Stop unit(s)"
+  - command: "restart"
+    modal_keybinding: "r"
+    direct_keybinding: "ctrl+s,ctrl+r"
+    description: "Restart unit(s)"
+  - command: "enable"
+    modal_keybinding: "e"
+    direct_keybinding: null
+    description: "Enable unit(s)"
+  - command: "disable"
+    modal_keybinding: "d"
+    direct_keybinding: null
+    description: "Disable unit(s)."
 
 ## Arguments passed to the configured `default_pager`.
 ## Should NOT be required most of the time.
