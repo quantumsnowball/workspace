@@ -1,0 +1,5 @@
+#!/bin/sh
+
+
+$XDG_CONFIG_HOME/workspace/steam/scs-software/euro-truck-simulator-2/install "$@"
+$XDG_CONFIG_HOME/workspace/steam/scs-software/american-truck-simulator/install "$@"
