@@ -1,0 +1,7 @@
+#!/bin/sh
+
+
+$XDG_CONFIG_HOME/workspace/steam/scs-software/american-truck-simulator/native/global/install "$@"
+$XDG_CONFIG_HOME/workspace/steam/scs-software/american-truck-simulator/native/local/install "$@"
+$XDG_CONFIG_HOME/workspace/steam/scs-software/american-truck-simulator/proton/global/install "$@"
+$XDG_CONFIG_HOME/workspace/steam/scs-software/american-truck-simulator/proton/local/install "$@"

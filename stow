@@ -14,27 +14,32 @@ color_path() {
 
 # runner
 run() {
-    printf "\n${CYAN}In${RESET}: $(color_path $target_dir/)\n"
+    printf "${CYAN}In${RESET}: $(color_path "$target_dir/")\n"
     stow -d "$stow_dir" -t "$target_dir" --verbose "$@" . ;
 }
 
 # symlink every items inside stow_dir into target_dir
-printf "\n${MAGENTA}>>> ${GREEN}Stowing ...${RESET}\n\n"
-printf "${CYAN}Source${RESET}: $(color_path $stow_dir/) [ ${CYAN}$(/bin/ls -pA "$stow_dir" | xargs)${RESET} ]\n"
-printf "${CYAN}Target${RESET}: $(color_path $target_dir/)\n"
+printf "\n${MAGENTA}>>> ${GREEN}Stowing ...${RESET}\n"
+printf "${CYAN}Source${RESET}: $(color_path "$stow_dir/") [ ${CYAN}$(/bin/ls -pA "$stow_dir" | xargs)${RESET} ]\n"
+printf "${CYAN}Target${RESET}: $(color_path "$target_dir/")\n"
 
 # simulate
 printf "\n${MAGENTA}>>> ${GREEN}Simulating ...${RESET}\n"
 run --simulate "$@"
 
 # prompt confirm
-printf "\n${MAGENTA}>>> ${RED}Apply changes? [y/N]:${RESET} " 
+printf "${MAGENTA}>>> ${RED}Apply changes? [y/N]:${RESET} " 
 read -r ans
 if [ "${ans:-n}" != "y" ]; then
-    printf "\n${MAGENTA}>>> ${RED}Aborted.${RESET}\n"
+    printf "${MAGENTA}>>> ${RED}Aborted.${RESET}\n"
+    # printf '█%.0s' {1..$(echo $COLUMNS)}
+    printf "${RED}▬%.0s${RESET}" $(seq 1 "$COLUMNS")
     exit 0
 fi
 
 # run
 printf "\n${MAGENTA}>>> ${GREEN}Applying ...${RESET}\n"
 run "$@"
+printf "${MAGENTA}>>> ${GREEN}Done.${RESET}\n"
+printf "${GREEN}▬%.0s${RESET}" $(seq 1 "$COLUMNS")
+exit 0

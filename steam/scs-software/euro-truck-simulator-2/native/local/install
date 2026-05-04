@@ -1,0 +1,7 @@
+#!/bin/sh
+
+stow_dir="$(dirname "$(realpath "$0")")/_"
+target_dir="$(echo "$HOME/.local/share/Euro Truck Simulator 2/steam_profiles/"*)"
+
+
+. $XDG_CONFIG_HOME/workspace/stow "$stow_dir" "$target_dir" "$@"
