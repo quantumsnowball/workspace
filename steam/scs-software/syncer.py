@@ -8,8 +8,9 @@ import hashlib
 import logging
 import shutil
 import time
+from dataclasses import dataclass
 from pathlib import Path
-from typing import Self
+from typing import Literal, Protocol, Self, Sequence
 
 from watchdog.events import (
     FileModifiedEvent,
@@ -29,6 +30,55 @@ FILE_PATHS = {
     Path('file2.txt').absolute(),
     Path('file3.txt').absolute(),
 }
+
+
+STEAM_HEX_ID = (Path.home() / '.steam_hex_id').read_text().strip()
+
+
+class Node(Protocol):
+    files: Sequence[Path]
+    sync_dirs: set[Path]
+
+
+@dataclass(kw_only=True)
+class GameNode(Node):
+    game_name: str
+    game_id: int
+    runtime: Literal['native', 'proton']
+
+    def __post_init__(self) -> None:
+        self.base_dir = (
+            Path.home()/f'.local/share/{self.game_name}' if self.runtime == 'native' else
+            Path.home()/f'.local/share/Steam/steamapps/compatdata/{self.game_id}/pfx/drive_c/users/steamuser/Documents/{self.game_name}'
+        )
+        self.files = (
+            self.base_dir/'config.cfg',
+            self.base_dir/'steam_profiles'/STEAM_HEX_ID/'config_local.cfg',
+            self.base_dir/'steam_profiles'/STEAM_HEX_ID/'controls_linux.sii',
+        )
+        self.sync_dirs = set(file.parent for file in self.files)
+
+
+@dataclass(kw_only=True)
+class ATSNode(GameNode):
+    game_name: str = 'American Truck Simulator'
+    game_id: int = 270880
+
+
+@dataclass(kw_only=True)
+class ETSNode(GameNode):
+    game_name: str = 'Euro Truck Simulator 2'
+    game_id: int = 227300
+
+
+class MasterNode(Node):
+    base_dir = Path.home()/f'.config/workspace/steam/scs_software'
+    files = (
+        base_dir/'config.cfg',
+        base_dir/'config_local.cfg',
+        base_dir/'controls_linux.sii',
+    )
+    sync_dirs = set(file.parent for file in files)
 
 
 class EventHandler(FileSystemEventHandler):
@@ -87,6 +137,14 @@ class EventObserver:
 
 
 def main() -> None:
+    nodes: list[Node] = [
+        ATSNode(runtime='native'),
+        ATSNode(runtime='proton'),
+        ETSNode(runtime='native'),
+        ETSNode(runtime='proton'),
+        MasterNode(),
+    ]
+
     with EventObserver(path=Path.cwd()) as observer:
         try:
             observer.run()
