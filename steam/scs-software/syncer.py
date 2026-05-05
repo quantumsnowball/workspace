@@ -94,18 +94,27 @@ class File:
         return self.path.is_relative_to(MasterNode.base_dir)
 
     def _digest_of(self, file: Path) -> str:
-        return hashlib.md5(file.read_bytes()).hexdigest()
+        try:
+            return hashlib.md5(file.read_bytes()).hexdigest()
+        except Exception:
+            return ''
 
     def update(self, master_node: MasterNode) -> None:
         dest_path = next(p for p in master_node.files if p.name == self.path.name)
         if self._digest_of(self.path) != self._digest_of(dest_path):
             shutil.copy2(self.path, dest_path)
+            logger.info(f'{self.path} copied to {dest_path}')
+        else:
+            logger.info('same digest, skipped')
 
     def broadcast(self, other_nodes: Sequence[Node]) -> None:
         dest_paths = tuple(p for node in other_nodes for p in node.files if p.name == self.path.name)
         for dest_path in dest_paths:
             if self._digest_of(self.path) != self._digest_of(dest_path):
                 shutil.copy2(self.path, dest_path)
+                logger.info(f'{self.path} copied to {dest_path}')
+            else:
+                logger.info('same digest, skipped')
 
 
 class NodeEventHandler(FileSystemEventHandler):
