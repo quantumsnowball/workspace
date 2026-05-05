@@ -13,6 +13,7 @@ from pathlib import Path
 from typing import Literal, Protocol, Self, Sequence
 
 from watchdog.events import (
+    FileCreatedEvent,
     FileModifiedEvent,
     FileMovedEvent,
     FileSystemEvent,
@@ -84,10 +85,11 @@ class Nodes:
 class File:
     def __init__(self, event: FileSystemEvent) -> None:
         self._event = event
+        self.is_created = isinstance(event, FileCreatedEvent)
         self.is_modified = isinstance(event, FileModifiedEvent)
         self.is_moved = isinstance(event, FileMovedEvent)
-        self.has_changed = self.is_modified or self.is_moved
-        self.path = Path(str(event.src_path)) if self.is_modified else Path(str(event.dest_path))
+        self.has_changed = self.is_created or self.is_modified or self.is_moved
+        self.path = Path(str(event.dest_path)) if self.is_moved else Path(str(event.src_path))
 
     @property
     def is_in_master_node(self) -> bool:
@@ -133,8 +135,7 @@ class NodeEventHandler(FileSystemEventHandler):
                 file.update(self._nodes.master_node)
 
     def on_any_event(self, event: FileSystemEvent) -> None:
-        file = File(event)
-        self._handle_file(file)
+        self._handle_file(File(event))
 
 
 class NodeObserver:
