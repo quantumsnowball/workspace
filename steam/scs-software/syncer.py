@@ -81,9 +81,46 @@ class MasterNode(Node):
     sync_dirs = set(file.parent for file in files)
 
 
-class EventHandler(FileSystemEventHandler):
-    def __init__(self) -> None:
+class Nodes:
+    def __init__(self, *nodes: Node) -> None:
+        self.items = nodes
+        self.master_node = next(node for node in nodes if isinstance(node, MasterNode))
+        self.other_nodes = tuple(node for node in nodes if not isinstance(node, MasterNode))
+
+
+class File:
+    def __init__(self, event: FileSystemEvent) -> None:
+        self._event = event
+        self.is_modified = isinstance(event, FileModifiedEvent)
+        self.is_moved = isinstance(event, FileMovedEvent)
+        self.has_changed = self.is_modified or self.is_moved
+        self.path = Path(str(event.src_path)) if self.is_modified else Path(str(event.dest_path))
+
+    @property
+    def is_in_master_node(self) -> bool:
+        return self.path.is_relative_to(MasterNode.base_dir)
+
+    def update(self, master_node: MasterNode) -> None:
+        pass
+
+    def broadcast(self, other_nodes: Sequence[Node]) -> None:
+        pass
+
+
+class NodeEventHandler(FileSystemEventHandler):
+    def __init__(self, nodes: Nodes) -> None:
+        self._nodes = nodes
+        self._files = set(file for node in nodes.items for file in node.files)
         self._cooldown = set[Path]()
+
+    def _handle_file(self, file: File) -> None:
+        # action only when the file has changed and file is in a node
+        if file.has_changed and file.path in self._files:
+            # action base of node type
+            if file.is_in_master_node:
+                file.broadcast(self._nodes.other_nodes)
+            else:
+                file.update(self._nodes.master_node)
 
     def on_any_event(self, event: FileSystemEvent) -> None:
         # check the path of the event
@@ -116,14 +153,17 @@ class EventHandler(FileSystemEventHandler):
                     logger.debug(f'hash for {active_path=} is the same as {passive_path=}, skipped copying')
 
 
-class EventObserver:
-    def __init__(self, path: Path) -> None:
-        self._path = path
+class NodeObserver:
+    def __init__(self, nodes: Nodes) -> None:
+        self._nodes = nodes
         self._observer = Observer()
-        self._event_handler = EventHandler()
+        self._event_handler = NodeEventHandler(nodes)
 
     def __enter__(self) -> Self:
-        self._observer.schedule(self._event_handler, str(self._path), recursive=False)
+        for node in self._nodes.items:
+            for dir in node.sync_dirs:
+                print(dir)
+        # self._observer.schedule(self._event_handler, str(self._path), recursive=False)
         self._observer.start()
         return self
 
@@ -137,15 +177,15 @@ class EventObserver:
 
 
 def main() -> None:
-    nodes: list[Node] = [
+    nodes = Nodes(
         ATSNode(runtime='native'),
         ATSNode(runtime='proton'),
         ETSNode(runtime='native'),
         ETSNode(runtime='proton'),
         MasterNode(),
-    ]
+    )
 
-    with EventObserver(path=Path.cwd()) as observer:
+    with NodeObserver(nodes) as observer:
         try:
             observer.run()
         except KeyboardInterrupt:
