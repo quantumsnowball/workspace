@@ -152,6 +152,7 @@ class NodeObserver:
         for node in self._nodes.items:
             for dir in node.sync_dirs:
                 self._observer.schedule(self._event_handler, str(dir), recursive=False)
+                logger.warning(f'Observing: {dir}')
         self._observer.start()
         return self
 
