@@ -25,13 +25,6 @@ logger = logging.getLogger(__file__)
 logging.basicConfig(level=logging.INFO, format='%(message)s')
 
 
-FILE_PATHS = {
-    Path('file1.txt').absolute(),
-    Path('file2.txt').absolute(),
-    Path('file3.txt').absolute(),
-}
-
-
 STEAM_HEX_ID = (Path.home() / '.steam_hex_id').read_text().strip()
 
 
@@ -100,11 +93,19 @@ class File:
     def is_in_master_node(self) -> bool:
         return self.path.is_relative_to(MasterNode.base_dir)
 
+    def _digest_of(self, file: Path) -> str:
+        return hashlib.md5(file.read_bytes()).hexdigest()
+
     def update(self, master_node: MasterNode) -> None:
-        pass
+        dest_path = next(p for p in master_node.files if p.name == self.path.name)
+        if self._digest_of(self.path) != self._digest_of(dest_path):
+            shutil.copy2(self.path, dest_path)
 
     def broadcast(self, other_nodes: Sequence[Node]) -> None:
-        pass
+        dest_paths = tuple(p for node in other_nodes for p in node.files if p.name == self.path.name)
+        for dest_path in dest_paths:
+            if self._digest_of(self.path) != self._digest_of(dest_path):
+                shutil.copy2(self.path, dest_path)
 
 
 class NodeEventHandler(FileSystemEventHandler):
@@ -123,34 +124,8 @@ class NodeEventHandler(FileSystemEventHandler):
                 file.update(self._nodes.master_node)
 
     def on_any_event(self, event: FileSystemEvent) -> None:
-        # check the path of the event
-        src_path = Path(str(event.src_path)).absolute()
-        dest_path = Path(str(event.dest_path)).absolute()
-
-        # only interested when file is modified or moved to
-        if (is_modified := isinstance(event, FileModifiedEvent)) or isinstance(event, FileMovedEvent):
-            # look at the related path
-            active_path = src_path if is_modified else dest_path
-            # check if the file is in defined list
-            if active_path not in FILE_PATHS:
-                return
-            # ignore if it is derived action
-            if active_path in self._cooldown:
-                self._cooldown.remove(active_path)
-                return
-            # confirm is first hand action
-            # calc other paths to copy to
-            passive_paths = FILE_PATHS - {active_path}
-            # for each other paths, put it on cooldown list, then copy source to destinatino
-            active_digest = hashlib.md5(active_path.read_bytes()).hexdigest()
-            for passive_path in passive_paths:
-                passive_digest = hashlib.md5(passive_path.read_bytes()).hexdigest()
-                if active_digest != passive_digest:
-                    self._cooldown.add(passive_path)
-                    shutil.copy2(active_path, passive_path)
-                    logger.info(f'copied {active_path} to {passive_path}')
-                else:
-                    logger.debug(f'hash for {active_path=} is the same as {passive_path=}, skipped copying')
+        file = File(event)
+        self._handle_file(file)
 
 
 class NodeObserver:
@@ -162,8 +137,7 @@ class NodeObserver:
     def __enter__(self) -> Self:
         for node in self._nodes.items:
             for dir in node.sync_dirs:
-                print(dir)
-        # self._observer.schedule(self._event_handler, str(self._path), recursive=False)
+                self._observer.schedule(self._event_handler, str(dir), recursive=False)
         self._observer.start()
         return self
 
