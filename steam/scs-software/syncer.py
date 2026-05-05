@@ -105,18 +105,18 @@ class File:
         dest_path = next(p for p in master_node.files if p.name == self.path.name)
         if self._digest_of(self.path) != self._digest_of(dest_path):
             shutil.copy2(self.path, dest_path)
-            logger.info(f'{self.path} copied to {dest_path}')
+            logger.info(f'Update COPY: {self.path} -> {dest_path}')
         else:
-            logger.info('same digest, skipped')
+            logger.debug(f'Update SKIPPED: {self.path} == {dest_path}')
 
     def broadcast(self, other_nodes: Sequence[Node]) -> None:
         dest_paths = tuple(p for node in other_nodes for p in node.files if p.name == self.path.name)
         for dest_path in dest_paths:
             if self._digest_of(self.path) != self._digest_of(dest_path):
                 shutil.copy2(self.path, dest_path)
-                logger.info(f'{self.path} copied to {dest_path}')
+                logger.info(f'Broadcast COPY: {self.path} -> {dest_path}')
             else:
-                logger.info('same digest, skipped')
+                logger.debug(f'Broadcast SKIPPED: {self.path} == {dest_path}')
 
 
 class NodeEventHandler(FileSystemEventHandler):
