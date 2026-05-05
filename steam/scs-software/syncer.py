@@ -41,6 +41,8 @@ class GameNode(Node):
     runtime: Literal['native', 'proton']
 
     def __post_init__(self) -> None:
+        # debug
+        # self.base_dir = Path.home()/f'Playground/test-syncer/{self.game_name}' if self.runtime == 'native' else Path.home()/f'Playground/test-syncer/{self.game_name} (proton)'
         self.base_dir = (
             Path.home()/f'.local/share/{self.game_name}' if self.runtime == 'native' else
             Path.home()/f'.local/share/Steam/steamapps/compatdata/{self.game_id}/pfx/drive_c/users/steamuser/Documents/{self.game_name}'
@@ -66,7 +68,9 @@ class ETSNode(GameNode):
 
 
 class MasterNode(Node):
-    base_dir = Path.home()/f'.config/workspace/steam/scs_software'
+    # debug
+    # base_dir = Path.home()/f'Playground/test-syncer/master'
+    base_dir = Path.home()/f'.config/workspace/steam/scs-software'
     files = (
         base_dir/'config.cfg',
         base_dir/'config_local.cfg',
