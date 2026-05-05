@@ -1,6 +1,7 @@
 # /// script
 # dependencies = [
-#   "watchdog"
+#   "typer",
+#   "watchdog",
 # ]
 # ///
 
@@ -10,8 +11,9 @@ import shutil
 import time
 from dataclasses import dataclass
 from pathlib import Path
-from typing import Literal, Protocol, Self, Sequence
+from typing import Annotated, Literal, Protocol, Self, Sequence
 
+import typer
 from watchdog.events import (
     FileCreatedEvent,
     FileModifiedEvent,
@@ -22,8 +24,6 @@ from watchdog.events import (
 from watchdog.observers import Observer
 
 logger = logging.getLogger(__file__)
-
-logging.basicConfig(level=logging.INFO, format='%(message)s')
 
 
 STEAM_HEX_ID = (Path.home() / '.steam_hex_id').read_text().strip()
@@ -109,18 +109,18 @@ class File:
         dest_path = next(p for p in master_node.files if p.name == self.path.name)
         if self._digest_of(self.path) != self._digest_of(dest_path):
             shutil.copy2(self.path, dest_path)
-            logger.info(f'Update COPY: {self.path} -> {dest_path}')
+            logger.warning(f'Update COPY: {self.path} -> {dest_path}')
         else:
-            logger.debug(f'Update SKIPPED: {self.path} == {dest_path}')
+            logger.info(f'Update SKIPPED: {self.path} == {dest_path}')
 
     def broadcast(self, other_nodes: Sequence[Node]) -> None:
         dest_paths = tuple(p for node in other_nodes for p in node.files if p.name == self.path.name)
         for dest_path in dest_paths:
             if self._digest_of(self.path) != self._digest_of(dest_path):
                 shutil.copy2(self.path, dest_path)
-                logger.info(f'Broadcast COPY: {self.path} -> {dest_path}')
+                logger.warning(f'Broadcast COPY: {self.path} -> {dest_path}')
             else:
-                logger.debug(f'Broadcast SKIPPED: {self.path} == {dest_path}')
+                logger.info(f'Broadcast SKIPPED: {self.path} == {dest_path}')
 
 
 class NodeEventHandler(FileSystemEventHandler):
@@ -164,7 +164,14 @@ class NodeObserver:
             time.sleep(1)
 
 
-def main() -> None:
+def main(
+    debug: Annotated[bool, typer.Option(help='Enable debug mode verbose output')] = False,
+) -> None:
+    logging.basicConfig(
+        level=logging.INFO if debug else logging.WARNING,
+        format='%(levelname)s: %(message)s' if debug else '%(message)s'
+    )
+
     nodes = Nodes(
         ATSNode(runtime='native'),
         ATSNode(runtime='proton'),
@@ -172,7 +179,6 @@ def main() -> None:
         ETSNode(runtime='proton'),
         MasterNode(),
     )
-
     with NodeObserver(nodes) as observer:
         try:
             observer.run()
@@ -181,4 +187,4 @@ def main() -> None:
 
 
 if __name__ == '__main__':
-    main()
+    typer.run(main)
