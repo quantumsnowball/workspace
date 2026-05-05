@@ -1,7 +1,15 @@
+# /// script
+# dependencies = [
+#   "watchdog"
+# ]
+# ///
+
 import hashlib
+import logging
 import shutil
 import time
 from pathlib import Path
+from typing import Self
 
 from watchdog.events import (
     FileModifiedEvent,
@@ -11,21 +19,26 @@ from watchdog.events import (
 )
 from watchdog.observers import Observer
 
+logger = logging.getLogger(__file__)
+
+logging.basicConfig(level=logging.INFO, format='%(message)s')
+
+
 FILE_PATHS = {
-    Path('file1.txt'),
-    Path('file2.txt'),
-    Path('file3.txt'),
+    Path('file1.txt').absolute(),
+    Path('file2.txt').absolute(),
+    Path('file3.txt').absolute(),
 }
 
 
-class MyEventHandler(FileSystemEventHandler):
+class EventHandler(FileSystemEventHandler):
     def __init__(self) -> None:
         self._cooldown = set[Path]()
 
     def on_any_event(self, event: FileSystemEvent) -> None:
         # check the path of the event
-        src_path = Path(str(event.src_path))
-        dest_path = Path(str(event.dest_path))
+        src_path = Path(str(event.src_path)).absolute()
+        dest_path = Path(str(event.dest_path)).absolute()
 
         # only interested when file is modified or moved to
         if (is_modified := isinstance(event, FileModifiedEvent)) or isinstance(event, FileMovedEvent):
@@ -48,18 +61,38 @@ class MyEventHandler(FileSystemEventHandler):
                 if active_digest != passive_digest:
                     self._cooldown.add(passive_path)
                     shutil.copy2(active_path, passive_path)
-                    print(f'{active_path} copied to {passive_path}')
+                    logger.info(f'copied {active_path} to {passive_path}')
                 else:
-                    print(f'{active_path=} same as {passive_path=}, skip')
+                    logger.debug(f'hash for {active_path=} is the same as {passive_path=}, skipped copying')
 
 
-event_handler = MyEventHandler()
-observer = Observer()
-observer.schedule(event_handler, '.', recursive=False)
-observer.start()
-try:
-    while True:
-        time.sleep(1)
-finally:
-    observer.stop()
-    observer.join()
+class EventObserver:
+    def __init__(self, path: Path) -> None:
+        self._path = path
+        self._observer = Observer()
+        self._event_handler = EventHandler()
+
+    def __enter__(self) -> Self:
+        self._observer.schedule(self._event_handler, str(self._path), recursive=False)
+        self._observer.start()
+        return self
+
+    def __exit__(self, *_) -> None:
+        self._observer.stop()
+        self._observer.join()
+
+    def run(self) -> None:
+        while True:
+            time.sleep(1)
+
+
+def main() -> None:
+    with EventObserver(path=Path.cwd()) as observer:
+        try:
+            observer.run()
+        except KeyboardInterrupt:
+            logger.info('user signal KeyboardInterrupt')
+
+
+if __name__ == '__main__':
+    main()
