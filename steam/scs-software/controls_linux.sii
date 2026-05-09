@@ -1,6 +1,6 @@
 SiiNunit
 {
-input_config : _nameless.3596.bf00 {
+input_config : _nameless.118b.3ba0 {
  version: 32
  config_lines: 591
  config_lines[0]: "device keyboard `sys.keyboard`"
@@ -414,9 +414,9 @@ input_config : _nameless.3596.bf00 {
  config_lines[408]: "mix lightpark `semantical.lightpark?0`"
  config_lines[409]: "mix lighton `semantical.lighton?0`"
  config_lines[410]: "mix hblight `semantical.hblight?0`"
- config_lines[411]: "mix lblinker `keyboard.q?0 | semantical.lblinker?0`"
+ config_lines[411]: "mix lblinker `keyboard.n?0 | semantical.lblinker?0`"
  config_lines[412]: "mix lblinkerh `semantical.lblinkerh?0`"
- config_lines[413]: "mix rblinker `keyboard.e?0 | semantical.rblinker?0`"
+ config_lines[413]: "mix rblinker `keyboard.o?0 | semantical.rblinker?0`"
  config_lines[414]: "mix rblinkerh `semantical.rblinkerh?0`"
  config_lines[415]: "mix flasher4way `semantical.flasher4way?0`"
  config_lines[416]: "mix showmirrors `keyboard.z?0 | semantical.showmirrors?0`"
@@ -482,8 +482,8 @@ input_config : _nameless.3596.bf00 {
  config_lines[476]: "mix camwalk_ud `-semantical.camwalk_ud?0`"
  config_lines[477]: "mix camwalk_lrs `looklranaraw * c_jrspeed`"
  config_lines[478]: "mix camwalk_uds `lookudanaraw * c_jrspeed`"
- config_lines[479]: "mix gearup `keyboard.o?0 | joy.ub627?0 | semantical.gearup?0`"
- config_lines[480]: "mix geardown `keyboard.n?0 | joy.ub626?0 | semantical.geardown?0`"
+ config_lines[479]: "mix gearup `keyboard.e?0 | joy.ub627?0 | semantical.gearup?0`"
+ config_lines[480]: "mix geardown `keyboard.q?0 | joy.ub626?0 | semantical.geardown?0`"
  config_lines[481]: "mix gear0 `keyboard.b?0 | joy.b31?0 | semantical.gear0?0`"
  config_lines[482]: "mix geardrive `semantical.geardrive?0`"
  config_lines[483]: "mix gearreverse `semantical.gearreverse?0`"
