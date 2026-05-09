@@ -15,3 +15,11 @@ input {
     focus-follows-mouse max-scroll-amount="0%"
 }
 
+// Gestures
+gestures {
+    // disable hot conrers default toggle overview
+    hot-corners {
+        off
+    }
+}
+
