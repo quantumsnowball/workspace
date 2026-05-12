@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # Configuration
 SOURCE_FILE="$XDG_CONFIG_HOME/workspace/google-chrome/google-chrome-kwallet/google-chrome-kwallet"
