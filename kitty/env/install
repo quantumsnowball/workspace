@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env bash
 
 stow_dir="$(dirname "$(realpath "$0")")/_"
 target_dir="$XDG_CONFIG_HOME/environment.d"

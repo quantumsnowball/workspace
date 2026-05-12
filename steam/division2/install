@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env bash
 
 stow_dir="$(dirname "$(realpath "$0")")/_"
 target_dir="$HOME/.local/share/Steam/steamapps/compatdata/2221490/pfx/drive_c/users/steamuser/Documents/My Games/Tom Clancy's The Division 2"

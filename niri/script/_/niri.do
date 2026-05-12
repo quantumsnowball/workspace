@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env bash
 
 
 # Iterate through each argument and run them using `niri msg action`, break on non 0 exit

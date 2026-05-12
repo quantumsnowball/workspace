@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env bash
 
 src_dir="$(dirname "$(realpath "$0")")"
 dst_dir="$XDG_CONFIG_HOME"

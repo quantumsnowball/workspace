@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env bash
 
 # state file
 STATE_FILE="/tmp/pixel-crosshair-cycle-colors-index"
