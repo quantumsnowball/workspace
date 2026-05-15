@@ -1,4 +1,4 @@
-# how to install chinese input method in Linux
+# How to install Chinese input method in Linux
 
 1. install `fcitx5-im`
     - this is the core imput method interface for other lang interface
