@@ -1,0 +1,46 @@
+#!/usr/bin/env bash
+
+# Exit immediately if any command fails
+set -e
+
+# Define targets based on your directory layout
+XML_SRC="DefaultRawGameControllerMappingProfilePXNV99.xml"
+INI_SRC="ControllerFFB-0X11FF3245.ini"
+INPUT_ZIP="inputmappingprofiles.zip"
+TUNABLE_ZIP="wheeltunablesettingspc.zip"
+
+echo "==========================================="
+echo "🎮 Injecting PXN-V99 Profiles using 7-Zip"
+echo "==========================================="
+
+# 1. Inject the custom XML profile directly
+if [ -f "$XML_SRC" ] && [ -f "$INPUT_ZIP" ]; then
+    echo " -> Injecting $XML_SRC into $INPUT_ZIP..."
+    
+    # 7z parameters broken down:
+    # u     = Update/add files to archive
+    # -mx=0 = Zero compression level (Copy/Store mode)
+    7z u "$INPUT_ZIP" "$XML_SRC" -mx=0
+    echo " 🎉 XML injection successful."
+else
+    echo " ❌ Error: Missing $XML_SRC or $INPUT_ZIP in this folder."
+    exit 1
+fi
+
+echo "-------------------------------------------"
+
+# 2. Inject the custom INI profile directly
+if [ -f "$INI_SRC" ] && [ -f "$TUNABLE_ZIP" ]; then
+    echo " -> Injecting $INI_SRC into $TUNABLE_ZIP..."
+    
+    # Inject directly into the zip root with zero compression
+    7z u "$TUNABLE_ZIP" "$INI_SRC" -mx=0
+    echo " 🎉 INI injection successful."
+else
+    echo " ❌ Error: Missing $INI_SRC or $TUNABLE_ZIP in this folder."
+    exit 1
+fi
+
+echo "==========================================="
+echo "✅ Done! Files injected natively via 7z with -mx=0."
+echo "==========================================="
