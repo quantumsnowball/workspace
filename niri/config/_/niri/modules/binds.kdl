@@ -41,6 +41,9 @@ binds {
     Super+S hotkey-overlay-title="Steam (with Mangohud)" {
         spawn-sh "notify-send -t 3000 'Steam' 'Launching Steam (with MangoHUD) ...' && gtk-launch steam-with-mangohud";
     }
+    Super+U hotkey-overlay-title="Lutris" {
+        spawn-sh "notify-send -t 3000 'Lutris' 'Launching Lutris ...' && lutris";
+    }
     Ctrl+Space hotkey-overlay-title="Launcher" {
         spawn-sh "qs -c noctalia-shell ipc call launcher toggle";
     }
@@ -135,7 +138,7 @@ binds {
     Super+Shift+Period       { consume-or-expel-window-right; }
     Super+A                  { toggle-window-floating; }
     Super+Shift+V            { switch-focus-between-floating-and-tiling; }
-    Super+U                  { toggle-column-tabbed-display; }
+    Super+T                  { toggle-column-tabbed-display; }
     Super+G                  { expand-column-to-available-width; }
 
     // actions
