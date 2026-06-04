@@ -1,0 +1,420 @@
+<Profiles>
+<RawGameControllerInputMappingProfile Version="1" Id="d04dfce8-5991-40d1-92d8-1a842069da0a" UserFacingName="IDS_DefaultWheelProfile_FanatecClubSportV2_Name" IsDefaultProfile="1" PrimaryDeviceVidPid="0x0eb70001" FFBDeviceVidPid="0x0eb70001" FFBMotorIndex="0">
+
+  <!-- Race -->
+  <Context Version="1" Context="INPUTCONTEXT_RACING">
+
+    <!-- Key = INPUTCMD_GAS, Fanatec CSV2 Axis 1 -->
+    <Value Version="1" Key="INPUTCMD_GAS" VidPid="0x0eb70001" InputType="Axis" Index="2" InvertAxis="true" InnerDeadzone="0.0" OuterDeadzone="1.0" />
+    <!-- Key = INPUTCMD_BRAKE, Fanatec CSV2 Axis 2 -->
+    <Value Version="1" Key="INPUTCMD_BRAKE" VidPid="0x0eb70001" InputType="Axis" Index="5" InvertAxis="true" InnerDeadzone="0.0" OuterDeadzone="1.0" />
+    <!-- Key = INPUTCMD_CLUTCH, Fanatec CSV2 Axis 3 -->
+    <Value Version="1" Key="INPUTCMD_CLUTCH" VidPid="0x0eb70001" InputType="Axis" Index="1" InvertAxis="true" InnerDeadzone="0.0" OuterDeadzone="1.0" />
+
+    <!-- Key = INPUTCMD_STEERING, Fanatec CSV2 Axis 0 -->
+    <Value Version="1" Key="INPUTCMD_STEERING" VidPid="0x0eb70001" InputType="Axis" Index="0" InvertAxis="false" DeadzonesAroundCenter="true" InnerDeadzone="0.00" OuterDeadzone="1.00" />
+
+    <!-- Key = INPUTCMD_SHIFTUP, Fanatec CSV2 Button 5 -->
+    <Value Version="1" Key="INPUTCMD_SHIFTUP" VidPid="0x0eb70001" InputType="Button" Index="4" />
+    <!-- Key = INPUTCMD_SHIFTDOWN, Fanatec CSV2 Button 4 -->
+    <Value Version="1" Key="INPUTCMD_SHIFTDOWN" VidPid="0x0eb70001" InputType="Button" Index="5" />
+
+    <!-- Key = INPUTCMD_AUTODRIVE_CINEMATIC_CAMERA, Fanatec CSV2 Button 4 -->
+    <Value Version="1" Key="INPUTCMD_AUTODRIVE_CINEMATIC_CAMERA" VidPid="0x0eb70001" InputType="Button" Index="5" />
+
+    <!-- Key = INPUTCMD_MULLIGAN, Fanatec CSV2 Button 3 -->
+    <Value Version="1" Key="INPUTCMD_MULLIGAN" VidPid="0x0eb70001" InputType="Button" Index="3" />
+    <!-- Key = INPUTCMD_HANDBRAKE, Fanatec CSV2 Button 2 -->
+    <Value Version="1" Key="INPUTCMD_HANDBRAKE" VidPid="0x0eb70001" InputType="Button" Index="2" />
+    <!-- Key = INPUTCMD_PAUSE, Fanatec CSV2 Button 7 -->
+    <Value Version="1" Key="INPUTCMD_PAUSE_GAME" VidPid="0x0eb70001" InputType="Button" Index="9" />
+    <!-- Key = INPUTCMD_SWITCH_CAMERA, Fanatec CSV2 Button 6 -->
+    <Value Version="1" Key="INPUTCMD_SWITCH_CAMERA" VidPid="0x0eb70001" InputType="Button" Index="10" />
+    <!-- Key = INPUTCMD_HORN, Fanatec CSV2 Button 6 -->
+    <Value Version="1" Key="INPUTCMD_HORN" VidPid="0x0eb70001" InputType="Button" Index="11" />
+
+    <Value Version="1" Key="INPUTCMD_ANNA_ACTIVATE" VidPid="0x0eb70001" InputType="Switch" Index="0" SwitchPosition="Down" />
+    <!-- Key = INPUTCMD_TELEMETRY_TOGGLE, Fanatec CSV2 Button 8 -->
+    <Value Version="1" Key="INPUTCMD_TELEMETRY_TOGGLE" VidPid="0x0eb70001" InputType="Switch" Index="0" SwitchPosition="Up" />
+    <!-- Key = INPUTCMD_TELEMETRY_PREV, Fanatec CSV2 Switch 0 Left -->
+    <Value Version="1" Key="INPUTCMD_TELEMETRY_PREV" VidPid="0x0eb70001" InputType="Switch" Index="0" SwitchPosition="Left" />
+    <!-- Key = INPUTCMD_TELEMETRY_NEXT, Fanatec CSV2 Switch 0 Right -->
+    <Value Version="1" Key="INPUTCMD_TELEMETRY_NEXT" VidPid="0x0eb70001" InputType="Switch" Index="0" SwitchPosition="Right" />
+
+    <!-- Key = INPUTCMD_ACTIVATE, Fanatec CSV2 Button 2 -->
+    <Value Version="1" Key="INPUTCMD_ACTIVATE" VidPid="0x0eb70001" InputType="Button" Index="8" />
+
+    <Value Version="1" Key="INPUTCMD_GEAR_REVERSE" VidPid="0x0eb70001" InputType="Button" Index="12" />
+    <Value Version="1" Key="INPUTCMD_GEAR_FIRST" VidPid="0x0eb70001" InputType="Button" Index="13" />
+    <Value Version="1" Key="INPUTCMD_GEAR_SECOND" VidPid="0x0eb70001" InputType="Button" Index="14" />
+    <Value Version="1" Key="INPUTCMD_GEAR_THIRD" VidPid="0x0eb70001" InputType="Button" Index="15" />
+    <Value Version="1" Key="INPUTCMD_GEAR_FOURTH" VidPid="0x0eb70001" InputType="Button" Index="16" />
+    <Value Version="1" Key="INPUTCMD_GEAR_FIFTH" VidPid="0x0eb70001" InputType="Button" Index="17" />
+    <Value Version="1" Key="INPUTCMD_GEAR_SIXTH" VidPid="0x0eb70001" InputType="Button" Index="18" />
+    <Value Version="1" Key="INPUTCMD_GEAR_SEVENTH" VidPid="0x0eb70001" InputType="Button" Index="19" />
+
+    <!-- through adapter-->
+    <!-- <Value Version="1" Key="INPUTCMD_HANDBRAKE" VidPid="0x0eb71a93" InputType="Axis" Index="0" InvertAxis="false" InnerDeadzone="0.0" OuterDeadzone="1.0" IsPrimary="0"/> -->
+    <!-- through CL pedals-->
+    <!-- <Value Version="1" Key="INPUTCMD_HANDBRAKE" VidPid="0x0eb76204" InputType="Axis" Index="3" InvertAxis="false" InnerDeadzone="0.0" OuterDeadzone="1.0" IsPrimary="0"/> -->
+    <!-- through V3 pedals-->
+    <!-- <Value Version="1" Key="INPUTCMD_HANDBRAKE" VidPid="0x0eb7183b" InputType="Axis" Index="3" InvertAxis="false" InnerDeadzone="0.0" OuterDeadzone="1.0" IsPrimary="0"/> -->
+    <!-- CL Pedals through usb-->
+    <!-- <Value Version="1" Key="INPUTCMD_GAS" VidPid="0x0eb76204" InputType="Axis" Index="0" InvertAxis="false" InnerDeadzone="0." OuterDeadzone="1.00" IsPrimary="0"/> -->
+    <!-- <Value Version="1" Key="INPUTCMD_BRAKE" VidPid="0x0eb76204" InputType="Axis" Index="1" InvertAxis="false" InnerDeadzone="0." OuterDeadzone="1.00" IsPrimary="0"/> -->
+    <!-- V3 Pedals-->
+    <!-- <Value Version="1" Key="INPUTCMD_GAS" VidPid="0x0eb7183b" InputType="Axis" Index="0" InvertAxis="false" InnerDeadzone="0." OuterDeadzone="1.00" IsPrimary="0"/> -->
+    <!-- <Value Version="1" Key="INPUTCMD_BRAKE" VidPid="0x0eb7183b" InputType="Axis" Index="1" InvertAxis="false" InnerDeadzone="0." OuterDeadzone="1.00" IsPrimary="0"/> -->
+    <!-- <Value Version="1" Key="INPUTCMD_CLUTCH" VidPid="0x0eb7183b" InputType="Axis" Index="2" InvertAxis="false" InnerDeadzone="0." OuterDeadzone="1.00" IsPrimary="0"/>	 -->
+    <!-- Used with the usb adapter-->
+    <!-- <Value Version="1" Key="INPUTCMD_GEAR_REVERSE" VidPid="0x0eb71a92" InputType="Button" Index="0" IsPrimary="0"/> -->
+    <!-- <Value Version="1" Key="INPUTCMD_GEAR_FIRST" VidPid="0x0eb71a92" InputType="Button" Index="1" IsPrimary="0"/> -->
+    <!-- <Value Version="1" Key="INPUTCMD_GEAR_SECOND" VidPid="0x0eb71a92" InputType="Button" Index="2" IsPrimary="0"/> -->
+    <!-- <Value Version="1" Key="INPUTCMD_GEAR_THIRD" VidPid="0x0eb71a92" InputType="Button" Index="3" IsPrimary="0"/> -->
+    <!-- <Value Version="1" Key="INPUTCMD_GEAR_FOURTH" VidPid="0x0eb71a92" InputType="Button" Index="4" IsPrimary="0"/> -->
+    <!-- <Value Version="1" Key="INPUTCMD_GEAR_FIFTH" VidPid="0x0eb71a92" InputType="Button" Index="5" IsPrimary="0"/> -->
+    <!-- <Value Version="1" Key="INPUTCMD_GEAR_SIXTH" VidPid="0x0eb71a92" InputType="Button" Index="6" IsPrimary="0"/> -->
+    <!-- <Value Version="1" Key="INPUTCMD_GEAR_SEVENTH" VidPid="0x0eb71a92" InputType="Button" Index="7" IsPrimary="0"/> -->
+
+  </Context>
+
+  <Context Version="1" Context="INPUTCONTEXT_RACING_UI">
+    <!-- DPad -->
+    <Value Version="1" Key="INPUTCMD_ANNA_ACTIVATE" VidPid="0x0eb70001" InputType="Switch" Index="0" SwitchPosition="Down" />
+    <!-- Key = INPUTCMD_PHOTO_MODE_TOGGLE, Fanatec CSV2 Button 8 -->
+    <Value Version="1" Key="INPUTCMD_PHOTO_MODE_TOGGLE" VidPid="0x0eb70001" InputType="Switch" Index="0" SwitchPosition="Up" />
+    <!-- Key = INPUTCMD_QUICKCHAT_ACTIVATE, Fanatec CSV2 Switch 0 Left -->
+    <Value Version="1" Key="INPUTCMD_QUICKCHAT_ACTIVATE" VidPid="0x0eb70001" InputType="Switch" Index="0" SwitchPosition="Left" />
+    <!-- Key = INPUTCMD_RADIO_RIGHT, Fanatec CSV2 Switch 0 Right -->
+    <Value Version="1" Key="INPUTCMD_RADIO_RIGHT" VidPid="0x0eb70001" InputType="Switch" Index="0" SwitchPosition="Right" />
+  </Context>
+  
+  <Context Version="1" Context="INPUTCONTEXT_ANNA">
+    <!-- Key = INPUTCMD_ANNA_ITEM_1, Fanatec CSV2 -->
+    <Value Version="1" Key="INPUTCMD_ANNA_ITEM_1" VidPid="0x0eb70001" InputType="Switch" Index="0" SwitchPosition="Up" />
+    <!-- Key = INPUTCMD_ANNA_ITEM_2, Fanatec CSV2  -->
+    <Value Version="1" Key="INPUTCMD_ANNA_ITEM_2" VidPid="0x0eb70001" InputType="Switch" Index="0" SwitchPosition="Left" />
+    <!-- Key = INPUTCMD_ANNA_ITEM_3, Fanatec CSV2  -->
+    <Value Version="1" Key="INPUTCMD_ANNA_ITEM_3" VidPid="0x0eb70001" InputType="Switch" Index="0" SwitchPosition="Right" />
+	<!-- Key = INPUTCMD_ANNA_ITEM_4, Fanatec CSV2  -->
+    <Value Version="1" Key="INPUTCMD_ANNA_ITEM_4" VidPid="0x0eb70001" InputType="Switch" Index="0" SwitchPosition="Down" />
+  </Context>
+  
+   <!-- Drone -->
+  <Context Version="1" Context="INPUTCONTEXT_COPTER">
+	<!-- DPad -->
+    <!-- Key = INPUTCMD_PHOTO_MODE_TOGGLE, Fanatec CSV2 Button 8 -->
+    <Value Version="1" Key="INPUTCMD_PHOTO_MODE_TOGGLE" VidPid="0x0eb70001" InputType="Switch" Index="0" SwitchPosition="Down" />
+    <!-- Key = INPUTCMD_QUICKCHAT_ACTIVATE, Fanatec CSV2 Switch 0 Left -->
+    <Value Version="1" Key="INPUTCMD_QUICKCHAT_ACTIVATE" VidPid="0x0eb70001" InputType="Switch" Index="0" SwitchPosition="Left" />
+    <!-- Key = INPUTCMD_RADIO_RIGHT, Fanatec CSV2 Switch 0 Right -->
+    <Value Version="1" Key="INPUTCMD_RADIO_RIGHT" VidPid="0x0eb70001" InputType="Switch" Index="0" SwitchPosition="Right" />
+  </Context> 
+
+  <!-- Car Meets -->
+  <Context Version="1" Context="INPUTCONTEXT_CAR_MEETS">
+	<!-- DPad -->
+    <!-- Key = INPUTCMD_QUICKCHAT_ACTIVATE, Fanatec CSV2 Switch 0 Left -->
+    <Value Version="1" Key="INPUTCMD_QUICKCHAT_ACTIVATE" VidPid="0x0eb70001" InputType="Switch" Index="0" SwitchPosition="Left" />
+	<!-- Key = INPUTCMD_QUICKCHAT_ACTIVATE, Fanatec CSV2 Switch 0 Up -->
+    <Value Version="1" Key="INPUTCMD_CAR_MEETS_PHOTO" VidPid="0x0eb70001" InputType="Switch" Index="0" SwitchPosition="Up" />
+    <!-- Key = INPUTCMD_QUICKCHAT_ACTIVATE, Fanatec CSV2 Switch 0 Down -->
+    <Value Version="1" Key="INPUTCMD_CAR_MEETS_CINEMATIC_CAM" VidPid="0x0eb70001" InputType="Switch" Index="0" SwitchPosition="Down" />
+  </Context>
+  
+  <!-- Freecam  the ones unmapped are the same for opus profile--> 
+  <Context Version="1" Context="INPUTCONTEXT_FREECAM">
+      <!-- <Mapping Command="INPUTCMD_MOVE_DOWN" Button="-1" ButtonHigh="-1" /> -->
+      <!-- <Mapping Command="INPUTCMD_MOVE_UP" Button="-1" ButtonHigh="-1" /> -->
+      
+	<Value Version="1" Key="INPUTCMD_UI_MAP_MOVE_LEFTRIGHT">
+		<!--Key = INPUTCMD_UI_MAP_MOVE_LEFTRIGHT, Fanatec CSV2 Button 11  --> 
+		<InputCmdLow VidPid="0x0eb70001" InputType="Axis" Index="2" InvertAxis="true" InnerDeadzone="0.05" OuterDeadzone="0.95" />
+		<!--Key = INPUTCMD_UI_MAP_MOVE_LEFTRIGHT, Fanatec CSV2 Button 11  -->
+		<InputCmdHigh VidPid="0x0eb70001" InputType="Axis" Index="1" InvertAxis="true" InnerDeadzone="0.05" OuterDeadzone="0.95" />
+	</Value>
+      <!-- <Mapping Command="INPUTCMD_MOVE_LEFTRIGHT" Button="-1" ButtonHigh="-1" /> -->
+      
+      <!-- <Mapping Command="INPUTCMD_ROT_LEFTRIGHT" Button="-1" ButtonHigh="-1" /> -->
+      <!-- <Mapping Command="INPUTCMD_ROT_UPDOWN" Button="-1" ButtonHigh="-1" /> -->
+      
+      <!-- <Mapping Command="INPUTCMD_FOV" Button="-1" ButtonHigh="-1" /> -->
+      <!-- <Mapping Command="INPUTCMD_ROLL" Button="-1" ButtonHigh="-1" /> -->
+  </Context>
+  
+  <Context Version="1" Context="INPUTCONTEXT_ELIMINATOR_UI">
+    <!-- Key = INPUTCMD_ELIMINATOR_UPGRADECHOICE_LEFT,  Button 11 -->
+    <Value Version="1" Key="INPUTCMD_ELIMINATOR_UPGRADECHOICE_LEFT" VidPid="0x0eb70001" InputType="Switch" Index="0" SwitchPosition="Left" />
+    <!-- Key = INPUTCMD_ELIMINATOR_UPGRADECHOICE_DOWN,  Button 10 -->
+    <Value Version="1" Key="INPUTCMD_ELIMINATOR_UPGRADECHOICE_DOWN" VidPid="0x0eb70001" InputType="Switch" Index="0" SwitchPosition="Down" />
+    <!-- Key = INPUTCMD_ELIMINATOR_UPGRADECHOICE_RIGHT, Button 9 -->
+    <Value Version="1" Key="INPUTCMD_ELIMINATOR_UPGRADECHOICE_RIGHT" VidPid="0x0eb70001" InputType="Switch" Index="0" SwitchPosition="Right" />
+  </Context>
+
+    <Context Version="1" Context="INPUTCONTEXT_HIDE_SEEK">
+        <Value Version="1" Key="INPUTCMD_HIDESEEK_PING_OR_CHASEBREAK" VidPid="0x0eb70001" InputType="Button" Index="3"/>
+    </Context>
+  
+  <Context Version="1" Context="INPUTCONTEXT_PROP_PLACEMENT_UI">
+
+      <!-- PROP PLACEMENT CLONE PROP -->      
+      <Value Version="1" Key="INPUTCMD_PP_CLONE_PROP" VidPid="0x0eb70001" InputType="Button" Index="3" />
+
+      <!-- PROP PLACEMENT STAMP PROP -->      
+      <Value Version="1" Key="INPUTCMD_PP_STAMP_PROP" VidPid="0x0eb70001" InputType="Button" Index="3" />
+      
+      <!-- PROP PLACEMENT DELETE PROP -->      
+      <Value Version="1" Key="INPUTCMD_PP_DELETE_PROP" VidPid="0x0eb70001" InputType="Button" Index="0" />
+
+      <!-- PROP PLACEMENT DELETE UGC PROP IN CAROUSEL -->      
+      <Value Version="1" Key="INPUTCMD_PP_DELETE_UGCPROP_IN_CAROUSEL" VidPid="0x0eb70001" InputType="Button" Index="0" />
+      
+      <!-- PROP PLACEMENT PLACE/EDIT PROP -->
+      <Value Version="1" Key="INPUTCMD_PP_PLACE_EDIT_PROP" VidPid="0x0eb70001" InputType="Button" Index="1"/>
+      
+      <!-- PROP PLACEMENT SAVE/EXIT PROP -->      
+      <Value Version="1" Key="INPUTCMD_PP_SAVE_AND_EXIT" VidPid="0x0eb70001" InputType="Button" Index="2" />      
+      
+      <!-- PROP PLACEMENT ROTATE PROP CCW on Placement Mode-->      
+      <Value Version="1" Key="INPUTCMD_PP_TRANSFORM_LEFT" VidPid="0x0eb70001" InputType="Switch" Index="0" SwitchPosition="Left" />
+      
+      <!-- PROP PLACEMENT ROTATE PROP CW on Placement Mode-->
+      <Value Version="1" Key="INPUTCMD_PP_TRANSFORM_RIGHT" VidPid="0x0eb70001" InputType="Switch" Index="0" SwitchPosition="Right" />      
+            
+      <!-- PROP PLACEMENT RAISE PROP on Placement Mode -->      
+      <Value Version="1" Key="INPUTCMD_PP_TRANSFORM_UP" VidPid="0x0eb70001" InputType="Switch" Index="0" SwitchPosition="Up" />      
+      
+      <!-- PROP PLACEMENT LOW PROP on Placement Mode -->      
+      <Value Version="1" Key="INPUTCMD_PP_TRANSFORM_DOWN" VidPid="0x0eb70001" InputType="Switch" Index="0" SwitchPosition="Down" />      
+
+      <!-- PROP PLACEMENT roll left on left trigger -->
+      <Value Version="1" Key="INPUTCMD_PP_ROLL_LEFT" VidPid="0x0eb70001" InputType="Button" Index="7" />
+
+      <!-- PROP PLACEMENT roll right on right trigger -->
+      <Value Version="1" Key="INPUTCMD_PP_ROLL_RIGHT" VidPid="0x0eb70001" InputType="Button" Index="6" />
+
+      <!-- PROP PLACEMENT undo  on left trigger -->
+      <Value Version="1" Key="INPUTCMD_PP_UNDO" VidPid="0x0eb70001" InputType="Button" Index="7" />
+
+      <!-- PROP PLACEMENT redo on right trigger -->
+      <Value Version="1" Key="INPUTCMD_PP_REDO" VidPid="0x0eb70001" InputType="Button" Index="6" />
+
+      <!-- PROP PLACEMENT reset position on left bumper -->
+      <Value Version="1" Key="INPUTCMD_PP_RESET_TRANSFORM" VidPid="0x0eb70001" InputType="Button" Index="5" />
+
+      <!-- PROP PLACEMENT precision mode on right bumper -->
+      <Value Version="1" Key="INPUTCMD_PP_PRECISION_MODE" VidPid="0x0eb70001" InputType="Button" Index="4" />
+
+      <!-- PROP PLACEMENT open library (tab) -->
+      <Value Version="1" Key="INPUTCMD_PP_OPEN_LIBRARY" VidPid="0x0eb70001" InputType="Button" Index="9" />
+
+      <!-- PROP PLACEMENT open more options (back) -->
+      <Value Version="1" Key="INPUTCMD_PP_OPEN_MOREOPTIONS" VidPid="0x0eb70001" InputType="Button" Index="8" />
+
+      <!-- PROP PLACEMENT open ProPrefab Selection popup (tab) -->
+      <Value Version="1" Key="INPUTCMD_PP_OPEN_PROPPREFAB_POPUP" VidPid="0x0eb70001" InputType="Button" Index="9" />
+
+      <!-- PROP PLACEMENT open Search Popup for Community PropPrefab (back) -->
+      <Value Version="1" Key="INPUTCMD_PP_OPEN_PROPPREFAB_SEARCHPOPUP" VidPid="0x0eb70001" InputType="Button" Index="8" />
+
+      <!-- PROP PLACEMENT selection mode -->
+      <Value Version="1" Key="INPUTCMD_PP_OPEN_SELECTIONMODE" VidPid="0x0eb70001" InputType="Button" Index="5" /> 
+
+      <!-- PROP PLACEMENT creation mode -->
+      <Value Version="1" Key="INPUTCMD_PP_OPEN_CREATIONMODE" VidPid="0x0eb70001" InputType="Button" Index="5" /> 
+
+      <!-- PROP PLACEMENT sphere selection -->
+      <Value Version="1" Key="INPUTCMD_PP_SPHERE_SELECTION" VidPid="0x0eb70001" InputType="Button" Index="1" /> 
+
+      <!-- PROP PLACEMENT add prop to selection -->
+      <Value Version="1" Key="INPUTCMD_PP_ADD_TO_SELECTION" VidPid="0x0eb70001" InputType="Button" Index="1" /> 
+
+      <!-- PROP PLACEMENT remove prop from selection -->
+      <Value Version="1" Key="INPUTCMD_PP_REMOVE_FROM_SELECTION" VidPid="0x0eb70001" InputType="Button" Index="0" /> 
+
+      <!-- PROP PLACEMENT save selected props -->
+      <Value Version="1" Key="INPUTCMD_PP_SAVE_SELECTED_PROPS" VidPid="0x0eb70001" InputType="Button" Index="3" /> 
+  </Context>  
+
+  <!-- UI -->
+  <Context Version="1" Context="INPUTCONTEXT_UI">
+  
+	<!-- Key = INPUTCMD_UI_DPAD_UP_PRESS, Fanatec CSV2 Button 8 -->
+    <Value Version="1" Key="INPUTCMD_UI_DPAD_UP_PRESS" VidPid="0x0eb70001" InputType="Switch" Index="0" SwitchPosition="Up" />
+    <!-- Key = INPUTCMD_UI_DPAD_DOWN_PRESS, Fanatec CSV2 Switch 0 Left -->
+    <Value Version="1" Key="INPUTCMD_UI_DPAD_DOWN_PRESS" VidPid="0x0eb70001" InputType="Switch" Index="0" SwitchPosition="Down" />
+    <!-- Key = INPUTCMD_UI_DPAD_LEFT_PRESS, Fanatec CSV2 Switch 0 Right -->
+    <Value Version="1" Key="INPUTCMD_UI_DPAD_LEFT_PRESS" VidPid="0x0eb70001" InputType="Switch" Index="0" SwitchPosition="Left" />
+	<!-- Key = INPUTCMD_UI_DPAD_RIGHT_PRESS, Fanatec CSV2 Switch 0 Right -->
+    <Value Version="1" Key="INPUTCMD_UI_DPAD_RIGHT_PRESS" VidPid="0x0eb70001" InputType="Switch" Index="0" SwitchPosition="Right" />
+	
+	
+    <!-- Key = INPUTCMD_UI_OK_PRESS, Fanatec CSV2 Button 0 -->
+    <Value Version="1" Key="INPUTCMD_UI_OK_PRESS" VidPid="0x0eb70001" InputType="Button" Index="1" />
+    <!-- Key = INPUTCMD_UI_OK_RELEASE, Fanatec CSV2 Button 0 -->
+    <Value Version="1" Key="INPUTCMD_UI_OK_RELEASE" VidPid="0x0eb70001" InputType="Button" Index="1" />
+    <!-- Key = INPUTCMD_UI_OK_REPEAT, Fanatec CSV2 Button 0 -->
+    <Value Version="1" Key="INPUTCMD_UI_OK_REPEAT" VidPid="0x0eb70001" InputType="Button" Index="1" />
+	<!-- Key = INPUTCMD_UI_OK_WHILEDOWN, Fanatec CSV2 Button 0 -->
+    <Value Version="1" Key="INPUTCMD_UI_OK_WHILEDOWN" VidPid="0x0eb70001" InputType="Button" Index="1" />
+	
+	<!-- Key = INPUTCMD_UI_CANCEL_PRESS, Fanatec CSV2 Button 1 -->
+    <Value Version="1" Key="INPUTCMD_UI_CANCEL_PRESS" VidPid="0x0eb70001" InputType="Button" Index="2" />
+    <!-- Key = INPUTCMD_UI_CANCEL_RELEASE, Fanatec CSV2 Button 1 -->
+    <Value Version="1" Key="INPUTCMD_UI_CANCEL_RELEASE" VidPid="0x0eb70001" InputType="Button" Index="2" />
+    <!-- Key = INPUTCMD_UI_CANCEL_REPEAT, Fanatec CSV2 Button 1 -->
+    <Value Version="1" Key="INPUTCMD_UI_CANCEL_REPEAT" VidPid="0x0eb70001" InputType="Button" Index="2" />
+	 <!-- Key = INPUTCMD_UI_CANCEL_WHILEDOWN, Fanatec CSV2 Button 1 -->
+    <Value Version="1" Key="INPUTCMD_UI_CANCEL_WHILEDOWN" VidPid="0x0eb70001" InputType="Button" Index="2" />
+	
+	<!-- Key = INPUTCMD_UI_START_PRESS, Fanatec CSV2 Button 7 -->
+    <Value Version="1" Key="INPUTCMD_UI_START_PRESS" VidPid="0x0eb70001" InputType="Button" Index="9" />
+    <!-- Key = INPUTCMD_UI_START_RELEASE, Fanatec CSV2 Button 7 -->
+    <Value Version="1" Key="INPUTCMD_UI_START_RELEASE" VidPid="0x0eb70001" InputType="Button" Index="9" />
+    <!-- Key = INPUTCMD_UI_START_REPEAT, Fanatec CSV2 Button 7 -->
+    <Value Version="1" Key="INPUTCMD_UI_START_REPEAT" VidPid="0x0eb70001" InputType="Button" Index="9" />
+	
+	<!-- Key = INPUTCMD_UI_BACK_PRESS, Fanatec CSV2 Button 6 -->
+    <Value Version="1" Key="INPUTCMD_UI_BACK_PRESS" VidPid="0x0eb70001" InputType="Button" Index="8" />
+    <!-- Key = INPUTCMD_UI_BACK_RELEASE, Fanatec CSV2 Button 6 -->
+    <Value Version="1" Key="INPUTCMD_UI_BACK_RELEASE" VidPid="0x0eb70001" InputType="Button" Index="8" />
+    <!-- Key = INPUTCMD_UI_BACK_REPEAT, Fanatec CSV2 Button 6 -->
+    <Value Version="1" Key="INPUTCMD_UI_BACK_REPEAT" VidPid="0x0eb70001" InputType="Button" Index="8" />
+	
+	<!-- Key = INPUTCMD_UI_UP_PRESS, Fanatec CSV2 Button 8 -->
+    <Value Version="1" Key="INPUTCMD_UI_UP_PRESS" VidPid="0x0eb70001" InputType="Switch" Index="0" SwitchPosition="Up" />
+    <!-- Key = INPUTCMD_UI_UP_RELEASE, Fanatec CSV2 Button 8 -->
+    <Value Version="1" Key="INPUTCMD_UI_UP_RELEASE" VidPid="0x0eb70001" InputType="Switch" Index="0" SwitchPosition="Up" />
+	<!-- Key = INPUTCMD_UI_UP_REPEAT, Fanatec CSV2 Button 8 -->
+    <Value Version="1" Key="INPUTCMD_UI_UP_REPEAT" VidPid="0x0eb70001" InputType="Switch" Index="0" SwitchPosition="Up" />
+    
+    <!-- Key = INPUTCMD_UI_DOWN_PRESS, Fanatec CSV2 Button 10 -->
+    <Value Version="1" Key="INPUTCMD_UI_DOWN_PRESS" VidPid="0x0eb70001" InputType="Switch" Index="0" SwitchPosition="Down" />
+    <!-- Key = INPUTCMD_UI_DOWN_RELEASE, Fanatec CSV2 Button 10 -->
+    <Value Version="1" Key="INPUTCMD_UI_DOWN_RELEASE" VidPid="0x0eb70001" InputType="Switch" Index="0" SwitchPosition="Down" />
+	<!-- Key = INPUTCMD_UI_DOWN_REPEAT, Fanatec CSV2 Button 10 -->
+    <Value Version="1" Key="INPUTCMD_UI_DOWN_REPEAT" VidPid="0x0eb70001" InputType="Switch" Index="0" SwitchPosition="Down" />
+    
+    <!-- Key = INPUTCMD_UI_LEFT_PRESS, Fanatec CSV2 Button 11 -->
+    <Value Version="1" Key="INPUTCMD_UI_LEFT_PRESS" VidPid="0x0eb70001" InputType="Switch" Index="0" SwitchPosition="Left" />
+    <!-- Key = INPUTCMD_UI_LEFT_RELEASE, Fanatec CSV2 Button 11 -->
+    <Value Version="1" Key="INPUTCMD_UI_LEFT_RELEASE" VidPid="0x0eb70001" InputType="Switch" Index="0" SwitchPosition="Left" />
+	<!-- Key = INPUTCMD_UI_LEFT_REPEAT, Fanatec CSV2 Button 11 -->
+    <Value Version="1" Key="INPUTCMD_UI_LEFT_REPEAT" VidPid="0x0eb70001" InputType="Switch" Index="0" SwitchPosition="Left" />
+    
+    <!-- Key = INPUTCMD_UI_RIGHT_PRESS, Fanatec CSV2 Button 9 -->
+    <Value Version="1" Key="INPUTCMD_UI_RIGHT_PRESS" VidPid="0x0eb70001" InputType="Switch" Index="0" SwitchPosition="Right" />
+    <!-- Key = INPUTCMD_UI_RIGHT_RELEASE, Fanatec CSV2 Button 9 -->
+    <Value Version="1" Key="INPUTCMD_UI_RIGHT_RELEASE" VidPid="0x0eb70001" InputType="Switch" Index="0" SwitchPosition="Right" />
+	 <!-- Key = INPUTCMD_UI_RIGHT_REPEAT, Fanatec CSV2 Button 9 -->
+    <Value Version="1" Key="INPUTCMD_UI_RIGHT_REPEAT" VidPid="0x0eb70001" InputType="Switch" Index="0" SwitchPosition="Right" />
+	
+    <!-- Key = INPUTCMD_UI_BRICKCHALLENGES_UP, Fanatec CSV2 Button 8 -->
+    <Value Version="1" Key="INPUTCMD_UI_BRICKCHALLENGES_UP" VidPid="0x0eb70001" InputType="Switch" Index="0" SwitchPosition="Up" />
+    <!-- Key = INPUTCMD_UI_BRICKCHALLENGES_LEFT, Fanatec CSV2 Button 11 -->
+    <Value Version="1" Key="INPUTCMD_UI_BRICKCHALLENGES_LEFT" VidPid="0x0eb70001" InputType="Switch" Index="0" SwitchPosition="Left" />
+    <!-- Key = INPUTCMD_UI_BRICKCHALLENGES_DOWN, Fanatec CSV2 Button 10 -->
+    <Value Version="1" Key="INPUTCMD_UI_BRICKCHALLENGES_DOWN" VidPid="0x0eb70001" InputType="Switch" Index="0" SwitchPosition="Down" />
+    <!-- Key = INPUTCMD_UI_BRICKCHALLENGES_RIGHT, Fanatec CSV2 Button 9 -->
+    <Value Version="1" Key="INPUTCMD_UI_BRICKCHALLENGES_RIGHT" VidPid="0x0eb70001" InputType="Switch" Index="0" SwitchPosition="Right" />
+
+	<!-- Key = INPUTCMD_MULLIGAN, Fanatec CSV2 Button 3 -->
+    <Value Version="1" Key="INPUTCMD_MULLIGAN" VidPid="0x0eb70001" InputType="Button" Index="3" />
+	
+	<Value Version="1" Key="INPUTCMD_UI_MAP_MOVE_LEFTRIGHT">
+		<!--Key = INPUTCMD_UI_MAP_MOVE_LEFTRIGHT, Fanatec CSV2 Button 11  --> 
+		<InputCmdLow VidPid="0x0eb70001" InputType="Switch" Index="0" SwitchPosition="Left" />
+		<!--Key = INPUTCMD_UI_MAP_MOVE_LEFTRIGHT, Fanatec CSV2 Button 11  -->
+		<InputCmdHigh VidPid="0x0eb70001" InputType="Switch" Index="0" SwitchPosition="Right" />
+	</Value>
+	
+	<Value Version="1" Key="INPUTCMD_UI_MAP_MOVE_UPDOWN">
+		<!--Key = INPUTCMD_UI_MAP_MOVE_LEFTRIGHT, Fanatec CSV2 Button 11  --> 
+		<InputCmdLow VidPid="0x0eb70001" InputType="Switch" Index="0" SwitchPosition="Down" />
+		<!--Key = INPUTCMD_UI_MAP_MOVE_LEFTRIGHT, Fanatec CSV2 Button 11  -->
+		<InputCmdHigh VidPid="0x0eb70001" InputType="Switch" Index="0" SwitchPosition="Up" />
+	</Value>
+    
+	<!-- Key = INPUTCMD_UI_X_PRESS, Fanatec CSV2 Button 2 -->
+    <Value Version="1" Key="INPUTCMD_UI_X_PRESS" VidPid="0x0eb70001" InputType="Button" Index="0" />
+    <!-- Key = INPUTCMD_UI_X_RELEASE, Fanatec CSV2 Button 2 -->
+    <Value Version="1" Key="INPUTCMD_UI_X_RELEASE" VidPid="0x0eb70001" InputType="Button" Index="0" />
+    <!-- Key = INPUTCMD_UI_X_REPEAT, Fanatec CSV2 Button 2 -->
+    <Value Version="1" Key="INPUTCMD_UI_X_REPEAT" VidPid="0x0eb70001" InputType="Button" Index="0" />
+	
+	<!-- Key = INPUTCMD_UI_Y_PRESS, Fanatec CSV2 Button 3 -->
+    <Value Version="1" Key="INPUTCMD_UI_Y_PRESS" VidPid="0x0eb70001" InputType="Button" Index="3" />
+    <!-- Key = INPUTCMD_UI_Y_RELEASE, Fanatec CSV2 Button 3 -->
+    <Value Version="1" Key="INPUTCMD_UI_Y_RELEASE" VidPid="0x0eb70001" InputType="Button" Index="3" />
+    <!-- Key = INPUTCMD_UI_Y_REPEAT, Fanatec CSV2 Button 3 -->
+    <Value Version="1" Key="INPUTCMD_UI_Y_REPEAT" VidPid="0x0eb70001" InputType="Button" Index="3" />
+	
+	<!-- Key = INPUTCMD_UI_RTRIGGER_PRESS, Fanatec CSV2 Axis 2 -->
+    <Value Version="1" Key="INPUTCMD_UI_RTRIGGER_PRESS" InputType="Button" Index="6"  />
+	<!-- Key = INPUTCMD_UI_RTRIGGER_RELEASE, Fanatec CSV2 Axis 2 -->
+    <Value Version="1" Key="INPUTCMD_UI_RTRIGGER_RELEASE" InputType="Button" Index="6"/>
+	<!-- Key = INPUTCMD_UI_RTRIGGER_REPEAT, Fanatec CSV2 Axis 2 -->
+    <Value Version="1" Key="INPUTCMD_UI_RTRIGGER_REPEAT" InputType="Button" Index="6" />
+	
+		<!-- Key = INPUTCMD_UI_RTRIGGER_PRESS, Fanatec CSV2 Axis 2 -->
+    <Value Version="1" Key="INPUTCMD_UI_LTRIGGER_PRESS" InputType="Button" Index="7"  />
+	<!-- Key = INPUTCMD_UI_RTRIGGER_RELEASE, Fanatec CSV2 Axis 2 -->
+    <Value Version="1" Key="INPUTCMD_UI_LTRIGGER_RELEASE" InputType="Button" Index="7"/>
+	<!-- Key = INPUTCMD_UI_RTRIGGER_REPEAT, Fanatec CSV2 Axis 2 -->
+    <Value Version="1" Key="INPUTCMD_UI_LTRIGGER_REPEAT" InputType="Button" Index="7" />
+	
+	<!-- Key = INPUTCMD_UI_LBUMPER_PRESS, Fanatec CSV2 Button 4 -->
+    <Value Version="1" Key="INPUTCMD_UI_LBUMPER_PRESS" VidPid="0x0eb70001" InputType="Button" Index="5" />
+    <Value Version="1" Key="INPUTCMD_PREV_CATEGORY" VidPid="0x0eb70001" InputType="Button" Index="5" />
+    <!-- Key = INPUTCMD_UI_LBUMPER_RELEASE, Fanatec CSV2 Button 4 -->
+    <Value Version="1" Key="INPUTCMD_UI_LBUMPER_RELEASE" VidPid="0x0eb70001" InputType="Button" Index="5" />
+	<!-- Key = INPUTCMD_UI_LBUMPER_REPEAT, Fanatec CSV2 Button 4 -->
+    <Value Version="1" Key="INPUTCMD_UI_LBUMPER_REPEAT" VidPid="0x0eb70001" InputType="Button" Index="5" />
+	
+	<!-- Key = INPUTCMD_UI_RBUMPER_PRESS, Fanatec CSV2 Button 5 -->
+    <Value Version="1" Key="INPUTCMD_UI_RBUMPER_PRESS" VidPid="0x0eb70001" InputType="Button" Index="4" />
+    <Value Version="1" Key="INPUTCMD_NEXT_CATEGORY" VidPid="0x0eb70001" InputType="Button" Index="4" />
+    <!-- Key = INPUTCMD_UI_RBUMPER_RELEASE, Fanatec CSV2 Button 5 -->
+    <Value Version="1" Key="INPUTCMD_UI_RBUMPER_RELEASE" VidPid="0x0eb70001" InputType="Button" Index="4" />
+	<!-- Key = INPUTCMD_UI_RBUMPER_REPEAT, Fanatec CSV2 Button 5 -->
+    <Value Version="1" Key="INPUTCMD_UI_RBUMPER_REPEAT" VidPid="0x0eb70001" InputType="Button" Index="4" />
+	
+	<!-- Key = INPUTCMD_UI_LSTICK_PRESS, Fanatec CSV2 Button 0 -->
+    <!--Value Version="1" Key="141" VidPid="0x0eb70001" InputType="Button" Index="0" /-->
+    <!-- Key = INPUTCMD_UI_LSTICK_RELEASE, Fanatec CSV2 Button 0 -->
+    <!--Value Version="1" Key="142" VidPid="0x0eb70001" InputType="Button" Index="0" /-->
+	<!-- Key = INPUTCMD_UI_LSTICK_REPEAT, Fanatec CSV2 Button 0 -->
+    <!--Value Version="1" Key="143" VidPid="0x0eb70001" InputType="Button" Index="0" /-->
+	
+	<!-- Key = INPUTCMD_UI_REPLAY_SPEED_LEFT, Fanatec CSV2 Axis 3 -->
+    <Value Version="1" Key="INPUTCMD_UI_REPLAY_SPEED_LEFT" InputType="Axis" Index="2" InvertAxis="false" InnerDeadzone="0.05" OuterDeadzone="0.95" />
+    <!-- Key = INPUTCMD_UI_REPLAY_SPEED_RIGHT, Fanatec CSV2 Axis 2 -->
+    <Value Version="1" Key="INPUTCMD_UI_REPLAY_SPEED_RIGHT" InputType="Axis" Index="1" InvertAxis="false" InnerDeadzone="0.05" OuterDeadzone="0.95" />
+	
+  </Context>
+
+  <!-- Race (Restricted controls) -->
+  <Context Version="1" Context="INPUTCONTEXT_RACING_CAMERA_ONLY">
+
+    <!-- Key = INPUTCMD_PAUSE, Fanatec CSV2 Button 7 -->
+    <Value Version="1" Key="INPUTCMD_PAUSE_GAME" VidPid="0x0eb70001" InputType="Button" Index="9" />
+    <!-- Key = INPUTCMD_SWITCH_CAMERA, Fanatec CSV2 Button 6 -->
+    <Value Version="1" Key="INPUTCMD_SWITCH_CAMERA" VidPid="0x0eb70001" InputType="Button" Index="10" />
+    <!-- Key = INPUTCMD_HORN, Fanatec CSV2 Button 6 -->
+    <Value Version="1" Key="INPUTCMD_HORN" VidPid="0x0eb70001" InputType="Button" Index="11" />
+
+    <Value Version="1" Key="INPUTCMD_ANNA_ACTIVATE" VidPid="0x0eb70001" InputType="Switch" Index="0" SwitchPosition="Down" />
+    <!-- Key = INPUTCMD_TELEMETRY_TOGGLE, Fanatec CSV2 Button 8 -->
+    <Value Version="1" Key="INPUTCMD_TELEMETRY_TOGGLE" VidPid="0x0eb70001" InputType="Switch" Index="0" SwitchPosition="Up" />
+    <!-- Key = INPUTCMD_TELEMETRY_PREV, Fanatec CSV2 Switch 0 Left -->
+    <Value Version="1" Key="INPUTCMD_TELEMETRY_PREV" VidPid="0x0eb70001" InputType="Switch" Index="0" SwitchPosition="Left" />
+    <!-- Key = INPUTCMD_TELEMETRY_NEXT, Fanatec CSV2 Switch 0 Right -->
+    <Value Version="1" Key="INPUTCMD_TELEMETRY_NEXT" VidPid="0x0eb70001" InputType="Switch" Index="0" SwitchPosition="Right" />
+
+    <!-- Key = INPUTCMD_ACTIVATE, Fanatec CSV2 Button 2 -->
+    <Value Version="1" Key="INPUTCMD_ACTIVATE" VidPid="0x0eb70001" InputType="Button" Index="8" />
+
+  </Context>
+
+</RawGameControllerInputMappingProfile>
+</Profiles>
