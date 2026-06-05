@@ -1,5 +1,5 @@
 <Profiles>
-<RawGameControllerInputMappingProfile Version="1" Id="4a08b0a8-ae04-416c-8c3f-4ed4490f5456" UserFacingName="IDS_DefaultWheelProfile_PXNV99_Name" IsDefaultProfile="1" PrimaryDeviceVidPid="0x11ff3245" FFBDeviceVidPid="0x11ff3245" FFBMotorIndex="0">
+<RawGameControllerInputMappingProfile Version="1" Id="c8cf4cc0-e0fa-11f0-8001-444553540000" UserFacingName="IDS_DefaultWheelProfile_PXNV99_Name" IsDefaultProfile="1" PrimaryDeviceVidPid="0x11ff3245" FFBDeviceVidPid="0x11ff3245" FFBMotorIndex="0">
 
   <!-- Race -->
   <Context Version="1" Context="0">
