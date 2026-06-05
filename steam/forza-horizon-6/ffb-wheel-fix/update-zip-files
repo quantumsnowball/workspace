@@ -4,7 +4,7 @@
 set -e
 
 # Define targets based on your directory layout
-XML_SRC="DefaultRawGameControllerMappingProfilePXNV99.xml"
+XML_SRC="DefaultRawGameControllerMappingProfileFanatecCSV2.xml"
 INI_SRC="ControllerFFB-0X11FF3245.ini"
 INPUT_ZIP="inputmappingprofiles.zip"
 TUNABLE_ZIP="wheeltunablesettingspc.zip"
