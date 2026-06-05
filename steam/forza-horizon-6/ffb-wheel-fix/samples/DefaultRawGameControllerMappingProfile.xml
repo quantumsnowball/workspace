@@ -1,0 +1,13 @@
+<Profiles>
+<RawGameControllerInputMappingProfile Version="1" Id="4a08b0a8-ae04-416c-8c3f-4ed4490f5456" UserFacingName="IDS_DefaultWheelProfile_Name" IsDefaultProfile="1" PrimaryDeviceVidPid="0xffffffff" FFBDeviceVidPid="0xffffffff" FFBMotorIndex="0">
+
+  <!-- Race -->
+  <Context Version="1" Context="0">
+  </Context>
+
+  <!-- UI -->
+  <Context Version="1" Context="7">
+  </Context>
+
+</RawGameControllerInputMappingProfile>
+</Profiles>
