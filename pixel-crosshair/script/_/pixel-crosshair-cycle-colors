@@ -7,10 +7,10 @@ STATE_FILE="/tmp/pixel-crosshair-cycle-colors-index"
 COLORS=(
     "#00ff00"
     "#00ffff"
-    "#ff00ff"
-    "#ffff00"
-    "#ff0000"
-    "#0000ff"
+    # "#ff00ff"
+    # "#ffff00"
+    # "#ff0000"
+    # "#0000ff"
     ""
 )
 
