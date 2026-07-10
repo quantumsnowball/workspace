@@ -106,9 +106,9 @@ window-rule  {
 }
 
 // all windows slightly transparent, exception some app that has their own transparent configs
-window-rule {
-    // Alacritty
-    exclude app-id="Alacritty"
-    exclude app-id="kitty"
-    opacity 0.95
-}
+// window-rule {
+//     // Alacritty
+//     exclude app-id="Alacritty"
+//     exclude app-id="kitty"
+//     opacity 0.95
+// }
