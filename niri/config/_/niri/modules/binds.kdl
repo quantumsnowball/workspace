@@ -53,8 +53,8 @@ binds {
     Super+BackSpace hotkey-overlay-title="Power Menu" {
         spawn-sh "dms ipc call powermenu toggle";
     }
-    Super+Delete allow-when-locked=true hotkey-overlay-title="Lock / Power Off" { 
-        spawn-sh "if loginctl show-session $XDG_SESSION_ID | grep -q 'LockedHint=yes'; then niri msg action power-off-monitors; else qs -c noctalia-shell ipc call lockScreen lock && sleep 5 && niri msg action power-off-monitors; fi"
+    Super+Delete allow-when-locked=true hotkey-overlay-title="Lock Screen & Outputs Off" {
+        spawn-sh "dms ipc call lock lockAndOutputsOff";
     }
     Ctrl+Alt+Delete hotkey-overlay-title="Logout" {
         quit skip-confirmation=true;
