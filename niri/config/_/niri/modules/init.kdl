@@ -1,6 +1,3 @@
-// noctalia shell
-spawn-at-startup "qs" "-c" "noctalia-shell"
-
 // kwallet
 spawn-at-startup "/usr/lib/pam_kwallet_init" 
 
