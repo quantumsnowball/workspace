@@ -44,8 +44,8 @@ binds {
     Super+U hotkey-overlay-title="Lutris" {
         spawn-sh "notify-send -t 3000 'Lutris' 'Launching Lutris ...' && lutris";
     }
-    Ctrl+Space hotkey-overlay-title="Launcher" {
-        spawn-sh "qs -c noctalia-shell ipc call launcher toggle";
+    Ctrl+space hotkey-overlay-title="Launcher" {
+        spawn-sh "dms ipc call spotlight toggle";
     }
     Super+V hotkey-overlay-title="Clipboard" {
         spawn-sh "qs -c noctalia-shell ipc call launcher clipboard";
