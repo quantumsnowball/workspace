@@ -48,7 +48,7 @@ binds {
         spawn-sh "dms ipc call spotlight toggle";
     }
     Super+V hotkey-overlay-title="Clipboard" {
-        spawn-sh "qs -c noctalia-shell ipc call launcher clipboard";
+        spawn-sh "dms ipc call clipboard toggle";
     }
     Super+BackSpace hotkey-overlay-title="Power Menu" {
         spawn-sh "dms ipc call powermenu toggle";
