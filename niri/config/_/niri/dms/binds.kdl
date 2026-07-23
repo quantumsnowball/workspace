@@ -1,0 +1,5 @@
+binds {
+    Ctrl+space hotkey-overlay-title="Default Launcher: Toggle" {
+        spawn "dms" "ipc" "call" "spotlight" "toggle";
+    }
+}
