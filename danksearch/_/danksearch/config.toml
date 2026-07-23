@@ -1,7 +1,7 @@
 # DankSearch Configuration
 # See https://github.com/AvengeMedia/danksearch for documentation
 
-index_path = "~/.cache/danksearch/index"
+index_path = "$HOME/.cache/danksearch/index"
 listen_addr = "127.0.0.1:43654"
 max_file_bytes = 2097152
 worker_count = 14
@@ -11,7 +11,7 @@ index_xattr_tags = true
 max_depth = 0
 
 [[index_paths]]
-  path = "~"
+  path = "$HOME"
   max_depth = 6
   exclude_hidden = false
   exclude_dirs = [".git", ".hg", ".svn", "node_modules", "bower_components", ".npm", ".yarn", "site-packages", "__pycache__", ".venv", "venv", ".tox", ".pytest_cache", ".eggs", "dist", "build", "out", "bin", "obj", "target", "vendor", ".gradle", ".m2", "bundle", ".cache", ".parcel-cache", ".next", ".nuxt", ".serverless", "Library", ".Trash-1000", ".postgresql", ".postgres", ".mysql", ".mongodb", ".redis", "pgdata", "pg_data", "go", ".cargo", ".pyenv", ".rbenv", ".nvm", ".rustup", ".composer", ".gem", ".idea", ".vscode"]
