@@ -44,18 +44,6 @@ binds {
     Super+U hotkey-overlay-title="Lutris" {
         spawn-sh "notify-send -t 3000 'Lutris' 'Launching Lutris ...' && lutris";
     }
-    Ctrl+Space hotkey-overlay-title="Launcher" {
-        spawn-sh "qs -c noctalia-shell ipc call launcher toggle";
-    }
-    Super+V hotkey-overlay-title="Clipboard" {
-        spawn-sh "qs -c noctalia-shell ipc call launcher clipboard";
-    }
-    Super+Backspace hotkey-overlay-title="Power Menu" {
-        spawn-sh "qs -c noctalia-shell ipc call sessionMenu toggle";
-    }
-    Super+Delete allow-when-locked=true hotkey-overlay-title="Lock / Power Off" { 
-        spawn-sh "if loginctl show-session $XDG_SESSION_ID | grep -q 'LockedHint=yes'; then niri msg action power-off-monitors; else qs -c noctalia-shell ipc call lockScreen lock && sleep 5 && niri msg action power-off-monitors; fi"
-    }
     Ctrl+Alt+Delete hotkey-overlay-title="Logout" {
         quit skip-confirmation=true;
     }
