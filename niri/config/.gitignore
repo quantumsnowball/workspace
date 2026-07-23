@@ -1,3 +1,4 @@
 /_/niri/noctalia.kdl
 
 /_/niri/dms/*
+!/_/niri/dms/windowrules.kdl
