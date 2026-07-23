@@ -28,30 +28,6 @@ multiplier = 3
 [colors]
 draw_bold_text_with_bright_colors = true
 
-[colors.primary]
-background = "#303030"
-foreground = "#eeeeee"
-
-[colors.normal]
-black = '#4e4e4e'
-red = '#eb4129'
-green = '#abe047'
-yellow = '#f6c744'
-blue = '#47a0f3'
-magenta = '#7b5cb0'
-cyan = '#64dbed'
-white = '#e5e9f0'
-
-[colors.bright]
-black = '#a0a0a0'
-red = '#ec5357'
-green = '#c0e17d'
-yellow = '#f9da6a'
-blue = '#49a4f8'
-magenta = '#a47de9'
-cyan = '#99faf2'
-white = '#ffffff'
-
 [font]
 size = 13
 
@@ -166,4 +142,7 @@ action = "ResetFontSize"
 [general]
 live_config_reload = true
 working_directory = "None"
+import = [
+    "~/.config/alacritty/my-theme.toml",
+]
 
