@@ -13,7 +13,7 @@ max_depth = 0
 [[index_paths]]
   path = "~"
   max_depth = 6
-  exclude_hidden = true
+  exclude_hidden = false
   exclude_dirs = [".git", ".hg", ".svn", "node_modules", "bower_components", ".npm", ".yarn", "site-packages", "__pycache__", ".venv", "venv", ".tox", ".pytest_cache", ".eggs", "dist", "build", "out", "bin", "obj", "target", "vendor", ".gradle", ".m2", "bundle", ".cache", ".parcel-cache", ".next", ".nuxt", ".serverless", "Library", ".Trash-1000", ".postgresql", ".postgres", ".mysql", ".mongodb", ".redis", "pgdata", "pg_data", "go", ".cargo", ".pyenv", ".rbenv", ".nvm", ".rustup", ".composer", ".gem", ".idea", ".vscode"]
   extract_exif = true
   extract_xattr_tags = false
