@@ -44,9 +44,6 @@ binds {
     Super+U hotkey-overlay-title="Lutris" {
         spawn-sh "notify-send -t 3000 'Lutris' 'Launching Lutris ...' && lutris";
     }
-    Super+BackSpace hotkey-overlay-title="Power Menu" {
-        spawn-sh "dms ipc call powermenu toggle";
-    }
     Super+Delete allow-when-locked=true hotkey-overlay-title="Lock Screen & Outputs Off" {
         spawn-sh "dms ipc call lock lockAndOutputsOff";
     }
