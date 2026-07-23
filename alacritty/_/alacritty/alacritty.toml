@@ -143,6 +143,7 @@ action = "ResetFontSize"
 live_config_reload = true
 working_directory = "None"
 import = [
-    "~/.config/alacritty/my-theme.toml",
+    # "~/.config/alacritty/my-theme.toml",
+    "~/.config/alacritty/dank-theme.toml",
 ]
 
