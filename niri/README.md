@@ -5,12 +5,16 @@
 paru -S noctalia-shell
 ```
 
+Noctalia uses specific fork of quickshell, which is like a minified version called `quickshell-qs`.
+
 ## dms shell
 ```
 sudo pacman -Syu niri xwayland-satellite xdg-desktop-portal-gnome xdg-desktop-portal-gtk alacritty
 paru -S dms-shell-bin matugen cava qt6-multimedia-ffmpeg
 systemctl --user add-wants niri.service dms
 ```
+
+DMS must use the official quickshell, cannot not share the same quickshell with noctalia which is a minified version.
 
 ## startup time
 
