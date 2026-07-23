@@ -1,5 +1,6 @@
 binds {
     Ctrl+space hotkey-overlay-title="Default Launcher: Toggle" { spawn "dms" "ipc" "call" "spotlight" "toggle"; }
     Mod+BackSpace hotkey-overlay-title="Power Menu: Toggle" { spawn "dms" "ipc" "call" "powermenu" "toggle"; }
+    Mod+Delete hotkey-overlay-title="Lock Screen & Outputs Off" allow-when-locked=true { spawn "dms" "ipc" "call" "lock" "lockAndOutputsOff"; }
     Mod+V hotkey-overlay-title="Clipboard: Toggle" { spawn "dms" "ipc" "call" "clipboard" "toggle"; }
 }
