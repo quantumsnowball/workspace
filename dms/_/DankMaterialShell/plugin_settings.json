@@ -16,6 +16,21 @@
         "visibilityInterval": 0,
         "id": "variant_1784883568585",
         "name": "Wallpaper"
+      },
+      {
+        "icon": "settings",
+        "displayText": "",
+        "displayCommand": "",
+        "clickCommand": "dms ipc settings focusOrToggle",
+        "middleClickCommand": "",
+        "rightClickCommand": "",
+        "updateInterval": 0,
+        "showIcon": true,
+        "showText": true,
+        "visibilityCommand": "",
+        "visibilityInterval": 0,
+        "id": "variant_1784895021881",
+        "name": "Settings"
       }
     ]
   }
