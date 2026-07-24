@@ -3,7 +3,7 @@
   "currentThemeCategory": "dynamic",
   "customThemeFile": "",
   "registryThemeVariants": {},
-  "matugenScheme": "scheme-vibrant",
+  "matugenScheme": "scheme-expressive",
   "matugenContrast": 0,
   "runUserMatugenTemplates": true,
   "matugenTargetMonitor": "",
@@ -111,9 +111,9 @@
   "controlCenterShowIdleInhibitorIcon": false,
   "controlCenterShowDoNotDisturbIcon": false,
   "showPrivacyButton": true,
-  "privacyShowMicIcon": false,
-  "privacyShowCameraIcon": false,
-  "privacyShowScreenShareIcon": false,
+  "privacyShowMicIcon": true,
+  "privacyShowCameraIcon": true,
+  "privacyShowScreenShareIcon": true,
   "controlCenterWidgets": [
     {
       "id": "volumeSlider",
@@ -167,7 +167,7 @@
   "groupWorkspaceApps": false,
   "groupActiveWorkspaceApps": false,
   "workspaceFollowFocus": false,
-  "showOccupiedWorkspacesOnly": false,
+  "showOccupiedWorkspacesOnly": true,
   "reverseScrolling": false,
   "dwlShowAllTags": false,
   "workspaceActiveAppHighlightEnabled": true,
@@ -262,16 +262,18 @@
   "spotlightSectionViewModes": {
     "apps": "list"
   },
-  "appDrawerSectionViewModes": {},
+  "appDrawerSectionViewModes": {
+    "apps": "list"
+  },
   "niriOverviewOverlayEnabled": true,
   "niriOverviewLauncherStyle": "full",
   "dankLauncherV2Size": "compact",
   "dankLauncherV2ShowSourceBadges": true,
-  "dankLauncherV2BorderEnabled": false,
-  "dankLauncherV2BorderThickness": 2,
+  "dankLauncherV2BorderEnabled": true,
+  "dankLauncherV2BorderThickness": 6,
   "dankLauncherV2BorderColor": "primary",
   "dankLauncherV2ShowFooter": true,
-  "dankLauncherV2UnloadOnClose": false,
+  "dankLauncherV2UnloadOnClose": true,
   "dankLauncherV2IncludeFilesInAll": false,
   "dankLauncherV2IncludeFoldersInAll": false,
   "launcherUseOverlayLayer": false,
@@ -488,7 +490,7 @@
   "lockPamExternallyManaged": false,
   "lockU2fPamPath": "",
   "lockScreenInactiveColor": "#000000",
-  "lockScreenNotificationMode": 2,
+  "lockScreenNotificationMode": 1,
   "lockScreenVideoEnabled": false,
   "lockScreenVideoPath": "",
   "lockScreenVideoCycling": false,
@@ -534,8 +536,8 @@
     "suspend",
     "restart"
   ],
-  "powerMenuDefaultAction": "logout",
-  "powerMenuGridLayout": true,
+  "powerMenuDefaultAction": "suspend",
+  "powerMenuGridLayout": false,
   "customPowerActionLock": "",
   "customPowerActionLogout": "",
   "customPowerActionSuspend": "",
@@ -577,14 +579,15 @@
       ],
       "showOnLastDisplay": true,
       "leftWidgets": [
-        "weather",
-        "focusedWindow"
-      ],
-      "centerWidgets": [
         {
           "id": "cpuUsage",
           "enabled": true,
           "minimumWidth": false
+        },
+        {
+          "id": "cpuTemp",
+          "enabled": true,
+          "minimumWidth": true
         },
         {
           "id": "memUsage",
@@ -602,28 +605,28 @@
         {
           "id": "network_speed_monitor",
           "enabled": true
-        },
+        }
+      ],
+      "centerWidgets": [
         {
-          "id": "spacer",
-          "enabled": true,
-          "size": 20
+          "id": "launcherButton",
+          "enabled": true
         },
-        "workspaceSwitcher",
-        {
-          "id": "spacer",
-          "enabled": true,
-          "size": 20
-        },
-        "clipboard",
         {
           "id": "colorPicker",
           "enabled": true
         },
+        "clipboard",
         {
-          "id": "spacer",
-          "enabled": true,
-          "size": 20
+          "id": "separator",
+          "enabled": true
         },
+        "workspaceSwitcher",
+        {
+          "id": "separator",
+          "enabled": true
+        },
+        "controlCenterButton",
         {
           "id": "systemTray",
           "enabled": true,
@@ -631,12 +634,12 @@
           "trayPopupSingleLine": true,
           "trayAutoOverflow": true,
           "trayMaxVisibleItems": 0
-        }
+        },
+        "notificationButton"
       ],
       "rightWidgets": [
         "music",
-        "notificationButton",
-        "controlCenterButton",
+        "weather",
         {
           "id": "clock",
           "enabled": true,
