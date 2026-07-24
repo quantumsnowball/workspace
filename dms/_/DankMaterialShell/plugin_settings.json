@@ -1,0 +1,22 @@
+{
+  "dankActions": {
+    "enabled": true,
+    "variants": [
+      {
+        "icon": "wallpaper",
+        "displayText": "",
+        "displayCommand": "",
+        "clickCommand": "dms ipc call dash toggle wallpaper",
+        "middleClickCommand": "",
+        "rightClickCommand": "",
+        "updateInterval": 0,
+        "showIcon": true,
+        "showText": true,
+        "visibilityCommand": "",
+        "visibilityInterval": 0,
+        "id": "variant_1784883568585",
+        "name": "Wallpaper"
+      }
+    ]
+  }
+}

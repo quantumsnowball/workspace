@@ -229,7 +229,7 @@
   "runningAppsGroupByApp": false,
   "runningAppsCurrentMonitor": false,
   "appIdSubstitutions": [],
-  "centeringMode": "index",
+  "centeringMode": "geometric",
   "clockDateFormat": "yyyy-MM-dd",
   "lockDateFormat": "yyyy-MM-dd",
   "greeterRememberLastSession": true,
@@ -609,16 +609,20 @@
       ],
       "centerWidgets": [
         {
-          "id": "launcherButton",
-          "enabled": true
-        },
-        {
           "id": "colorPicker",
           "enabled": true
         },
         "clipboard",
         {
+          "id": "dankActions:variant_1784883568585",
+          "enabled": true
+        },
+        {
           "id": "separator",
+          "enabled": true
+        },
+        {
+          "id": "launcherButton",
           "enabled": true
         },
         "workspaceSwitcher",
