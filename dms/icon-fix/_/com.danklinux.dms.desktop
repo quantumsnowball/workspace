@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Application
+Name=DMS Settings
+Comment=DankMaterialShell Settings Manager
+Exec=dms settings
+Icon=danklogo
+Categories=Settings;DesktopSettings;
+NoDisplay=true
+StartupWMClass=com.danklinux.dms
