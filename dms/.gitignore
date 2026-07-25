@@ -1,4 +1,5 @@
 /_/DankMaterialShell/.firstlaunch
 /_/DankMaterialShell/.changelog-*
 /_/DankMaterialShell/firefox.css
-/_/DankMaterialShell/plugins/
+/_/DankMaterialShell/plugins/*
+!/_/DankMaterialShell/plugins/chooseWallpaperButton/

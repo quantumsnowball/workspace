@@ -605,6 +605,10 @@
         {
           "id": "network_speed_monitor",
           "enabled": true
+        },
+        {
+          "id": "chooseWallpaperButton",
+          "enabled": true
         }
       ],
       "centerWidgets": [

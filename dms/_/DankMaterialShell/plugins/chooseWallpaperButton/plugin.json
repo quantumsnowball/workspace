@@ -1,0 +1,11 @@
+{
+    "id": "chooseWallpaperButton",
+    "name": "Choose Wallpaper Button",
+    "description": "Launch the Wallpaper dank dash from a dank bar button",
+    "version": "1.0.0",
+    "license": "MIT",
+    "author": "Quantum Snowball",
+    "icon": "terminal",
+    "firstParty": true,
+    "component": "./chooseWallpaperButton.qml"
+}
