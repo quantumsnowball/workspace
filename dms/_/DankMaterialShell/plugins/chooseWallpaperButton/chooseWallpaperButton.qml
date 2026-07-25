@@ -27,7 +27,7 @@ PluginComponent {
     // Process executor for testing desktop notifications
     Process {
         id: notifyProcess
-        command: ["notify-send", "DMS Plugin Test", "Widget clicked successfully!"]
+        command: ["dms", "ipc", "call", "dash", "toggle", "wallpaper"]
     }
 
     // Override the default pill click action to open the Wallpaper Dash tab
