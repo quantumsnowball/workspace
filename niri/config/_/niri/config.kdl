@@ -7,8 +7,11 @@ include "modules/binds.kdl"
 include "modules/rules.kdl"
 
 // DMS configs override
-include "dms/colors.kdl"
-include "dms/cursor.kdl"
-include "dms/layout.kdl"
-include "dms/windowrules.kdl"
-include "dms/binds.kdl"
+// include "dms/colors.kdl"
+// include "dms/cursor.kdl"
+// include "dms/layout.kdl"
+// include "dms/windowrules.kdl"
+// include "dms/binds.kdl"
+
+// noctalia configs override
+include "noctalia/binds.kdl"

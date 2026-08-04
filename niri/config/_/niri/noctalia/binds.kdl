@@ -1,0 +1,14 @@
+binds {
+    Ctrl+space hotkey-overlay-title="Launcher: Toggle" {
+        spawn-sh "noctalia msg panel-toggle launcher";
+    }
+    Mod+BackSpace hotkey-overlay-title="Session Menu: Toggle" {
+        spawn-sh "noctalia msg panel-toggle session";
+    }
+    Mod+Delete hotkey-overlay-title="Lock Screen & Outputs Off" allow-when-locked=true {
+        spawn-sh "noctalia msg session lock && sleep 2 && niri msg action power-off-monitors";
+    }
+    Mod+V hotkey-overlay-title="Clipboard: Toggle" {
+        spawn-sh "noctalia msg panel-toggle clipboard";
+    }
+}
