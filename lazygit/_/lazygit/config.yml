@@ -6,8 +6,8 @@ quitOnTopLevelReturn: true
 git:
   merging:
     args: "--no-ff"
-  pagers:
-    - pager: diff-so-fancy
+  diffRenderers:
+    - command: diff-so-fancy
       colorArg: always
   log:
     showGraph: 'always'
