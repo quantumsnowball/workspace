@@ -1,8 +1,16 @@
 [bar.default]
 position = "bottom"
+background_opacity = 0.5
 center = [ "launcher", "wallpaper", "workspaces", "tray", "clipboard", "notifications", "volume", "network", "bluetooth" ]
 end = [ "media", "brightness", "clock" ]
 start = [ "cpu", "temp", "ram", "network_rx", "network_tx" ]
+margin_ends = 0
+widget_spacing = 10
+
+    [bar.default.dead_zone.actions]
+    left = "settings-toggle"
+    scroll_down = "workspace-switch next"
+    scroll_up = "workspace-switch prev"
 
 [lockscreen_widgets]
 enabled = false
@@ -55,3 +63,8 @@ path = "/usr/share/noctalia/assets/noctalia-wallpaper.png"
 
 [wallpaper.last]
 path = "/usr/share/noctalia/assets/noctalia-wallpaper.png"
+
+[widget.workspaces]
+anchor = true
+display = "none"
+scale = 1.2
