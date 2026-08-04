@@ -1,3 +1,6 @@
+// choose the shell, dms or noctalia
+spawn-at-startup "dms" "run"
+
 // kwallet
 spawn-at-startup "/usr/lib/pam_kwallet_init" 
 
