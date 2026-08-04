@@ -1,4 +1,5 @@
 [bar.default]
+position = "bottom"
 
 [lockscreen_widgets]
 enabled = false
