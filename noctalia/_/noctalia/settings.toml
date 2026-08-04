@@ -36,6 +36,10 @@ widget_order = [ "lockscreen-login-box@HDMI-A-1" ]
         show_unlock_hint = true
         show_weather = true
 
+[osd]
+position = "bottom_center"
+position_vertical = "bottom_center"
+
 [theme]
 builtin = "Noctalia"
 community_palette = "Oxocarbon"
