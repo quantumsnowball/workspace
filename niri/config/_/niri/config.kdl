@@ -14,4 +14,6 @@ include "modules/rules.kdl"
 // include "dms/binds.kdl"
 
 // noctalia configs override
+include "noctalia.kdl"
 include "noctalia/binds.kdl"
+
