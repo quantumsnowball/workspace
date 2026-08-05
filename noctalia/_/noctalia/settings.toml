@@ -1,11 +1,12 @@
 [bar.default]
 position = "bottom"
 background_opacity = 0.5
-center = [ "launcher", "wallpaper", "workspaces", "tray", "clipboard", "notifications", "volume", "network", "bluetooth" ]
+center = [ "launcher", "wallpaper", "workspaces", "tray", "clipboard", "notifications", "network", "bluetooth", "volume" ]
 end = [ "media", "brightness", "clock" ]
 start = [ "cpu", "temp", "ram", "network_rx", "network_tx" ]
 margin_ends = 0
 widget_spacing = 10
+scale = 1.2
 
     [bar.default.dead_zone.actions]
     left = "settings-toggle"
@@ -51,18 +52,31 @@ widget_order = [ "lockscreen-login-box@HDMI-A-1" ]
 position = "bottom_center"
 position_vertical = "bottom_center"
 
+[[shell.session.actions]]
+action = "command"
+command = "systemctl soft-reboot"
+countdown_seconds = 0.0
+enabled = true
+glyph = "reboot"
+label = "Soft Reboot"
+shortcut = "6"
+variant = "default"
+
 [theme]
 builtin = "Noctalia"
 community_palette = "Oxocarbon"
 mode = "dark"
 source = "wallpaper"
-wallpaper_scheme = "m3-content"
+wallpaper_scheme = "vibrant"
 
-[wallpaper.default]
-path = "/usr/share/noctalia/assets/noctalia-wallpaper.png"
+    [theme.templates]
+    builtin_ids = [ "niri" ]
 
-[wallpaper.last]
-path = "/usr/share/noctalia/assets/noctalia-wallpaper.png"
+[widget.network]
+show_label = false
+
+[widget.volume]
+show_label = false
 
 [widget.workspaces]
 anchor = true
