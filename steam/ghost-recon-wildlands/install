@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+
+stow_dir="$(dirname "$(realpath "$0")")/_"
+target_dir="$HOME/.local/share/Steam/steamapps/compatdata/460930/pfx/drive_c/users/steamuser/Documents/My Games/Ghost Recon Wildlands"
+
+. $XDG_CONFIG_HOME/workspace/stow "$stow_dir" "$target_dir" "$@"
