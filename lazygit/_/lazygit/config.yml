@@ -12,7 +12,7 @@ git:
   log:
     showGraph: 'always'
     showWholeGraph: true
-  branchLogCmd: 'git log --graph --all --color=always --abbrev-commit --decorate --date=relative --pretty=oneline {{branchName}} --'
+  branchLogCmd: 'git log --graph --all --color=always --abbrev-commit --decorate --date=relative --pretty=format:"%C(yellow)%h%Creset%C(auto)%d%Creset %s %C(magenta)%cr%Creset %C(blue)%G?%Creset" {{branchName}} --'
   allBranchesLogCmds:
     - git log --graph --all --color=always --abbrev-commit --decorate --date=relative  --pretty=oneline
 customCommands:
