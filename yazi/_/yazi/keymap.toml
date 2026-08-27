@@ -12,6 +12,8 @@ prepend_keymap = [
 	{ on = ["t", "j"], run = "tab_swap -1", desc = "Swap current tab with previous tab" },
 	{ on = ["t", "k"], run = "tab_swap 1",  desc = "Swap current tab with next tab" },
 	{ on = ["t", "q"], run = "close", desc = "Close the current tab, or quit if it's last" },
+	# selection
+	{ on = ["g", "a"], run = "toggle_all", desc = "Toggle select all"},
 	# chmod
 	# to install: ya pkg add yazi-rs/plugins:chmod
 	{ on = [ "c", "m" ], run = "plugin chmod", desc = "Chmod on selected files" }
