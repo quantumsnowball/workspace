@@ -2,6 +2,8 @@
 # and append always has a lower priority than default:
 [mgr]
 prepend_keymap = [
+    # general
+	{ on = "<Esc>", run = ["escape", "unyank"], desc = "Cancel the yank status" },
     # zoxide and fzf
 	{ on = "Z", run = "plugin fzf", desc = "Jump to a file/directory via fzf" },
 	{ on = "z", run = "plugin zoxide", desc = "Jump to a directory via zoxide" },
@@ -19,7 +21,7 @@ prepend_keymap = [
 	{ on = [ "c", "m" ], run = "plugin chmod", desc = "Chmod on selected files" }
 ]
 
-# Close input by once Esc press (,gadon't use vim mode the input box)
+# Close input by once Esc press (don't use vim mode the input box)
 [[input.prepend_keymap]]
 on   = "<Esc>"
 run  = "close"
