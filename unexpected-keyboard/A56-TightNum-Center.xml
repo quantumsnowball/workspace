@@ -30,11 +30,11 @@
     <!-- row 3 -->
     <key c="a" e="tab" shift="0.5" />
     <key c="s" />
-    <key c="d" />
-    <key c="f" w="backspace"/>
+    <key c="d" n="up" s="down" e="right" w="left" />
+    <key c="f" />
     <key c="g" e="-" w="-" n="|" s="_" ne="/" sw="/" nw="\\" se="\\"/>
-    <key c="h" e="tab" />
-    <key c="j" />
+    <key c="h" />
+    <key c="j" n="up" s="down" e="right" w="left" />
     <key c="k" se=";" ne=":" />
     <key c="l" se="'" ne="&quot;" w="backspace"/>
   </row>
