@@ -50,41 +50,12 @@
     <key c="m" se="/" ne="\?" />
     <key c="backspace" n="shift" s="alt" w="backspace" width="1.5" />
   </row>
-  <row height="0.95">
+  <row height="1.0">
     <!-- row 5 -->
-    <key c="ctrl" 
-      s="del"
-      e="tab"
-      n="shift"
-      width="1.7" 
-    />
-    <key c="," 
-      n="page_up"
-      s="page_down"
-      e="end"
-      w="home"
-      width="1.5" 
-    />
-    <key c="space" 
-      n="up"
-      s="down"
-      e="right"
-      w="left"
-      width="3.6" 
-    />
-    <key c="." 
-      n="page_up"
-      s="page_down"
-      e="end"
-      w="home"
-      width="1.5" 
-    />
-    <key c="enter" 
-      w="backspace"
-      s="delete"
-      n="shift"
-      s="ctrl"
-      width="1.7" 
-    />
+    <key c="ctrl" s="delete" e="tab" n="shift" width="1.7" />
+    <key c="," n="page_up" s="page_down" e="end" w="home" width="1.5" />
+    <key c="space" n="up" s="down" e="right" w="left" width="3.6" />
+    <key c="." n="page_up" s="page_down" e="end" w="home" width="1.5" />
+    <key c="enter" w="backspace" s="delete" n="shift" s="ctrl" width="1.7" />
   </row>
 </keyboard>
