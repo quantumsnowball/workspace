@@ -18,10 +18,10 @@
     <key c="q" e="tab"/>
     <key c="w" />
     <key c="e" />
-    <key c="r" s="redo" w="backspace" />
+    <key c="r" s="redo" />
     <key c="t" />
     <key c="y" />
-    <key c="u" s="undo" e="tab" />
+    <key c="u" s="undo" />
     <key c="i" se="[" ne="{" />
     <key c="o" se="]" ne="}" />
     <key c="p" se="\\" ne="|" w="backspace" />
