@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<keyboard name="A80-TightNum-Center" script="latin" bottom_row="false">
+<keyboard name="A56-TightNum-Center" script="latin" bottom_row="false">
   <row>
     <!-- row 1 -->
     <key c="1" se="!" sw="`" nw="~" />
@@ -40,7 +40,7 @@
   </row>
   <row>
     <!-- row 4 -->
-    <key c="esc" n="shift" s="delete" e="tab" width="1.5" />
+    <key c="esc" n="shift" s="alt" e="tab" width="1.5" />
     <key c="z" s="switch_clipboard" />
     <key c="x" s="cut" n="selectAll" />
     <key c="c" s="copy" n="selectAll" />
@@ -48,12 +48,12 @@
     <key c="b" se="," ne="&lt;" />
     <key c="n" se="." ne="&gt;" />
     <key c="m" se="/" ne="\?" />
-    <key c="backspace" n="shift" s="delete" w="backspace" width="1.5" />
+    <key c="backspace" n="shift" s="alt" w="backspace" width="1.5" />
   </row>
   <row height="0.95">
     <!-- row 5 -->
     <key c="ctrl" 
-      s="alt"
+      s="del"
       e="tab"
       n="shift"
       width="1.7" 
