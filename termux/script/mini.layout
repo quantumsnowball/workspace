@@ -1,0 +1,5 @@
+
+extra-keys = [ \
+    ['ESC', 'TAB','CTRL','ALT','LEFT','DOWN','RIGHT','-','/'] \
+]
+
