@@ -10,3 +10,9 @@ termux.keyboard.mini() {
     cat $base/script/mini.layout >> $base/_/.termux/termux.properties
     termux-reload-settings
 }
+termux.keyboard.full() {
+    termux.config.restore-from-repo 
+    base=$XDG_CONFIG_HOME/workspace/termux/
+    cat $base/script/full.layout >> $base/_/.termux/termux.properties
+    termux-reload-settings
+}

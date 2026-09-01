@@ -1,0 +1,7 @@
+
+extra-keys = [ \
+    ['APOSTROPHE','/','-',':','(',')','<','>'], \
+    ['ESC','|','~','HOME','UP','END','DEL','PGUP'], \
+    ['TAB','CTRL','ALT','LEFT','DOWN','RIGHT','?','PGDN'] \
+]
+
