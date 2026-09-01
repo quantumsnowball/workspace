@@ -1,0 +1,3 @@
+/_/.termux/*
+
+!/_/.termux/termux.properties.template
