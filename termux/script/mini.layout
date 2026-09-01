@@ -1,5 +1,13 @@
 
-extra-keys = [ \
-    ['ESC', 'TAB','CTRL','ALT','LEFT','DOWN','RIGHT','-','/'] \
-]
+extra-keys = [[ \
+    {key: CTRL}, \
+    {key: ALT}, \
+    {key: ESC}, \
+    {key: LEFT, popup: HOME}, \
+    {key: DOWN, popup: PGDN}, \
+    {key: UP, popup: PGUP}, \
+    {key: RIGHT, popup: END}, \
+    {key: '-', popup: '_'}, \
+    {key: '/', popup: '|'} \
+]]
 
