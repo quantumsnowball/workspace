@@ -45,3 +45,33 @@ key L {
     shift+ralt: replace DPAD_RIGHT
 }
 
+# RightAlt + NM,. Navigation
+key N {
+    label: 'n'
+    base: 'n'
+    shift, capslock: 'N'
+    ralt: replace MOVE_HOME
+    shift+ralt: replace MOVE_HOME
+}
+key M {
+    label: 'm'
+    base: 'm'
+    shift, capslock: 'M'
+    ralt: replace PAGE_DOWN
+    shift+ralt: replace PAGE_DOWN
+}
+key COMMA {
+    label: ','
+    base: ','
+    shift: '<'
+    ralt: replace PAGE_UP
+    shift+ralt: replace PAGE_UP
+}
+key PERIOD {
+    label: '.'
+    base: '.'
+    shift: '>'
+    ralt: replace MOVE_END
+    shift+ralt: replace MOVE_END
+}
+
