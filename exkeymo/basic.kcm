@@ -6,3 +6,5 @@ map key 58 ESCAPE
 map key 1 GRAVE
 # home -> del
 map key 102 FORWARD_DEL
+# del -> home
+map key 111 MOVE_HOME
