@@ -14,3 +14,34 @@ map key 29 META_LEFT
 map key 56 CTRL_LEFT
 # lmeta -> lalt
 map key 125 ALT_LEFT
+
+# RightAlt + HJKL Arrow Keys
+key H {
+    label: 'h'
+    base: 'h'
+    shift, capslock: 'H'
+    ralt: replace DPAD_LEFT
+    shift+ralt: replace DPAD_LEFT
+}
+key J {
+    label: 'j'
+    base: 'j'
+    shift, capslock: 'J'
+    ralt: replace DPAD_DOWN
+    shift+ralt: replace DPAD_DOWN
+}
+key K {
+    label: 'k'
+    base: 'k'
+    shift, capslock: 'K'
+    ralt: replace DPAD_UP
+    shift+ralt: replace DPAD_UP
+}
+key L {
+    label: 'l'
+    base: 'l'
+    shift, capslock: 'L'
+    ralt: replace DPAD_RIGHT
+    shift+ralt: replace DPAD_RIGHT
+}
+
