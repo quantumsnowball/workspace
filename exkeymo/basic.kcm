@@ -1,0 +1,4 @@
+type OVERLAY
+
+# capslock -> escape
+map key 58 ESCAPE
