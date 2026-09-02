@@ -6,7 +6,7 @@ This app named ExKeyMo, it can generate a custom layout for physical keyboard, a
 
 1. Simple setup
 
-- go to <https://ris58h.github.io/exkeymo/simple.html>
+- go to <https://ris58h.github.io/exkeymo/simple.html> or host it locally using <https://github.com/ris58h/exkeymo> and navigate to simple.html
 - then set the keymap you want
 - generate and download the apk
 - install in you Android device
@@ -15,11 +15,20 @@ This app named ExKeyMo, it can generate a custom layout for physical keyboard, a
 
 2. Complex setup
 
-- go to <https://ris58h.github.io/exkeymo/complex.html>
-- paste in you predeined config file there
+- go to <https://ris58h.github.io/exkeymo/complex.html> or host it locally using <https://github.com/ris58h/exkeymo> and navigate to complex.html
+- paste in you predefined config file there
 - click download the apk file
 - the rest steps are the same as the simple setup
 
+# Bug
+
+The author actually provide the source code to build the apk, repo is here:
+<https://github.com/ris58h/exkeymo>
+
+However, the complex page download button doesn't work as of 2026-09-03, a pull request by some user has already issued but not being merged yet:
+<https://github.com/ris58h/exkeymo/issues/1>
+
+Only need to change one line to fix that bug, so I would fork the repo and fix that myself at <https://github.com/quantumsnowball/exkeymo>
 
 ## How ExKeyMo Works Under the Hood
 
