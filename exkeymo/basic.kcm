@@ -8,3 +8,9 @@ map key 1 GRAVE
 map key 102 FORWARD_DEL
 # del -> home
 map key 111 MOVE_HOME
+# lctrl -> lmeta
+map key 29 META_LEFT
+# lalt -> lctrl
+map key 56 CTRL_LEFT
+# lmeta -> lalt
+map key 125 ALT_LEFT
