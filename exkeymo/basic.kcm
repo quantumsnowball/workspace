@@ -1,4 +1,6 @@
 type OVERLAY
 
-# capslock -> escape
+# capslock -> esc
 map key 58 ESCAPE
+# esc-> `
+map key 1 GRAVE
