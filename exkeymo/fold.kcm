@@ -1,3 +1,6 @@
+# NOTE: better disable the CMD key in Android, avoid accidentally trigger the app menu
+
+# include default mappings
 type OVERLAY
 
 # capslock -> esc
@@ -6,4 +9,64 @@ map key 58 ESCAPE
 map key 29 META_LEFT
 # lmeta -> lctrl
 map key 125 CTRL_LEFT
+
+# RightAlt + HJKL Arrow Keys
+key H {
+    label: 'h'
+    base: 'h'
+    shift, capslock: 'H'
+    ralt: replace DPAD_LEFT
+    shift+ralt: replace DPAD_LEFT
+}
+key J {
+    label: 'j'
+    base: 'j'
+    shift, capslock: 'J'
+    ralt: replace DPAD_DOWN
+    shift+ralt: replace DPAD_DOWN
+}
+key K {
+    label: 'k'
+    base: 'k'
+    shift, capslock: 'K'
+    ralt: replace DPAD_UP
+    shift+ralt: replace DPAD_UP
+}
+key L {
+    label: 'l'
+    base: 'l'
+    shift, capslock: 'L'
+    ralt: replace DPAD_RIGHT
+    shift+ralt: replace DPAD_RIGHT
+}
+
+# RightAlt + NM,. Navigation
+key N {
+    label: 'n'
+    base: 'n'
+    shift, capslock: 'N'
+    ralt: replace MOVE_HOME
+    shift+ralt: replace MOVE_HOME
+}
+key M {
+    label: 'm'
+    base: 'm'
+    shift, capslock: 'M'
+    ralt: replace PAGE_DOWN
+    shift+ralt: replace PAGE_DOWN
+}
+key COMMA {
+    label: ','
+    base: ','
+    shift: '<'
+    ralt: replace PAGE_UP
+    shift+ralt: replace PAGE_UP
+}
+key PERIOD {
+    label: '.'
+    base: '.'
+    shift: '>'
+    ralt: replace MOVE_END
+    shift+ralt: replace MOVE_END
+}
 
