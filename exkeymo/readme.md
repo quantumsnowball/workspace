@@ -3,8 +3,12 @@
 This app named ExKeyMo, it can generate a custom layout for physical keyboard, achieving key remapping capabilities or even key combos without root.
 
 # Key Codes And Names
-All the key codes and names can be found here:
-<https://android.googlesource.com/platform/frameworks/base/+/master/data/keyboards/Generic.kl>
+1. default key codes and names 
+    - <https://android.googlesource.com/platform/frameworks/base/+/master/data/keyboards/Generic.kl>
+    - or locally the `ref/Generic.kl`
+2. default key mappings, as enforce by the first line `type OVERLAY`
+    - <https://android.googlesource.com/platform/frameworks/base/+/master/data/keyboards/Generic.kcm>
+    - or locally the `ref/Generic.kcm`
 
 # Simple Usage
 
