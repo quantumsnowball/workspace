@@ -1,3 +1,6 @@
+# NOTE: better disable the CMD key in Android, avoid accidentally trigger the app menu
+
+# include default mappings
 type OVERLAY
 
 # capslock -> esc
