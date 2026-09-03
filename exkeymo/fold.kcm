@@ -1,0 +1,9 @@
+type OVERLAY
+
+# capslock -> esc
+map key 58 ESCAPE
+# lctrl -> lmeta
+map key 29 META_LEFT
+# lmeta -> lctrl
+map key 125 CTRL_LEFT
+
