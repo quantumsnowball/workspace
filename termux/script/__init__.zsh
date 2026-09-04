@@ -4,15 +4,21 @@ termux.config.restore-from-repo() {
     termux-reload-settings
 }
 
-termux.keyboard.mini() {
+termux.keyboard() {
+    if [[ -z "$1" ]]; then
+        echo "Usage: termux.keyboard <layout_name>" >&2
+        return 1
+    fi
+    local base="${XDG_CONFIG_HOME:-$HOME/.config}/workspace/termux"
+    local layout_file="$base/script/$1.layout"
+    if [[ ! -f "$layout_file" ]]; then
+        echo "Error: Layout file not found: $layout_file" >&2
+        return 1
+    fi
     termux.config.restore-from-repo 
-    base=$XDG_CONFIG_HOME/workspace/termux/
-    cat $base/script/mini.layout >> $base/_/.termux/termux.properties
+    cat "$layout_file" >> "$base/_/.termux/termux.properties"
     termux-reload-settings
 }
-termux.keyboard.full() {
-    termux.config.restore-from-repo 
-    base=$XDG_CONFIG_HOME/workspace/termux/
-    cat $base/script/full.layout >> $base/_/.termux/termux.properties
-    termux-reload-settings
-}
+termux.keyboard.mini() { termux.keyboard mini; }
+termux.keyboard.full() { termux.keyboard full; }
+termux.keyboard.quest2() { termux.keyboard quest2; }
