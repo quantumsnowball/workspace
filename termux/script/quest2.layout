@@ -1,6 +1,6 @@
 
 extra-keys = [ \
-    ['c'   , 'd'  , 'l'   , 'q'   , 'TAB', 'i'    , 'KEYBOARD'], \
+    ['c'   , 'd'  , 'l'   , 'q'   , 'i'  , 'TAB'  , 'KEYBOARD'], \
     ['CTRL', 'ESC', 'LEFT', 'DOWN', 'UP' , 'RIGHT', 'ENTER'   ] \
 ]
 
