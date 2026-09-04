@@ -1,7 +1,7 @@
 
 extra-keys = [ \
-    ['c',   'd',   '/',   'HOME', 'UP',   'END',   'KEYBOARD'], \
-    ['CTRL','TAB', 'ESC', 'LEFT', 'DOWN', 'RIGHT', 'ENTER'   ] \
+    ['c'   , 'd'  , 'l'   , 'q'   , 'TAB', 'i'    , 'KEYBOARD'], \
+    ['CTRL', 'ESC', 'LEFT', 'DOWN', 'UP' , 'RIGHT', 'ENTER'   ] \
 ]
 
 # vim: ft=sh
