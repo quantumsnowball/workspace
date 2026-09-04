@@ -1,3 +1,4 @@
 /_/.termux/*
 
 !/_/.termux/termux.properties.template
+!/_/.termux/colors.properties
