@@ -12,3 +12,4 @@ extra-keys = [[ \
     {key: '/', popup: '|'} \
 ]]
 
+# vim: ft=sh
