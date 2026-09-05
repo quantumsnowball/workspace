@@ -5,6 +5,8 @@ type OVERLAY
 map key 58 ESCAPE
 # esc-> `
 map key 1 GRAVE
+# ` -> capsloc
+map key 41 CAPS_LOCK
 # home -> del
 map key 102 FORWARD_DEL
 # del -> home
