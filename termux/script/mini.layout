@@ -2,10 +2,10 @@
 extra-keys = [[ \
     {key: CTRL}, \
     {key: ALT}, \
-    {key: ESC}, \
-    {key: TAB}, \
     {key: LEFT, popup: HOME}, \
     {key: DOWN, popup: PGDN}, \
+    {key: ESC, popup: TAB}, \
+    {key: ESC, popup: TAB}, \
     {key: UP, popup: PGUP}, \
     {key: RIGHT, popup: END}, \
     {key: '-', popup: '_'}, \
