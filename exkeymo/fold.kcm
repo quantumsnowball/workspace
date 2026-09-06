@@ -11,6 +11,8 @@ map key 172 CAPS_LOCK
 map key 29 META_LEFT
 # lmeta -> lctrl
 map key 125 CTRL_LEFT
+# rmeta -> lalt
+map key 126 ALT_LEFT
 
 # RightAlt + HJKL Arrow Keys
 key H {
