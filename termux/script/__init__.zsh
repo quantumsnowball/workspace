@@ -19,6 +19,7 @@ termux.keyboard() {
     cat "$layout_file" >> "$base/_/.termux/termux.properties"
     termux-reload-settings
 }
-termux.keyboard.mini() { termux.keyboard mini; }
-termux.keyboard.full() { termux.keyboard full; }
-termux.keyboard.quest2() { termux.keyboard quest2; }
+termux.keyboard.one-row() { termux.keyboard one-row; }
+termux.keyboard.two-rows() { termux.keyboard two-rows; }
+termux.keyboard.three-rows() { termux.keyboard three-rows; }
+termux.keyboard.qwerty() { termux.keyboard qwerty; }
