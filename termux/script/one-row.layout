@@ -4,12 +4,12 @@ extra-keys = [[ \
     {key: TAB}, \
     {key: LEFT, popup: HOME}, \
     {key: DOWN, popup: PGDN}, \
-    {key: ESC, popup: TAB}, \
-    {key: ESC, popup: TAB}, \
+    {key: ESC, popup: {macro: 'CTRL c', display: '^C'}}, \
+    {key: ESC, popup: {macro: 'CTRL c', display: '^C'}}, \
     {key: UP, popup: PGUP}, \
     {key: RIGHT, popup: END}, \
-    {key: BACKSPACE, popup: '-'}, \
-    {key: ENTER, popup: '/'} \
+    {key: BACKSPACE, popup: {macro: 'ALT u', display: 'M-u'}}, \
+    {key: ENTER, popup: '.'} \
 ]]
 
 # vim: ft=sh
