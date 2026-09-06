@@ -5,6 +5,8 @@ type OVERLAY
 
 # capslock -> esc
 map key 58 ESCAPE
+# home button-> capslock
+map key 172 CAPS_LOCK
 # lctrl -> lmeta
 map key 29 META_LEFT
 # lmeta -> lctrl
