@@ -1,3 +1,7 @@
+# Keyboard Config
+- For supported key names or other references: 
+<https://wiki.termux.com/wiki/Touch_Keyboard>
+
 # Problem: Signal 9 - occasionally some process being killed by Android 
 
 That consistency points directly to Android's OS-level process management. Since Android 12, Google enforces the Phantom Process Killer across all Android devices (phones, tablets, Meta Quest OS). It silently issues a SIGKILL (Signal 9) to Termux whenever background process count or CPU usage crosses system thresholds.
