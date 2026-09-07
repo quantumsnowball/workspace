@@ -1,4 +1,12 @@
-# scrolling
+#env
+# -R : Output raw ANSI color escape sequences (enables terminal colors)
+# -S : Chop long lines rather than wrapping them (disables word wrap)
+# -F : Automatically exit if the entire file fits on one screen
+# -X : Prevent clearing the terminal screen upon exit (keep output visible)
+# -i : Case-insensitive search unless an uppercase character is typed
+LESS = -R -S -X -i
+
+#command
 h left-scroll
 l right-scroll
 j forw-scroll
