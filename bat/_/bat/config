@@ -1,0 +1,8 @@
+# Force bat to open an interactive pager even when piped
+--paging=always
+
+# Enable full visual decorations (line numbers, headers, grid lines, git changes)
+--style=full
+
+# Disable bat's internal line wrapping (preserves long lines for less)
+--wrap=never
