@@ -6,7 +6,7 @@
         "icon": "wallpaper",
         "displayText": "",
         "displayCommand": "",
-        "clickCommand": "dms ipc call dash toggle wallpaper",
+        "clickCommand": "dms ipc call dash toggleAt wallpaper center",
         "middleClickCommand": "",
         "rightClickCommand": "",
         "updateInterval": 0,
