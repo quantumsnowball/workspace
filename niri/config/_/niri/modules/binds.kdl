@@ -17,8 +17,8 @@ binds {
     XF86MonBrightnessDown allow-when-locked=true { spawn "brightnessctl" "--class=backlight" "set" "10%-"; }
 
     // exec programs
-    Super+Semicolon hotkey-overlay-title="Terminal: Kitty (tmux)" {
-        spawn-sh "kitty -e 'tmux.launch-with-presets'";
+    Super+Semicolon hotkey-overlay-title="Terminal: Kitty (tmux smart)" {
+        spawn-sh "kitty -e /bin/zsh -i -c t";
     }
     Super+Shift+Semicolon hotkey-overlay-title="Terminal: Kitty" {
         spawn-sh "kitty -e /bin/zsh";
