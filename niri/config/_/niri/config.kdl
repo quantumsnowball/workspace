@@ -1,3 +1,6 @@
+// dms pre-config
+include "dms/windowrules.kdl"
+
 // includes
 include "modules/init.kdl"
 include "modules/input.kdl"
@@ -6,9 +9,8 @@ include "modules/layout.kdl"
 include "modules/binds.kdl"
 include "modules/rules.kdl"
 
-// DMS configs override
+// dms override
 include "dms/colors.kdl"
 include "dms/cursor.kdl"
 include "dms/layout.kdl"
-include "dms/windowrules.kdl"
 include "dms/binds.kdl"

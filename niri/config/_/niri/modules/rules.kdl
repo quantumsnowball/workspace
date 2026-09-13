@@ -1,3 +1,9 @@
+// dms custom
+window-rule {
+    // dms settings should not float
+    match app-id="^com.danklinux.dms$" title="^Settings$"
+    open-floating false
+}
 // Open the Firefox picture-in-picture player as floating by default.
 window-rule {
     match app-id=r#"firefox$"# title="^Picture-in-Picture$"
