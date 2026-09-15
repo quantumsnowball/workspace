@@ -18,7 +18,7 @@ binds {
 
     // exec programs
     Super+Semicolon hotkey-overlay-title="Terminal: Kitty (tmux smart)" {
-        spawn-sh "kitty -e /bin/zsh -i -c t";
+        spawn-sh "kitty -e /bin/zsh -i -c 't; exec zsh'";
     }
     Super+Shift+Semicolon hotkey-overlay-title="Terminal: Kitty" {
         spawn-sh "kitty -e /bin/zsh";
