@@ -5,6 +5,7 @@
 
 - As of 2026-03-24, in CachyOS, directly press Play in Steam will launch the original game with no problem
 - It will launch ProtonFixes itself and fix the broken things.
+- In some case, .NET is not installed properly, game window will just crash. Need to install `wine-mono` fix the problem. You can run `wine notepad.exe` to confirm it is installed successfully.
 
 
 ## Run Content Manager
