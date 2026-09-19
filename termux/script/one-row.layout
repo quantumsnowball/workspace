@@ -1,14 +1,14 @@
 
 extra-keys = [[ \
-    {key: TAB, popup: {macro: 'CTRL a w', display: 'TREE'}}, \
+    {key: TAB, popup: {macro: 'CTRL a d', display: '</T>'}}, \
     {macro: 'ALT n', display: '+T', popup: {macro: 'ALT `', display: '-T'}}, \
     {key: LEFT, popup: HOME}, \
     {key: DOWN, popup: CTRL}, \
     {key: ESC, popup: {macro: 'CTRL c', display: '^C'}}, \
     {key: UP, popup: ALT}, \
     {key: RIGHT, popup: END}, \
-    {key: BACKSPACE, popup: {macro: 'CTRL u', display: '^U'}}, \
-    {key: ENTER, popup: {macro: 'ALT ;', display: '^;'}} \
+    {key: BACKSPACE, popup: {macro: 'ALT ;', display: '^;'}}, \
+    {key: ENTER, popup: {macro: 'CTRL a w', display: 'TREE'}} \
 ]]
 
 # vim: ft=sh
