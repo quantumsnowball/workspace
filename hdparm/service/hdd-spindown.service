@@ -1,0 +1,10 @@
+[Unit]
+Description=Spin down SATA HDDs on user login
+After=default.target
+
+[Service]
+Type=oneshot
+ExecStart=/bin/sh -c '/usr/bin/hdparm -y /dev/sd[a-z]'
+
+[Install]
+WantedBy=default.target

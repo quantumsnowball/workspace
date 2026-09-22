@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+src="$HOME/.config/workspace/hdparm/service/hdd-spindown.service"
+dst="/etc/systemd/system/hdd-spindown.service"
+
+sudo ln -sf "$src" "$dst"
+
+sudo systemctl daemon-reload
+sudo systemctl enable hdd-spindown.service
