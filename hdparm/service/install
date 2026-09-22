@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-src="$HOME/.config/workspace/hdparm/service/hdd-spindown.service"
+src="$XDG_CONFIG_HOME/workspace/hdparm/service/hdd-spindown.service"
 dst="/etc/systemd/system/hdd-spindown.service"
 
 sudo ln -sf "$src" "$dst"
