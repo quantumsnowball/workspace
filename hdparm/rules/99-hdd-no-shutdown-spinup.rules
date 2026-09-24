@@ -1,0 +1,2 @@
+# stop kernel from spinning up spun-down SATA drives during reboot/shutdown
+ACTION=="add", SUBSYSTEM=="scsi_disk", ATTR{manage_start_stop}="1"

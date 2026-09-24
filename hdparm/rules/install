@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+
+
+src="$XDG_CONFIG_HOME/workspace/hdparm/rules/99-hdd-no-shutdown-spinup.rules"
+dst="/etc/udev/rules.d/99-hdd-no-shutdown-spinup.rules"
+
+sudo ln -sf "$src" "$dst"
+
+# reload udev rules and trigger for existing scsi disks
+sudo udevadm control --reload-rules
+sudo udevadm trigger --subsystem-match=scsi_disk
+
+# verify setup
+if [[ -L "$dst" && -e "$dst" ]]; then
+    echo "udev rule installed and applied successfully"
+else
+    echo "failed to install udev rule symlink" >&2
+    exit 1
+fi
