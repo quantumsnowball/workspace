@@ -16,6 +16,9 @@ flags=(
 
     # force Nvidia
     --enable-features=VaapiOnNvidiaGPUs
+
+    # cache to ram location, improve performance
+    --disk-cache-dir=/tmp/google-chrome
 )
 
 # force Nvidia
