@@ -1,0 +1,26 @@
+#!/usr/bin/env bash
+
+
+# Debug
+# - chrome://gpu 
+# - F12 devtools, 'Media' tab
+# Reference docs:
+# - https://wiki.archlinux.org/title/Chromium
+# - https://wiki.archlinux.org/title/Hardware_video_acceleration
+
+# define chrome launch flags
+flags=(
+    # wallet integration
+    --password-store=kwallet6
+
+    # force Intel iGPU
+    --enable-features=VaapiVideoDecoder
+    # run `ls -l /dev/dri/by-path` to check
+    --hardware-video-device-path=/dev/dri/renderD129
+)
+
+# force Intel iGPU
+export LIBVA_DRIVER_NAME=iHD
+
+# run
+exec /opt/google/chrome/google-chrome "${flags[@]}" "$@"
