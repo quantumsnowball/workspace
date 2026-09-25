@@ -9,28 +9,33 @@ flags=(
     # wallet integration
     --password-store=kwallet6
 
+    --ignore-gpu-blocklist
+    --enable-zero-copy
+    --enable-features=AcceleratedVideoDecodeLinuxGL,AcceleratedVideoDecoder,VaapiOnNvidiaGPUs,VaapiVideoDecoder
+
+
     # wayland display server
-    --ozone-platform=wayland
+    # --ozone-platform=wayland
 
     #
-    --use-gl=desktop
-    --use-angle=vulkan
+    # --use-gl=desktop
+    # --use-angle=vulkan
 
     # force intel iGPU render node (129) instead of nvidia (128)
-    --render-node-override=/dev/dri/renderD129
+    # --render-node-override=/dev/dri/renderD129
     # --render-node-override=/dev/dri/renderD128
 
     # feature flags
-    --enable-features=Vulkan,CanvasOopRasterization,WaylandLinuxDrmSyncobj,UseMultiPlaneFormatForHardwareVideo
-    --disable-features=UseChromeOSDirectVideoDecoder
+    # --enable-features=Vulkan,CanvasOopRasterization,WaylandLinuxDrmSyncobj,UseMultiPlaneFormatForHardwareVideo
+    # --disable-features=UseChromeOSDirectVideoDecoder
 
     # workaround 
-    --disable-gpu-driver-bug-workarounds
-    --disable-gpu-vsync
+    # --disable-gpu-driver-bug-workarounds
+    # --disable-gpu-vsync
 )
 
-# force Mesa/iHD VA-API driver
-export LIBVA_DRIVER_NAME=iHD
+# force Nvidia
+export LIBVA_DRIVER_NAME=nvidia
 
 # run
 exec /opt/google/chrome/google-chrome "${flags[@]}" "$@"
