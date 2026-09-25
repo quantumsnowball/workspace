@@ -1,0 +1,27 @@
+{
+    {
+        {
+            "name": "FourSeasons",
+            "background": "#111111",
+            "foreground": "#FFFFFF",
+            "black": "#444444",
+            "brightBlack": "#888888",
+            "red": "#dd3366",
+            "brightRed": "#ff5588",
+            "green": "#33dd77",
+            "brightGreen": "#55ff99",
+            "yellow": "#dddd88",
+            "brightYellow": "#ffff88",
+            "blue": "#0088dd",
+            "brightBlue": "#22aaff",
+            "purple": "#bb66dd",
+            "brightPurple": "#dd88ff",
+            "cyan": "#44dddd",
+            "brightCyan": "#66ffff",
+            "white": "#eeeeee",
+            "brightWhite": "#FFFFFF",
+            "cursorColor": "#FFFFFF",
+            "selectionBackground": "#FFFFFF"
+        }
+    }
+}
