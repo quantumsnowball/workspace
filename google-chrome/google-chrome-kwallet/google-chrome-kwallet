@@ -1,23 +1,21 @@
 #!/usr/bin/env bash
 
-# Wrapper to force KWallet6 and other useful flags for Google Chrome
-# exec /opt/google/chrome/google-chrome \
-#     --password-store=kwallet6 \
-#     # use wayland
-#     --ozone-platform=wayland \
-#     # force to use Intel iGPU instead of Nvidia because of broken driver
-#     --render-node-override=/dev/dri/renderD129 \
-#     # --use-gl=desktop \
-#     # --enable-features=VaapiVideoDecoder,VaapiVideoEncoder,CanvasOopRasterization,VaapiIgnoreDriverChecks,WaylandLinuxDrmSyncobj \
-#     # --disable-features=UseChromeOSDirectVideoDecoder,Vulkan \
-#     # --disable-gpu-driver-bug-workarounds \
-#     # --ignore-gpu-blocklist \
-#     "$@"
-exec /opt/google/chrome/google-chrome \
-    --password-store=kwallet6 \
-    --ozone-platform=wayland \
-    --render-node-override=/dev/dri/renderD129 \
-    --use-gl=desktop \
-    --enable-features=VaapiVideoDecoder,VaapiVideoEncoder,CanvasOopRasterization,VaapiIgnoreDriverChecks,WaylandLinuxDrmSyncobj \
-    --disable-features=UseChromeOSDirectVideoDecoder,Vulkan \
-    "$@"
+# define chrome launch flags
+flags=(
+    # wallet integration
+    --password-store=kwallet6
+
+    # wayland display server
+    --ozone-platform=wayland
+
+    # force to D129, the intel GPU, because nvidia vaapi driver is broken
+    --render-node-override=/dev/dri/renderD129
+    --use-gl=desktop
+
+    # hardware acceleration features
+    --enable-features=VaapiVideoDecoder,VaapiVideoEncoder,CanvasOopRasterization,VaapiIgnoreDriverChecks,WaylandLinuxDrmSyncobj
+    --disable-features=UseChromeOSDirectVideoDecoder,Vulkan
+    --disable-gpu-driver-bug-workarounds
+)
+
+exec /opt/google/chrome/google-chrome "${flags[@]}" "$@"
