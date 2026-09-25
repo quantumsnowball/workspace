@@ -1,9 +1,12 @@
 #!/usr/bin/env bash
 
 
+# Debug
+# - chrome://gpu 
+# - F12 devtools, 'Media' tab
 # Reference docs:
-# https://wiki.archlinux.org/title/Chromium
-# https://wiki.archlinux.org/title/Hardware_video_acceleration
+# - https://wiki.archlinux.org/title/Chromium
+# - https://wiki.archlinux.org/title/Hardware_video_acceleration
 
 # define chrome launch flags
 flags=(
