@@ -8,14 +8,25 @@ flags=(
     # wayland display server
     --ozone-platform=wayland
 
-    # force to D129, the intel GPU, because nvidia vaapi driver is broken
-    --render-node-override=/dev/dri/renderD129
+    #
     --use-gl=desktop
+    --use-angle=vulkan
 
-    # hardware acceleration features
-    --enable-features=VaapiVideoDecoder,VaapiVideoEncoder,CanvasOopRasterization,VaapiIgnoreDriverChecks,WaylandLinuxDrmSyncobj
-    --disable-features=UseChromeOSDirectVideoDecoder,Vulkan
+    # force intel iGPU render node (129) instead of nvidia (128)
+    --render-node-override=/dev/dri/renderD129
+    # --render-node-override=/dev/dri/renderD128
+
+    # feature flags
+    --enable-features=Vulkan,CanvasOopRasterization,WaylandLinuxDrmSyncobj,UseMultiPlaneFormatForHardwareVideo
+    --disable-features=UseChromeOSDirectVideoDecoder
+
+    # workaround 
     --disable-gpu-driver-bug-workarounds
+    --disable-gpu-vsync
 )
 
+# force Mesa/iHD VA-API driver
+export LIBVA_DRIVER_NAME=iHD
+
+# run
 exec /opt/google/chrome/google-chrome "${flags[@]}" "$@"
