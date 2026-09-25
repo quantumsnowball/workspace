@@ -4,7 +4,6 @@
 # Debug
 # - chrome://gpu 
 # - F12 devtools, 'Media' tab
-# - nvtop, when running should see the Nvidia device showing DEC[|||| 30%], means the decode chip is being used 
 # Reference docs:
 # - https://wiki.archlinux.org/title/Chromium
 # - https://wiki.archlinux.org/title/Hardware_video_acceleration
@@ -14,12 +13,14 @@ flags=(
     # wallet integration
     --password-store=kwallet6
 
-    # force Nvidia
-    --enable-features=VaapiOnNvidiaGPUs
+    # force Intel iGPU
+    --enable-features=VaapiVideoDecoder
+    # run `ls -l /dev/dri/by-path` to check
+    --hardware-video-device-path=/dev/dri/renderD129
 )
 
-# force Nvidia
-export LIBVA_DRIVER_NAME=nvidia
+# force Intel iGPU
+export LIBVA_DRIVER_NAME=iHD
 
 # run
 exec /opt/google/chrome/google-chrome "${flags[@]}" "$@"
