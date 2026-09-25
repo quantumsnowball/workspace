@@ -1,5 +1,9 @@
 #!/usr/bin/env bash
 
+
+# Reference docs:
+# https://wiki.archlinux.org/title/Hardware_video_acceleration#Configuring_VA-API
+
 # define chrome launch flags
 flags=(
     # wallet integration
