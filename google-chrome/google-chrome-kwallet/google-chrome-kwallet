@@ -4,6 +4,7 @@
 # Debug
 # - chrome://gpu 
 # - F12 devtools, 'Media' tab
+# - nvtop, when running should see the Nvidia device showing DEC[|||| 30%], means the decode chip is being used 
 # Reference docs:
 # - https://wiki.archlinux.org/title/Chromium
 # - https://wiki.archlinux.org/title/Hardware_video_acceleration
