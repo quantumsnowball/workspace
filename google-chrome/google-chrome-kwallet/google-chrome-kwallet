@@ -2,6 +2,7 @@
 
 
 # Reference docs:
+# https://wiki.archlinux.org/title/Chromium
 # https://wiki.archlinux.org/title/Hardware_video_acceleration
 
 # define chrome launch flags
@@ -9,9 +10,7 @@ flags=(
     # wallet integration
     --password-store=kwallet6
 
-    # --ignore-gpu-blocklist
-    # --enable-zero-copy
-    # --enable-features=AcceleratedVideoDecodeLinuxGL,AcceleratedVideoDecoder,VaapiOnNvidiaGPUs,VaapiVideoDecoder
+    # force Nvidia
     --enable-features=VaapiOnNvidiaGPUs
 )
 
