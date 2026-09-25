@@ -2,36 +2,17 @@
 
 
 # Reference docs:
-# https://wiki.archlinux.org/title/Hardware_video_acceleration#Configuring_VA-API
+# https://wiki.archlinux.org/title/Hardware_video_acceleration
 
 # define chrome launch flags
 flags=(
     # wallet integration
     --password-store=kwallet6
 
-    --ignore-gpu-blocklist
-    --enable-zero-copy
-    --enable-features=AcceleratedVideoDecodeLinuxGL,AcceleratedVideoDecoder,VaapiOnNvidiaGPUs,VaapiVideoDecoder
-
-
-    # wayland display server
-    # --ozone-platform=wayland
-
-    #
-    # --use-gl=desktop
-    # --use-angle=vulkan
-
-    # force intel iGPU render node (129) instead of nvidia (128)
-    # --render-node-override=/dev/dri/renderD129
-    # --render-node-override=/dev/dri/renderD128
-
-    # feature flags
-    # --enable-features=Vulkan,CanvasOopRasterization,WaylandLinuxDrmSyncobj,UseMultiPlaneFormatForHardwareVideo
-    # --disable-features=UseChromeOSDirectVideoDecoder
-
-    # workaround 
-    # --disable-gpu-driver-bug-workarounds
-    # --disable-gpu-vsync
+    # --ignore-gpu-blocklist
+    # --enable-zero-copy
+    # --enable-features=AcceleratedVideoDecodeLinuxGL,AcceleratedVideoDecoder,VaapiOnNvidiaGPUs,VaapiVideoDecoder
+    --enable-features=VaapiOnNvidiaGPUs
 )
 
 # force Nvidia
