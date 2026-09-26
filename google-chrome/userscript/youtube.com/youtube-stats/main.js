@@ -1,8 +1,8 @@
 // ==UserScript==
 // @name         YouTube Video Stats
 // @namespace    http://tampermonkey.net/
-// @version      2.0
-// @description  display youtube video resolution, fps, and raw full codecs in the bottom control bar
+// @version      2.1
+// @description  display youtube video resolution, fps, and raw full codecs trimmed in bottom control bar
 // @author       You
 // @match        https://www.youtube.com/*
 // @match        https://youtube.com/*
@@ -20,7 +20,7 @@
         alignItems: 'center',
         height: '100%',
         padding: '0 10px',
-        fontSize: '13px',
+        fontSize: '14px',
         fontFamily: 'monospace',
         fontWeight: 'bold',
         color: '#ffffff',
@@ -34,9 +34,6 @@
     resSpan.style.color = '#4fc3f7';
 
     const fpsSpan = document.createElement('span');
-
-    const codecsSpan = document.createElement('span');
-    codecsSpan.style.color = '#aaaaaa';
 
     const vCodecSpan = document.createElement('span');
     vCodecSpan.style.color = '#ff8a65';
@@ -57,6 +54,12 @@
     let lastTime = performance.now();
     let lastFrames = 0;
     let fps = 0;
+
+    // helper function to trim codec strings
+    function formatCodec(str) {
+        if (!str || str === 'N/A') return 'N/A';
+        return str.length > 10 ? `${str.slice(0, 10)}...` : str;
+    }
 
     function injectStatsBar() {
         // locate autoplay button or right control bar container
@@ -113,10 +116,14 @@
 
         // update DOM node contents directly
         resSpan.textContent = res;
-        fpsSpan.textContent = `${fps} FPS`;
+        fpsSpan.textContent = `${fps} fps`;
         fpsSpan.style.color = fps >= 50 ? '#4caf50' : '#ffb74d';
-        vCodecSpan.textContent = vCodec;
-        aCodecSpan.textContent = aCodec;
+
+        vCodecSpan.textContent = formatCodec(vCodec);
+        vCodecSpan.title = vCodec; // show full string on mouse hover
+
+        aCodecSpan.textContent = formatCodec(aCodec);
+        aCodecSpan.title = aCodec; // show full string on mouse hover
     }
 
     setInterval(updateStats, 1000);
