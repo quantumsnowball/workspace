@@ -1,8 +1,8 @@
 // ==UserScript==
 // @name         YouTube Video Stats
 // @namespace    http://tampermonkey.net/
-// @version      1.3
-// @description  display youtube video resolution, fps, and codecs
+// @version      1.4
+// @description  display youtube video resolution, fps, and raw full codecs
 // @author       You
 // @match        https://www.youtube.com/*
 // @match        https://youtube.com/*
@@ -20,17 +20,18 @@
         top: '12px',
         right: '12px',
         zIndex: '9999',
-        backgroundColor: 'rgba(0, 0, 0, 0.8)',
-        color: '#00ffcc',
+        backgroundColor: 'rgba(0, 0, 0, 0.5)',
+        color: '#ffffff',
         fontFamily: 'monospace',
-        fontSize: '12px',
+        fontSize: '10px',
         fontWeight: 'bold',
         padding: '6px 10px',
         borderRadius: '6px',
         pointerEvents: 'none',
-        border: '1px solid rgba(0, 255, 204, 0.3)',
+        border: '0px',
         lineHeight: '1.4',
         whiteSpace: 'pre-line',
+        textAlign: 'right',
     });
 
     let lastTime = performance.now();
@@ -69,25 +70,20 @@
                 ? `${video.videoWidth} x ${video.videoHeight}`
                 : 'loading...';
 
-        // extract codecs
-        let vCodec = 'vp9';
-        let aCodec = 'opus';
-
+        // extract full codec string as reported by youtube
+        let vCodec = 'N/A';
+        let aCodec = 'N/A';
         if (player.getStatsForNerds) {
             const stats = player.getStatsForNerds();
             if (stats && stats.codecs) {
                 const parts = stats.codecs.split('/');
-                if (parts[0])
-                    vCodec = parts[0].trim().split('.')[0].toLowerCase();
-                if (parts[1])
-                    aCodec = parts[1].trim().split('.')[0].toLowerCase();
+                if (parts[0]) vCodec = parts[0].trim();
+                if (parts[1]) aCodec = parts[1].trim();
             }
         }
 
         // output format:
-        // 2560 x 1080, 60 fps
-        // vp9, opus
-        badge.textContent = `${res}, ${fps} fps\n${vCodec}, ${aCodec}`;
+        badge.textContent = `${res}, ${fps} fps\n${vCodec}\n${aCodec}`;
     }
 
     setInterval(updateStats, 1000);
