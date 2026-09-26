@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+
+
+# inject launcher
+launcher_src="$XDG_CONFIG_HOME/workspace/google-chrome/launcher/google-chrome-launcher"
+launcher_dst="/opt/google/chrome/google-chrome-launcher"
+sudo ln -sf "$launcher_src" "$launcher_dst"
+ls -l "$launcher_dst"
+
+# setup pacman hooks
+hook_src="$XDG_CONFIG_HOME/workspace/google-chrome/launcher/google-chrome-post.hook"
+hook_dst="/etc/pacman.d/hooks/google-chrome-post.hook"
+sudo ln -sf "$hook_src" "$hook_dst"
+ls -l "$hook_dst"
