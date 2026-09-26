@@ -1,8 +1,8 @@
 // ==UserScript==
 // @name         YouTube Video Stats
 // @namespace    http://tampermonkey.net/
-// @version      2.1
-// @description  display youtube video resolution, fps, and raw full codecs trimmed in bottom control bar
+// @version      2.3
+// @description  display youtube video resolution, fps, and raw full codecs in high-contrast bottom control bar
 // @author       You
 // @match        https://www.youtube.com/*
 // @match        https://youtube.com/*
@@ -26,30 +26,40 @@
         color: '#ffffff',
         opacity: '1.0',
         pointerEvents: 'none',
-        whiteSpace: 'nowrap',
+        whiteSpace: 'pre', // preserve literal whitespace characters between spans
+        // heavy black outline and deep blur shadow for max contrast on pure white video frames
+        textShadow: `
+            0 0 2px #000000,
+            0 0 4px #000000,
+            1px 1px 0 #000000,
+            -1px -1px 0 #000000,
+            1px -1px 0 #000000,
+            -1px 1px 0 #000000,
+            0 2px 6px rgba(0, 0, 0, 0.95)
+        `,
     });
 
-    // create persistent inline elements
+    // create persistent inline elements using extra bright colors
     const resSpan = document.createElement('span');
-    resSpan.style.color = '#4fc3f7';
+    resSpan.style.color = '#e0f7fa'; // ultra light cyan
 
     const fpsSpan = document.createElement('span');
 
     const vCodecSpan = document.createElement('span');
-    vCodecSpan.style.color = '#ff8a65';
+    vCodecSpan.style.color = '#ffe0b2'; // ultra light orange
 
     const aCodecSpan = document.createElement('span');
-    aCodecSpan.style.color = '#81d4fa';
+    aCodecSpan.style.color = '#e1f5fe'; // ultra light blue
 
     // assemble inline structure
     statsContainer.appendChild(resSpan);
     statsContainer.appendChild(document.createTextNode(' @ '));
     statsContainer.appendChild(fpsSpan);
-    statsContainer.appendChild(document.createTextNode(' ['));
+    statsContainer.appendChild(document.createTextNode(' ( '));
     statsContainer.appendChild(vCodecSpan);
-    statsContainer.appendChild(document.createTextNode(', '));
+    statsContainer.appendChild(document.createTextNode(' | '));
     statsContainer.appendChild(aCodecSpan);
-    statsContainer.appendChild(document.createTextNode(']'));
+    statsContainer.appendChild(document.createTextNode(' )'));
 
     let lastTime = performance.now();
     let lastFrames = 0;
@@ -117,7 +127,7 @@
         // update DOM node contents directly
         resSpan.textContent = res;
         fpsSpan.textContent = `${fps} fps`;
-        fpsSpan.style.color = fps >= 50 ? '#4caf50' : '#ffb74d';
+        fpsSpan.style.color = fps >= 50 ? '#b9f6ca' : '#fff59d'; // bright mint green / pale yellow
 
         vCodecSpan.textContent = formatCodec(vCodec);
         vCodecSpan.title = vCodec; // show full string on mouse hover
