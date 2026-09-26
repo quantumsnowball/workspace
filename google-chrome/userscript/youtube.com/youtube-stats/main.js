@@ -51,9 +51,7 @@
 
         // calculate current fps
         const now = performance.now();
-        const quality = video.getVideoPlaybackQuality
-            ? video.getVideoPlaybackQuality()
-            : null;
+        const quality = video.getVideoPlaybackQuality ? video.getVideoPlaybackQuality() : null;
         if (quality) {
             const totalFrames = quality.totalVideoFrames;
             const elapsed = (now - lastTime) / 1000;
@@ -65,10 +63,7 @@
         }
 
         // get resolution
-        const res =
-            video.videoWidth && video.videoHeight
-                ? `${video.videoWidth} x ${video.videoHeight}`
-                : 'loading...';
+        const res = video.videoWidth && video.videoHeight ? `${video.videoWidth} x ${video.videoHeight}` : 'loading...';
 
         // extract full codec string as reported by youtube
         let vCodec = 'N/A';
