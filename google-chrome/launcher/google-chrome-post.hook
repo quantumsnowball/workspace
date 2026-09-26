@@ -1,0 +1,10 @@
+[Trigger]
+Operation = Install
+Operation = Upgrade
+Type = Package
+Target = google-chrome
+
+[Action]
+Description = [Post Hook] Redirecting Google Chrome's original launcher to my custom launcher ...
+When = PostTransaction
+Exec = /bin/sh -c 'mv -f /opt/google/chrome/google-chrome /opt/google/chrome/google-chrome-original && ln -sf /opt/google/chrome/google-chrome-launcher /opt/google/chrome/google-chrome'
