@@ -1,0 +1,31 @@
+#!/usr/bin/env bash
+
+
+# Debug
+# - chrome://gpu
+# - F12 devtools, 'Media' tab
+# - nvtop, when running should see the Nvidia device showing DEC[|||| 30%], means the decode chip is being used
+# Reference docs:
+# - https://wiki.archlinux.org/title/Chromium
+# - https://wiki.archlinux.org/title/Hardware_video_acceleration
+
+# define chrome launch flags
+flags=(
+    # wallet integration
+    --password-store=kwallet6
+
+    # force Nvidia
+    --enable-features=VaapiOnNvidiaGPUs
+
+    # cache to ram location, improve performance
+    --disk-cache-dir=/tmp/google-chrome
+
+    # other features
+    --enable-features=MiddleClickAutoscroll
+)
+
+# force Nvidia
+export LIBVA_DRIVER_NAME=nvidia
+
+# run
+exec /opt/google/chrome/google-chrome-original "${flags[@]}" "$@"
