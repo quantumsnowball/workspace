@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         YouTube Video Stats
 // @namespace    http://tampermonkey.net/
-// @version      1.6
+// @version      1.7
 // @description  display youtube video resolution, fps, and raw full codecs
 // @author       You
 // @match        https://www.youtube.com/*
@@ -40,39 +40,45 @@
     let lastFrames = 0;
     let fps = 0;
 
-    // create toggle button styled like youtube pill buttons
+    // create toggle button for player controls
     const statsBtn = document.createElement('button');
     statsBtn.id = 'yt-stats-toggle-btn';
     statsBtn.textContent = 'Stats';
+    statsBtn.className = 'ytp-button';
     Object.assign(statsBtn.style, {
-        marginRight: '8px',
-        padding: '0 12px',
-        height: '36px',
-        fontSize: '14px',
-        fontWeight: '500',
-        color: 'var(--yt-spec-text-primary, #fff)',
-        backgroundColor: 'var(--yt-spec-badge-chip-background, rgba(255, 255, 255, 0.1))',
-        border: 'none',
-        borderRadius: '18px',
+        fontSize: '11px',
+        fontWeight: 'bold',
+        color: '#ffffff',
+        opacity: '0.85',
         cursor: 'pointer',
-        display: 'inline-flex',
-        alignItems: 'center',
-        justifyContent: 'center',
+        textAlign: 'center',
+        lineHeight: '36px',
+        verticalAlign: 'top',
+        width: 'auto',
+        padding: '0 8px',
     });
 
     statsBtn.addEventListener('click', () => {
         isStatsVisible = !isStatsVisible;
         badge.style.display = isStatsVisible ? 'block' : 'none';
-        statsBtn.style.backgroundColor = isStatsVisible ? 'var(--yt-spec-text-primary, #fff)' : 'var(--yt-spec-badge-chip-background, rgba(255, 255, 255, 0.1))';
-        statsBtn.style.color = isStatsVisible ? 'var(--yt-spec-base-background, #000)' : 'var(--yt-spec-text-primary, #fff)';
+        statsBtn.style.opacity = isStatsVisible ? '1' : '0.85';
+        statsBtn.style.color = isStatsVisible ? '#3ea6ff' : '#ffffff';
     });
 
     function injectButton() {
-        // target the like button container or the main top-level action buttons
-        const likeContainer = document.querySelector('#segment-like-button') || document.querySelector('#top-level-buttons-computed > *');
+        // target autoplay button or right control bar inside player
+        const autoPlayBtn = document.querySelector('.ytp-autonav-toggle-button');
+        const rightControls = document.querySelector('.ytp-right-controls');
 
-        if (likeContainer && likeContainer.parentElement && !document.getElementById('yt-stats-toggle-btn')) {
-            likeContainer.parentElement.insertBefore(statsBtn, likeContainer);
+        if (!document.getElementById('yt-stats-toggle-btn')) {
+            if (autoPlayBtn && autoPlayBtn.parentElement) {
+                // insert to the left of the auto play button container
+                const container = autoPlayBtn.closest('.ytp-button') || autoPlayBtn;
+                container.parentElement.insertBefore(statsBtn, container);
+            } else if (rightControls) {
+                // fallback to the start of right control bar
+                rightControls.insertBefore(statsBtn, rightControls.firstChild);
+            }
         }
     }
 
