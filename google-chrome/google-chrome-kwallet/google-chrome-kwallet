@@ -19,6 +19,9 @@ flags=(
 
     # cache to ram location, improve performance
     --disk-cache-dir=/tmp/google-chrome
+
+    # other features
+    --enable-features=MiddleClickAutoscroll
 )
 
 # force Nvidia
