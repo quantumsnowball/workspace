@@ -15,13 +15,10 @@ flags=(
     --password-store=kwallet6
 
     # force Nvidia
-    --enable-features=VaapiOnNvidiaGPUs
+    --enable-features=VaapiOnNvidiaGPUs,MiddleClickAutoscroll
 
     # cache to ram location, improve performance
     --disk-cache-dir=/tmp/google-chrome
-
-    # other features
-    --enable-features=MiddleClickAutoscroll
 )
 
 # force Nvidia
