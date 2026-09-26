@@ -53,13 +53,12 @@
 
     // assemble inline structure
     statsContainer.appendChild(resSpan);
-    statsContainer.appendChild(document.createTextNode(' @ '));
+    statsContainer.appendChild(document.createTextNode(' | '));
     statsContainer.appendChild(fpsSpan);
-    statsContainer.appendChild(document.createTextNode(' ( '));
+    statsContainer.appendChild(document.createTextNode(' | '));
     statsContainer.appendChild(vCodecSpan);
     statsContainer.appendChild(document.createTextNode(' | '));
     statsContainer.appendChild(aCodecSpan);
-    statsContainer.appendChild(document.createTextNode(' )'));
 
     let lastTime = performance.now();
     let lastFrames = 0;
