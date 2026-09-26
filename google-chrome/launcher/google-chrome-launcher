@@ -1,5 +1,29 @@
 #!/usr/bin/env zsh
 
+#
+# Original logics from chromium launcher script
+# (refer to /opt/google/chrome/google-chrome-original for the origianl code)
+#
+
+export CHROME_WRAPPER="/opt/google/chrome/google-chrome"
+export CHROME_VERSION_EXTRA="stable"
+export GNOME_DISABLE_CRASH_DIALOG=SET_BY_GOOGLE_CHROME
+
+# Use system xdg utilities. But first create mimeapps.list if it doesn't exist; some systems have bugs in xdg-mime that make it fail without it.
+xdg_app_dir="${XDG_DATA_HOME:-$HOME/.local/share/applications}"
+mkdir -p "$xdg_app_dir"
+[ -f "$xdg_app_dir/mimeapps.list" ] || touch "$xdg_app_dir/mimeapps.list"
+
+# Sanitize std{in,out,err} because they'll be shared with untrusted child processes (http://crbug.com/40079595).
+exec < /dev/null
+exec > >(exec cat)
+exec 2> >(exec cat >&2)
+
+#
+# Custom logics starts here
+#
+
+export LIBVA_DRIVER_NAME=nvidia
 
 # Debug
 # - chrome://gpu
@@ -28,10 +52,7 @@ local flags=(
     --enable-features="${(j:,:)features}"
 )
 
-# force Nvidia
-export LIBVA_DRIVER_NAME=nvidia
-
-# run
-exec /opt/google/chrome/google-chrome-original "${flags[@]}" "$@"
+# run the real binary but info it about the wrapper name
+exec -a "$CHROME_WRAPPER" "/opt/google/chrome/chrome" "${flags[@]}" "$@"
 
 # vim: ft=zsh
