@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         YouTube Video Stats
 // @namespace    http://tampermonkey.net/
-// @version      1.5
+// @version      1.6
 // @description  display youtube video resolution, fps, and raw full codecs
 // @author       You
 // @match        https://www.youtube.com/*
@@ -40,22 +40,26 @@
     let lastFrames = 0;
     let fps = 0;
 
-    // create toggle button
+    // create toggle button styled like youtube pill buttons
     const statsBtn = document.createElement('button');
     statsBtn.id = 'yt-stats-toggle-btn';
     statsBtn.textContent = 'Stats';
     Object.assign(statsBtn.style, {
-        marginLeft: '12px',
-        padding: '4px 8px',
-        fontSize: '12px',
+        marginRight: '8px',
+        padding: '0 12px',
+        height: '36px',
+        fontSize: '14px',
         fontWeight: '500',
         color: 'var(--yt-spec-text-primary, #fff)',
         backgroundColor: 'var(--yt-spec-badge-chip-background, rgba(255, 255, 255, 0.1))',
         border: 'none',
-        borderRadius: '12px',
+        borderRadius: '18px',
         cursor: 'pointer',
-        verticalAlign: 'middle',
+        display: 'inline-flex',
+        alignItems: 'center',
+        justifyContent: 'center',
     });
+
     statsBtn.addEventListener('click', () => {
         isStatsVisible = !isStatsVisible;
         badge.style.display = isStatsVisible ? 'block' : 'none';
@@ -64,10 +68,11 @@
     });
 
     function injectButton() {
-        // locate youtube title container
-        const titleElement = document.querySelector('ytd-watch-metadata #title h1') || document.querySelector('#title h1');
-        if (titleElement && !document.getElementById('yt-stats-toggle-btn')) {
-            titleElement.appendChild(statsBtn);
+        // target the like button container or the main top-level action buttons
+        const likeContainer = document.querySelector('#segment-like-button') || document.querySelector('#top-level-buttons-computed > *');
+
+        if (likeContainer && likeContainer.parentElement && !document.getElementById('yt-stats-toggle-btn')) {
+            likeContainer.parentElement.insertBefore(statsBtn, likeContainer);
         }
     }
 
