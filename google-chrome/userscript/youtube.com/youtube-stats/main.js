@@ -52,6 +52,7 @@
     aCodecSpan.style.color = '#e1f5fe'; // ultra light blue
 
     // assemble inline structure
+    statsContainer.appendChild(document.createTextNode(' | '));
     statsContainer.appendChild(resSpan);
     statsContainer.appendChild(document.createTextNode(' | '));
     statsContainer.appendChild(fpsSpan);
@@ -59,6 +60,7 @@
     statsContainer.appendChild(vCodecSpan);
     statsContainer.appendChild(document.createTextNode(' | '));
     statsContainer.appendChild(aCodecSpan);
+    statsContainer.appendChild(document.createTextNode(' | '));
 
     let lastTime = performance.now();
     let lastFrames = 0;
@@ -67,7 +69,7 @@
     // helper function to trim codec strings
     function formatCodec(str) {
         if (!str || str === 'N/A') return 'N/A';
-        return str.length > 10 ? `${str.slice(0, 10)}...` : str;
+        return str.length > 6 ? `${str.slice(0, 6)}..` : str;
     }
 
     function injectStatsBar() {
