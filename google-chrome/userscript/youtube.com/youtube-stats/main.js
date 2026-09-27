@@ -1,8 +1,8 @@
 // ==UserScript==
 // @name         YouTube Video Stats
 // @namespace    http://tampermonkey.net/
-// @version      2.3
-// @description  display youtube video resolution, fps, and raw full codecs in high-contrast bottom control bar
+// @version      2.4
+// @description  display youtube video resolution, fps, and raw full codecs in control bar with clean margins
 // @author       You
 // @match        https://www.youtube.com/*
 // @match        https://youtube.com/*
@@ -18,16 +18,16 @@
     Object.assign(statsContainer.style, {
         display: 'inline-flex',
         alignItems: 'center',
+        gap: '8px', // space between each stat span
         height: '100%',
-        padding: '0 10px',
-        fontSize: '14px',
+        padding: '0 12px',
+        fontSize: '13px',
         fontFamily: 'monospace',
         fontWeight: 'bold',
         color: '#ffffff',
         opacity: '1.0',
         pointerEvents: 'none',
-        whiteSpace: 'pre', // preserve literal whitespace characters between spans
-        // heavy black outline and deep blur shadow for max contrast on pure white video frames
+        whiteSpace: 'nowrap',
         textShadow: `
             0 0 2px #000000,
             0 0 4px #000000,
@@ -52,15 +52,10 @@
     aCodecSpan.style.color = '#e1f5fe'; // ultra light blue
 
     // assemble inline structure
-    statsContainer.appendChild(document.createTextNode(' | '));
     statsContainer.appendChild(resSpan);
-    statsContainer.appendChild(document.createTextNode(' | '));
     statsContainer.appendChild(fpsSpan);
-    statsContainer.appendChild(document.createTextNode(' | '));
     statsContainer.appendChild(vCodecSpan);
-    statsContainer.appendChild(document.createTextNode(' | '));
     statsContainer.appendChild(aCodecSpan);
-    statsContainer.appendChild(document.createTextNode(' | '));
 
     let lastTime = performance.now();
     let lastFrames = 0;
