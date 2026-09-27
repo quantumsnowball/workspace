@@ -21,9 +21,8 @@
         gap: '8px', // space between each stat span
         height: '100%',
         padding: '0 12px',
-        fontSize: '13px',
-        fontFamily: 'monospace',
-        fontWeight: 'bold',
+        fontSize: '14px',
+        fontWeight: 'normal',
         color: '#ffffff',
         opacity: '1.0',
         pointerEvents: 'none',
@@ -130,7 +129,7 @@
         // format fps
         const fpsText = isSmallViewport ? `${fps}` : `${fps} fps`;
 
-        // format codecs with dynamic max length (4 on small viewports, 6 on larger)
+        // format codecs with dynamic max length
         const codecMaxLen = isSmallViewport ? 4 : 10;
 
         // update DOM node contents directly
