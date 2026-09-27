@@ -145,7 +145,7 @@
         }
 
         // format sanitized fps
-        const displayFps = fps >= 0 && fps <= 60 ? fps : '-';
+        const displayFps = fps >= 0 && fps <= 66 ? fps : '-';
         const fpsText = isSmallViewport ? `${displayFps}` : `${displayFps} fps`;
 
         // format codecs with dynamic max length (4 on small viewports, 10 on larger)
