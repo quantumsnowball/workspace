@@ -40,15 +40,15 @@
 
     // create persistent inline elements using extra bright colors
     const resSpan = document.createElement('span');
-    resSpan.style.color = '#e0f7fa'; // ultra light cyan
+    resSpan.style.color = '#8effff'; // bright cyan
 
     const fpsSpan = document.createElement('span');
 
     const vCodecSpan = document.createElement('span');
-    vCodecSpan.style.color = '#ffe0b2'; // ultra light orange
+    vCodecSpan.style.color = '#ffa534'; // bright orange
 
     const aCodecSpan = document.createElement('span');
-    aCodecSpan.style.color = '#e1f5fe'; // ultra light blue
+    aCodecSpan.style.color = '#da6969'; // dim red
 
     // assemble inline structure
     statsContainer.appendChild(resSpan);
@@ -154,7 +154,7 @@
         // update DOM node contents directly
         resSpan.textContent = resText;
         fpsSpan.textContent = fpsText;
-        fpsSpan.style.color = fps >= 50 ? '#b9f6ca' : '#fff59d'; // bright mint green / pale yellow
+        fpsSpan.style.color = fps >= 50 ? '#65ff6a' : '#ffeb3b'; // bright green / bright yellow
 
         vCodecSpan.textContent = formatCodec(vCodec, codecMaxLen);
         vCodecSpan.title = vCodec; // show full string on mouse hover
