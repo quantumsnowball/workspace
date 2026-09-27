@@ -1,8 +1,8 @@
 // ==UserScript==
 // @name         YouTube Video Stats
 // @namespace    http://tampermonkey.net/
-// @version      2.5
-// @description  display youtube video resolution, fps, and raw full codecs with dynamic width adaptation
+// @version      2.6
+// @description  display youtube video resolution, fps, and raw full codecs with dynamic width adaptation and sanitized fps
 // @author       You
 // @match        https://www.youtube.com/*
 // @match        https://youtube.com/*
@@ -59,6 +59,7 @@
     let lastTime = performance.now();
     let lastFrames = 0;
     let fps = 0;
+    let currentSrc = '';
 
     // helper function to trim codec strings
     function formatCodec(str, maxLen = 6) {
@@ -91,6 +92,14 @@
 
         if (!video || !player) return;
 
+        // detect media source/video change and reset state immediately
+        if (video.currentSrc !== currentSrc) {
+            currentSrc = video.currentSrc;
+            lastFrames = 0;
+            lastTime = performance.now();
+            fps = -1;
+        }
+
         // calculate current fps
         const now = performance.now();
         const quality = video.getVideoPlaybackQuality ? video.getVideoPlaybackQuality() : null;
@@ -98,7 +107,16 @@
             const totalFrames = quality.totalVideoFrames;
             const elapsed = (now - lastTime) / 1000;
             if (elapsed >= 1) {
-                fps = Math.round((totalFrames - lastFrames) / elapsed);
+                const calculatedFps = Math.round((totalFrames - lastFrames) / elapsed);
+
+                // validate fps range (0 to 240 fps)
+                if (calculatedFps >= 0 && calculatedFps <= 240 && lastFrames <= totalFrames) {
+                    fps = calculatedFps;
+                } else {
+                    // reset frame anchor on invalid jump/seek
+                    fps = -1;
+                }
+
                 lastFrames = totalFrames;
                 lastTime = now;
             }
@@ -126,10 +144,11 @@
             resText = isSmallViewport ? `${video.videoHeight}p` : `${video.videoWidth} x ${video.videoHeight}`;
         }
 
-        // format fps
-        const fpsText = isSmallViewport ? `${fps}` : `${fps} fps`;
+        // format sanitized fps
+        const displayFps = fps >= 0 && fps <= 60 ? fps : '-';
+        const fpsText = isSmallViewport ? `${displayFps}` : `${displayFps} fps`;
 
-        // format codecs with dynamic max length
+        // format codecs with dynamic max length (4 on small viewports, 10 on larger)
         const codecMaxLen = isSmallViewport ? 4 : 10;
 
         // update DOM node contents directly
