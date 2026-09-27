@@ -1,8 +1,8 @@
 // ==UserScript==
 // @name         YouTube Video Stats
 // @namespace    http://tampermonkey.net/
-// @version      2.4
-// @description  display youtube video resolution, fps, and raw full codecs in control bar with clean margins
+// @version      2.5
+// @description  display youtube video resolution, fps, and raw full codecs with dynamic width adaptation
 // @author       You
 // @match        https://www.youtube.com/*
 // @match        https://youtube.com/*
@@ -62,9 +62,9 @@
     let fps = 0;
 
     // helper function to trim codec strings
-    function formatCodec(str) {
+    function formatCodec(str, maxLen = 6) {
         if (!str || str === 'N/A') return 'N/A';
-        return str.length > 6 ? `${str.slice(0, 6)}..` : str;
+        return str.length > maxLen ? `${str.slice(0, maxLen)}..` : str;
     }
 
     function injectStatsBar() {
@@ -105,9 +105,6 @@
             }
         }
 
-        // get resolution
-        const res = video.videoWidth && video.videoHeight ? `${video.videoWidth} x ${video.videoHeight}` : 'loading...';
-
         // extract full codec string as reported by youtube
         let vCodec = 'N/A';
         let aCodec = 'N/A';
@@ -120,15 +117,31 @@
             }
         }
 
+        // detect player container width
+        const playerWidth = player.clientWidth;
+        const isSmallViewport = playerWidth < 1280;
+
+        // format resolution
+        let resText = 'loading...';
+        if (video.videoWidth && video.videoHeight) {
+            resText = isSmallViewport ? `${video.videoHeight}p` : `${video.videoWidth} x ${video.videoHeight}`;
+        }
+
+        // format fps
+        const fpsText = isSmallViewport ? `${fps}` : `${fps} fps`;
+
+        // format codecs with dynamic max length (4 on small viewports, 6 on larger)
+        const codecMaxLen = isSmallViewport ? 4 : 10;
+
         // update DOM node contents directly
-        resSpan.textContent = res;
-        fpsSpan.textContent = `${fps} fps`;
+        resSpan.textContent = resText;
+        fpsSpan.textContent = fpsText;
         fpsSpan.style.color = fps >= 50 ? '#b9f6ca' : '#fff59d'; // bright mint green / pale yellow
 
-        vCodecSpan.textContent = formatCodec(vCodec);
+        vCodecSpan.textContent = formatCodec(vCodec, codecMaxLen);
         vCodecSpan.title = vCodec; // show full string on mouse hover
 
-        aCodecSpan.textContent = formatCodec(aCodec);
+        aCodecSpan.textContent = formatCodec(aCodec, codecMaxLen);
         aCodecSpan.title = aCodec; // show full string on mouse hover
     }
 
