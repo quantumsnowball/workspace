@@ -15,6 +15,7 @@ git:
   branchLogCmd: 'git log --graph --all --color=always --abbrev-commit --decorate --date=relative --pretty=format:"%C(yellow)%h%Creset%C(auto)%d%Creset %s %C(magenta)%cr%Creset %C(blue)%G?%Creset" {{branchName}} --'
   allBranchesLogCmds:
     - git log --graph --all --color=always --abbrev-commit --decorate --date=relative  --pretty=oneline
+  overrideGpg: true
 customCommands:
   - key: 'F'
     description: 'fast-forward selected branch up to current branch'
