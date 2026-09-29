@@ -4,6 +4,9 @@
 # Virtual Hubs
 05e3:0608 Virtual Hub USB 2.0
 
+# Wireless
+0489:e10a WiFi Bluetooth Adaptor
+
 # keyboard
 1a2c:7fff BOW Keyboard
 0603:2801 DigiMOMO Keybaord
