@@ -1,11 +1,14 @@
-# Hubs
+# hubs
 214b:7250 Outlet 7 Ports
 
-# Virtual Hubs
+# virtual hubs
 05e3:0608 Virtual Hub USB 2.0
 
-# Wireless
+# wireless
 0489:e10a WiFi Bluetooth Adaptor
+
+# audio
+0db0:d1d7 Onboard Audio
 
 # keyboard
 1a2c:7fff BOW Keyboard
