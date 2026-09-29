@@ -17,4 +17,8 @@
 # gamepad
 2a06:b111 IINE Touchpad
 
+# driving wheel
+11ff:3245 PXN-V99 FFB Wheel
+
+
 # vim: ft=ini
