@@ -222,6 +222,14 @@ systemctl_commands:
     modal_keybinding: "d"
     direct_keybinding: null
     description: "Disable unit(s)."
+  - command: "mask"
+    modal_keybinding: "m"
+    direct_keybinding: null
+    description: "Mask/Disable starting unit(s)"
+  - command: "unmask"
+    modal_keybinding: "u"
+    direct_keybinding: null
+    description: "Undo masking of unit(s)"
 
 ## Arguments passed to the configured `default_pager`.
 ## Should NOT be required most of the time.
