@@ -1,8 +1,8 @@
 // ==UserScript==
 // @name         YouTube Video Stats
 // @namespace    http://tampermonkey.net/
-// @version      2.6
-// @description  display youtube video resolution, fps, and raw full codecs with dynamic width adaptation and sanitized fps
+// @version      2.7
+// @description  display youtube video resolution, fps, and raw full codecs with dynamic viewport adaptation
 // @author       You
 // @match        https://www.youtube.com/*
 // @match        https://youtube.com/*
@@ -136,6 +136,7 @@
 
         // detect player container width
         const playerWidth = player.clientWidth;
+        const isTinyViewport = playerWidth < 960;
         const isSmallViewport = playerWidth < 1280;
 
         // format resolution
@@ -156,11 +157,20 @@
         fpsSpan.textContent = fpsText;
         fpsSpan.style.color = fps >= 50 ? '#65ff6a' : '#ffeb3b'; // bright green / bright yellow
 
-        vCodecSpan.textContent = formatCodec(vCodec, codecMaxLen);
-        vCodecSpan.title = vCodec; // show full string on mouse hover
+        // hide codecs on tiny viewports (< 640px)
+        if (isTinyViewport) {
+            vCodecSpan.style.display = 'none';
+            aCodecSpan.style.display = 'none';
+        } else {
+            vCodecSpan.style.display = 'inline';
+            aCodecSpan.style.display = 'inline';
 
-        aCodecSpan.textContent = formatCodec(aCodec, codecMaxLen);
-        aCodecSpan.title = aCodec; // show full string on mouse hover
+            vCodecSpan.textContent = formatCodec(vCodec, codecMaxLen);
+            vCodecSpan.title = vCodec; // show full string on mouse hover
+
+            aCodecSpan.textContent = formatCodec(aCodec, codecMaxLen);
+            aCodecSpan.title = aCodec; // show full string on mouse hover
+        }
     }
 
     setInterval(updateStats, 1000);
