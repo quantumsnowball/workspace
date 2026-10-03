@@ -58,7 +58,8 @@ function createUi(onClear, onFilter) {
         <div id="media-extractor-list" style="padding:10px 14px;overflow-y:auto;max-height:380px;flex-grow:1;"></div>
         <div style="padding:10px 14px;background:#252525;border-top:1px solid #333;display:flex;align-items:center;gap:10px;">
             <label for="media-extractor-filter" style="color:#aaa;font-size:11px;white-space:nowrap;user-select:none;">filter:</label>
-            <input id="media-extractor-filter" type="text" placeholder="type keyword..." style="width:100%;box-sizing:border-box;background:#181818;color:#fff;border:1px solid #444;border-radius:4px;padding:6px 10px;font-family:monospace;font-size:12px;outline:none;" />
+            <input id="media-extractor-filter" type="text" placeholder="type keyword..." style="flex-grow:1;box-sizing:border-box;background:#181818;color:#fff;border:1px solid #444;border-radius:4px;padding:6px 10px;font-family:monospace;font-size:12px;outline:none;" />
+            <div id="media-extractor-res-group" style="display:flex;gap:4px;flex-shrink:0;"></div>
         </div>
     `;
 
@@ -68,6 +69,51 @@ function createUi(onClear, onFilter) {
     listContainer = document.getElementById('media-extractor-list');
     badge = document.getElementById('media-extractor-badge');
     filterInput = document.getElementById('media-extractor-filter');
+
+    // resolution quick filter preset buttons with progressive heat-map colors
+    const resPresets = [
+        { label: '480', bg: '#4a5568' }, // slate gray
+        { label: '720', bg: '#2b6cb0' }, // soft blue
+        { label: '1080', bg: '#2f855a' }, // emerald green
+        { label: '1440', bg: '#d69e2e' }, // warm gold
+        { label: '2560', bg: '#dd6b20' }, // deep orange
+        { label: '2k', bg: '#e53e3e' }, // vibrant red
+        { label: '4k', bg: '#805ad5' }, // ultra purple
+    ];
+
+    const resGroupContainer = document.getElementById('media-extractor-res-group');
+    resPresets.forEach((preset) => {
+        const btn = document.createElement('button');
+        btn.textContent = preset.label;
+        Object.assign(btn.style, {
+            backgroundColor: preset.bg,
+            color: '#fff',
+            border: 'none',
+            padding: '3px 7px',
+            borderRadius: '3px',
+            cursor: 'pointer',
+            fontSize: '10px',
+            fontFamily: 'monospace',
+            fontWeight: 'bold',
+            opacity: '0.85',
+            transition: 'opacity 0.15s ease, transform 0.1s ease',
+            userSelect: 'none',
+        });
+
+        btn.onmouseover = () => {
+            btn.style.opacity = '1';
+        };
+        btn.onmouseout = () => {
+            btn.style.opacity = '0.85';
+        };
+
+        btn.onclick = () => {
+            filterInput.value = preset.label;
+            onFilter(preset.label);
+        };
+
+        resGroupContainer.appendChild(btn);
+    });
 
     fab.onclick = () => {
         popup.style.display = popup.style.display === 'none' ? 'flex' : 'none';
