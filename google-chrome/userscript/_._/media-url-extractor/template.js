@@ -1,5 +1,5 @@
 // template.js
-const FAB_HTML = `🎥<span id="media-extractor-badge" style="background:#e63946;color:#fff;border-radius:10px;padding:2px 7px;font-size:11px;font-weight:bold;margin-left:6px;box-shadow:0 2px 4px rgba(0,0,0,0.4);">0</span>`;
+const FAB_HTML = `Media<span id="media-extractor-badge" style="background:#e63946;color:#fff;border-radius:10px;padding:2px 7px;font-size:11px;font-weight:bold;margin-left:6px;box-shadow:0 2px 4px rgba(0,0,0,0.4);">0</span>`;
 
 const POPUP_LAYOUT_HTML = `
     <div style="padding:10px 14px;background:#2d2d2d;border-bottom:1px solid #444;display:flex;justify-content:space-between;align-items:center;gap:12px;">
