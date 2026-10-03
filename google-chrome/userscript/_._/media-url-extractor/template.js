@@ -9,12 +9,11 @@ const POPUP_LAYOUT_HTML = `
             <button id="media-extractor-close" style="background:#6c757d;color:#fff;border:none;padding:4px 10px;border-radius:4px;cursor:pointer;">✕</button>
         </div>
     </div>
-    <div id="media-extractor-headers-bar" style="padding:8px 14px;background:#252525;border-bottom:1px solid #333;display:flex;align-items:center;gap:16px;user-select:none;line-height:1;">
-        <span style="color:#aaa;font-size:11px;font-weight:bold;display:inline-flex;align-items:center;">headers:</span>
-        <label style="color:#ddd;cursor:pointer;display:inline-flex;align-items:center;gap:4px;font-size:11px;margin:0;"><input type="checkbox" id="hdr-referer" style="cursor:pointer;margin:0;vertical-align:middle;" /> Referer</label>
-        <label style="color:#ddd;cursor:pointer;display:inline-flex;align-items:center;gap:4px;font-size:11px;margin:0;"><input type="checkbox" id="hdr-origin" style="cursor:pointer;margin:0;vertical-align:middle;" /> Origin</label>
-        <label style="color:#ddd;cursor:pointer;display:inline-flex;align-items:center;gap:4px;font-size:11px;margin:0;"><input type="checkbox" id="hdr-useragent" style="cursor:pointer;margin:0;vertical-align:middle;" /> User-Agent</label>
-        <label style="color:#ddd;cursor:pointer;display:inline-flex;align-items:center;gap:4px;font-size:11px;margin:0;"><input type="checkbox" id="hdr-acceptlang" style="cursor:pointer;margin:0;vertical-align:middle;" /> Accept-Language</label>
+    <div id="media-extractor-headers-bar" style="padding:8px 14px;background:#252525;border-bottom:1px solid #333;display:flex;align-items:center;justify-content:center;gap:10px;user-select:none;">
+        <button id="hdr-referer" style="cursor:pointer;">Referer</button>
+        <button id="hdr-origin" style="cursor:pointer;">Origin</button>
+        <button id="hdr-useragent" style="cursor:pointer;">User-Agent</button>
+        <button id="hdr-acceptlang" style="cursor:pointer;">Accept-Language</button>
     </div>
     <div id="media-extractor-list" style="padding:10px 14px;overflow-y:auto;max-height:380px;flex-grow:1;"></div>
     <div style="padding:10px 14px;background:#252525;border-top:1px solid #333;display:flex;align-items:center;gap:8px;">

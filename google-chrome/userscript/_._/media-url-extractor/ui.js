@@ -75,6 +75,11 @@ function createUi(onClear, onFilter) {
     filterInput = document.getElementById('media-extractor-filter');
     const clearFilterBtn = document.getElementById('media-extractor-clear-filter');
 
+    // helper to sync toggle button visual state
+    function renderHeaderBtnState(btn, isActive) {
+        Object.assign(btn.style, HEADER_TOGGLE_BTN_BASE, isActive ? HEADER_TOGGLE_BTN_ON : HEADER_TOGGLE_BTN_OFF);
+    }
+
     const headerMap = {
         'hdr-referer': 'Referer',
         'hdr-origin': 'Origin',
@@ -82,13 +87,15 @@ function createUi(onClear, onFilter) {
         'hdr-acceptlang': 'Accept-Language',
     };
 
-    // Restore saved checkbox states & set change listeners
+    // initialize toggle buttons and attach click handlers
     Object.entries(headerMap).forEach(([id, headerName]) => {
-        const checkbox = document.getElementById(id);
-        if (checkbox) {
-            checkbox.checked = !!activeHeaders[headerName];
-            checkbox.onchange = (e) => {
-                activeHeaders[headerName] = e.target.checked;
+        const btn = document.getElementById(id);
+        if (btn) {
+            renderHeaderBtnState(btn, !!activeHeaders[headerName]);
+
+            btn.onclick = () => {
+                activeHeaders[headerName] = !activeHeaders[headerName];
+                renderHeaderBtnState(btn, activeHeaders[headerName]);
                 saveHeaders(activeHeaders);
             };
         }

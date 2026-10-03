@@ -45,6 +45,30 @@ const POPUP_STYLE = {
     boxSizing: 'border-box',
 };
 
+const HEADER_TOGGLE_BTN_BASE = {
+    padding: '3px 10px',
+    borderRadius: '4px',
+    fontSize: '11px',
+    fontFamily: 'monospace',
+    fontWeight: 'bold',
+    cursor: 'pointer',
+    userSelect: 'none',
+    transition: 'all 0.15s ease',
+};
+
+const HEADER_TOGGLE_BTN_OFF = {
+    backgroundColor: '#383838',
+    color: '#888888',
+    border: '1px solid #4a4a4a',
+};
+
+const HEADER_TOGGLE_BTN_ON = {
+    backgroundColor: '#0d9488',
+    color: '#ffffff',
+    border: '1px solid #14b8a6',
+    boxShadow: '0 0 6px rgba(20, 184, 166, 0.4)',
+};
+
 const LIST_ROW_STYLE = {
     display: 'flex',
     alignItems: 'center',
