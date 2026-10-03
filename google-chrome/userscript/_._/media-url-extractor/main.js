@@ -1,8 +1,8 @@
 // ==UserScript==
 // @name         media url extractor
 // @namespace    http://tampermonkey.net/
-// @version      1.4
-// @description  captures m3u8 and mp4 urls with syntax highlighting and search filtering
+// @version      1.5
+// @description  captures m3u8 and mp4 urls with syntax highlighting, cyan search term matching, and bottom filter layout
 // @author       you
 // @match        *://*/*
 // @run-at       document-start
@@ -32,13 +32,28 @@
         }
     }
 
+    // escape html strings to prevent xss
+    function escapeHtml(str) {
+        return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+    }
+
+    // helper function to highlight matched keyword in cyan
+    function highlightSearchTerm(htmlStr, keyword) {
+        if (!keyword) return htmlStr;
+
+        // escape special regex characters in user search query
+        const escapedKeyword = keyword.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+
+        // match occurrences outside of existing html tags
+        const regex = new RegExp(`(?![^<]*>)(${escapedKeyword})`, 'gi');
+        return htmlStr.replace(regex, '<span style="color: #00ffff; background-color: #005f5f; font-weight: bold; padding: 0 2px; border-radius: 2px;">$1</span>');
+    }
+
     // helper function to highlight protocol, domain, slashes, and extensions
-    function formatHighlightedUrl(rawUrl) {
+    function formatHighlightedUrl(rawUrl, keyword) {
+        let formattedHtml = '';
         try {
             const parsed = new URL(rawUrl);
-
-            // escape html strings to prevent xss
-            const escapeHtml = (str) => str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
 
             const protocol = escapeHtml(parsed.protocol); // e.g. "https:"
             const host = escapeHtml(parsed.host); // e.g. "s4.maxstream.org"
@@ -52,12 +67,15 @@
             // format remaining path (slashes -> red, extension -> yellow)
             rest = rest.replace(/\//g, redSlash).replace(/(\.m3u8|\.mp4)/gi, '<span style="color: #f1fa8c; font-weight: bold;">$1</span>');
 
-            return `${styledProtocol}${redSlash}${redSlash}${styledHost}${rest}`;
+            formattedHtml = `${styledProtocol}${redSlash}${redSlash}${styledHost}${rest}`;
         } catch (e) {
             // fallback for relative or unparseable urls
-            const escaped = rawUrl.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
-            return escaped.replace(/\//g, '<span style="color: #ff5555; font-weight: bold;">/</span>').replace(/(\.m3u8|\.mp4)/gi, '<span style="color: #f1fa8c; font-weight: bold;">$1</span>');
+            const escaped = escapeHtml(rawUrl);
+            formattedHtml = escaped.replace(/\//g, '<span style="color: #ff5555; font-weight: bold;">/</span>').replace(/(\.m3u8|\.mp4)/gi, '<span style="color: #f1fa8c; font-weight: bold;">$1</span>');
         }
+
+        // apply cyan highlight to matched filter keyword
+        return highlightSearchTerm(formattedHtml, keyword);
     }
 
     // hook fetch api
@@ -132,7 +150,7 @@
             bottom: '70px',
             right: '20px',
             width: '380px',
-            maxHeight: '440px',
+            maxHeight: '460px',
             backgroundColor: '#1e1e1e',
             color: '#fff',
             border: '1px solid #444',
@@ -153,10 +171,11 @@
                     <button id="media-extractor-close" style="background:#6c757d;color:#fff;border:none;padding:3px 8px;border-radius:4px;cursor:pointer;">✕</button>
                 </div>
             </div>
-            <div style="padding:8px 10px;background:#252525;border-bottom:1px solid #333;">
-                <input id="media-extractor-filter" type="text" placeholder="filter urls..." style="width:100%;box-sizing:border-box;background:#181818;color:#fff;border:1px solid #444;border-radius:4px;padding:4px 8px;font-family:monospace;font-size:11px;outline:none;" />
+            <div id="media-extractor-list" style="padding:10px;overflow-y:auto;max-height:330px;flex-grow:1;"></div>
+            <div style="padding:8px 10px;background:#252525;border-top:1px solid #333;display:flex;align-items:center;gap:8px;">
+                <label for="media-extractor-filter" style="color:#aaa;font-size:11px;white-space:nowrap;user-select:none;">filter:</label>
+                <input id="media-extractor-filter" type="text" placeholder="type keyword..." style="width:100%;box-sizing:border-box;background:#181818;color:#fff;border:1px solid #444;border-radius:4px;padding:4px 8px;font-family:monospace;font-size:11px;outline:none;" />
             </div>
-            <div id="media-extractor-list" style="padding:10px;overflow-y:auto;max-height:330px;"></div>
         `;
 
         document.body.appendChild(fab);
@@ -180,7 +199,7 @@
         };
 
         filterInput.oninput = (e) => {
-            filterKeyword = e.target.value.toLowerCase().trim();
+            filterKeyword = e.target.value.trim();
             updateUi();
         };
     }
@@ -189,7 +208,8 @@
         if (!badge || !listContainer) return;
 
         // filter captured urls based on keyword
-        const filteredUrls = Array.from(capturedUrls).filter((url) => url.toLowerCase().includes(filterKeyword));
+        const lowerKeyword = filterKeyword.toLowerCase();
+        const filteredUrls = Array.from(capturedUrls).filter((url) => url.toLowerCase().includes(lowerKeyword));
 
         badge.textContent = capturedUrls.size;
         listContainer.innerHTML = '';
@@ -218,8 +238,8 @@
             });
 
             const urlText = document.createElement('span');
-            // render highlighted html
-            urlText.innerHTML = formatHighlightedUrl(url);
+            // render highlighted html with cyan search term match
+            urlText.innerHTML = formatHighlightedUrl(url, filterKeyword);
             urlText.style.marginRight = '8px';
             urlText.style.maxHeight = '50px';
             urlText.style.overflow = 'hidden';
