@@ -31,8 +31,8 @@ function createUi(onClear, onFilter) {
         position: 'fixed',
         bottom: '70px',
         right: '20px',
-        width: 'calc(100vw - 40px)', // takes container width with 20px padding on each side
-        maxWidth: '1280px', // capped at half of 2560px screen width
+        width: 'calc(100vw - 40px)',
+        maxWidth: '1280px',
         maxHeight: '520px',
         backgroundColor: '#1e1e1e',
         color: '#fff',
@@ -84,6 +84,19 @@ function createUi(onClear, onFilter) {
     };
 }
 
+// helper to handle clipboard copying with brief button feedback
+function copyToClipboard(text, button, successLabel, defaultLabel) {
+    if (typeof GM_setClipboard !== 'undefined') {
+        GM_setClipboard(text);
+    } else {
+        navigator.clipboard.writeText(text);
+    }
+    button.textContent = successLabel;
+    setTimeout(() => {
+        button.textContent = defaultLabel;
+    }, 1200);
+}
+
 function updateUiList(capturedUrls, filterKeyword) {
     if (!badge || !listContainer) return;
 
@@ -117,38 +130,56 @@ function updateUiList(capturedUrls, filterKeyword) {
             gap: '12px',
         });
 
+        // url text preview
         const urlText = document.createElement('span');
         urlText.innerHTML = formatHighlightedUrl(url, filterKeyword);
         urlText.style.flexGrow = '1';
         urlText.style.maxHeight = '60px';
         urlText.style.overflow = 'hidden';
 
-        const copyBtn = document.createElement('button');
-        copyBtn.textContent = 'copy';
-        Object.assign(copyBtn.style, {
-            backgroundColor: '#28a745',
-            color: '#fff',
-            border: 'none',
-            padding: '5px 12px',
-            borderRadius: '4px',
-            cursor: 'pointer',
+        // action buttons container
+        const btnContainer = document.createElement('div');
+        Object.assign(btnContainer.style, {
+            display: 'flex',
+            gap: '6px',
             flexShrink: '0',
         });
 
-        copyBtn.onclick = () => {
-            if (typeof GM_setClipboard !== 'undefined') {
-                GM_setClipboard(url);
-            } else {
-                navigator.clipboard.writeText(url);
-            }
-            copyBtn.textContent = 'copied!';
-            setTimeout(() => {
-                copyBtn.textContent = 'copy';
-            }, 1500);
-        };
+        // copy raw url button
+        const copyUrlBtn = document.createElement('button');
+        copyUrlBtn.textContent = 'url';
+        Object.assign(copyUrlBtn.style, {
+            backgroundColor: '#28a745',
+            color: '#fff',
+            border: 'none',
+            padding: '4px 8px',
+            borderRadius: '4px',
+            cursor: 'pointer',
+            fontSize: '11px',
+            fontFamily: 'monospace',
+        });
+        copyUrlBtn.onclick = () => copyToClipboard(url, copyUrlBtn, 'copied!', 'url');
+
+        // copy yt-dlp command button
+        const copyYtdlpBtn = document.createElement('button');
+        copyYtdlpBtn.textContent = 'yt-dlp';
+        Object.assign(copyYtdlpBtn.style, {
+            backgroundColor: '#17a2b8',
+            color: '#fff',
+            border: 'none',
+            padding: '4px 8px',
+            borderRadius: '4px',
+            cursor: 'pointer',
+            fontSize: '11px',
+            fontFamily: 'monospace',
+        });
+        copyYtdlpBtn.onclick = () => copyToClipboard(`yt-dlp "${url}"`, copyYtdlpBtn, 'copied!', 'yt-dlp');
+
+        btnContainer.appendChild(copyUrlBtn);
+        btnContainer.appendChild(copyYtdlpBtn);
 
         row.appendChild(urlText);
-        row.appendChild(copyBtn);
+        row.appendChild(btnContainer);
         listContainer.appendChild(row);
     });
 }
