@@ -64,11 +64,27 @@ function getNativeAcceptLanguage() {
     return 'en-US';
 }
 
-// helper to sanitize page title for filename safety
+// helper to sanitize page title for filename safety with visually similar replacements
 function getSanitizedTitle() {
     const rawTitle = document.title.trim() || 'video';
-    // sanitize reserved filesystem characters and double quotes
-    return rawTitle.replace(/["/\\?%*:|"<>]/g, '_');
+
+    // Map strict OS reserved filesystem characters to full-width/similar Unicode lookalikes
+    const replacements = {
+        '"': '＂', // full-width quotation mark
+        '/': '／', // full-width solidus
+        '\\': '＼', // full-width reverse solidus
+        '?': '？', // full-width question mark
+        '%': '％', // full-width percent sign
+        '*': '＊', // full-width asterisk
+        ':': '：', // full-width colon
+        '|': '｜', // full-width vertical line
+        '<': '＜', // full-width less-than sign
+        '>': '＞', // full-width greater-than sign
+    };
+
+    return rawTitle //
+        .replace(/["/\\?%*:|"<>]/g, (char) => replacements[char] || char)
+        .replace(/[\x00-\x1F\x7F]/g, ''); // strip non-printable ASCII control chars
 }
 
 // helper to handle clipboard copying with brief button feedback
