@@ -70,3 +70,16 @@ function getSanitizedTitle() {
     // sanitize reserved filesystem characters and double quotes
     return rawTitle.replace(/["/\\?%*:|"<>]/g, '_');
 }
+
+// helper to handle clipboard copying with brief button feedback
+function copyToClipboard(text, button, successLabel, defaultLabel) {
+    if (typeof GM_setClipboard !== 'undefined') {
+        GM_setClipboard(text);
+    } else {
+        navigator.clipboard.writeText(text);
+    }
+    button.textContent = successLabel;
+    setTimeout(() => {
+        button.textContent = defaultLabel;
+    }, 1200);
+}

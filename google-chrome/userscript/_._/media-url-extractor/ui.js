@@ -182,39 +182,6 @@ function createUi(onClear, onFilter) {
     };
 }
 
-// helper to build yt-dlp command with --add-header flags and output filename option
-function buildYtdlpCommand(url) {
-    const headerValues = {
-        Referer: window.location.href,
-        Origin: window.location.origin,
-        'User-Agent': navigator.userAgent,
-        'Accept-Language': getNativeAcceptLanguage(),
-    };
-
-    let flags = '';
-    Object.keys(activeHeaders).forEach((header) => {
-        if (activeHeaders[header]) {
-            flags += ` --add-header "${header}:${headerValues[header]}"`;
-        }
-    });
-
-    const pageTitle = getSanitizedTitle();
-    return `yt-dlp${flags} -o "${pageTitle}.%(ext)s" "${url}"`;
-}
-
-// helper to handle clipboard copying with brief button feedback
-function copyToClipboard(text, button, successLabel, defaultLabel) {
-    if (typeof GM_setClipboard !== 'undefined') {
-        GM_setClipboard(text);
-    } else {
-        navigator.clipboard.writeText(text);
-    }
-    button.textContent = successLabel;
-    setTimeout(() => {
-        button.textContent = defaultLabel;
-    }, 1200);
-}
-
 function updateUiList(capturedUrls, filterKeyword) {
     if (!badge || !listContainer) return;
 
@@ -291,7 +258,7 @@ function updateUiList(capturedUrls, filterKeyword) {
             fontSize: '11px',
             fontFamily: 'monospace',
         });
-        copyYtdlpBtn.onclick = () => copyToClipboard(buildYtdlpCommand(url), copyYtdlpBtn, 'copied!', 'yt-dlp');
+        copyYtdlpBtn.onclick = () => copyToClipboard(buildYtdlpCommand(activeHeaders, url), copyYtdlpBtn, 'copied!', 'yt-dlp');
 
         btnContainer.appendChild(copyUrlBtn);
         btnContainer.appendChild(copyYtdlpBtn);
