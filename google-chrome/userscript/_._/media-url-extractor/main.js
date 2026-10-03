@@ -1,8 +1,8 @@
 // ==UserScript==
 // @name         media url extractor
 // @namespace    http://tampermonkey.net/
-// @version      1.3
-// @description  captures m3u8 and mp4 urls with enhanced syntax highlighting
+// @version      1.4
+// @description  captures m3u8 and mp4 urls with syntax highlighting and search filtering
 // @author       you
 // @match        *://*/*
 // @run-at       document-start
@@ -13,6 +13,7 @@
     'use strict';
 
     const capturedUrls = new Set();
+    let filterKeyword = '';
 
     // extract valid media url
     function checkAndAddUrl(url) {
@@ -98,7 +99,7 @@
     const observer = new MutationObserver(scanMediaElements);
 
     // UI elements setup
-    let fab, popup, listContainer, badge;
+    let fab, popup, listContainer, badge, filterInput;
 
     function createUi() {
         if (document.getElementById('media-extractor-fab')) return;
@@ -131,7 +132,7 @@
             bottom: '70px',
             right: '20px',
             width: '380px',
-            maxHeight: '400px',
+            maxHeight: '440px',
             backgroundColor: '#1e1e1e',
             color: '#fff',
             border: '1px solid #444',
@@ -152,6 +153,9 @@
                     <button id="media-extractor-close" style="background:#6c757d;color:#fff;border:none;padding:3px 8px;border-radius:4px;cursor:pointer;">✕</button>
                 </div>
             </div>
+            <div style="padding:8px 10px;background:#252525;border-bottom:1px solid #333;">
+                <input id="media-extractor-filter" type="text" placeholder="filter urls..." style="width:100%;box-sizing:border-box;background:#181818;color:#fff;border:1px solid #444;border-radius:4px;padding:4px 8px;font-family:monospace;font-size:11px;outline:none;" />
+            </div>
             <div id="media-extractor-list" style="padding:10px;overflow-y:auto;max-height:330px;"></div>
         `;
 
@@ -160,6 +164,7 @@
 
         listContainer = document.getElementById('media-extractor-list');
         badge = document.getElementById('media-extractor-badge');
+        filterInput = document.getElementById('media-extractor-filter');
 
         fab.onclick = () => {
             popup.style.display = popup.style.display === 'none' ? 'flex' : 'none';
@@ -173,10 +178,18 @@
             capturedUrls.clear();
             updateUi();
         };
+
+        filterInput.oninput = (e) => {
+            filterKeyword = e.target.value.toLowerCase().trim();
+            updateUi();
+        };
     }
 
     function updateUi() {
         if (!badge || !listContainer) return;
+
+        // filter captured urls based on keyword
+        const filteredUrls = Array.from(capturedUrls).filter((url) => url.toLowerCase().includes(filterKeyword));
 
         badge.textContent = capturedUrls.size;
         listContainer.innerHTML = '';
@@ -186,7 +199,12 @@
             return;
         }
 
-        capturedUrls.forEach((url) => {
+        if (filteredUrls.length === 0) {
+            listContainer.innerHTML = '<div style="color:#aaa;text-align:center;">no matching urls found</div>';
+            return;
+        }
+
+        filteredUrls.forEach((url) => {
             const row = document.createElement('div');
             Object.assign(row.style, {
                 display: 'flex',
