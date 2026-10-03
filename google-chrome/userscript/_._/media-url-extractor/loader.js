@@ -9,6 +9,9 @@
 // @grant        GM_setClipboard
 // @require      file:///home/<username>/.config/workspace/google-chrome/userscript/_._/media-url-extractor/utils.js
 // @require      file:///home/<username>/.config/workspace/google-chrome/userscript/_._/media-url-extractor/interceptor.js
+// @require      file:///home/<username>/.config/workspace/google-chrome/userscript/_._/media-url-extractor/ytdlp.js
+// @require      file:///home/<username>/.config/workspace/google-chrome/userscript/_._/media-url-extractor/template.js
+// @require      file:///home/<username>/.config/workspace/google-chrome/userscript/_._/media-url-extractor/style.js
 // @require      file:///home/<username>/.config/workspace/google-chrome/userscript/_._/media-url-extractor/ui.js
 // @require      file:///home/<username>/.config/workspace/google-chrome/userscript/_._/media-url-extractor/main.js
 // ==/UserScript==
