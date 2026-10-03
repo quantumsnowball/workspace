@@ -59,9 +59,9 @@ function createUi(onClear, onFilter) {
 
     // layout structure: header title -> checkboxes bar -> list container -> filter bar
     popup.innerHTML = `
-        <div style="padding:10px 14px;background:#2d2d2d;border-bottom:1px solid #444;display:flex;justify-content:space-between;align-items:center;">
-            <b style="color:#fff;">captured media urls</b>
-            <div>
+        <div style="padding:10px 14px;background:#2d2d2d;border-bottom:1px solid #444;display:flex;justify-content:space-between;align-items:center;gap:12px;">
+            <b id="media-extractor-title" style="color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;"></b>
+            <div style="flex-shrink:0;">
                 <button id="media-extractor-clear" style="background:#dc3545;color:#fff;border:none;padding:4px 10px;border-radius:4px;cursor:pointer;margin-right:6px;">clear</button>
                 <button id="media-extractor-close" style="background:#6c757d;color:#fff;border:none;padding:4px 10px;border-radius:4px;cursor:pointer;">✕</button>
             </div>
@@ -83,6 +83,8 @@ function createUi(onClear, onFilter) {
 
     document.body.appendChild(fab);
     document.body.appendChild(popup);
+
+    document.getElementById('media-extractor-title').textContent = document.title.trim() || 'captured media urls';
 
     listContainer = document.getElementById('media-extractor-list');
     badge = document.getElementById('media-extractor-badge');
@@ -184,6 +186,11 @@ function createUi(onClear, onFilter) {
 
 function updateUiList(capturedUrls, filterKeyword) {
     if (!badge || !listContainer) return;
+
+    const titleElement = document.getElementById('media-extractor-title');
+    if (titleElement) {
+        titleElement.textContent = document.title.trim() || 'captured media urls';
+    }
 
     const lowerKeyword = filterKeyword.toLowerCase();
     const filteredUrls = Array.from(capturedUrls).filter((url) => url.toLowerCase().includes(lowerKeyword));
