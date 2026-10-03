@@ -7,6 +7,8 @@
 // @match        *://*/*
 // @run-at       document-start
 // @grant        GM_setClipboard
+// @grant        GM_setValue
+// @grant        GM_getValue
 // @require      file:///home/<username>/.config/workspace/google-chrome/userscript/_._/media-url-extractor/utils.js
 // @require      file:///home/<username>/.config/workspace/google-chrome/userscript/_._/media-url-extractor/interceptor.js
 // @require      file:///home/<username>/.config/workspace/google-chrome/userscript/_._/media-url-extractor/ytdlp.js

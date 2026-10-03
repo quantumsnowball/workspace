@@ -1,13 +1,45 @@
 // ui.js
 let fab, popup, listContainer, badge, filterInput;
 
-// tracks active headers to include in yt-dlp command
-const activeHeaders = {
+// Key used for per-domain storage
+const STORAGE_KEY = `media_extractor_headers_${location.hostname}`;
+
+// Default header states
+const defaultHeaders = {
     Referer: false,
     Origin: false,
     'User-Agent': false,
     'Accept-Language': false,
 };
+
+// Load saved settings per domain
+function loadSavedHeaders() {
+    try {
+        if (typeof GM_getValue !== 'undefined') {
+            return GM_getValue(STORAGE_KEY, defaultHeaders);
+        }
+        const saved = localStorage.getItem(STORAGE_KEY);
+        return saved ? JSON.parse(saved) : defaultHeaders;
+    } catch (e) {
+        return defaultHeaders;
+    }
+}
+
+// Save settings per domain
+function saveHeaders(headers) {
+    try {
+        if (typeof GM_setValue !== 'undefined') {
+            GM_setValue(STORAGE_KEY, headers);
+        } else {
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(headers));
+        }
+    } catch (e) {
+        console.error('Failed to save header settings:', e);
+    }
+}
+
+// Active headers initialized from persistent storage
+const activeHeaders = loadSavedHeaders();
 
 function createUi(onClear, onFilter) {
     if (document.getElementById('media-extractor-fab')) return;
@@ -41,11 +73,16 @@ function createUi(onClear, onFilter) {
         'hdr-acceptlang': 'Accept-Language',
     };
 
+    // Restore saved checkbox states & set change listeners
     Object.entries(headerMap).forEach(([id, headerName]) => {
         const checkbox = document.getElementById(id);
-        checkbox.onchange = (e) => {
-            activeHeaders[headerName] = e.target.checked;
-        };
+        if (checkbox) {
+            checkbox.checked = !!activeHeaders[headerName];
+            checkbox.onchange = (e) => {
+                activeHeaders[headerName] = e.target.checked;
+                saveHeaders(activeHeaders);
+            };
+        }
     });
 
     const resGroupContainer = document.getElementById('media-extractor-res-group');
