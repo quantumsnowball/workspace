@@ -64,11 +64,21 @@ function getNativeAcceptLanguage() {
     return 'en-US';
 }
 
-// helper to sanitize page title for filename safety with visually similar replacements
+// helper to sanitize page title for filename safety with cross-origin iframe support
 function getSanitizedTitle() {
-    const rawTitle = document.title.trim() || 'video';
+    // get raw page title using unified display title getter
+    let rawTitle =
+        typeof getPopupDisplayTitle === 'function' //
+            ? getPopupDisplayTitle()
+            : document.title.trim() || 'video';
 
-    // Map strict OS reserved filesystem characters to full-width/similar Unicode lookalikes
+    if (!rawTitle || !rawTitle.trim() || rawTitle === 'captured media urls') {
+        rawTitle = document.title.trim() || 'video';
+    }
+
+    rawTitle = rawTitle.trim();
+
+    // map strict OS reserved filesystem characters to full-width/similar Unicode lookalikes
     const replacements = {
         '"': '＂', // full-width quotation mark
         '/': '／', // full-width solidus

@@ -2,7 +2,50 @@
 let fab, popup, listContainer, badge, filterInput, shadowRoot;
 
 // Key used for per-domain storage
-const STORAGE_KEY = `media_extractor_headers_${location.hostname}`;
+const HEADERS_STORAGE_KEY = `media_extractor_headers_${location.hostname}`;
+const TITLE_STORAGE_KEY = 'media_extractor_shared_title';
+
+// Save top-level page title using static GM key when running in the main window
+if (window.top === window) {
+    try {
+        if (typeof GM_setValue !== 'undefined') {
+            GM_setValue(TITLE_STORAGE_KEY, document.title);
+        } else {
+            localStorage.setItem(TITLE_STORAGE_KEY, document.title);
+        }
+    } catch (e) {
+        // fail gracefully if storage is restricted
+    }
+}
+
+// Unified helper to retrieve page title (reads static GM key for iframe compatibility)
+function getPopupDisplayTitle() {
+    let title = '';
+
+    // Read stored top-level title from static GM storage key
+    try {
+        if (typeof GM_getValue !== 'undefined') {
+            title = GM_getValue(TITLE_STORAGE_KEY, '');
+        } else {
+            title = localStorage.getItem(TITLE_STORAGE_KEY) || '';
+        }
+    } catch (e) {
+        title = '';
+    }
+
+    // Fall back to same-origin window.top or document.title
+    if (!title) {
+        try {
+            if (window.top && window.top.document) {
+                title = window.top.document.title;
+            }
+        } catch (e) {
+            title = document.title;
+        }
+    }
+
+    return title && title.trim() ? title.trim() : 'captured media urls';
+}
 
 // Default header states
 const defaultHeaders = {
@@ -16,9 +59,9 @@ const defaultHeaders = {
 function loadSavedHeaders() {
     try {
         if (typeof GM_getValue !== 'undefined') {
-            return GM_getValue(STORAGE_KEY, defaultHeaders);
+            return GM_getValue(HEADERS_STORAGE_KEY, defaultHeaders);
         }
-        const saved = localStorage.getItem(STORAGE_KEY);
+        const saved = localStorage.getItem(HEADERS_STORAGE_KEY);
         return saved ? JSON.parse(saved) : defaultHeaders;
     } catch (e) {
         return defaultHeaders;
@@ -29,9 +72,9 @@ function loadSavedHeaders() {
 function saveHeaders(headers) {
     try {
         if (typeof GM_setValue !== 'undefined') {
-            GM_setValue(STORAGE_KEY, headers);
+            GM_setValue(HEADERS_STORAGE_KEY, headers);
         } else {
-            localStorage.setItem(STORAGE_KEY, JSON.stringify(headers));
+            localStorage.setItem(HEADERS_STORAGE_KEY, JSON.stringify(headers));
         }
     } catch (e) {
         console.error('Failed to save header settings:', e);
@@ -81,10 +124,10 @@ function createUi(onClear, onFilter) {
     shadowRoot.appendChild(fab);
     shadowRoot.appendChild(popup);
 
-    // query elements from shadowRoot instead of document
+    // set popup header title using unified title getter
     const titleElement = shadowRoot.getElementById('media-extractor-title');
     if (titleElement) {
-        titleElement.textContent = document.title.trim() || 'captured media urls';
+        titleElement.textContent = getPopupDisplayTitle();
     }
 
     listContainer = shadowRoot.getElementById('media-extractor-list');
@@ -173,7 +216,7 @@ function updateUiList(capturedUrls, filterKeyword) {
 
     const titleElement = shadowRoot.getElementById('media-extractor-title');
     if (titleElement) {
-        titleElement.textContent = document.title.trim() || 'captured media urls';
+        titleElement.textContent = getPopupDisplayTitle();
     }
 
     const lowerKeyword = filterKeyword.toLowerCase();
