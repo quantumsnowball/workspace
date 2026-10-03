@@ -215,7 +215,14 @@ function getNativeAcceptLanguage() {
     return 'en-US';
 }
 
-// helper to build yt-dlp command with --add-header flags
+// helper to sanitize page title for filename safety
+function getSanitizedTitle() {
+    const rawTitle = document.title.trim() || 'video';
+    // sanitize reserved filesystem characters and double quotes
+    return rawTitle.replace(/["/\\?%*:|"<>]/g, '_');
+}
+
+// helper to build yt-dlp command with --add-header flags and output filename option
 function buildYtdlpCommand(url) {
     const headerValues = {
         Referer: window.location.href,
@@ -231,7 +238,8 @@ function buildYtdlpCommand(url) {
         }
     });
 
-    return `yt-dlp${flags} "${url}"`;
+    const pageTitle = getSanitizedTitle();
+    return `yt-dlp${flags} -o "${pageTitle}.%(ext)s" "${url}"`;
 }
 
 // helper to handle clipboard copying with brief button feedback
