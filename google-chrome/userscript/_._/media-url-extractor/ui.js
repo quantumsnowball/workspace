@@ -1,6 +1,14 @@
 // ui.js
 let fab, popup, listContainer, badge, filterInput;
 
+// tracks active headers to include in yt-dlp command
+const activeHeaders = {
+    Referer: false,
+    Origin: false,
+    'User-Agent': false,
+    'Accept-Language': false,
+};
+
 function createUi(onClear, onFilter) {
     if (document.getElementById('media-extractor-fab')) return;
 
@@ -35,7 +43,7 @@ function createUi(onClear, onFilter) {
         transform: 'translateX(-50%)',
         width: 'calc(100vw - 40px)',
         maxWidth: '1280px',
-        maxHeight: '520px',
+        maxHeight: '560px',
         backgroundColor: '#1e1e1e',
         color: '#fff',
         border: '1px solid #444',
@@ -49,7 +57,7 @@ function createUi(onClear, onFilter) {
         boxSizing: 'border-box',
     });
 
-    // toolbar layout order: resolution buttons -> filter input box -> clear button
+    // layout structure: header title -> checkboxes bar -> list container -> filter bar
     popup.innerHTML = `
         <div style="padding:10px 14px;background:#2d2d2d;border-bottom:1px solid #444;display:flex;justify-content:space-between;align-items:center;">
             <b style="color:#fff;">captured media urls</b>
@@ -57,6 +65,13 @@ function createUi(onClear, onFilter) {
                 <button id="media-extractor-clear" style="background:#dc3545;color:#fff;border:none;padding:4px 10px;border-radius:4px;cursor:pointer;margin-right:6px;">clear</button>
                 <button id="media-extractor-close" style="background:#6c757d;color:#fff;border:none;padding:4px 10px;border-radius:4px;cursor:pointer;">✕</button>
             </div>
+        </div>
+        <div id="media-extractor-headers-bar" style="padding:8px 14px;background:#252525;border-bottom:1px solid #333;display:flex;align-items:center;gap:16px;user-select:none;line-height:1;">
+            <span style="color:#aaa;font-size:11px;font-weight:bold;display:inline-flex;align-items:center;">headers:</span>
+            <label style="color:#ddd;cursor:pointer;display:inline-flex;align-items:center;gap:4px;font-size:11px;margin:0;"><input type="checkbox" id="hdr-referer" style="cursor:pointer;margin:0;vertical-align:middle;" /> Referer</label>
+            <label style="color:#ddd;cursor:pointer;display:inline-flex;align-items:center;gap:4px;font-size:11px;margin:0;"><input type="checkbox" id="hdr-origin" style="cursor:pointer;margin:0;vertical-align:middle;" /> Origin</label>
+            <label style="color:#ddd;cursor:pointer;display:inline-flex;align-items:center;gap:4px;font-size:11px;margin:0;"><input type="checkbox" id="hdr-useragent" style="cursor:pointer;margin:0;vertical-align:middle;" /> User-Agent</label>
+            <label style="color:#ddd;cursor:pointer;display:inline-flex;align-items:center;gap:4px;font-size:11px;margin:0;"><input type="checkbox" id="hdr-acceptlang" style="cursor:pointer;margin:0;vertical-align:middle;" /> Accept-Language</label>
         </div>
         <div id="media-extractor-list" style="padding:10px 14px;overflow-y:auto;max-height:380px;flex-grow:1;"></div>
         <div style="padding:10px 14px;background:#252525;border-top:1px solid #333;display:flex;align-items:center;gap:8px;">
@@ -73,6 +88,21 @@ function createUi(onClear, onFilter) {
     badge = document.getElementById('media-extractor-badge');
     filterInput = document.getElementById('media-extractor-filter');
     const clearFilterBtn = document.getElementById('media-extractor-clear-filter');
+
+    // header checkbox bindings
+    const headerMap = {
+        'hdr-referer': 'Referer',
+        'hdr-origin': 'Origin',
+        'hdr-useragent': 'User-Agent',
+        'hdr-acceptlang': 'Accept-Language',
+    };
+
+    Object.entries(headerMap).forEach(([id, headerName]) => {
+        const checkbox = document.getElementById(id);
+        checkbox.onchange = (e) => {
+            activeHeaders[headerName] = e.target.checked;
+        };
+    });
 
     // resolution quick filter preset buttons
     const resPresets = [
@@ -150,6 +180,66 @@ function createUi(onClear, onFilter) {
     filterInput.oninput = (e) => {
         onFilter(e.target.value.trim());
     };
+}
+
+function getNativeAcceptLanguage() {
+    if (Array.isArray(navigator.languages) && navigator.languages.length > 0) {
+        const langs = [];
+
+        // 1. Traverse navigator.languages and append base fallback if missing
+        navigator.languages.forEach((lang) => {
+            if (!langs.includes(lang)) {
+                langs.push(lang);
+            }
+            if (lang.includes('-')) {
+                const baseLang = lang.split('-')[0];
+                if (!langs.includes(baseLang)) {
+                    langs.push(baseLang);
+                }
+            }
+        });
+
+        // 2. Filter out duplicates while preserving first-seen index order
+        const uniqueLangs = Array.from(new Set(langs));
+
+        // 3. Map decaying q-factors (1.0, 0.9, 0.8, 0.7...)
+        return uniqueLangs
+            .map((lang, idx) => {
+                if (idx === 0) return lang;
+                const q = Math.max(0.1, 1 - idx * 0.1).toFixed(1);
+                return `${lang};q=${q}`;
+            })
+            .join(',');
+    }
+
+    return 'en-US';
+}
+
+// helper to sanitize page title for filename safety
+function getSanitizedTitle() {
+    const rawTitle = document.title.trim() || 'video';
+    // sanitize reserved filesystem characters and double quotes
+    return rawTitle.replace(/["/\\?%*:|"<>]/g, '_');
+}
+
+// helper to build yt-dlp command with --add-header flags and output filename option
+function buildYtdlpCommand(url) {
+    const headerValues = {
+        Referer: window.location.href,
+        Origin: window.location.origin,
+        'User-Agent': navigator.userAgent,
+        'Accept-Language': getNativeAcceptLanguage(),
+    };
+
+    let flags = '';
+    Object.keys(activeHeaders).forEach((header) => {
+        if (activeHeaders[header]) {
+            flags += ` --add-header "${header}:${headerValues[header]}"`;
+        }
+    });
+
+    const pageTitle = getSanitizedTitle();
+    return `yt-dlp${flags} -o "${pageTitle}.%(ext)s" "${url}"`;
 }
 
 // helper to handle clipboard copying with brief button feedback
@@ -241,7 +331,7 @@ function updateUiList(capturedUrls, filterKeyword) {
             fontSize: '11px',
             fontFamily: 'monospace',
         });
-        copyYtdlpBtn.onclick = () => copyToClipboard(`yt-dlp "${url}"`, copyYtdlpBtn, 'copied!', 'yt-dlp');
+        copyYtdlpBtn.onclick = () => copyToClipboard(buildYtdlpCommand(url), copyYtdlpBtn, 'copied!', 'yt-dlp');
 
         btnContainer.appendChild(copyUrlBtn);
         btnContainer.appendChild(copyYtdlpBtn);
