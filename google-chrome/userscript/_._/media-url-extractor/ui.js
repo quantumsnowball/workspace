@@ -16,48 +16,13 @@ function createUi(onClear, onFilter) {
     fab = document.createElement('div');
     fab.id = 'media-extractor-fab';
     fab.innerHTML = `🎥 <span id="media-extractor-badge" style="background:red;color:white;border-radius:10px;padding:2px 6px;font-size:11px;margin-left:4px;">0</span>`;
-    Object.assign(fab.style, {
-        position: 'fixed',
-        bottom: '20px',
-        left: '50%',
-        transform: 'translateX(-50%)',
-        zIndex: '999999',
-        backgroundColor: '#222',
-        color: '#fff',
-        padding: '10px 16px',
-        borderRadius: '24px',
-        cursor: 'pointer',
-        boxShadow: '0 4px 12px rgba(0,0,0,0.4)',
-        fontSize: '14px',
-        fontFamily: 'monospace',
-        userSelect: 'none',
-    });
+    Object.assign(fab.style, FAB_STYLE);
 
     // popup panel (centered horizontally above FAB)
     popup = document.createElement('div');
     popup.id = 'media-extractor-popup';
-    Object.assign(popup.style, {
-        position: 'fixed',
-        bottom: '70px',
-        left: '50%',
-        transform: 'translateX(-50%)',
-        width: 'calc(100vw - 40px)',
-        maxWidth: '1280px',
-        maxHeight: '560px',
-        backgroundColor: '#1e1e1e',
-        color: '#fff',
-        border: '1px solid #444',
-        borderRadius: '8px',
-        boxShadow: '0 4px 20px rgba(0,0,0,0.5)',
-        zIndex: '999999',
-        display: 'none',
-        flexDirection: 'column',
-        fontFamily: 'monospace',
-        fontSize: '12px',
-        boxSizing: 'border-box',
-    });
+    Object.assign(popup.style, POPUP_STYLE);
 
-    // layout structure: header title -> checkboxes bar -> list container -> filter bar
     popup.innerHTML = `
         <div style="padding:10px 14px;background:#2d2d2d;border-bottom:1px solid #444;display:flex;justify-content:space-between;align-items:center;gap:12px;">
             <b id="media-extractor-title" style="color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;"></b>
@@ -91,7 +56,6 @@ function createUi(onClear, onFilter) {
     filterInput = document.getElementById('media-extractor-filter');
     const clearFilterBtn = document.getElementById('media-extractor-clear-filter');
 
-    // header checkbox bindings
     const headerMap = {
         'hdr-referer': 'Referer',
         'hdr-origin': 'Origin',
@@ -106,35 +70,11 @@ function createUi(onClear, onFilter) {
         };
     });
 
-    // resolution quick filter preset buttons
-    const resPresets = [
-        { label: '480', bg: '#4a5568' },
-        { label: '720', bg: '#2b6cb0' },
-        { label: '1080', bg: '#2f855a' },
-        { label: '1440', bg: '#d69e2e' },
-        { label: '2560', bg: '#dd6b20' },
-        { label: '2k', bg: '#e53e3e' },
-        { label: '4k', bg: '#805ad5' },
-    ];
-
     const resGroupContainer = document.getElementById('media-extractor-res-group');
-    resPresets.forEach((preset) => {
+    RES_PRESETS.forEach((preset) => {
         const btn = document.createElement('button');
         btn.textContent = preset.label;
-        Object.assign(btn.style, {
-            backgroundColor: preset.bg,
-            color: '#fff',
-            border: 'none',
-            padding: '3px 7px',
-            borderRadius: '3px',
-            cursor: 'pointer',
-            fontSize: '10px',
-            fontFamily: 'monospace',
-            fontWeight: 'bold',
-            opacity: '0.85',
-            transition: 'opacity 0.15s ease, transform 0.1s ease',
-            userSelect: 'none',
-        });
+        Object.assign(btn.style, RES_BTN_STYLE, { backgroundColor: preset.bg });
 
         btn.onmouseover = () => {
             btn.style.opacity = '1';
@@ -142,7 +82,6 @@ function createUi(onClear, onFilter) {
         btn.onmouseout = () => {
             btn.style.opacity = '0.85';
         };
-
         btn.onclick = () => {
             filterInput.value = preset.label;
             onFilter(preset.label);
@@ -151,7 +90,6 @@ function createUi(onClear, onFilter) {
         resGroupContainer.appendChild(btn);
     });
 
-    // clear filter text on button click
     clearFilterBtn.onclick = () => {
         filterInput.value = '';
         onFilter('');
@@ -159,14 +97,10 @@ function createUi(onClear, onFilter) {
     };
 
     clearFilterBtn.onmouseover = () => {
-        clearFilterBtn.style.color = '#fff';
-        clearFilterBtn.style.backgroundColor = '#dc3545';
-        clearFilterBtn.style.borderColor = '#dc3545';
+        Object.assign(clearFilterBtn.style, { color: '#fff', backgroundColor: '#dc3545', borderColor: '#dc3545' });
     };
     clearFilterBtn.onmouseout = () => {
-        clearFilterBtn.style.color = '#aaa';
-        clearFilterBtn.style.backgroundColor = '#3a3a3a';
-        clearFilterBtn.style.borderColor = '#555';
+        Object.assign(clearFilterBtn.style, { color: '#aaa', backgroundColor: '#3a3a3a', borderColor: '#555' });
     };
 
     fab.onclick = () => {
@@ -210,61 +144,23 @@ function updateUiList(capturedUrls, filterKeyword) {
 
     filteredUrls.forEach((url) => {
         const row = document.createElement('div');
-        Object.assign(row.style, {
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'space-between',
-            marginBottom: '8px',
-            padding: '8px 12px',
-            backgroundColor: '#2b2b2b',
-            borderRadius: '4px',
-            wordBreak: 'break-all',
-            gap: '12px',
-        });
+        Object.assign(row.style, LIST_ROW_STYLE);
 
-        // url text preview
         const urlText = document.createElement('span');
         urlText.innerHTML = formatHighlightedUrl(url, filterKeyword);
-        urlText.style.flexGrow = '1';
-        urlText.style.maxHeight = '60px';
-        urlText.style.overflow = 'hidden';
+        Object.assign(urlText.style, { flexGrow: '1', maxHeight: '60px', overflow: 'hidden' });
 
-        // action buttons container
         const btnContainer = document.createElement('div');
-        Object.assign(btnContainer.style, {
-            display: 'flex',
-            gap: '6px',
-            flexShrink: '0',
-        });
+        Object.assign(btnContainer.style, { display: 'flex', gap: '6px', flexShrink: '0' });
 
-        // copy raw url button
         const copyUrlBtn = document.createElement('button');
         copyUrlBtn.textContent = 'url';
-        Object.assign(copyUrlBtn.style, {
-            backgroundColor: '#28a745',
-            color: '#fff',
-            border: 'none',
-            padding: '4px 8px',
-            borderRadius: '4px',
-            cursor: 'pointer',
-            fontSize: '11px',
-            fontFamily: 'monospace',
-        });
+        Object.assign(copyUrlBtn.style, COPY_BTN_STYLE, { backgroundColor: '#28a745' });
         copyUrlBtn.onclick = () => copyToClipboard(url, copyUrlBtn, 'copied!', 'url');
 
-        // copy yt-dlp command button
         const copyYtdlpBtn = document.createElement('button');
         copyYtdlpBtn.textContent = 'yt-dlp';
-        Object.assign(copyYtdlpBtn.style, {
-            backgroundColor: '#17a2b8',
-            color: '#fff',
-            border: 'none',
-            padding: '4px 8px',
-            borderRadius: '4px',
-            cursor: 'pointer',
-            fontSize: '11px',
-            fontFamily: 'monospace',
-        });
+        Object.assign(copyYtdlpBtn.style, COPY_BTN_STYLE, { backgroundColor: '#17a2b8' });
         copyYtdlpBtn.onclick = () => copyToClipboard(buildYtdlpCommand(activeHeaders, url), copyYtdlpBtn, 'copied!', 'yt-dlp');
 
         btnContainer.appendChild(copyUrlBtn);
