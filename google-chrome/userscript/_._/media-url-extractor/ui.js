@@ -1,38 +1,149 @@
 // ui.js
-let fab, popup, listContainer, badge, filterInput;
+let fab, popup, listContainer, badge, filterInput, shadowRoot;
 
-// tracks active headers to include in yt-dlp command
-const activeHeaders = {
+// Key used for per-domain storage
+const HEADERS_STORAGE_KEY = `media_extractor_headers_${location.hostname}`;
+const TITLE_STORAGE_KEY = 'media_extractor_shared_title';
+
+// Save top-level page title using static GM key when running in the main window
+if (window.top === window) {
+    try {
+        if (typeof GM_setValue !== 'undefined') {
+            GM_setValue(TITLE_STORAGE_KEY, document.title);
+        } else {
+            localStorage.setItem(TITLE_STORAGE_KEY, document.title);
+        }
+    } catch (e) {
+        // fail gracefully if storage is restricted
+    }
+}
+
+// Unified helper to retrieve page title (reads static GM key for iframe compatibility)
+function getPopupDisplayTitle() {
+    let title = '';
+
+    // Read stored top-level title from static GM storage key
+    try {
+        if (typeof GM_getValue !== 'undefined') {
+            title = GM_getValue(TITLE_STORAGE_KEY, '');
+        } else {
+            title = localStorage.getItem(TITLE_STORAGE_KEY) || '';
+        }
+    } catch (e) {
+        title = '';
+    }
+
+    // Fall back to same-origin window.top or document.title
+    if (!title) {
+        try {
+            if (window.top && window.top.document) {
+                title = window.top.document.title;
+            }
+        } catch (e) {
+            title = document.title;
+        }
+    }
+
+    return title && title.trim() ? title.trim() : 'captured media urls';
+}
+
+// Default header states
+const defaultHeaders = {
     Referer: false,
     Origin: false,
     'User-Agent': false,
     'Accept-Language': false,
 };
 
-function createUi(onClear, onFilter) {
-    if (document.getElementById('media-extractor-fab')) return;
+// Load saved settings per domain
+function loadSavedHeaders() {
+    try {
+        if (typeof GM_getValue !== 'undefined') {
+            return GM_getValue(HEADERS_STORAGE_KEY, defaultHeaders);
+        }
+        const saved = localStorage.getItem(HEADERS_STORAGE_KEY);
+        return saved ? JSON.parse(saved) : defaultHeaders;
+    } catch (e) {
+        return defaultHeaders;
+    }
+}
 
-    // floating action button
+// Save settings per domain
+function saveHeaders(headers) {
+    try {
+        if (typeof GM_setValue !== 'undefined') {
+            GM_setValue(HEADERS_STORAGE_KEY, headers);
+        } else {
+            localStorage.setItem(HEADERS_STORAGE_KEY, JSON.stringify(headers));
+        }
+    } catch (e) {
+        console.error('Failed to save header settings:', e);
+    }
+}
+
+// Active headers initialized from persistent storage
+const activeHeaders = loadSavedHeaders();
+
+function attachHoverEffect(element, opacityHover = '1', opacityDefault = '0.85') {
+    element.style.transition = 'opacity 0.15s ease, transform 0.1s ease';
+    element.style.opacity = opacityDefault;
+    element.onmouseover = (e) => {
+        if (e.currentTarget === element) element.style.opacity = opacityHover;
+    };
+    element.onmouseout = (e) => {
+        if (e.currentTarget === element) element.style.opacity = opacityDefault;
+    };
+}
+
+function createUi(onClear, onFilter) {
+    if (document.getElementById('media-extractor-host')) return;
+
+    // create a host container for the Shadow DOM
+    const host = document.createElement('div');
+    host.id = 'media-extractor-host';
+    document.body.appendChild(host);
+
+    // attach an open Shadow Root
+    shadowRoot = host.attachShadow({ mode: 'open' });
+
+    // FAB
     fab = document.createElement('div');
     fab.id = 'media-extractor-fab';
     fab.innerHTML = FAB_HTML;
     Object.assign(fab.style, FAB_STYLE);
+    fab.onmouseover = () => Object.assign(fab.style, FAB_HOVER_STYLE);
+    fab.onmouseout = () => Object.assign(fab.style, FAB_STYLE);
 
-    // popup panel
+    // popup
     popup = document.createElement('div');
     popup.id = 'media-extractor-popup';
     Object.assign(popup.style, POPUP_STYLE);
     popup.innerHTML = POPUP_LAYOUT_HTML;
 
-    document.body.appendChild(fab);
-    document.body.appendChild(popup);
+    // attach elements inside the shadow tree
+    shadowRoot.appendChild(fab);
+    shadowRoot.appendChild(popup);
 
-    document.getElementById('media-extractor-title').textContent = document.title.trim() || 'captured media urls';
+    // set popup header title using unified title getter
+    const titleElement = shadowRoot.getElementById('media-extractor-title');
+    if (titleElement) {
+        titleElement.textContent = getPopupDisplayTitle();
+    }
 
-    listContainer = document.getElementById('media-extractor-list');
-    badge = document.getElementById('media-extractor-badge');
-    filterInput = document.getElementById('media-extractor-filter');
-    const clearFilterBtn = document.getElementById('media-extractor-clear-filter');
+    listContainer = shadowRoot.getElementById('media-extractor-list');
+    badge = shadowRoot.getElementById('media-extractor-badge');
+    filterInput = shadowRoot.getElementById('media-extractor-filter');
+    const clearFilterBtn = shadowRoot.getElementById('media-extractor-clear-filter');
+    const clearBtn = shadowRoot.getElementById('media-extractor-clear');
+    const closeBtn = shadowRoot.getElementById('media-extractor-close');
+
+    attachHoverEffect(clearBtn);
+    attachHoverEffect(closeBtn);
+
+    // header toggle button bindings
+    function renderHeaderBtnState(btn, isActive) {
+        Object.assign(btn.style, HEADER_TOGGLE_BTN_BASE, isActive ? HEADER_TOGGLE_BTN_ON : HEADER_TOGGLE_BTN_OFF);
+    }
 
     const headerMap = {
         'hdr-referer': 'Referer',
@@ -42,24 +153,27 @@ function createUi(onClear, onFilter) {
     };
 
     Object.entries(headerMap).forEach(([id, headerName]) => {
-        const checkbox = document.getElementById(id);
-        checkbox.onchange = (e) => {
-            activeHeaders[headerName] = e.target.checked;
-        };
+        const btn = shadowRoot.getElementById(id);
+        if (btn) {
+            renderHeaderBtnState(btn, !!activeHeaders[headerName]);
+            attachHoverEffect(btn, '1', '0.85');
+
+            btn.onclick = () => {
+                activeHeaders[headerName] = !activeHeaders[headerName];
+                renderHeaderBtnState(btn, activeHeaders[headerName]);
+                saveHeaders(activeHeaders);
+            };
+        }
     });
 
-    const resGroupContainer = document.getElementById('media-extractor-res-group');
+    // resolution quick filter presets
+    const resGroupContainer = shadowRoot.getElementById('media-extractor-res-group');
     RES_PRESETS.forEach((preset) => {
         const btn = document.createElement('button');
         btn.textContent = preset.label;
         Object.assign(btn.style, RES_BTN_STYLE, { backgroundColor: preset.bg });
+        attachHoverEffect(btn);
 
-        btn.onmouseover = () => {
-            btn.style.opacity = '1';
-        };
-        btn.onmouseout = () => {
-            btn.style.opacity = '0.85';
-        };
         btn.onclick = () => {
             filterInput.value = preset.label;
             onFilter(preset.label);
@@ -68,6 +182,7 @@ function createUi(onClear, onFilter) {
         resGroupContainer.appendChild(btn);
     });
 
+    // Filter clear & search handlers
     clearFilterBtn.onclick = () => {
         filterInput.value = '';
         onFilter('');
@@ -85,11 +200,11 @@ function createUi(onClear, onFilter) {
         popup.style.display = popup.style.display === 'none' ? 'flex' : 'none';
     };
 
-    document.getElementById('media-extractor-close').onclick = () => {
+    closeBtn.onclick = () => {
         popup.style.display = 'none';
     };
 
-    document.getElementById('media-extractor-clear').onclick = onClear;
+    clearBtn.onclick = onClear;
 
     filterInput.oninput = (e) => {
         onFilter(e.target.value.trim());
@@ -99,9 +214,9 @@ function createUi(onClear, onFilter) {
 function updateUiList(capturedUrls, filterKeyword) {
     if (!badge || !listContainer) return;
 
-    const titleElement = document.getElementById('media-extractor-title');
+    const titleElement = shadowRoot.getElementById('media-extractor-title');
     if (titleElement) {
-        titleElement.textContent = document.title.trim() || 'captured media urls';
+        titleElement.textContent = getPopupDisplayTitle();
     }
 
     const lowerKeyword = filterKeyword.toLowerCase();
@@ -122,7 +237,17 @@ function updateUiList(capturedUrls, filterKeyword) {
 
     filteredUrls.forEach((url) => {
         const row = document.createElement('div');
-        Object.assign(row.style, LIST_ROW_STYLE);
+        Object.assign(row.style, LIST_ROW_STYLE, {
+            cursor: 'pointer',
+            transition: 'background-color 0.15s ease',
+        });
+
+        row.onmouseover = () => {
+            row.style.backgroundColor = '#383838';
+        };
+        row.onmouseout = () => {
+            row.style.backgroundColor = '#2b2b2b';
+        };
 
         const urlText = document.createElement('span');
         urlText.innerHTML = formatHighlightedUrl(url, filterKeyword);
@@ -134,12 +259,24 @@ function updateUiList(capturedUrls, filterKeyword) {
         const copyUrlBtn = document.createElement('button');
         copyUrlBtn.textContent = 'url';
         Object.assign(copyUrlBtn.style, COPY_BTN_STYLE, { backgroundColor: '#28a745' });
-        copyUrlBtn.onclick = () => copyToClipboard(url, copyUrlBtn, 'copied!', 'url');
+        attachHoverEffect(copyUrlBtn);
+        copyUrlBtn.onclick = (e) => {
+            e.stopPropagation();
+            copyToClipboard(url, copyUrlBtn, 'copied!', 'url');
+        };
 
         const copyYtdlpBtn = document.createElement('button');
         copyYtdlpBtn.textContent = 'yt-dlp';
         Object.assign(copyYtdlpBtn.style, COPY_BTN_STYLE, { backgroundColor: '#17a2b8' });
-        copyYtdlpBtn.onclick = () => copyToClipboard(buildYtdlpCommand(activeHeaders, url), copyYtdlpBtn, 'copied!', 'yt-dlp');
+        attachHoverEffect(copyYtdlpBtn);
+        copyYtdlpBtn.onclick = (e) => {
+            e.stopPropagation();
+            copyToClipboard(buildYtdlpCommand(activeHeaders, url), copyYtdlpBtn, 'copied!', 'yt-dlp');
+        };
+
+        row.onclick = () => {
+            copyToClipboard(buildYtdlpCommand(activeHeaders, url), copyYtdlpBtn, 'copied!', 'yt-dlp');
+        };
 
         btnContainer.appendChild(copyUrlBtn);
         btnContainer.appendChild(copyYtdlpBtn);

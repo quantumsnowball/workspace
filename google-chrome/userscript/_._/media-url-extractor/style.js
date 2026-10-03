@@ -5,15 +5,23 @@ const FAB_STYLE = {
     left: '50%',
     transform: 'translateX(-50%)',
     zIndex: '999999',
-    backgroundColor: '#222',
-    color: '#fff',
-    padding: '10px 16px',
+    backgroundColor: '#404040',
+    color: '#ffffff',
+    border: '1px solid #7a7a7a',
+    padding: '10px 18px',
     borderRadius: '24px',
     cursor: 'pointer',
-    boxShadow: '0 4px 12px rgba(0,0,0,0.4)',
+    boxShadow: '0 10px 30px rgba(0, 0, 0, 0.85), 0 2px 8px rgba(0, 0, 0, 0.6)',
     fontSize: '14px',
+    fontWeight: '600',
     fontFamily: 'monospace',
     userSelect: 'none',
+    transition: 'background-color 0.2s ease, border-color 0.2s ease',
+};
+
+const FAB_HOVER_STYLE = {
+    backgroundColor: '#585858',
+    borderColor: '#7a7a7a',
 };
 
 const POPUP_STYLE = {
@@ -35,6 +43,31 @@ const POPUP_STYLE = {
     fontFamily: 'monospace',
     fontSize: '12px',
     boxSizing: 'border-box',
+};
+
+const HEADER_TOGGLE_BTN_BASE = {
+    padding: '3px 10px',
+    borderRadius: '4px',
+    fontSize: '11px',
+    fontFamily: 'monospace',
+    fontWeight: 'bold',
+    cursor: 'pointer',
+    userSelect: 'none',
+    opacity: '0.85',
+    transition: 'all 0.15s ease',
+};
+
+const HEADER_TOGGLE_BTN_OFF = {
+    backgroundColor: '#383838',
+    color: '#888888',
+    border: '1px solid #4a4a4a',
+};
+
+const HEADER_TOGGLE_BTN_ON = {
+    backgroundColor: '#0d9488',
+    color: '#ffffff',
+    border: '1px solid #14b8a6',
+    boxShadow: '0 0 6px rgba(20, 184, 166, 0.4)',
 };
 
 const LIST_ROW_STYLE = {
@@ -69,8 +102,12 @@ const COPY_BTN_STYLE = {
     padding: '4px 8px',
     borderRadius: '4px',
     cursor: 'pointer',
-    fontSize: '11px',
+    fontSize: '12px',
     fontFamily: 'monospace',
+    fontWeight: 'bold',
+    opacity: '0.85',
+    transition: 'opacity 0.15s ease, transform 0.1s ease',
+    userSelect: 'none',
 };
 
 const RES_PRESETS = [

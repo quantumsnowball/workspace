@@ -5,12 +5,14 @@
     const capturedUrls = new Set();
     let filterKeyword = '';
 
+    // common media extensions to capture
+    const MEDIA_REGEX = /\.(m3u8|mp4|m4s|m4v|webm|mpd|mov|flv|avi|mkv|mp3|m4a|aac|ogg|wav|flac)(\?|$)/i;
+
     function checkAndAddUrl(url) {
         if (!url || typeof url !== 'string') return;
         try {
             const absoluteUrl = new URL(url, window.location.href).href;
-            const cleanUrl = absoluteUrl.split('?')[0].toLowerCase();
-            if (cleanUrl.includes('.m3u8') || cleanUrl.includes('.mp4')) {
+            if (MEDIA_REGEX.test(absoluteUrl)) {
                 if (!capturedUrls.has(absoluteUrl)) {
                     capturedUrls.add(absoluteUrl);
                     updateUiList(capturedUrls, filterKeyword);
@@ -22,7 +24,7 @@
     }
 
     function scanMediaElements() {
-        document.querySelectorAll('video, source').forEach((el) => {
+        document.querySelectorAll('video, audio, source').forEach((el) => {
             if (el.src) checkAndAddUrl(el.src);
         });
     }

@@ -12,6 +12,8 @@ function highlightSearchTerm(htmlStr, keyword) {
 
 function formatHighlightedUrl(rawUrl, keyword) {
     let formattedHtml = '';
+    const mediaExtRegex = /(\.(?:m3u8|mp4|m4s|m4v|webm|mpd|mov|flv|avi|mkv|mp3|m4a|aac|ogg|wav|flac))(?=[?#]|$)/gi;
+
     try {
         const parsed = new URL(rawUrl);
         const protocol = escapeHtml(parsed.protocol);
@@ -22,11 +24,12 @@ function formatHighlightedUrl(rawUrl, keyword) {
         const styledHost = `<span style="color: #ff8f00; font-weight: bold;">${host}</span>`;
         const redSlash = `<span style="color: #ff5555; font-weight: bold;">/</span>`;
 
-        rest = rest.replace(/\//g, redSlash).replace(/(\.m3u8|\.mp4)/gi, '<span style="color: #f1fa8c; font-weight: bold;">$1</span>');
+        rest = rest.replace(/\//g, redSlash).replace(mediaExtRegex, '<span style="color: #f1fa8c; font-weight: bold;">$1</span>');
+
         formattedHtml = `${styledProtocol}${redSlash}${redSlash}${styledHost}${rest}`;
     } catch (e) {
         const escaped = escapeHtml(rawUrl);
-        formattedHtml = escaped.replace(/\//g, '<span style="color: #ff5555; font-weight: bold;">/</span>').replace(/(\.m3u8|\.mp4)/gi, '<span style="color: #f1fa8c; font-weight: bold;">$1</span>');
+        formattedHtml = escaped.replace(/\//g, '<span style="color: #ff5555; font-weight: bold;">/</span>').replace(mediaExtRegex, '<span style="color: #f1fa8c; font-weight: bold;">$1</span>');
     }
     return highlightSearchTerm(formattedHtml, keyword);
 }
@@ -64,11 +67,37 @@ function getNativeAcceptLanguage() {
     return 'en-US';
 }
 
-// helper to sanitize page title for filename safety
+// helper to sanitize page title for filename safety with cross-origin iframe support
 function getSanitizedTitle() {
-    const rawTitle = document.title.trim() || 'video';
-    // sanitize reserved filesystem characters and double quotes
-    return rawTitle.replace(/["/\\?%*:|"<>]/g, '_');
+    // get raw page title using unified display title getter
+    let rawTitle =
+        typeof getPopupDisplayTitle === 'function' //
+            ? getPopupDisplayTitle()
+            : document.title.trim() || 'video';
+
+    if (!rawTitle || !rawTitle.trim() || rawTitle === 'captured media urls') {
+        rawTitle = document.title.trim() || 'video';
+    }
+
+    rawTitle = rawTitle.trim();
+
+    // map strict OS reserved filesystem characters to full-width/similar Unicode lookalikes
+    const replacements = {
+        '"': '＂', // full-width quotation mark
+        '/': '／', // full-width solidus
+        '\\': '＼', // full-width reverse solidus
+        '?': '？', // full-width question mark
+        '%': '％', // full-width percent sign
+        '*': '＊', // full-width asterisk
+        ':': '：', // full-width colon
+        '|': '｜', // full-width vertical line
+        '<': '＜', // full-width less-than sign
+        '>': '＞', // full-width greater-than sign
+    };
+
+    return rawTitle //
+        .replace(/["/\\?%*:|"<>]/g, (char) => replacements[char] || char)
+        .replace(/[\x00-\x1F\x7F]/g, ''); // strip non-printable ASCII control chars
 }
 
 // helper to handle clipboard copying with brief button feedback
