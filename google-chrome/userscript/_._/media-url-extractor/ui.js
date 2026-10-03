@@ -4,33 +4,38 @@ let fab, popup, listContainer, badge, filterInput;
 function createUi(onClear, onFilter) {
     if (document.getElementById('media-extractor-fab')) return;
 
+    // floating action button (centered at bottom)
     fab = document.createElement('div');
     fab.id = 'media-extractor-fab';
     fab.innerHTML = `🎥 <span id="media-extractor-badge" style="background:red;color:white;border-radius:10px;padding:2px 6px;font-size:11px;margin-left:4px;">0</span>`;
     Object.assign(fab.style, {
         position: 'fixed',
         bottom: '20px',
-        right: '20px',
+        left: '50%',
+        transform: 'translateX(-50%)',
         zIndex: '999999',
         backgroundColor: '#222',
         color: '#fff',
-        padding: '10px 14px',
+        padding: '10px 16px',
         borderRadius: '24px',
         cursor: 'pointer',
-        boxShadow: '0 4px 10px rgba(0,0,0,0.3)',
+        boxShadow: '0 4px 12px rgba(0,0,0,0.4)',
         fontSize: '14px',
         fontFamily: 'monospace',
         userSelect: 'none',
     });
 
+    // popup panel (centered horizontally above FAB)
     popup = document.createElement('div');
     popup.id = 'media-extractor-popup';
     Object.assign(popup.style, {
         position: 'fixed',
         bottom: '70px',
-        right: '20px',
-        width: '380px',
-        maxHeight: '460px',
+        left: '50%',
+        transform: 'translateX(-50%)',
+        width: 'calc(100vw - 40px)',
+        maxWidth: '1280px',
+        maxHeight: '520px',
         backgroundColor: '#1e1e1e',
         color: '#fff',
         border: '1px solid #444',
@@ -41,20 +46,23 @@ function createUi(onClear, onFilter) {
         flexDirection: 'column',
         fontFamily: 'monospace',
         fontSize: '12px',
+        boxSizing: 'border-box',
     });
 
+    // toolbar layout order: resolution buttons -> filter input box -> clear button
     popup.innerHTML = `
-        <div style="padding:10px;background:#2d2d2d;border-bottom:1px solid #444;display:flex;justify-content:space-between;align-items:center;">
+        <div style="padding:10px 14px;background:#2d2d2d;border-bottom:1px solid #444;display:flex;justify-content:space-between;align-items:center;">
             <b style="color:#fff;">captured media urls</b>
             <div>
-                <button id="media-extractor-clear" style="background:#dc3545;color:#fff;border:none;padding:3px 8px;border-radius:4px;cursor:pointer;margin-right:4px;">clear</button>
-                <button id="media-extractor-close" style="background:#6c757d;color:#fff;border:none;padding:3px 8px;border-radius:4px;cursor:pointer;">✕</button>
+                <button id="media-extractor-clear" style="background:#dc3545;color:#fff;border:none;padding:4px 10px;border-radius:4px;cursor:pointer;margin-right:6px;">clear</button>
+                <button id="media-extractor-close" style="background:#6c757d;color:#fff;border:none;padding:4px 10px;border-radius:4px;cursor:pointer;">✕</button>
             </div>
         </div>
-        <div id="media-extractor-list" style="padding:10px;overflow-y:auto;max-height:330px;flex-grow:1;"></div>
-        <div style="padding:8px 10px;background:#252525;border-top:1px solid #333;display:flex;align-items:center;gap:8px;">
-            <label for="media-extractor-filter" style="color:#aaa;font-size:11px;white-space:nowrap;user-select:none;">filter:</label>
-            <input id="media-extractor-filter" type="text" placeholder="type keyword..." style="width:100%;box-sizing:border-box;background:#181818;color:#fff;border:1px solid #444;border-radius:4px;padding:4px 8px;font-family:monospace;font-size:11px;outline:none;" />
+        <div id="media-extractor-list" style="padding:10px 14px;overflow-y:auto;max-height:380px;flex-grow:1;"></div>
+        <div style="padding:10px 14px;background:#252525;border-top:1px solid #333;display:flex;align-items:center;gap:8px;">
+            <div id="media-extractor-res-group" style="display:flex;gap:4px;flex-shrink:0;"></div>
+            <input id="media-extractor-filter" type="text" placeholder="type keyword..." style="flex-grow:1;box-sizing:border-box;background:#181818;color:#fff;border:1px solid #444;border-radius:4px;padding:6px 10px;font-family:monospace;font-size:12px;outline:none;" />
+            <button id="media-extractor-clear-filter" title="Clear filter text" style="background:#3a3a3a;color:#aaa;border:1px solid #555;border-radius:4px;padding:4px 8px;cursor:pointer;font-size:11px;font-family:monospace;line-height:1;user-select:none;flex-shrink:0;">✕</button>
         </div>
     `;
 
@@ -64,6 +72,70 @@ function createUi(onClear, onFilter) {
     listContainer = document.getElementById('media-extractor-list');
     badge = document.getElementById('media-extractor-badge');
     filterInput = document.getElementById('media-extractor-filter');
+    const clearFilterBtn = document.getElementById('media-extractor-clear-filter');
+
+    // resolution quick filter preset buttons
+    const resPresets = [
+        { label: '480', bg: '#4a5568' },
+        { label: '720', bg: '#2b6cb0' },
+        { label: '1080', bg: '#2f855a' },
+        { label: '1440', bg: '#d69e2e' },
+        { label: '2560', bg: '#dd6b20' },
+        { label: '2k', bg: '#e53e3e' },
+        { label: '4k', bg: '#805ad5' },
+    ];
+
+    const resGroupContainer = document.getElementById('media-extractor-res-group');
+    resPresets.forEach((preset) => {
+        const btn = document.createElement('button');
+        btn.textContent = preset.label;
+        Object.assign(btn.style, {
+            backgroundColor: preset.bg,
+            color: '#fff',
+            border: 'none',
+            padding: '3px 7px',
+            borderRadius: '3px',
+            cursor: 'pointer',
+            fontSize: '10px',
+            fontFamily: 'monospace',
+            fontWeight: 'bold',
+            opacity: '0.85',
+            transition: 'opacity 0.15s ease, transform 0.1s ease',
+            userSelect: 'none',
+        });
+
+        btn.onmouseover = () => {
+            btn.style.opacity = '1';
+        };
+        btn.onmouseout = () => {
+            btn.style.opacity = '0.85';
+        };
+
+        btn.onclick = () => {
+            filterInput.value = preset.label;
+            onFilter(preset.label);
+        };
+
+        resGroupContainer.appendChild(btn);
+    });
+
+    // clear filter text on button click
+    clearFilterBtn.onclick = () => {
+        filterInput.value = '';
+        onFilter('');
+        filterInput.focus();
+    };
+
+    clearFilterBtn.onmouseover = () => {
+        clearFilterBtn.style.color = '#fff';
+        clearFilterBtn.style.backgroundColor = '#dc3545';
+        clearFilterBtn.style.borderColor = '#dc3545';
+    };
+    clearFilterBtn.onmouseout = () => {
+        clearFilterBtn.style.color = '#aaa';
+        clearFilterBtn.style.backgroundColor = '#3a3a3a';
+        clearFilterBtn.style.borderColor = '#555';
+    };
 
     fab.onclick = () => {
         popup.style.display = popup.style.display === 'none' ? 'flex' : 'none';
@@ -80,6 +152,19 @@ function createUi(onClear, onFilter) {
     };
 }
 
+// helper to handle clipboard copying with brief button feedback
+function copyToClipboard(text, button, successLabel, defaultLabel) {
+    if (typeof GM_setClipboard !== 'undefined') {
+        GM_setClipboard(text);
+    } else {
+        navigator.clipboard.writeText(text);
+    }
+    button.textContent = successLabel;
+    setTimeout(() => {
+        button.textContent = defaultLabel;
+    }, 1200);
+}
+
 function updateUiList(capturedUrls, filterKeyword) {
     if (!badge || !listContainer) return;
 
@@ -90,12 +175,12 @@ function updateUiList(capturedUrls, filterKeyword) {
     listContainer.innerHTML = '';
 
     if (capturedUrls.size === 0) {
-        listContainer.innerHTML = '<div style="color:#aaa;text-align:center;">no media urls captured yet</div>';
+        listContainer.innerHTML = '<div style="color:#aaa;text-align:center;padding:12px;">no media urls captured yet</div>';
         return;
     }
 
     if (filteredUrls.length === 0) {
-        listContainer.innerHTML = '<div style="color:#aaa;text-align:center;">no matching urls found</div>';
+        listContainer.innerHTML = '<div style="color:#aaa;text-align:center;padding:12px;">no matching urls found</div>';
         return;
     }
 
@@ -106,44 +191,63 @@ function updateUiList(capturedUrls, filterKeyword) {
             alignItems: 'center',
             justifyContent: 'space-between',
             marginBottom: '8px',
-            padding: '6px',
+            padding: '8px 12px',
             backgroundColor: '#2b2b2b',
             borderRadius: '4px',
             wordBreak: 'break-all',
+            gap: '12px',
         });
 
+        // url text preview
         const urlText = document.createElement('span');
         urlText.innerHTML = formatHighlightedUrl(url, filterKeyword);
-        urlText.style.marginRight = '8px';
-        urlText.style.maxHeight = '50px';
+        urlText.style.flexGrow = '1';
+        urlText.style.maxHeight = '60px';
         urlText.style.overflow = 'hidden';
 
-        const copyBtn = document.createElement('button');
-        copyBtn.textContent = 'copy';
-        Object.assign(copyBtn.style, {
+        // action buttons container
+        const btnContainer = document.createElement('div');
+        Object.assign(btnContainer.style, {
+            display: 'flex',
+            gap: '6px',
+            flexShrink: '0',
+        });
+
+        // copy raw url button
+        const copyUrlBtn = document.createElement('button');
+        copyUrlBtn.textContent = 'url';
+        Object.assign(copyUrlBtn.style, {
             backgroundColor: '#28a745',
             color: '#fff',
             border: 'none',
             padding: '4px 8px',
             borderRadius: '4px',
             cursor: 'pointer',
-            flexShrink: '0',
+            fontSize: '11px',
+            fontFamily: 'monospace',
         });
+        copyUrlBtn.onclick = () => copyToClipboard(url, copyUrlBtn, 'copied!', 'url');
 
-        copyBtn.onclick = () => {
-            if (typeof GM_setClipboard !== 'undefined') {
-                GM_setClipboard(url);
-            } else {
-                navigator.clipboard.writeText(url);
-            }
-            copyBtn.textContent = 'copied!';
-            setTimeout(() => {
-                copyBtn.textContent = 'copy';
-            }, 1500);
-        };
+        // copy yt-dlp command button
+        const copyYtdlpBtn = document.createElement('button');
+        copyYtdlpBtn.textContent = 'yt-dlp';
+        Object.assign(copyYtdlpBtn.style, {
+            backgroundColor: '#17a2b8',
+            color: '#fff',
+            border: 'none',
+            padding: '4px 8px',
+            borderRadius: '4px',
+            cursor: 'pointer',
+            fontSize: '11px',
+            fontFamily: 'monospace',
+        });
+        copyYtdlpBtn.onclick = () => copyToClipboard(`yt-dlp "${url}"`, copyYtdlpBtn, 'copied!', 'yt-dlp');
+
+        btnContainer.appendChild(copyUrlBtn);
+        btnContainer.appendChild(copyYtdlpBtn);
 
         row.appendChild(urlText);
-        row.appendChild(copyBtn);
+        row.appendChild(btnContainer);
         listContainer.appendChild(row);
     });
 }
