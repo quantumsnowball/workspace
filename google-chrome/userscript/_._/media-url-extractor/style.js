@@ -53,6 +53,7 @@ const HEADER_TOGGLE_BTN_BASE = {
     fontWeight: 'bold',
     cursor: 'pointer',
     userSelect: 'none',
+    opacity: '0.85',
     transition: 'all 0.15s ease',
 };
 
@@ -104,6 +105,9 @@ const COPY_BTN_STYLE = {
     fontSize: '12px',
     fontFamily: 'monospace',
     fontWeight: 'bold',
+    opacity: '0.85',
+    transition: 'opacity 0.15s ease, transform 0.1s ease',
+    userSelect: 'none',
 };
 
 const RES_PRESETS = [

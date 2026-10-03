@@ -41,6 +41,17 @@ function saveHeaders(headers) {
 // Active headers initialized from persistent storage
 const activeHeaders = loadSavedHeaders();
 
+function attachHoverEffect(element, opacityHover = '1', opacityDefault = '0.85') {
+    element.style.transition = 'opacity 0.15s ease, transform 0.1s ease';
+    element.style.opacity = opacityDefault;
+    element.onmouseover = (e) => {
+        if (e.currentTarget === element) element.style.opacity = opacityHover;
+    };
+    element.onmouseout = (e) => {
+        if (e.currentTarget === element) element.style.opacity = opacityDefault;
+    };
+}
+
 function createUi(onClear, onFilter) {
     if (document.getElementById('media-extractor-host')) return;
 
@@ -80,6 +91,11 @@ function createUi(onClear, onFilter) {
     badge = shadowRoot.getElementById('media-extractor-badge');
     filterInput = shadowRoot.getElementById('media-extractor-filter');
     const clearFilterBtn = shadowRoot.getElementById('media-extractor-clear-filter');
+    const clearBtn = shadowRoot.getElementById('media-extractor-clear');
+    const closeBtn = shadowRoot.getElementById('media-extractor-close');
+
+    attachHoverEffect(clearBtn);
+    attachHoverEffect(closeBtn);
 
     // header toggle button bindings
     function renderHeaderBtnState(btn, isActive) {
@@ -97,6 +113,8 @@ function createUi(onClear, onFilter) {
         const btn = shadowRoot.getElementById(id);
         if (btn) {
             renderHeaderBtnState(btn, !!activeHeaders[headerName]);
+            attachHoverEffect(btn, '1', '0.85');
+
             btn.onclick = () => {
                 activeHeaders[headerName] = !activeHeaders[headerName];
                 renderHeaderBtnState(btn, activeHeaders[headerName]);
@@ -105,19 +123,14 @@ function createUi(onClear, onFilter) {
         }
     });
 
-    // Resolution quick filter presets
+    // resolution quick filter presets
     const resGroupContainer = shadowRoot.getElementById('media-extractor-res-group');
     RES_PRESETS.forEach((preset) => {
         const btn = document.createElement('button');
         btn.textContent = preset.label;
         Object.assign(btn.style, RES_BTN_STYLE, { backgroundColor: preset.bg });
+        attachHoverEffect(btn);
 
-        btn.onmouseover = () => {
-            btn.style.opacity = '1';
-        };
-        btn.onmouseout = () => {
-            btn.style.opacity = '0.85';
-        };
         btn.onclick = () => {
             filterInput.value = preset.label;
             onFilter(preset.label);
@@ -133,15 +146,22 @@ function createUi(onClear, onFilter) {
         filterInput.focus();
     };
 
+    clearFilterBtn.onmouseover = () => {
+        Object.assign(clearFilterBtn.style, { color: '#fff', backgroundColor: '#dc3545', borderColor: '#dc3545' });
+    };
+    clearFilterBtn.onmouseout = () => {
+        Object.assign(clearFilterBtn.style, { color: '#aaa', backgroundColor: '#3a3a3a', borderColor: '#555' });
+    };
+
     fab.onclick = () => {
         popup.style.display = popup.style.display === 'none' ? 'flex' : 'none';
     };
 
-    shadowRoot.getElementById('media-extractor-close').onclick = () => {
+    closeBtn.onclick = () => {
         popup.style.display = 'none';
     };
 
-    shadowRoot.getElementById('media-extractor-clear').onclick = onClear;
+    clearBtn.onclick = onClear;
 
     filterInput.oninput = (e) => {
         onFilter(e.target.value.trim());
@@ -196,6 +216,7 @@ function updateUiList(capturedUrls, filterKeyword) {
         const copyUrlBtn = document.createElement('button');
         copyUrlBtn.textContent = 'url';
         Object.assign(copyUrlBtn.style, COPY_BTN_STYLE, { backgroundColor: '#28a745' });
+        attachHoverEffect(copyUrlBtn);
         copyUrlBtn.onclick = (e) => {
             e.stopPropagation();
             copyToClipboard(url, copyUrlBtn, 'copied!', 'url');
@@ -204,6 +225,7 @@ function updateUiList(capturedUrls, filterKeyword) {
         const copyYtdlpBtn = document.createElement('button');
         copyYtdlpBtn.textContent = 'yt-dlp';
         Object.assign(copyYtdlpBtn.style, COPY_BTN_STYLE, { backgroundColor: '#17a2b8' });
+        attachHoverEffect(copyYtdlpBtn);
         copyYtdlpBtn.onclick = (e) => {
             e.stopPropagation();
             copyToClipboard(buildYtdlpCommand(activeHeaders, url), copyYtdlpBtn, 'copied!', 'yt-dlp');
