@@ -12,6 +12,8 @@ function highlightSearchTerm(htmlStr, keyword) {
 
 function formatHighlightedUrl(rawUrl, keyword) {
     let formattedHtml = '';
+    const mediaExtRegex = /(\.(?:m3u8|mp4|m4s|m4v|webm|mpd|mov|flv|avi|mkv|mp3|m4a|aac|ogg|wav|flac))(?=[?#]|$)/gi;
+
     try {
         const parsed = new URL(rawUrl);
         const protocol = escapeHtml(parsed.protocol);
@@ -22,11 +24,12 @@ function formatHighlightedUrl(rawUrl, keyword) {
         const styledHost = `<span style="color: #ff8f00; font-weight: bold;">${host}</span>`;
         const redSlash = `<span style="color: #ff5555; font-weight: bold;">/</span>`;
 
-        rest = rest.replace(/\//g, redSlash).replace(/(\.m3u8|\.mp4)/gi, '<span style="color: #f1fa8c; font-weight: bold;">$1</span>');
+        rest = rest.replace(/\//g, redSlash).replace(mediaExtRegex, '<span style="color: #f1fa8c; font-weight: bold;">$1</span>');
+
         formattedHtml = `${styledProtocol}${redSlash}${redSlash}${styledHost}${rest}`;
     } catch (e) {
         const escaped = escapeHtml(rawUrl);
-        formattedHtml = escaped.replace(/\//g, '<span style="color: #ff5555; font-weight: bold;">/</span>').replace(/(\.m3u8|\.mp4)/gi, '<span style="color: #f1fa8c; font-weight: bold;">$1</span>');
+        formattedHtml = escaped.replace(/\//g, '<span style="color: #ff5555; font-weight: bold;">/</span>').replace(mediaExtRegex, '<span style="color: #f1fa8c; font-weight: bold;">$1</span>');
     }
     return highlightSearchTerm(formattedHtml, keyword);
 }
