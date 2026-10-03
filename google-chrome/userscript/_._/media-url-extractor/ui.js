@@ -50,6 +50,15 @@ function createUi(onClear, onFilter) {
     fab.innerHTML = FAB_HTML;
     Object.assign(fab.style, FAB_STYLE);
 
+    // hover handlers
+    fab.onmouseover = () => {
+        Object.assign(fab.style, FAB_HOVER_STYLE);
+    };
+
+    fab.onmouseout = () => {
+        Object.assign(fab.style, FAB_STYLE);
+    };
+
     // popup panel
     popup = document.createElement('div');
     popup.id = 'media-extractor-popup';

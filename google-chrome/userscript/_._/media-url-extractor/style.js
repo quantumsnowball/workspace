@@ -16,7 +16,12 @@ const FAB_STYLE = {
     fontWeight: '600',
     fontFamily: 'monospace',
     userSelect: 'none',
-    transition: 'all 0.2s ease-in-out',
+    transition: 'background-color 0.2s ease, border-color 0.2s ease',
+};
+
+const FAB_HOVER_STYLE = {
+    backgroundColor: '#585858',
+    borderColor: '#7a7a7a',
 };
 
 const POPUP_STYLE = {
