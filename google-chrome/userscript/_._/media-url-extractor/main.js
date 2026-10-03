@@ -1,8 +1,8 @@
 // ==UserScript==
 // @name         media url extractor
 // @namespace    http://tampermonkey.net/
-// @version      1.0
-// @description  captures m3u8 and mp4 urls without opening devtools
+// @version      1.2
+// @description  captures m3u8 and mp4 urls with syntax highlighting
 // @author       you
 // @match        *://*/*
 // @run-at       document-start
@@ -29,6 +29,15 @@
         } catch (e) {
             // ignore invalid urls
         }
+    }
+
+    // helper function to highlight slashes red and media extensions yellow
+    function formatHighlightedUrl(url) {
+        // escape HTML to prevent XSS injection
+        const escaped = url.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+
+        // highlight slashes red and m3u8/mp4 extensions yellow
+        return escaped.replace(/\//g, '<span style="color: #ff5555; font-weight: bold;">/</span>').replace(/(\.m3u8|\.mp4)/gi, '<span style="color: #f1fa8c; font-weight: bold;">$1</span>');
     }
 
     // hook fetch api
@@ -91,7 +100,7 @@
             cursor: 'pointer',
             boxShadow: '0 4px 10px rgba(0,0,0,0.3)',
             fontSize: '14px',
-            fontFamily: 'sans-serif',
+            fontFamily: 'monospace',
             userSelect: 'none',
         });
 
@@ -102,7 +111,7 @@
             position: 'fixed',
             bottom: '70px',
             right: '20px',
-            width: '360px',
+            width: '380px',
             maxHeight: '400px',
             backgroundColor: '#1e1e1e',
             color: '#fff',
@@ -112,7 +121,7 @@
             zIndex: '999999',
             display: 'none',
             flexDirection: 'column',
-            fontFamily: 'sans-serif',
+            fontFamily: 'monospace',
             fontSize: '12px',
         });
 
@@ -172,9 +181,10 @@
             });
 
             const urlText = document.createElement('span');
-            urlText.textContent = url;
+            // render highlighted html
+            urlText.innerHTML = formatHighlightedUrl(url);
             urlText.style.marginRight = '8px';
-            urlText.style.maxHeight = '40px';
+            urlText.style.maxHeight = '50px';
             urlText.style.overflow = 'hidden';
 
             const copyBtn = document.createElement('button');
