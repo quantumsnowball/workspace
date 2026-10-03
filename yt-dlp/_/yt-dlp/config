@@ -1,4 +1,7 @@
 # default use 16 threads to download
 -N 16
 
+# cache directory
+-P "temp:~/.cache/yt-dlp"
+
 # vim: ft=ini
