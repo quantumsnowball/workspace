@@ -1,0 +1,4 @@
+# default use 16 threads to download
+-N 16
+
+# vim: ft=ini
