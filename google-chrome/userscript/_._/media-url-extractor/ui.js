@@ -4,33 +4,35 @@ let fab, popup, listContainer, badge, filterInput;
 function createUi(onClear, onFilter) {
     if (document.getElementById('media-extractor-fab')) return;
 
-    // floating action button
+    // floating action button (centered at bottom)
     fab = document.createElement('div');
     fab.id = 'media-extractor-fab';
     fab.innerHTML = `🎥 <span id="media-extractor-badge" style="background:red;color:white;border-radius:10px;padding:2px 6px;font-size:11px;margin-left:4px;">0</span>`;
     Object.assign(fab.style, {
         position: 'fixed',
         bottom: '20px',
-        right: '20px',
+        left: '50%',
+        transform: 'translateX(-50%)',
         zIndex: '999999',
         backgroundColor: '#222',
         color: '#fff',
-        padding: '10px 14px',
+        padding: '10px 16px',
         borderRadius: '24px',
         cursor: 'pointer',
-        boxShadow: '0 4px 10px rgba(0,0,0,0.3)',
+        boxShadow: '0 4px 12px rgba(0,0,0,0.4)',
         fontSize: '14px',
         fontFamily: 'monospace',
         userSelect: 'none',
     });
 
-    // popup panel
+    // popup panel (centered horizontally above FAB)
     popup = document.createElement('div');
     popup.id = 'media-extractor-popup';
     Object.assign(popup.style, {
         position: 'fixed',
         bottom: '70px',
-        right: '20px',
+        left: '50%',
+        transform: 'translateX(-50%)',
         width: 'calc(100vw - 40px)',
         maxWidth: '1280px',
         maxHeight: '520px',
