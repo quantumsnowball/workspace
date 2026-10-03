@@ -182,46 +182,6 @@ function createUi(onClear, onFilter) {
     };
 }
 
-function getNativeAcceptLanguage() {
-    if (Array.isArray(navigator.languages) && navigator.languages.length > 0) {
-        const langs = [];
-
-        // 1. Traverse navigator.languages and append base fallback if missing
-        navigator.languages.forEach((lang) => {
-            if (!langs.includes(lang)) {
-                langs.push(lang);
-            }
-            if (lang.includes('-')) {
-                const baseLang = lang.split('-')[0];
-                if (!langs.includes(baseLang)) {
-                    langs.push(baseLang);
-                }
-            }
-        });
-
-        // 2. Filter out duplicates while preserving first-seen index order
-        const uniqueLangs = Array.from(new Set(langs));
-
-        // 3. Map decaying q-factors (1.0, 0.9, 0.8, 0.7...)
-        return uniqueLangs
-            .map((lang, idx) => {
-                if (idx === 0) return lang;
-                const q = Math.max(0.1, 1 - idx * 0.1).toFixed(1);
-                return `${lang};q=${q}`;
-            })
-            .join(',');
-    }
-
-    return 'en-US';
-}
-
-// helper to sanitize page title for filename safety
-function getSanitizedTitle() {
-    const rawTitle = document.title.trim() || 'video';
-    // sanitize reserved filesystem characters and double quotes
-    return rawTitle.replace(/["/\\?%*:|"<>]/g, '_');
-}
-
 // helper to build yt-dlp command with --add-header flags and output filename option
 function buildYtdlpCommand(url) {
     const headerValues = {
