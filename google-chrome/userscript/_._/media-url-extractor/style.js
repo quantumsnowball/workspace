@@ -5,15 +5,18 @@ const FAB_STYLE = {
     left: '50%',
     transform: 'translateX(-50%)',
     zIndex: '999999',
-    backgroundColor: '#222',
-    color: '#fff',
-    padding: '10px 16px',
+    backgroundColor: '#404040',
+    color: '#ffffff',
+    border: '1px solid #7a7a7a',
+    padding: '10px 18px',
     borderRadius: '24px',
     cursor: 'pointer',
-    boxShadow: '0 4px 12px rgba(0,0,0,0.4)',
+    boxShadow: '0 10px 30px rgba(0, 0, 0, 0.85), 0 2px 8px rgba(0, 0, 0, 0.6)',
     fontSize: '14px',
+    fontWeight: '600',
     fontFamily: 'monospace',
     userSelect: 'none',
+    transition: 'all 0.2s ease-in-out',
 };
 
 const POPUP_STYLE = {
