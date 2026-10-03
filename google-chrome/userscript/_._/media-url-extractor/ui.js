@@ -1,5 +1,5 @@
 // ui.js
-let fab, popup, listContainer, badge, filterInput;
+let fab, popup, listContainer, badge, filterInput, shadowRoot;
 
 // Key used for per-domain storage
 const STORAGE_KEY = `media_extractor_headers_${location.hostname}`;
@@ -42,40 +42,46 @@ function saveHeaders(headers) {
 const activeHeaders = loadSavedHeaders();
 
 function createUi(onClear, onFilter) {
-    if (document.getElementById('media-extractor-fab')) return;
+    if (document.getElementById('media-extractor-host')) return;
 
-    // floating action button
+    // create a host container for the Shadow DOM
+    const host = document.createElement('div');
+    host.id = 'media-extractor-host';
+    document.body.appendChild(host);
+
+    // attach an open Shadow Root
+    shadowRoot = host.attachShadow({ mode: 'open' });
+
+    // FAB
     fab = document.createElement('div');
     fab.id = 'media-extractor-fab';
     fab.innerHTML = FAB_HTML;
     Object.assign(fab.style, FAB_STYLE);
+    fab.onmouseover = () => Object.assign(fab.style, FAB_HOVER_STYLE);
+    fab.onmouseout = () => Object.assign(fab.style, FAB_STYLE);
 
-    // hover handlers
-    fab.onmouseover = () => {
-        Object.assign(fab.style, FAB_HOVER_STYLE);
-    };
-
-    fab.onmouseout = () => {
-        Object.assign(fab.style, FAB_STYLE);
-    };
-
-    // popup panel
+    // popup
     popup = document.createElement('div');
     popup.id = 'media-extractor-popup';
     Object.assign(popup.style, POPUP_STYLE);
     popup.innerHTML = POPUP_LAYOUT_HTML;
 
-    document.body.appendChild(fab);
-    document.body.appendChild(popup);
+    // attach elements inside the shadow tree
+    shadowRoot.appendChild(fab);
+    shadowRoot.appendChild(popup);
 
-    document.getElementById('media-extractor-title').textContent = document.title.trim() || 'captured media urls';
+    // query elements from shadowRoot instead of document
+    const titleElement = shadowRoot.getElementById('media-extractor-title');
+    if (titleElement) {
+        titleElement.textContent = document.title.trim() || 'captured media urls';
+    }
 
-    listContainer = document.getElementById('media-extractor-list');
-    badge = document.getElementById('media-extractor-badge');
-    filterInput = document.getElementById('media-extractor-filter');
-    const clearFilterBtn = document.getElementById('media-extractor-clear-filter');
+    listContainer = shadowRoot.getElementById('media-extractor-list');
+    badge = shadowRoot.getElementById('media-extractor-badge');
+    filterInput = shadowRoot.getElementById('media-extractor-filter');
+    const clearFilterBtn = shadowRoot.getElementById('media-extractor-clear-filter');
 
-    // helper to sync toggle button visual state
+    // header toggle button bindings
     function renderHeaderBtnState(btn, isActive) {
         Object.assign(btn.style, HEADER_TOGGLE_BTN_BASE, isActive ? HEADER_TOGGLE_BTN_ON : HEADER_TOGGLE_BTN_OFF);
     }
@@ -87,12 +93,10 @@ function createUi(onClear, onFilter) {
         'hdr-acceptlang': 'Accept-Language',
     };
 
-    // initialize toggle buttons and attach click handlers
     Object.entries(headerMap).forEach(([id, headerName]) => {
-        const btn = document.getElementById(id);
+        const btn = shadowRoot.getElementById(id);
         if (btn) {
             renderHeaderBtnState(btn, !!activeHeaders[headerName]);
-
             btn.onclick = () => {
                 activeHeaders[headerName] = !activeHeaders[headerName];
                 renderHeaderBtnState(btn, activeHeaders[headerName]);
@@ -101,7 +105,8 @@ function createUi(onClear, onFilter) {
         }
     });
 
-    const resGroupContainer = document.getElementById('media-extractor-res-group');
+    // Resolution quick filter presets
+    const resGroupContainer = shadowRoot.getElementById('media-extractor-res-group');
     RES_PRESETS.forEach((preset) => {
         const btn = document.createElement('button');
         btn.textContent = preset.label;
@@ -121,28 +126,22 @@ function createUi(onClear, onFilter) {
         resGroupContainer.appendChild(btn);
     });
 
+    // Filter clear & search handlers
     clearFilterBtn.onclick = () => {
         filterInput.value = '';
         onFilter('');
         filterInput.focus();
     };
 
-    clearFilterBtn.onmouseover = () => {
-        Object.assign(clearFilterBtn.style, { color: '#fff', backgroundColor: '#dc3545', borderColor: '#dc3545' });
-    };
-    clearFilterBtn.onmouseout = () => {
-        Object.assign(clearFilterBtn.style, { color: '#aaa', backgroundColor: '#3a3a3a', borderColor: '#555' });
-    };
-
     fab.onclick = () => {
         popup.style.display = popup.style.display === 'none' ? 'flex' : 'none';
     };
 
-    document.getElementById('media-extractor-close').onclick = () => {
+    shadowRoot.getElementById('media-extractor-close').onclick = () => {
         popup.style.display = 'none';
     };
 
-    document.getElementById('media-extractor-clear').onclick = onClear;
+    shadowRoot.getElementById('media-extractor-clear').onclick = onClear;
 
     filterInput.oninput = (e) => {
         onFilter(e.target.value.trim());
@@ -152,7 +151,7 @@ function createUi(onClear, onFilter) {
 function updateUiList(capturedUrls, filterKeyword) {
     if (!badge || !listContainer) return;
 
-    const titleElement = document.getElementById('media-extractor-title');
+    const titleElement = shadowRoot.getElementById('media-extractor-title');
     if (titleElement) {
         titleElement.textContent = document.title.trim() || 'captured media urls';
     }
@@ -180,7 +179,6 @@ function updateUiList(capturedUrls, filterKeyword) {
             transition: 'background-color 0.15s ease',
         });
 
-        // row hover feedback
         row.onmouseover = () => {
             row.style.backgroundColor = '#383838';
         };
@@ -188,16 +186,13 @@ function updateUiList(capturedUrls, filterKeyword) {
             row.style.backgroundColor = '#2b2b2b';
         };
 
-        // url text preview
         const urlText = document.createElement('span');
         urlText.innerHTML = formatHighlightedUrl(url, filterKeyword);
         Object.assign(urlText.style, { flexGrow: '1', maxHeight: '60px', overflow: 'hidden' });
 
-        // action buttons container
         const btnContainer = document.createElement('div');
         Object.assign(btnContainer.style, { display: 'flex', gap: '6px', flexShrink: '0' });
 
-        // copy raw url button
         const copyUrlBtn = document.createElement('button');
         copyUrlBtn.textContent = 'url';
         Object.assign(copyUrlBtn.style, COPY_BTN_STYLE, { backgroundColor: '#28a745' });
@@ -206,7 +201,6 @@ function updateUiList(capturedUrls, filterKeyword) {
             copyToClipboard(url, copyUrlBtn, 'copied!', 'url');
         };
 
-        // copy yt-dlp command button
         const copyYtdlpBtn = document.createElement('button');
         copyYtdlpBtn.textContent = 'yt-dlp';
         Object.assign(copyYtdlpBtn.style, COPY_BTN_STYLE, { backgroundColor: '#17a2b8' });
@@ -215,7 +209,6 @@ function updateUiList(capturedUrls, filterKeyword) {
             copyToClipboard(buildYtdlpCommand(activeHeaders, url), copyYtdlpBtn, 'copied!', 'yt-dlp');
         };
 
-        // row-level click copies yt-dlp command using the yt-dlp button context
         row.onclick = () => {
             copyToClipboard(buildYtdlpCommand(activeHeaders, url), copyYtdlpBtn, 'copied!', 'yt-dlp');
         };
