@@ -1,8 +1,8 @@
 // ==UserScript==
 // @name         media url extractor
 // @namespace    http://tampermonkey.net/
-// @version      1.2
-// @description  captures m3u8 and mp4 urls with syntax highlighting
+// @version      1.3
+// @description  captures m3u8 and mp4 urls with enhanced syntax highlighting
 // @author       you
 // @match        *://*/*
 // @run-at       document-start
@@ -31,13 +31,32 @@
         }
     }
 
-    // helper function to highlight slashes red and media extensions yellow
-    function formatHighlightedUrl(url) {
-        // escape HTML to prevent XSS injection
-        const escaped = url.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+    // helper function to highlight protocol, domain, slashes, and extensions
+    function formatHighlightedUrl(rawUrl) {
+        try {
+            const parsed = new URL(rawUrl);
 
-        // highlight slashes red and m3u8/mp4 extensions yellow
-        return escaped.replace(/\//g, '<span style="color: #ff5555; font-weight: bold;">/</span>').replace(/(\.m3u8|\.mp4)/gi, '<span style="color: #f1fa8c; font-weight: bold;">$1</span>');
+            // escape html strings to prevent xss
+            const escapeHtml = (str) => str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+
+            const protocol = escapeHtml(parsed.protocol); // e.g. "https:"
+            const host = escapeHtml(parsed.host); // e.g. "s4.maxstream.org"
+            let rest = escapeHtml(parsed.pathname + parsed.search + parsed.hash);
+
+            // style highlights
+            const styledProtocol = `<span style="color: #7f7f7f;">${protocol}</span>`;
+            const styledHost = `<span style="color: #ff8f00; font-weight: bold;">${host}</span>`;
+            const redSlash = `<span style="color: #ff5555; font-weight: bold;">/</span>`;
+
+            // format remaining path (slashes -> red, extension -> yellow)
+            rest = rest.replace(/\//g, redSlash).replace(/(\.m3u8|\.mp4)/gi, '<span style="color: #f1fa8c; font-weight: bold;">$1</span>');
+
+            return `${styledProtocol}${redSlash}${redSlash}${styledHost}${rest}`;
+        } catch (e) {
+            // fallback for relative or unparseable urls
+            const escaped = rawUrl.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+            return escaped.replace(/\//g, '<span style="color: #ff5555; font-weight: bold;">/</span>').replace(/(\.m3u8|\.mp4)/gi, '<span style="color: #f1fa8c; font-weight: bold;">$1</span>');
+        }
     }
 
     // hook fetch api
