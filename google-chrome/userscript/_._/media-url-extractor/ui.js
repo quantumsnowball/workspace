@@ -56,8 +56,8 @@ function createUi(onClear, onFilter) {
             </div>
         </div>
         <div id="media-extractor-list" style="padding:10px 14px;overflow-y:auto;max-height:380px;flex-grow:1;"></div>
-        <div style="padding:10px 14px;background:#252525;border-top:1px solid #333;display:flex;align-items:center;gap:10px;">
-            <label for="media-extractor-filter" style="color:#aaa;font-size:11px;white-space:nowrap;user-select:none;">filter:</label>
+        <div style="padding:10px 14px;background:#252525;border-top:1px solid #333;display:flex;align-items:center;gap:8px;">
+            <button id="media-extractor-clear-filter" title="Clear filter text" style="background:#3a3a3a;color:#aaa;border:1px solid #555;border-radius:4px;padding:4px 8px;cursor:pointer;font-size:11px;font-family:monospace;line-height:1;user-select:none;flex-shrink:0;">✕</button>
             <input id="media-extractor-filter" type="text" placeholder="type keyword..." style="flex-grow:1;box-sizing:border-box;background:#181818;color:#fff;border:1px solid #444;border-radius:4px;padding:6px 10px;font-family:monospace;font-size:12px;outline:none;" />
             <div id="media-extractor-res-group" style="display:flex;gap:4px;flex-shrink:0;"></div>
         </div>
@@ -69,16 +69,17 @@ function createUi(onClear, onFilter) {
     listContainer = document.getElementById('media-extractor-list');
     badge = document.getElementById('media-extractor-badge');
     filterInput = document.getElementById('media-extractor-filter');
+    const clearFilterBtn = document.getElementById('media-extractor-clear-filter');
 
-    // resolution quick filter preset buttons with progressive heat-map colors
+    // resolution quick filter preset buttons
     const resPresets = [
-        { label: '480', bg: '#4a5568' }, // slate gray
-        { label: '720', bg: '#2b6cb0' }, // soft blue
-        { label: '1080', bg: '#2f855a' }, // emerald green
-        { label: '1440', bg: '#d69e2e' }, // warm gold
-        { label: '2560', bg: '#dd6b20' }, // deep orange
-        { label: '2k', bg: '#e53e3e' }, // vibrant red
-        { label: '4k', bg: '#805ad5' }, // ultra purple
+        { label: '480', bg: '#4a5568' },
+        { label: '720', bg: '#2b6cb0' },
+        { label: '1080', bg: '#2f855a' },
+        { label: '1440', bg: '#d69e2e' },
+        { label: '2560', bg: '#dd6b20' },
+        { label: '2k', bg: '#e53e3e' },
+        { label: '4k', bg: '#805ad5' },
     ];
 
     const resGroupContainer = document.getElementById('media-extractor-res-group');
@@ -114,6 +115,24 @@ function createUi(onClear, onFilter) {
 
         resGroupContainer.appendChild(btn);
     });
+
+    // clear filter text on button click
+    clearFilterBtn.onclick = () => {
+        filterInput.value = '';
+        onFilter('');
+        filterInput.focus();
+    };
+
+    clearFilterBtn.onmouseover = () => {
+        clearFilterBtn.style.color = '#fff';
+        clearFilterBtn.style.backgroundColor = '#dc3545';
+        clearFilterBtn.style.borderColor = '#dc3545';
+    };
+    clearFilterBtn.onmouseout = () => {
+        clearFilterBtn.style.color = '#aaa';
+        clearFilterBtn.style.backgroundColor = '#3a3a3a';
+        clearFilterBtn.style.borderColor = '#555';
+    };
 
     fab.onclick = () => {
         popup.style.display = popup.style.display === 'none' ? 'flex' : 'none';
