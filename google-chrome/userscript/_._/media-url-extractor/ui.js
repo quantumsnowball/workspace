@@ -175,24 +175,50 @@ function updateUiList(capturedUrls, filterKeyword) {
 
     filteredUrls.forEach((url) => {
         const row = document.createElement('div');
-        Object.assign(row.style, LIST_ROW_STYLE);
+        Object.assign(row.style, LIST_ROW_STYLE, {
+            cursor: 'pointer',
+            transition: 'background-color 0.15s ease',
+        });
 
+        // row hover feedback
+        row.onmouseover = () => {
+            row.style.backgroundColor = '#383838';
+        };
+        row.onmouseout = () => {
+            row.style.backgroundColor = '#2b2b2b';
+        };
+
+        // url text preview
         const urlText = document.createElement('span');
         urlText.innerHTML = formatHighlightedUrl(url, filterKeyword);
         Object.assign(urlText.style, { flexGrow: '1', maxHeight: '60px', overflow: 'hidden' });
 
+        // action buttons container
         const btnContainer = document.createElement('div');
         Object.assign(btnContainer.style, { display: 'flex', gap: '6px', flexShrink: '0' });
 
+        // copy raw url button
         const copyUrlBtn = document.createElement('button');
         copyUrlBtn.textContent = 'url';
         Object.assign(copyUrlBtn.style, COPY_BTN_STYLE, { backgroundColor: '#28a745' });
-        copyUrlBtn.onclick = () => copyToClipboard(url, copyUrlBtn, 'copied!', 'url');
+        copyUrlBtn.onclick = (e) => {
+            e.stopPropagation();
+            copyToClipboard(url, copyUrlBtn, 'copied!', 'url');
+        };
 
+        // copy yt-dlp command button
         const copyYtdlpBtn = document.createElement('button');
         copyYtdlpBtn.textContent = 'yt-dlp';
         Object.assign(copyYtdlpBtn.style, COPY_BTN_STYLE, { backgroundColor: '#17a2b8' });
-        copyYtdlpBtn.onclick = () => copyToClipboard(buildYtdlpCommand(activeHeaders, url), copyYtdlpBtn, 'copied!', 'yt-dlp');
+        copyYtdlpBtn.onclick = (e) => {
+            e.stopPropagation();
+            copyToClipboard(buildYtdlpCommand(activeHeaders, url), copyYtdlpBtn, 'copied!', 'yt-dlp');
+        };
+
+        // row-level click copies yt-dlp command using the yt-dlp button context
+        row.onclick = () => {
+            copyToClipboard(buildYtdlpCommand(activeHeaders, url), copyYtdlpBtn, 'copied!', 'yt-dlp');
+        };
 
         btnContainer.appendChild(copyUrlBtn);
         btnContainer.appendChild(copyYtdlpBtn);
