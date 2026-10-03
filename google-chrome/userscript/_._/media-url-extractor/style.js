@@ -101,8 +101,9 @@ const COPY_BTN_STYLE = {
     padding: '4px 8px',
     borderRadius: '4px',
     cursor: 'pointer',
-    fontSize: '11px',
+    fontSize: '12px',
     fontFamily: 'monospace',
+    fontWeight: 'bold',
 };
 
 const RES_PRESETS = [
