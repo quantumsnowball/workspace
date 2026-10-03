@@ -57,6 +57,7 @@ function createUi(onClear, onFilter) {
         boxSizing: 'border-box',
     });
 
+    // layout structure: header title -> checkboxes bar -> list container -> filter bar
     popup.innerHTML = `
         <div style="padding:10px 14px;background:#2d2d2d;border-bottom:1px solid #444;display:flex;justify-content:space-between;align-items:center;">
             <b style="color:#fff;">captured media urls</b>
@@ -181,10 +182,28 @@ function createUi(onClear, onFilter) {
     };
 }
 
-// helper to format browser languages into standard Accept-Language header format
-function getFormattedAcceptLanguage() {
+function getNativeAcceptLanguage() {
     if (Array.isArray(navigator.languages) && navigator.languages.length > 0) {
-        return navigator.languages
+        const langs = [];
+
+        // 1. Traverse navigator.languages and append base fallback if missing
+        navigator.languages.forEach((lang) => {
+            if (!langs.includes(lang)) {
+                langs.push(lang);
+            }
+            if (lang.includes('-')) {
+                const baseLang = lang.split('-')[0];
+                if (!langs.includes(baseLang)) {
+                    langs.push(baseLang);
+                }
+            }
+        });
+
+        // 2. Filter out duplicates while preserving first-seen index order
+        const uniqueLangs = Array.from(new Set(langs));
+
+        // 3. Map decaying q-factors (1.0, 0.9, 0.8, 0.7...)
+        return uniqueLangs
             .map((lang, idx) => {
                 if (idx === 0) return lang;
                 const q = Math.max(0.1, 1 - idx * 0.1).toFixed(1);
@@ -192,8 +211,8 @@ function getFormattedAcceptLanguage() {
             })
             .join(',');
     }
-    // Fallback to exact working header string captured from mitmproxy
-    return 'en-US,en;q=0.9,zh-TW;q=0.8,zh;q=0.7';
+
+    return 'en-US';
 }
 
 // helper to build yt-dlp command with --add-header flags
@@ -202,7 +221,7 @@ function buildYtdlpCommand(url) {
         Referer: window.location.href,
         Origin: window.location.origin,
         'User-Agent': navigator.userAgent,
-        'Accept-Language': getFormattedAcceptLanguage(),
+        'Accept-Language': getNativeAcceptLanguage(),
     };
 
     let flags = '';
