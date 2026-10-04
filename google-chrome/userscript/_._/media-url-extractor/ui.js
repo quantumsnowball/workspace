@@ -3,45 +3,21 @@ let fab, popup, listContainer, badge, filterInput, shadowRoot;
 
 // Key used for per-domain storage
 const HEADERS_STORAGE_KEY = `media_extractor_headers_${location.hostname}`;
-const TITLE_STORAGE_KEY = 'media_extractor_shared_title';
 
-// Save top-level page title using static GM key when running in the main window
-if (window.top === window) {
-    try {
-        if (typeof GM_setValue !== 'undefined') {
-            GM_setValue(TITLE_STORAGE_KEY, document.title);
-        } else {
-            localStorage.setItem(TITLE_STORAGE_KEY, document.title);
-        }
-    } catch (e) {
-        // fail gracefully if storage is restricted
-    }
-}
-
-// Unified helper to retrieve page title (reads static GM key for iframe compatibility)
+// Unified helper to retrieve page title directly from DOM
 function getPopupDisplayTitle() {
     let title = '';
 
-    // Read stored top-level title from static GM storage key
     try {
-        if (typeof GM_getValue !== 'undefined') {
-            title = GM_getValue(TITLE_STORAGE_KEY, '');
-        } else {
-            title = localStorage.getItem(TITLE_STORAGE_KEY) || '';
+        if (window.top && window.top.document) {
+            title = window.top.document.title;
         }
     } catch (e) {
-        title = '';
+        title = document.title;
     }
 
-    // Fall back to same-origin window.top or document.title
-    if (!title) {
-        try {
-            if (window.top && window.top.document) {
-                title = window.top.document.title;
-            }
-        } catch (e) {
-            title = document.title;
-        }
+    if (!title || !title.trim()) {
+        title = document.title;
     }
 
     return title && title.trim() ? title.trim() : 'captured media urls';
@@ -124,7 +100,7 @@ function createUi(onClear, onFilter) {
     shadowRoot.appendChild(fab);
     shadowRoot.appendChild(popup);
 
-    // set popup header title using unified title getter
+    // set popup header title using DOM getter
     const titleElement = shadowRoot.getElementById('media-extractor-title');
     if (titleElement) {
         titleElement.textContent = getPopupDisplayTitle();
