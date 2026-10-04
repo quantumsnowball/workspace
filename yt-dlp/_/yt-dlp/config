@@ -1,5 +1,9 @@
-# default use 16 threads to download
+# multi parts playlist, default use 16 threads to download
 -N 16
+
+# single vidoe file, use aria2 16 threads to download
+--downloader aria2c
+--downloader-args aria2c:"-x 8 -s 8 -k 2M"
 
 # cache directory (relative to cwd)
 -P "temp:.yt-dlp/"
