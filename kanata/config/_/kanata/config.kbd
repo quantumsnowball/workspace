@@ -6,6 +6,12 @@
   process-unmapped-keys yes
 )
 
+;; define aliases
+(defalias
+  vim (layer-while-held vim-layer)
+  media (layer-while-held media-layer)
+)
+
 ;; define source
 ;;   key names ref:
 ;;   https://github.com/jtroo/kanata/blob/main/parser/src/keys/mod.rs
@@ -16,12 +22,6 @@
   caps        a         s         d         f         g         h         j         k         l         ;         '         ret                pgup
   lsft         z         x         c         v         b         n         m         ,         .         /         rsft             up         pgdn
   lctl      lmet      lalt                            spc                             ralt                rctl         left        down        right
-)
-
-;; define aliases
-(defalias
-  vim (layer-while-held vim-layer)
-  media (layer-while-held media-layer)
 )
 
 ;; define layers
