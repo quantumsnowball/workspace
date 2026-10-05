@@ -39,11 +39,11 @@
 ;; define layers
 (deflayer default
   caps
-  grv    _      _      _      _      _      _      _      _      _      _      _      _      _        del
-  _       _      _      _      _      _      _      _      _      _      _      _      _      _       home
-  esc      _      _      _      _      _      _      _      _      _      _      _           _        _
-  _         _      _      _      _      _      _      _      _      _      _        _         _       _
-  lmet    lalt    lctl                 _                             @vim    @media  _       _        _
+  grv       _         _         _         _         _         _         _         _         _         _         _         _         _          del
+  _          _         _         _         _         _         _         _         _         _         _         _         _         _         home
+  esc         _         _         _         _         _         _         _         _         _         _         _         _                  _
+  _            _         _         _         _         _         _         _         _         _         _         _                _          _
+  lmet      lalt      lctl                            _                               @vim                @media       _           _           _
 )
 (deflayer vim-layer
   _
