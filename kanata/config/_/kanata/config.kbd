@@ -55,9 +55,9 @@
 )
 (deflayer media-layer
   _
-  _      C-f1   C-f2   C-f3   C-f4   lrld   _      _      _      _      _      _      _      @m_bs    @m_del
-  _       _      _      _      _      _      _      _      _      _      _      prev   next   _       _
-  _        _      _      _      _      _      _      _      _      _      _      volu        _        _
-  _         _      _      _      _      _      _      _      _      pp     vold     _         @m_u    _
-  _       _       _                    _                             _       _       @m_l    @m_d     @m_r
+  _         C-f1      C-f2      C-f3      C-f4      lrld      _         _         _         _         _         _         _         @m_bs      @m_del
+  _          _         _         _         _         _         _         _         _         _         _         prev      next      _         _
+  _           _         _         _         _         _         _         _         _         _         _         volu      _                  _
+  _            _         _         _         _         _         _         _         _         pp        vold      _                @m_u       _
+  _         _         _                               _                               _                   _            @m_l        @m_d        @m_r
 )
