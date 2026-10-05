@@ -47,11 +47,11 @@
 )
 (deflayer vim-layer
   _
-  _   M-1  M-2  M-3  M-4  M-5  M-6  M-7  M-8  M-9  M-0   _    _   @b_w  @d_w
-  _     _  @n_w   _    _    _    _    _    _    _    _   @a_l @a_r  _     _
-  _      _    _  @d_w   _    _  left down  up  right  _    _    _         _
-  _       _    _  @d_w   _  @p_w home pgdn  pgup end   _      _      _    _
-  _     _    _                _                 _      _        _    _    _
+  _      M-1    M-2    M-3    M-4    M-5    M-6    M-7    M-8    M-9    M-0    _      _      @b_w     @d_w
+  _       _      @n_w   _      _      _      _      _      _      _      _      @a_l   @a_r   _       _
+  _        _      _      @d_w   _      _      left   down   up     right  _      _           _        _
+  _         _      _      @d_w   _      @p_w   home   pgdn   pgup   end    _        _         _       _
+  _       _       _                    _                             _       _       _       _        _
 )
 (deflayer media-layer
   _
