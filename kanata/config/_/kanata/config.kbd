@@ -22,18 +22,6 @@
 (defalias
   vim (layer-while-held vim-layer)
   media (layer-while-held media-layer)
-  n_w C-right
-  p_w C-left
-  d_w C-del
-  b_w C-bspc
-  a_l A-left
-  a_r A-right
-  m_u M-A-up
-  m_d M-A-down
-  m_l M-A-left
-  m_r M-A-right
-  m_bs M-bspc
-  m_del M-del
 )
 
 ;; define layers
@@ -47,17 +35,17 @@
 )
 (deflayer vim-layer
   _
-  _         M-1       M-2       M-3       M-4       M-5       M-6       M-7       M-8       M-9       M-0       _         _         @b_w       @d_w
-  _          _         @n_w      _         _         _         _         _         _         _         _         @a_l      @a_r      _         _
-  _           _         _         @d_w      _         _         left      down      up        right     _         _         _                  _
-  _            _         _         @d_w      _         @p_w      home      pgdn      pgup      end       _         _                _          _
+  _         M-1       M-2       M-3       M-4       M-5       M-6       M-7       M-8       M-9       M-0       _         _         C-bspc     C-del
+  _          _         C-right   _         _         _         _         _         _         _         _         A-left    A-right   _         _
+  _           _         _         C-del     _         _         left      down      up        right     _         _         _                  _
+  _            _         _         C-del     _         C-left    home      pgdn      pgup      end       _         _                _          _
   _         _         _                               _                               _                   _            _           _           _
 )
 (deflayer media-layer
   _
-  _         C-f1      C-f2      C-f3      C-f4      lrld      _         _         _         _         _         _         _         @m_bs      @m_del
+  _         C-f1      C-f2      C-f3      C-f4      lrld      _         _         _         _         _         _         _         M-bspc     M-del
   _          _         _         _         _         _         _         _         _         _         _         prev      next      _         _
   _           _         _         _         _         _         _         _         _         _         _         volu      _                  _
-  _            _         _         _         _         _         _         _         _         pp        vold      _                @m_u       _
-  _         _         _                               _                               _                   _            @m_l        @m_d        @m_r
+  _            _         _         _         _         _         _         _         _         pp        vold      _                M-A-up     _
+  _         _         _                               _                               _                   _            M-A-left    M-A-down    M-A-right
 )
