@@ -64,11 +64,11 @@
     _
 ;;
     _         C-f1      C-f2      C-f3      C-f4      lrld      _         _         _         _         _         _         _         M-bspc     M-del
-;;
+;;                                                                                                                 prevMedia nextMedia
     _          _         _         _         _         _         _         _         _         _         _         prev      next      _         _
-;;
+;;                                                                                                                  volume+
     _           _         _         _         _         _         _         _         _         _         _         volu      _                  _
-;;
+;;                                                                                               pause     volume-
     _            _         _         _         _         _         _         _         _         pp        vold      _                M-A-up     _
 ;;
     _         _         _                               _                               _                   _            M-A-left    M-A-down    M-A-right
