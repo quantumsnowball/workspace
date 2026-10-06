@@ -48,8 +48,8 @@
 (deflayer vim-layer
 ;;
     _
-;;
-    _         M-1       M-2       M-3       M-4       M-5       M-6       M-7       M-8       M-9       M-0       _         _         C-bspc     C-del
+;;            work1     work2     work3     work4     work5     work6     work7     work8     work9
+    _         M-1       M-2       M-3       M-4       M-5       M-6       M-7       M-8       M-9       _         _         _         C-bspc     C-del
 ;;
     _          _         C-right   _         _         _         _         _         _         _         _         A-left    A-right   C-tab     C-w
 ;;
