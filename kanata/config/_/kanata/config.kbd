@@ -38,7 +38,7 @@
   _         M-1       M-2       M-3       M-4       M-5       M-6       M-7       M-8       M-9       M-0       _         _         C-bspc     C-del
   _          _         C-right   _         _         _         _         _         _         _         _         A-left    A-right   C-tab     C-w
   _           _         _         C-del     _         _         left      down      up        right     _         C-S-b     C-t                _
-  _            _         _         C-del     _         C-left    home      pgdn      pgup      end       _         _                _          _
+  _            _         _         C-del     _         C-left    home      pgdn      pgup      end       C-S-l     _                _          _
   _         _         _                               _                               _                   _            _           _           _
 )
 (deflayer media-layer
