@@ -16,36 +16,60 @@
 ;;   key names ref:
 ;;   https://github.com/jtroo/kanata/blob/main/parser/src/keys/mod.rs
 (defsrc
+;;
     grv
+;;
     esc       1         2         3         4         5         6         7         8         9         0         -         =         bspc       home
+;;
     tab        q         w         e         r         t         y         u         i         o         p         [         ]         \         del
+;;
     caps        a         s         d         f         g         h         j         k         l         ;         '         ret                pgup
+;;
     lsft         z         x         c         v         b         n         m         ,         .         /         rsft             up         pgdn
+;;
     lctl      lmet      lalt                            spc                             ralt                rctl         left        down        right
 )
 
 ;; define layers
 (deflayer default
+;;
     caps
+;;
     grv       _         _         _         _         _         _         _         _         _         _         _         _         _          del
+;;
     _          _         _         _         _         _         _         _         _         _         _         _         _         _         home
+;;
     esc         _         _         _         _         _         _         _         _         _         _         _         _                  _
+;;
     _            _         _         _         _         _         _         _         _         _         _         _                _          _
+;;
     lmet      lalt      lctl                            _                               @vim                @media       _           _           _
 )
 (deflayer vim-layer
+;;
     _
+;;
     _         M-1       M-2       M-3       M-4       M-5       M-6       M-7       M-8       M-9       M-0       _         _         C-bspc     C-del
+;;
     _          _         C-right   _         _         _         _         _         _         _         _         A-left    A-right   C-tab     C-w
+;;
     _           _         _         C-del     _         _         left      down      up        right     C-j       C-S-b     C-t                _
+;;
     _            _         _         C-del     _         C-left    home      pgdn      pgup      end       C-S-l     _                _          _
+;;
     _         _         _                               _                               _                   _            _           _           _
 )
 (deflayer media-layer
+;;
     _
+;;
     _         C-f1      C-f2      C-f3      C-f4      lrld      _         _         _         _         _         _         _         M-bspc     M-del
+;;
     _          _         _         _         _         _         _         _         _         _         _         prev      next      _         _
+;;
     _           _         _         _         _         _         _         _         _         _         _         volu      _                  _
+;;
     _            _         _         _         _         _         _         _         _         pp        vold      _                M-A-up     _
+;;
     _         _         _                               _                               _                   _            M-A-left    M-A-down    M-A-right
 )
