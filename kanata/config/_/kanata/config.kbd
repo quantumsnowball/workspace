@@ -46,13 +46,17 @@
     lmet      lalt      lctl                            _                               @vim                @media       _           _           _
 )
 ;; vim layer
+(defalias
+    ;; close tab / reopen tab when shifted
+    opClTab (fork C-w C-S-t (lsft rsft))
+)
 (deflayer vim-layer
 ;;
     _
 ;;            work1     work2     work3     work4     work5     work6     work7     work8     work9                                   bspcWord   delWord
     _         M-1       M-2       M-3       M-4       M-5       M-6       M-7       M-8       M-9       _         _         _         C-bspc     C-del
-;;                       nextWord                                                                                  prevURL   nextURL   nextTab   closeTab
-    _          _         C-right   _         _         _         _         _         _         _         _         A-left    A-right   C-tab     C-w
+;;                       nextWord                                                                                  prevURL   nextURL   nextTab   opClTab
+    _          _         C-right   _         _         _         _         _         _         _         _         A-left    A-right   C-tab     @opClTab
 ;;                                  delWord                                                               tgDlPage  tgBmBar   newTab
     _           _         _         C-del     _         _         left      down      up        right     C-j       C-S-b     C-t                _
 ;;                                   delWord             prevWord                                          tgVTabW
