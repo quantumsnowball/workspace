@@ -42,7 +42,7 @@
     esc         _         _         _         _         _         _         _         _         _         _         _         _                  _
 ;;
     _            _         _         _         _         _         _         _         _         _         _         _                _          _
-;;
+;;                                                                                      vim-layer           media-layer
     lmet      lalt      lctl                            _                               @vim                @media       _           _           _
 )
 (deflayer vim-layer
