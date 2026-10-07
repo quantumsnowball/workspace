@@ -57,8 +57,8 @@
     _         M-1       M-2       M-3       M-4       M-5       M-6       M-7       M-8       M-9       _         _         _         C-bspc     C-del
 ;;                       nextWord                                                                                  prevURL   nextURL   nextTab   opClTab
     _          _         C-right   _         _         _         _         _         _         _         _         A-left    A-right   C-tab     @opClTab
-;;                                  delWord                                                                         tgBmBar   newTab
-    _           _         _         C-del     _         _         left      down      up        right     _         C-S-b     C-t                _
+;;                                  delWord                                                                         tgBmBar   newTab             bmPage
+    _           _         _         C-del     _         _         left      down      up        right     _         C-S-b     C-t                C-S-o
 ;;                                   delWord             prevWord                                          tgVTabW                               clPage
     _            _         _         C-del     _         C-left    home      pgdn      pgup      end       C-S-l     _                _          C-j
 ;;
