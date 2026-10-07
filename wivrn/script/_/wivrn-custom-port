@@ -1,0 +1,31 @@
+#!/usr/bin/env bash
+
+# set default port if $1 is empty or not provided
+port="${1:-19757}"
+
+# location of base config
+base_config="$XDG_CONFIG_HOME/wivrn/config.json"
+
+# fallback to default empty json if base config doesn't exist
+if [[ ! -f "$base_config" ]]; then
+    base_config_content='{}'
+else
+    base_config_content=$(cat "$base_config")
+fi
+
+# create temp file
+tmp_file=$(mktemp --tmpdir wivrn-custom-port-XXXXXX.json)
+
+# cleanup temp file automatically on script exit/interrupt
+trap 'rm -f "$tmp_file"' EXIT INT TERM
+
+# modify json using jq and write to temp file
+echo "$base_config_content" | jq --argjson p "$port" '. + {port: $p}' > "$tmp_file"
+
+# setup adb reverse port forwarding
+echo "setting up adb reverse tunnel on port $port..."
+adb reverse "tcp:$port" "tcp:$port"
+
+# launch wivrn-dashboard passing the generated config file
+echo "launching wivrn-dashboard on port $port..."
+wivrn-dashboard -f "$tmp_file"
