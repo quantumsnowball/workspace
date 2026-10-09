@@ -28,6 +28,7 @@ if $(adb reverse "tcp:$port" "tcp:$port"); then
     echo "${GREEN}adb reverse tunnel successfully set up on port $port${RESET}"
 else
     echo "${RED}failed to set up adb reverse tunnel on port $port${RESET}"
+    exit 1
 fi
 
 # launch wivrn-dashboard passing the generated config file
