@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/usr/bin/env zsh
 
 # set default port if $1 is empty or not provided
 port="${1:-19757}"
@@ -23,9 +23,13 @@ trap 'rm -f "$tmp_file"' EXIT INT TERM
 echo "$base_config_content" | jq --argjson p "$port" '. + {port: $p}' > "$tmp_file"
 
 # setup adb reverse port forwarding
-echo "setting up adb reverse tunnel on port $port..."
-adb reverse "tcp:$port" "tcp:$port"
+echo "${YELLOW}setting up adb reverse tunnel on port $port...${RESET}"
+if $(adb reverse "tcp:$port" "tcp:$port"); then
+    echo "${GREEN}adb reverse tunnel successfully set up on port $port${RESET}"
+else
+    echo "${RED}failed to set up adb reverse tunnel on port $port${RESET}"
+fi
 
 # launch wivrn-dashboard passing the generated config file
-echo "launching wivrn-dashboard on port $port..."
+echo "${YELLOW}launching wivrn-dashboard on port $port...${RESET}"
 wivrn-dashboard -f "$tmp_file"
