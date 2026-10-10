@@ -5,5 +5,6 @@
 
 # only track these whitelisted files
 !/_/sunshine/sunshine.conf
+!/_/sunshine/apps.json
 !/_/sunshine/mkcert/readme.md
 
