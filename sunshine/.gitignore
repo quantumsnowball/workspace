@@ -1,6 +1,9 @@
 # default ignore everything in the stow dir
-/_/sunshine/*
+/_/sunshine/**/*
+# allow Git to look into folders safely without whitelisting their contents
+!/_/sunshine/**/
 
-# only track the files below
+# only track these whitelisted files
 !/_/sunshine/sunshine.conf
+!/_/sunshine/mkcert/readme.md
 
