@@ -51,6 +51,9 @@ binds {
     // overview
     Super+Tab repeat=false { toggle-overview; }
 
+    // monitors
+    Super+Backslash { focus-monitor-next; }
+
     // close window
     Super+Grave repeat=false { close-window; }
     Super+W repeat=false     { close-window; }
@@ -86,7 +89,7 @@ binds {
     Super+Shift+Up    { move-window-up; }
     Super+Shift+Home  { move-column-to-first; }
     Super+Shift+End   { move-column-to-last; }
-    
+
     // workspace movement
     Super+BracketRight         { focus-workspace-down; }
     Super+BracketLeft          { focus-workspace-up; }
