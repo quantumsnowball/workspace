@@ -89,6 +89,7 @@ binds {
     Super+Shift+Up    { move-window-up; }
     Super+Shift+Home  { move-column-to-first; }
     Super+Shift+End   { move-column-to-last; }
+    Super+Shift+Backslash { move-column-to-monitor-next; }
 
     // workspace movement
     Super+BracketRight         { focus-workspace-down; }
