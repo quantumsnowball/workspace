@@ -1,0 +1,6 @@
+# default ignore everything in the stow dir
+/_/sunshine/*
+
+# only track the files below
+!/_/sunshine/sunshine.conf
+
