@@ -15,6 +15,10 @@
             "output": "",
             "prep-cmd": [
                 {
+                    "do": "niri msg output HEADLESS-1 on",
+                    "undo": "niri msg output HEADLESS-1 off"
+                },
+                {
                     "do": "niri msg output HDMI-A-1 off",
                     "undo": "niri msg output HDMI-A-1 on"
                 }
