@@ -21,7 +21,7 @@
             "exclude-global-prep-cmd": false,
             "exit-timeout": 5,
             "image-path": "",
-            "name": "s7-hd",
+            "name": "s7 - 16:10 / 1.6 (1920x1200)",
             "output": "",
             "prep-cmd": [
                 {
@@ -38,7 +38,7 @@
             "exclude-global-prep-cmd": false,
             "exit-timeout": 5,
             "image-path": "",
-            "name": "s7-2k",
+            "name": "s7 - 16:10 / 1.6 (2560x1600)",
             "output": "",
             "prep-cmd": [
                 {
@@ -72,7 +72,7 @@
             "exclude-global-prep-cmd": false,
             "exit-timeout": 5,
             "image-path": "",
-            "name": "quest2-1920x1440(4:3,1.333)",
+            "name": "quest2 - 4:3 / 1.333 (1920x1440)",
             "output": "",
             "prep-cmd": [
                 {
@@ -89,7 +89,7 @@
             "exclude-global-prep-cmd": false,
             "exit-timeout": 5,
             "image-path": "",
-            "name": "quest2-2217x1247(16:9,1.778)",
+            "name": "quest2 - 16:9 / 1.778 (2217x1247)",
             "output": "",
             "prep-cmd": [
                 {
