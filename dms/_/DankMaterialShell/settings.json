@@ -169,6 +169,10 @@
         "notificationButton"
       ],
       "rightWidgets": [
+        {
+          "id": "dankActions:variant_1791736190544",
+          "enabled": true
+        },
         "music",
         "weather",
         {
