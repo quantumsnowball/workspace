@@ -76,6 +76,23 @@
             "exclude-global-prep-cmd": false,
             "exit-timeout": 5,
             "image-path": "",
+            "name": "quest2-1920x1440(4:3,1.333)",
+            "output": "",
+            "prep-cmd": [
+                {
+                    "do": "niri msg create-virtual-output --name HEADLESS-1 --width 1920 --height 1440 --refresh-rate 60",
+                    "undo": "niri msg remove-virtual-output HEADLESS-1"
+                }
+            ],
+            "wait-all": true
+        },
+        {
+            "auto-detach": true,
+            "cmd": "",
+            "elevated": false,
+            "exclude-global-prep-cmd": false,
+            "exit-timeout": 5,
+            "image-path": "",
             "name": "quest2-2217x1247(16:9,1.778)",
             "output": "",
             "prep-cmd": [
