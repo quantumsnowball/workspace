@@ -34,18 +34,33 @@
       },
       {
         "icon": "monitor",
-        "displayText": "Monitor",
+        "displayText": "ON",
         "displayCommand": "",
         "clickCommand": "sleep 1 && notify-send 'HDMI-A-1' 'Turning monitor ON ...' && sleep 2 && niri msg output HDMI-A-1 on",
-        "middleClickCommand": "sleep 1 && notify-send 'HDMI-A-1' 'Turning monitor OFF ...' && sleep 2 && niri msg output HDMI-A-1 off",
-        "rightClickCommand": "sleep 1 && notify-send 'HDMI-A-1' 'Turning monitor OFF ...' && sleep 2 && niri msg output HDMI-A-1 off",
+        "middleClickCommand": "",
+        "rightClickCommand": "",
         "updateInterval": 0,
         "showIcon": true,
         "showText": true,
         "visibilityCommand": "",
         "visibilityInterval": 0,
         "id": "variant_1791736190544",
-        "name": "Main Monitor On/Off"
+        "name": "Main Monitor On"
+      },
+      {
+        "icon": "monitor",
+        "displayText": "OFF",
+        "displayCommand": "",
+        "clickCommand": "sleep 1 && notify-send 'HDMI-A-1' 'Turning monitor OFF ...' && sleep 2 && niri msg output HDMI-A-1 off",
+        "middleClickCommand": "",
+        "rightClickCommand": "",
+        "updateInterval": 0,
+        "showIcon": true,
+        "showText": true,
+        "visibilityCommand": "",
+        "visibilityInterval": 0,
+        "id": "variant_1791750842101",
+        "name": "Monitor Off"
       }
     ]
   }

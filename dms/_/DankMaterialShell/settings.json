@@ -95,6 +95,18 @@
       "showOnLastDisplay": true,
       "leftWidgets": [
         {
+          "id": "dankActions:variant_1791736190544",
+          "enabled": true
+        },
+        {
+          "id": "dankActions:variant_1791750842101",
+          "enabled": true
+        },
+        {
+          "id": "separator",
+          "enabled": true
+        },
+        {
           "id": "cpuUsage",
           "enabled": true,
           "minimumWidth": false
@@ -119,6 +131,10 @@
         },
         {
           "id": "network_speed_monitor",
+          "enabled": true
+        },
+        {
+          "id": "separator",
           "enabled": true
         },
         {
@@ -169,10 +185,6 @@
         "notificationButton"
       ],
       "rightWidgets": [
-        {
-          "id": "dankActions:variant_1791736190544",
-          "enabled": true
-        },
         "music",
         "weather",
         {
