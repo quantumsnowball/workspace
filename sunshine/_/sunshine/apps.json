@@ -25,8 +25,8 @@
             "output": "",
             "prep-cmd": [
                 {
-                    "do": "niri msg output HEADLESS-1 on",
-                    "undo": ""
+                    "do": "niri msg create-virtual-output --name HEADLESS-1 --width 1920 --height 1200 --refresh-rate 60",
+                    "undo": "niri msg remove-virtual-output HEADLESS-1"
                 }
             ],
             "wait-all": true
@@ -42,8 +42,8 @@
             "output": "",
             "prep-cmd": [
                 {
-                    "do": "niri msg output HEADLESS-1 on",
-                    "undo": "niri msg output HEADLESS-1 off"
+                    "do": "niri msg create-virtual-output --name HEADLESS-1 --width 1920 --height 1200 --refresh-rate 60",
+                    "undo": "niri msg remove-virtual-output HEADLESS-1"
                 },
                 {
                     "do": "niri msg output HDMI-A-1 off",
