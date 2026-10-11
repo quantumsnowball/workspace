@@ -21,7 +21,7 @@
             "exclude-global-prep-cmd": false,
             "exit-timeout": 5,
             "image-path": "",
-            "name": "S7",
+            "name": "s7-hd",
             "output": "",
             "prep-cmd": [
                 {
@@ -38,7 +38,24 @@
             "exclude-global-prep-cmd": false,
             "exit-timeout": 5,
             "image-path": "",
-            "name": "S7-Exclusive",
+            "name": "s7-2k",
+            "output": "",
+            "prep-cmd": [
+                {
+                    "do": "niri msg create-virtual-output --name HEADLESS-1 --width 2560 --height 1600 --refresh-rate 60",
+                    "undo": "niri msg remove-virtual-output HEADLESS-1"
+                }
+            ],
+            "wait-all": true
+        },
+        {
+            "auto-detach": true,
+            "cmd": "",
+            "elevated": false,
+            "exclude-global-prep-cmd": false,
+            "exit-timeout": 5,
+            "image-path": "",
+            "name": "s7-hd (exclusive)",
             "output": "",
             "prep-cmd": [
                 {
