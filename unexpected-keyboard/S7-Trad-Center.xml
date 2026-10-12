@@ -45,32 +45,35 @@
       s="page_down"
       e="end"
       w="home"
-      width="0.9" 
+      width="0.9"
     />
   </row>
   <row height="0.95">
-    <key c="fn" 
+    <key c="meta"
       n="config"
       s="switch_forward"
-      width="1.1" 
+      width="1.0"
     />
-    <key c="ctrl" 
-      w="alt"
-      width="1.7" 
+    <key c="alt"
+      width="0.9"
     />
-    <key c="space" 
+    <key c="ctrl"
+      n="fn"
+      width="0.9"
+    />
+    <key c="space"
       n="up"
       s="down"
       e="right"
       w="left"
-      width="6.4" 
+      width="6.4"
     />
-    <key c="backspace" 
+    <key c="backspace"
       e="delete"
-      width="1.4" 
+      width="1.4"
     />
-    <key c="enter" 
-      width="1.4" 
+    <key c="enter"
+      width="1.4"
     />
   </row>
 </keyboard>
