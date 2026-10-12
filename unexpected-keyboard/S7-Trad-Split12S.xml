@@ -10,22 +10,22 @@
     <key c="tab"
       width="2.0"
     />
-    <key c="fn" 
+    <key c="fn"
       n="config"
       s="switch_forward"
       width="1.0"
     />
     <key c="pasteAsPlainText" />
-    <key c="paste" 
+    <key c="paste"
       width="2.0"
     />
-    <key c="copy" 
+    <key c="copy"
       width="2.0"
     />
     <key c="cut" />
-    <key c="backspace" 
+    <key c="backspace"
       e="delete"
-      width="3.0" 
+      width="3.0"
     />
     <key c="y" n="6" ne="^" sw="copy" />
     <key c="u" n="7" ne="&amp;" sw="undo" />
@@ -41,16 +41,11 @@
     <key c="d" />
     <key c="f" />
     <key c="g" />
-    <key c="ctrl" 
-      w="alt"
-      width="4.0" 
-    />
-    <key c="selectAll" 
-      width="4.0" 
-    />
-    <key c="enter" 
-      width="4.0" 
-    />
+    <key c="meta" width="2.0"/>
+    <key c="alt" width="2.0"/>
+    <key c="ctrl" width="2.0"/>
+    <key c="selectAll" width="2.0" />
+    <key c="enter" width="4.0" />
     <key c="h" />
     <key c="j" />
     <key c="k" />
@@ -64,12 +59,12 @@
     <key c="x" s="cut" />
     <key c="c" s="copy" />
     <key c="v" s="paste" />
-    <key c="space" 
+    <key c="space"
       n="up"
       s="down"
       e="right"
       w="left"
-      width="12.0" 
+      width="12.0"
     />
     <key c="b" />
     <key c="n"  />
@@ -81,7 +76,7 @@
       s="page_down"
       e="end"
       w="home"
-      width="0.9" 
+      width="0.9"
     />
   </row>
 </keyboard>
