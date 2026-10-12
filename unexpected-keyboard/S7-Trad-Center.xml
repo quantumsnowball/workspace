@@ -6,7 +6,7 @@
     <key c="w" n="2" nw="@" />
     <key c="e" n="3" nw="#" />
     <key c="r" n="4" nw="$" se="redo" />
-    <key c="t" n="5" nw="%" />
+    <key c="t" n="5" nw="%" s="switch_forward" />
     <key c="y" n="6" ne="^" sw="copy" />
     <key c="u" n="7" ne="&amp;" sw="undo" />
     <key c="i" n="8" ne="*" />
@@ -20,7 +20,7 @@
     <key c="s" />
     <key c="d" />
     <key c="f" />
-    <key c="g" />
+    <key c="g" n="config"/>
     <key c="h" />
     <key c="j" />
     <key c="k" />
@@ -49,18 +49,9 @@
     />
   </row>
   <row height="0.95">
-    <key c="meta"
-      n="config"
-      s="switch_forward"
-      width="1.0"
-    />
-    <key c="alt"
-      width="0.9"
-    />
-    <key c="ctrl"
-      n="fn"
-      width="0.9"
-    />
+    <key c="meta" width="1.0" />
+    <key c="alt" width="0.9" />
+    <key c="ctrl" width="0.9" />
     <key c="space"
       n="up"
       s="down"
@@ -70,6 +61,7 @@
     />
     <key c="backspace"
       e="delete"
+      w="fn"
       width="1.4"
     />
     <key c="enter"
