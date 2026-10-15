@@ -1,6 +1,8 @@
 {
   "debug-gui": false,
+  "encoder": "nvenc",
   "hid-forwarding": false,
   "lh-stick-deadzone": 0.0,
+  "openvr-compat-path": "/opt/xrizer",
   "use-steamvr-lh": false
 }
