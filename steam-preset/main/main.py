@@ -46,7 +46,7 @@ def discover_presets() -> Registry:
 # the main console script entry
 def run() -> None:
     # extract %command%
-    target_cmd = sys.argv[1:]
+    steam_cmd = sys.argv[1:]
     if not len(sys.argv) > 1:
         logger.error('No %command% detected. Use `steam-preset %command%` as launch options.')
         sys.exit(1)
@@ -63,22 +63,23 @@ def run() -> None:
     else:
         logger.debug(f'Preset loaded from registry: {preset=}')
 
-    # run preset extra logics to filter or modify env and args
-    extra_env: Env = preset.env.copy() if isinstance(preset, PresetWithEnv) else {}
-    extra_wrappers: Wrappers = preset.wrappers.copy() if isinstance(preset, PresetWithWrappers) else []
-    extra_args: Args = preset.args.copy() if isinstance(preset, PresetWithArgs) else []
-    if isinstance(preset, PresetConfigurable):
-        extra_env, extra_wrappers, extra_args = preset.config(extra_env, extra_wrappers, extra_args)
-    logger.info(f'{extra_env=}')
-    logger.info(f'{extra_wrappers=}')
-    logger.info(f'{extra_args=}')
+    # load preset extras
+    preset_env: Env = preset.env.copy() if isinstance(preset, PresetWithEnv) else {}
+    preset_wrappers: Wrappers = preset.wrappers.copy() if isinstance(preset, PresetWithWrappers) else []
+    preset_args: Args = preset.args.copy() if isinstance(preset, PresetWithArgs) else []
+    logger.info(f'{preset_env=}')
+    logger.info(f'{preset_wrappers=}')
+    logger.info(f'{preset_args=}')
 
     # construct the final version of cmd and env
-    full_env = os.environ.copy()
-    full_env.update(extra_env)
-    full_cmd = extra_wrappers + target_cmd + extra_args
-    logger.debug(f'{full_env=}')
-    logger.info(f'{full_cmd=}')
+    if isinstance(preset, PresetConfigurable):
+        steam_env = os.environ.copy()
+        env, cmd = preset.config(steam_env, steam_cmd, preset_env, preset_wrappers, preset_args)
+    else:
+        env = os.environ | preset_env
+        cmd = preset_wrappers + steam_cmd + preset_args
+    logger.debug(f'{env=}')
+    logger.info(f'{cmd=}')
 
-    # exec
-    os.execvpe(full_cmd[0], full_cmd, full_env)
+    # run the game
+    os.execvpe(cmd[0], cmd, env)

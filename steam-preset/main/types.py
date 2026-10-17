@@ -3,6 +3,7 @@ from typing import Protocol, runtime_checkable
 Env = dict[str, str]
 Wrappers = list[str]
 Args = list[str]
+Cmd = list[str]
 
 
 @runtime_checkable
@@ -31,10 +32,14 @@ class PresetWithArgs(Preset, Protocol):
 
 @runtime_checkable
 class PresetConfigurable(Preset, Protocol):
+    # function receives everything needed to understand the current launch environment
+    # use these infos to construct the final env and cmd to run the game
     def config(
         self,
-        env: Env,
-        wrappers: Wrappers,
-        args: Args,
-    ) -> tuple[Env, Wrappers, Args]:
+        steam_env: Env,
+        steam_cmd: Cmd,
+        preset_env: Env,
+        preset_wrappers: Wrappers,
+        preset_args: Args,
+    ) -> tuple[Env, Cmd]:
         ...
