@@ -1,4 +1,5 @@
 import importlib
+import logging
 import os
 import pkgutil
 import sys
@@ -8,6 +9,9 @@ import presets
 from main.types import GamePreset
 
 Registry = dict[str, GamePreset]
+
+logging.basicConfig(level=logging.DEBUG, format='%(name)s: %(levelname)s: %(message)s')
+logger = logging.getLogger('steam-preset')
 
 
 def discover_presets() -> Registry:
@@ -21,11 +25,13 @@ def discover_presets() -> Registry:
 
         # try import the module
         module = importlib.import_module(full_name)
+        logger.debug(f'Imported {module}')
 
         # register module by its APP_ID attribute if defined
         if hasattr(module, 'APP_ID'):
             preset = cast(GamePreset, module)
             registry[preset.APP_ID] = preset
+            logger.info(f'Discovered {preset}')
     #
     return registry
 
@@ -42,21 +48,20 @@ def run() -> None:
 
     # parse app_id
     app_id = os.environ.get('SteamAppId', 'default')
+    logger.debug(f'{app_id=}')
 
     # discover presets dynamically and pick by matching APP_ID
     registry = discover_presets()
     preset = registry.get(app_id)
-
-    # overrides env and args
-    env_overrides: dict[str, str] = {}
-    extra_args: list[str] = []
+    logger.debug(f'{preset=}')
 
     # run preset extra logics to filter or modify env and args
+    env_overrides: dict[str, str] = {}
+    extra_args: list[str] = []
     if preset is not None:
         env_overrides = preset.ENV.copy()
         extra_args = preset.ARGS.copy()
         env_overrides, extra_args = preset.setup(env_overrides, extra_args)
-    print(f'DEBUG: {env_overrides=}', flush=True)
 
     # construct the final version of cmd and env
     full_env = os.environ.copy()
