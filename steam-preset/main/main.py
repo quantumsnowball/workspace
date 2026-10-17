@@ -6,7 +6,7 @@ import sys
 from types import ModuleType
 
 import presets
-from main.types import Preset
+from main.types import Preset, PresetConfigurable
 
 Registry = dict[str, ModuleType]
 
@@ -66,8 +66,8 @@ def run() -> None:
         env_overrides = preset.ENV.copy()
         wrappers = preset.WRAPPERS.copy()
         extra_args = preset.ARGS.copy()
-        if callable(preset.setup):
-            env_overrides, wrappers, extra_args = preset.setup(env_overrides, wrappers, extra_args)
+        if isinstance(preset, PresetConfigurable):
+            env_overrides, wrappers, extra_args = preset.config(env_overrides, wrappers, extra_args)
         logger.info(f'{env_overrides=}')
         logger.info(f'{wrappers=}')
         logger.info(f'{extra_args=}')

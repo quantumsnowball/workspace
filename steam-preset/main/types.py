@@ -1,12 +1,8 @@
-from typing import Callable, Protocol, runtime_checkable
+from typing import Protocol, runtime_checkable
 
 Env = dict[str, str]
 Wrappers = list[str]
 Args = list[str]
-SetupFn = Callable[
-    [Env, Wrappers, Args],
-    tuple[Env, Wrappers, Args],
-]
 
 
 @runtime_checkable
@@ -23,5 +19,13 @@ class Preset(Protocol):
     # args to be set, usually comes after %command%
     ARGS: Args
 
-    # optional setup function for extra processing
-    setup: SetupFn | None = None
+
+@runtime_checkable
+class PresetConfigurable(Preset, Protocol):
+    def config(
+        self,
+        env: Env,
+        wrappers: Wrappers,
+        args: Args,
+    ) -> tuple[Env, Wrappers, Args]:
+        ...

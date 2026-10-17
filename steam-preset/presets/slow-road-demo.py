@@ -7,5 +7,3 @@ WRAPPERS = [
 ]
 
 ARGS = []
-
-setup = None
