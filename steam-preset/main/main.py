@@ -60,18 +60,21 @@ def run() -> None:
 
     # run preset extra logics to filter or modify env and args
     env_overrides: dict[str, str] = {}
+    wrappers: list[str] = []
     extra_args: list[str] = []
     if preset is not None:
         env_overrides = preset.ENV.copy()
+        wrappers = preset.WRAPPERS.copy()
         extra_args = preset.ARGS.copy()
-        env_overrides, extra_args = preset.setup(env_overrides, extra_args)
+        env_overrides, wrappers, extra_args = preset.setup(env_overrides, wrappers, extra_args)
         logger.info(f'{env_overrides=}')
+        logger.info(f'{wrappers=}')
         logger.info(f'{extra_args=}')
 
     # construct the final version of cmd and env
     full_env = os.environ.copy()
     full_env.update(env_overrides)
-    final_cmd = target_cmd + extra_args
+    final_cmd = wrappers + target_cmd + extra_args
     logger.debug(f'{full_env=}')
     logger.info(f'{final_cmd=}')
 
