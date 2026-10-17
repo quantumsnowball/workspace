@@ -64,21 +64,21 @@ def run() -> None:
         logger.debug(f'Preset loaded from registry: {preset=}')
 
     # run preset extra logics to filter or modify env and args
-    env_overrides: Env = preset.env.copy() if isinstance(preset, PresetWithEnv) else {}
-    wrappers: Wrappers = preset.wrappers.copy() if isinstance(preset, PresetWithWrappers) else []
+    extra_env: Env = preset.env.copy() if isinstance(preset, PresetWithEnv) else {}
+    extra_wrappers: Wrappers = preset.wrappers.copy() if isinstance(preset, PresetWithWrappers) else []
     extra_args: Args = preset.args.copy() if isinstance(preset, PresetWithArgs) else []
     if isinstance(preset, PresetConfigurable):
-        env_overrides, wrappers, extra_args = preset.config(env_overrides, wrappers, extra_args)
-    logger.info(f'{env_overrides=}')
-    logger.info(f'{wrappers=}')
+        extra_env, extra_wrappers, extra_args = preset.config(extra_env, extra_wrappers, extra_args)
+    logger.info(f'{extra_env=}')
+    logger.info(f'{extra_wrappers=}')
     logger.info(f'{extra_args=}')
 
     # construct the final version of cmd and env
     full_env = os.environ.copy()
-    full_env.update(env_overrides)
-    final_cmd = wrappers + target_cmd + extra_args
+    full_env.update(extra_env)
+    full_cmd = extra_wrappers + target_cmd + extra_args
     logger.debug(f'{full_env=}')
-    logger.info(f'{final_cmd=}')
+    logger.info(f'{full_cmd=}')
 
     # exec
-    os.execvpe(final_cmd[0], final_cmd, full_env)
+    os.execvpe(full_cmd[0], full_cmd, full_env)
