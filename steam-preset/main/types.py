@@ -5,6 +5,8 @@ Wrappers = list[str]
 Args = list[str]
 Cmd = list[str]
 
+__all__ = ['Env', 'Wrappers', 'Args', 'Cmd', ]
+
 
 @runtime_checkable
 class Preset(Protocol):
