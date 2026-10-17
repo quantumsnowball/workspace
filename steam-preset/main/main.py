@@ -3,12 +3,12 @@ import logging
 import os
 import pkgutil
 import sys
-from typing import cast
+from types import ModuleType
 
 import presets
 from main.types import GamePreset
 
-Registry = dict[str, GamePreset]
+Registry = dict[str, ModuleType]
 
 logging.basicConfig(level=logging.DEBUG, format='%(name)s: %(levelname)s: %(message)s')
 logger = logging.getLogger('steam-preset')
@@ -28,23 +28,20 @@ def discover_presets() -> Registry:
         logger.debug(f'Imported {module}')
 
         # register module by its APP_ID attribute if defined
-        if isinstance(module, GamePreset):
-            preset = cast(GamePreset, module)
-            registry[preset.APP_ID] = preset
-            logger.info(f'Discovered {preset}')
+        if hasattr(module, 'APP_ID'):
+            registry[module.APP_ID] = module
+            logger.info(f'Discovered {module}')
     #
     return registry
 
 
 # the main console script entry
 def run() -> None:
-    # ensure %command%
-    if len(sys.argv) < 2:
-        print('Error: No %command% detected. Use `steam-preset %command%` as launch options.')
-        sys.exit(1)
-
     # extract %command%
     target_cmd = sys.argv[1:]
+    if not len(sys.argv) > 1:
+        logger.error('No %command% detected. Use `steam-preset %command%` as launch options.')
+        sys.exit(1)
 
     # parse app_id
     app_id = os.environ.get('SteamAppId', 'default')
@@ -53,7 +50,13 @@ def run() -> None:
     # discover presets dynamically and pick by matching APP_ID
     registry = discover_presets()
     preset = registry.get(app_id)
-    logger.debug(f'Fetched from registry: {preset=}')
+    if preset is None:
+        logger.warning(f'No preset is loaded, steam-preset has no effect')
+    elif not isinstance(preset, GamePreset):
+        logger.error(f'Invalid preset file, it violates the preset protocol: {preset}')
+        sys.exit(1)
+    else:
+        logger.debug(f'Preset loaded from registry: {preset=}')
 
     # run preset extra logics to filter or modify env and args
     env_overrides: dict[str, str] = {}
