@@ -53,7 +53,7 @@ def run() -> None:
     # discover presets dynamically and pick by matching APP_ID
     registry = discover_presets()
     preset = registry.get(app_id)
-    logger.debug(f'{preset=}')
+    logger.debug(f'Fetched from registry: {preset=}')
 
     # run preset extra logics to filter or modify env and args
     env_overrides: dict[str, str] = {}
@@ -62,11 +62,15 @@ def run() -> None:
         env_overrides = preset.ENV.copy()
         extra_args = preset.ARGS.copy()
         env_overrides, extra_args = preset.setup(env_overrides, extra_args)
+        logger.info(f'{env_overrides=}')
+        logger.info(f'{extra_args=}')
 
     # construct the final version of cmd and env
     full_env = os.environ.copy()
     full_env.update(env_overrides)
     final_cmd = target_cmd + extra_args
+    logger.debug(f'{full_env=}')
+    logger.info(f'{final_cmd=}')
 
     # exec
     os.execvpe(final_cmd[0], final_cmd, full_env)
