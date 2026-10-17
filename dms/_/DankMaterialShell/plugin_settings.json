@@ -61,6 +61,21 @@
         "visibilityInterval": 0,
         "id": "variant_1791750842101",
         "name": "Monitor Off"
+      },
+      {
+        "icon": "terminal",
+        "displayText": "FPS",
+        "displayCommand": "",
+        "clickCommand": "ydotool key --key-delay 200 42:1 60:1 60:0 42:0",
+        "middleClickCommand": "",
+        "rightClickCommand": "",
+        "updateInterval": 0,
+        "showIcon": true,
+        "showText": true,
+        "visibilityCommand": "",
+        "visibilityInterval": 0,
+        "id": "variant_1792185367214",
+        "name": "Mangohud"
       }
     ]
   }
