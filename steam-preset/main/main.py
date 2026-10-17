@@ -3,7 +3,6 @@ import logging
 import os
 import pkgutil
 import sys
-from types import ModuleType
 
 import presets
 from main.types import (
@@ -17,9 +16,9 @@ from main.types import (
     Wrappers,
 )
 
-Registry = dict[str, ModuleType]
+Registry = dict[str, Preset]
 
-logging.basicConfig(level=logging.DEBUG, format='%(name)s: %(levelname)s: %(message)s')
+logging.basicConfig(level=logging.INFO, format='[ %(name)s ]: %(levelname)s: %(message)s')
 logger = logging.getLogger('steam-preset')
 
 
@@ -37,8 +36,8 @@ def discover_presets() -> Registry:
         logger.debug(f'Imported {module}')
 
         # register module by its app_id attribute if defined
-        if hasattr(module, 'app_id'):
-            registry[module.app_id] = module
+        if isinstance(module, Preset):
+            registry[str(module.app_id)] = module
             logger.info(f'Discovered {module}')
     #
     return registry
@@ -61,9 +60,6 @@ def run() -> None:
     preset = registry.get(app_id)
     if preset is None:
         logger.warning(f'No preset is loaded, steam-preset has no effect')
-    elif not isinstance(preset, Preset):
-        logger.error(f'Invalid preset file, it violates the preset protocol: {preset}')
-        sys.exit(1)
     else:
         logger.debug(f'Preset loaded from registry: {preset=}')
 

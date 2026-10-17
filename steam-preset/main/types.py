@@ -8,7 +8,7 @@ Args = list[str]
 @runtime_checkable
 class Preset(Protocol):
     # uniquely identify a Steam game
-    app_id: str
+    app_id: int | str
 
 
 @runtime_checkable
