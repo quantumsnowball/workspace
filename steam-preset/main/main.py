@@ -6,7 +6,16 @@ import sys
 from types import ModuleType
 
 import presets
-from main.types import Preset, PresetConfigurable
+from main.types import (
+    Args,
+    Env,
+    Preset,
+    PresetConfigurable,
+    PresetWithArgs,
+    PresetWithEnv,
+    PresetWithWrappers,
+    Wrappers,
+)
 
 Registry = dict[str, ModuleType]
 
@@ -59,18 +68,14 @@ def run() -> None:
         logger.debug(f'Preset loaded from registry: {preset=}')
 
     # run preset extra logics to filter or modify env and args
-    env_overrides: dict[str, str] = {}
-    wrappers: list[str] = []
-    extra_args: list[str] = []
-    if preset is not None:
-        env_overrides = preset.env.copy()
-        wrappers = preset.wrappers.copy()
-        extra_args = preset.args.copy()
-        if isinstance(preset, PresetConfigurable):
-            env_overrides, wrappers, extra_args = preset.config(env_overrides, wrappers, extra_args)
-        logger.info(f'{env_overrides=}')
-        logger.info(f'{wrappers=}')
-        logger.info(f'{extra_args=}')
+    env_overrides: Env = preset.env.copy() if isinstance(preset, PresetWithEnv) else {}
+    wrappers: Wrappers = preset.wrappers.copy() if isinstance(preset, PresetWithWrappers) else []
+    extra_args: Args = preset.args.copy() if isinstance(preset, PresetWithArgs) else []
+    if isinstance(preset, PresetConfigurable):
+        env_overrides, wrappers, extra_args = preset.config(env_overrides, wrappers, extra_args)
+    logger.info(f'{env_overrides=}')
+    logger.info(f'{wrappers=}')
+    logger.info(f'{extra_args=}')
 
     # construct the final version of cmd and env
     full_env = os.environ.copy()
