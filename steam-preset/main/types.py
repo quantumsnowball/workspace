@@ -8,16 +8,16 @@ Args = list[str]
 @runtime_checkable
 class Preset(Protocol):
     # uniquely identify a Steam game
-    APP_ID: str
+    app_id: str
 
     # env vars to be set, usually comes before %command%
-    ENV: Env
+    env: Env
 
     # wrappers to be set, usually comes before %command%
-    WRAPPERS: Wrappers
+    wrappers: Wrappers
 
     # args to be set, usually comes after %command%
-    ARGS: Args
+    args: Args
 
 
 @runtime_checkable

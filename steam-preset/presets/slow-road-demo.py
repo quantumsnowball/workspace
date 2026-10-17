@@ -1,9 +1,9 @@
-APP_ID = '4551650'
+app_id = '4551650'
 
-ENV = dict()
+env = dict()
 
-WRAPPERS = [
+wrappers = [
     'mangohud',
 ]
 
-ARGS = []
+args = []

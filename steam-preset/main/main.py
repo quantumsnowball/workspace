@@ -27,9 +27,9 @@ def discover_presets() -> Registry:
         module = importlib.import_module(full_name)
         logger.debug(f'Imported {module}')
 
-        # register module by its APP_ID attribute if defined
-        if hasattr(module, 'APP_ID'):
-            registry[module.APP_ID] = module
+        # register module by its app_id attribute if defined
+        if hasattr(module, 'app_id'):
+            registry[module.app_id] = module
             logger.info(f'Discovered {module}')
     #
     return registry
@@ -47,7 +47,7 @@ def run() -> None:
     app_id = os.environ.get('SteamAppId', 'default')
     logger.debug(f'{app_id=}')
 
-    # discover presets dynamically and pick by matching APP_ID
+    # discover presets dynamically and pick by matching app_id
     registry = discover_presets()
     preset = registry.get(app_id)
     if preset is None:
@@ -63,9 +63,9 @@ def run() -> None:
     wrappers: list[str] = []
     extra_args: list[str] = []
     if preset is not None:
-        env_overrides = preset.ENV.copy()
-        wrappers = preset.WRAPPERS.copy()
-        extra_args = preset.ARGS.copy()
+        env_overrides = preset.env.copy()
+        wrappers = preset.wrappers.copy()
+        extra_args = preset.args.copy()
         if isinstance(preset, PresetConfigurable):
             env_overrides, wrappers, extra_args = preset.config(env_overrides, wrappers, extra_args)
         logger.info(f'{env_overrides=}')
