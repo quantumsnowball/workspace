@@ -6,7 +6,7 @@ import sys
 from types import ModuleType
 
 import presets
-from main.types import GamePreset
+from main.types import Preset
 
 Registry = dict[str, ModuleType]
 
@@ -52,7 +52,7 @@ def run() -> None:
     preset = registry.get(app_id)
     if preset is None:
         logger.warning(f'No preset is loaded, steam-preset has no effect')
-    elif not isinstance(preset, GamePreset):
+    elif not isinstance(preset, Preset):
         logger.error(f'Invalid preset file, it violates the preset protocol: {preset}')
         sys.exit(1)
     else:

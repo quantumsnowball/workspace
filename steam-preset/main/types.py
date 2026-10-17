@@ -10,18 +10,18 @@ SetupFn = Callable[
 
 
 @runtime_checkable
-class GamePreset(Protocol):
+class Preset(Protocol):
     # uniquely identify a Steam game
     APP_ID: str
 
     # env vars to be set, usually comes before %command%
-    ENV: dict[str, str]
+    ENV: Env
 
     # wrappers to be set, usually comes before %command%
-    WRAPPERS: list[str]
+    WRAPPERS: Wrappers
 
     # args to be set, usually comes after %command%
-    ARGS: list[str]
+    ARGS: Args
 
     # optional setup function for extra processing
     setup: SetupFn | None = None
