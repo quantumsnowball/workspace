@@ -66,7 +66,8 @@ def run() -> None:
         env_overrides = preset.ENV.copy()
         wrappers = preset.WRAPPERS.copy()
         extra_args = preset.ARGS.copy()
-        env_overrides, wrappers, extra_args = preset.setup(env_overrides, wrappers, extra_args)
+        if callable(preset.setup):
+            env_overrides, wrappers, extra_args = preset.setup(env_overrides, wrappers, extra_args)
         logger.info(f'{env_overrides=}')
         logger.info(f'{wrappers=}')
         logger.info(f'{extra_args=}')

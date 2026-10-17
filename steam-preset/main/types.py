@@ -1,4 +1,12 @@
-from typing import Protocol, runtime_checkable
+from typing import Callable, Protocol, runtime_checkable
+
+Env = dict[str, str]
+Wrappers = list[str]
+Args = list[str]
+SetupFn = Callable[
+    [Env, Wrappers, Args],
+    tuple[Env, Wrappers, Args],
+]
 
 
 @runtime_checkable
@@ -15,11 +23,5 @@ class GamePreset(Protocol):
     # args to be set, usually comes after %command%
     ARGS: list[str]
 
-    # extra processing for the env and args
-    def setup(
-        self,
-        env: dict[str, str],
-        wrappers: list[str],
-        args: list[str],
-    ) -> tuple[dict[str, str], list[str], list[str]]:
-        ...
+    # optional setup function for extra processing
+    setup: SetupFn | None = None
