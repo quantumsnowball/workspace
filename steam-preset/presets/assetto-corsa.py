@@ -17,6 +17,9 @@ def config(
     env = steam_env | preset_env
 
     # cmd
+    #   There are two ways to launcher the origianl launcher instead of Content Manager:
+    #   1. use the flag --original-launcher (officially supported by Content Manager)
+    #   2. set ASSETTO_CORSA_ORIGINAL_LAUNCHER=1 (but existing steam process may not have acces to this)
     if steam_env.get('ASSETTO_CORSA_ORIGINAL_LAUNCHER') == '1':
         cmd = preset_wrappers + steam_cmd + preset_args
     else:
