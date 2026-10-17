@@ -5,14 +5,14 @@ input {
         numlock
     }
 
-    // mouse 
+    // mouse
     mouse {
         // move the content, not the viewport
         natural-scroll
     }
 
     // Focus windows and outputs automatically when moving the mouse into them.
-    focus-follows-mouse max-scroll-amount="0%"
+    // focus-follows-mouse max-scroll-amount="0%"
 }
 
 // Gestures
