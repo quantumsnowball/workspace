@@ -28,7 +28,7 @@ def discover_presets() -> Registry:
         logger.debug(f'Imported {module}')
 
         # register module by its APP_ID attribute if defined
-        if hasattr(module, 'APP_ID'):
+        if isinstance(module, GamePreset):
             preset = cast(GamePreset, module)
             registry[preset.APP_ID] = preset
             logger.info(f'Discovered {preset}')
