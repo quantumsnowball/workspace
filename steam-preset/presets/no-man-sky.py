@@ -1,8 +1,5 @@
 app_id = 275850
 
-wrapper = ['mangohud', 'taskset', '-c', '0-15', ]
-
-
 '''
 2D:
 [ steam-preset ]: INFO: cmd=[..., "$HOME/.local/share/Steam/steamapps/common/No Man's Sky/Binaries/NMS.exe"]
