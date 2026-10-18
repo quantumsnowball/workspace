@@ -6,14 +6,14 @@ import sys
 
 import presets
 from main.types import (
-    Args,
+    Arg,
     Env,
     Preset,
     PresetConfigurable,
-    PresetWithArgs,
+    PresetWithArg,
     PresetWithEnv,
-    PresetWithWrappers,
-    Wrappers,
+    PresetWithWrapper,
+    Wrapper,
 )
 
 Registry = dict[str, Preset]
@@ -65,19 +65,19 @@ def run() -> None:
 
     # load preset extras
     preset_env: Env = preset.env.copy() if isinstance(preset, PresetWithEnv) else {}
-    preset_wrappers: Wrappers = preset.wrappers.copy() if isinstance(preset, PresetWithWrappers) else []
-    preset_args: Args = preset.args.copy() if isinstance(preset, PresetWithArgs) else []
+    preset_wrapper: Wrapper = preset.wrapper.copy() if isinstance(preset, PresetWithWrapper) else []
+    preset_arg: Arg = preset.arg.copy() if isinstance(preset, PresetWithArg) else []
     logger.info(f'{preset_env=}')
-    logger.info(f'{preset_wrappers=}')
-    logger.info(f'{preset_args=}')
+    logger.info(f'{preset_wrapper=}')
+    logger.info(f'{preset_arg=}')
 
     # construct the final version of cmd and env
     if isinstance(preset, PresetConfigurable):
         steam_env = os.environ.copy()
-        env, cmd = preset.config(steam_env, steam_cmd, preset_env, preset_wrappers, preset_args)
+        env, cmd = preset.config(steam_env, steam_cmd, preset_env, preset_wrapper, preset_arg)
     else:
         env = os.environ | preset_env
-        cmd = preset_wrappers + steam_cmd + preset_args
+        cmd = preset_wrapper + steam_cmd + preset_arg
     logger.debug(f'{env=}')
     logger.info(f'{cmd=}')
 
