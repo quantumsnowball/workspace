@@ -2,8 +2,6 @@ from main.types import *
 
 app_id = 244210
 
-wrapper = ['mangohud', ]
-
 
 def config(
     steam_env: Env,
