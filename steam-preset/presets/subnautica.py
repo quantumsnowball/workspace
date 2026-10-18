@@ -1,0 +1,9 @@
+app_id = 264710
+
+env = {
+    'PRESSURE_VESSEL_IMPORT_OPENXR_1_RUNTIMES': '1',
+}
+
+wrapper = [
+    'mangohud',
+]
