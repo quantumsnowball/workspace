@@ -1,6 +1,6 @@
 app_id = 275850
 
-wrappers = ['mangohud', 'taskset', '-c', '0-15', ]
+wrapper = ['mangohud', 'taskset', '-c', '0-15', ]
 
 
 '''

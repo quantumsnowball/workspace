@@ -1,11 +1,11 @@
 from typing import Protocol, runtime_checkable
 
 Env = dict[str, str]
-Wrappers = list[str]
-Args = list[str]
+Wrapper = list[str]
+Arg = list[str]
 Cmd = list[str]
 
-__all__ = ['Env', 'Wrappers', 'Args', 'Cmd', ]
+__all__ = ['Env', 'Wrapper', 'Arg', 'Cmd', ]
 
 
 @runtime_checkable
@@ -16,20 +16,20 @@ class Preset(Protocol):
 
 @runtime_checkable
 class PresetWithEnv(Preset, Protocol):
-    # env vars to be set, usually comes before %command%
+    # env to be set, usually comes before %command%
     env: Env
 
 
 @runtime_checkable
-class PresetWithWrappers(Preset, Protocol):
-    # wrappers to be set, usually comes before %command%
-    wrappers: Wrappers
+class PresetWithWrapper(Preset, Protocol):
+    # wrapper to be set, usually comes before %command%
+    wrapper: Wrapper
 
 
 @runtime_checkable
-class PresetWithArgs(Preset, Protocol):
-    # args to be set, usually comes after %command%
-    args: Args
+class PresetWithArg(Preset, Protocol):
+    # arg to be set, usually comes after %command%
+    arg: Arg
 
 
 @runtime_checkable
@@ -41,7 +41,7 @@ class PresetConfigurable(Preset, Protocol):
         steam_env: Env,
         steam_cmd: Cmd,
         preset_env: Env,
-        preset_wrappers: Wrappers,
-        preset_args: Args,
+        preset_wrapper: Wrapper,
+        preset_arg: Arg,
     ) -> tuple[Env, Cmd]:
         ...
