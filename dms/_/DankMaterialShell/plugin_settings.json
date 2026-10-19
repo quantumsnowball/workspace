@@ -8,7 +8,7 @@
         "displayCommand": "",
         "clickCommand": "dms ipc call dash toggleAt wallpaper center",
         "middleClickCommand": "",
-        "rightClickCommand": "",
+        "rightClickCommand": "wallhaven.set-random-wallpaper",
         "updateInterval": 0,
         "showIcon": true,
         "showText": true,
