@@ -1,0 +1,34 @@
+#!/usr/bin/env bash
+
+
+# ensure download directory exists
+wallpaper_dir="$HOME/Pictures/Wallpaper"
+mkdir -p "$wallpaper_dir"
+
+# fetch random ultrawide 2560x1080 wallpaper URL via wallhaven api
+api_url="https://wallhaven.cc/api/v1/search?sorting=random&resolutions=2560x1080"
+img_url=$(curl -s "$api_url" | jq -r '.data[0].path')
+
+# check if image url was successfully retrieved
+if [[ -z "$img_url" || "$img_url" == "null" ]]; then
+    notify-send "Wallhaven" "Failed to fetch wallpaper from API" -u critical
+    exit 1
+fi
+
+# extract base filename and insert suffix before extension
+original_filename=$(basename "$img_url")
+name="${original_filename%.*}"
+ext="${original_filename##*.}"
+filename="${name}_2560x1080.${ext}"
+output_path="$wallpaper_dir/$filename"
+
+# download the image
+curl -s -o "$output_path" "$img_url"
+
+# set wallpaper using dms ipc
+dms ipc call wallpaper set "$output_path"
+
+# output message
+msg="Saved and set wallpaper: $filename"
+echo "$msg"
+notify-send "Wallhaven" "$msg"
