@@ -1,25 +1,27 @@
 #!/usr/bin/env bash
 
+# set resolution from first argument or default to 2560x1080
+res="${1:-2560x1080}"
 
 # ensure download directory exists
 wallpaper_dir="$HOME/Pictures/Wallpaper"
 mkdir -p "$wallpaper_dir"
 
-# fetch random ultrawide 2560x1080 wallpaper URL via wallhaven api
-api_url="https://wallhaven.cc/api/v1/search?sorting=random&resolutions=2560x1080"
+# fetch random wallpaper URL for specified resolution via wallhaven api
+api_url="https://wallhaven.cc/api/v1/search?sorting=random&resolutions=$res"
 img_url=$(curl -s "$api_url" | jq -r '.data[0].path')
 
 # check if image url was successfully retrieved
 if [[ -z "$img_url" || "$img_url" == "null" ]]; then
-    notify-send "Wallhaven" "Failed to fetch wallpaper from API" -u critical
+    notify-send "Wallhaven" "Failed to fetch wallpaper ($res) from API" -u critical
     exit 1
 fi
 
-# extract base filename and insert suffix before extension
+# extract base filename and insert resolution suffix before extension
 original_filename=$(basename "$img_url")
 name="${original_filename%.*}"
 ext="${original_filename##*.}"
-filename="${name}_2560x1080.${ext}"
+filename="${name}_${res}.${ext}"
 output_path="$wallpaper_dir/$filename"
 
 # download the image
