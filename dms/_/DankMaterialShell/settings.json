@@ -66,6 +66,17 @@
   "lockScreenPowerOffMonitorsOnLock": true,
   "lockScreenNotificationMode": 1,
   "notificationAnimationSpeed": 4,
+  "notificationRules": [
+    {
+      "enabled": true,
+      "field": "desktopEntry",
+      "pattern": "dev.lizardbyte.app.Sunshine",
+      "matchType": "exact",
+      "action": "mute",
+      "urgency": "default",
+      "bypassDnd": false
+    }
+  ],
   "osdAlwaysShowValue": true,
   "osdPowerProfileEnabled": true,
   "powerActionConfirm": false,
