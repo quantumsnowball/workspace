@@ -1,5 +1,5 @@
 app_id = 348250
 
-env = {
-    'PRESSURE_VESSEL_IMPORT_OPENXR_1_RUNTIMES': '1',
-}
+env = dict(
+    PRESSURE_VESSEL_IMPORT_OPENXR_1_RUNTIMES=1,
+)
