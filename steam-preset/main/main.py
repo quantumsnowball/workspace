@@ -64,9 +64,12 @@ def run() -> None:
         logger.debug(f'Preset loaded from registry: {preset=}')
 
     # load preset extras
-    preset_env: Env = preset.env.copy() if isinstance(preset, PresetWithEnv) else presets.default.env
-    preset_wrapper: Wrapper = preset.wrapper.copy() if isinstance(preset, PresetWithWrapper) else presets.default.wrapper
-    preset_arg: Arg = preset.arg.copy() if isinstance(preset, PresetWithArg) else presets.default.arg
+    preset_env_ = preset.env.copy() if isinstance(preset, PresetWithEnv) else presets.default.env
+    preset_env: Env = {str(k): str(v) for k, v in preset_env_.items()}
+    preset_wrapper_ = preset.wrapper.copy() if isinstance(preset, PresetWithWrapper) else presets.default.wrapper
+    preset_wrapper: Wrapper = [str(v) for v in preset_wrapper_]
+    preset_arg_ = preset.arg.copy() if isinstance(preset, PresetWithArg) else presets.default.arg
+    preset_arg: Arg = [str(v) for v in preset_arg_]
     logger.info(f'{preset_env=}')
     logger.info(f'{preset_wrapper=}')
     logger.info(f'{preset_arg=}')
