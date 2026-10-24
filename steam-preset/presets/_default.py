@@ -1,12 +1,12 @@
 # default preset, apply to games without a preset file
 from main.types import *
 
-env: Env = {
+env: Env_ = {
 }
 
-wrapper: Wrapper = [
+wrapper: Wrapper_ = [
     'mangohud',
 ]
 
-arg: Arg = [
+arg: Arg_ = [
 ]

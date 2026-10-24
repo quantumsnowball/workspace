@@ -1,11 +1,14 @@
 from typing import Protocol, runtime_checkable
 
+Env_ = dict[str, str | int]
 Env = dict[str, str]
+Wrapper_ = list[str | int]
 Wrapper = list[str]
+Arg_ = list[str | int]
 Arg = list[str]
 Cmd = list[str]
 
-__all__ = ['Env', 'Wrapper', 'Arg', 'Cmd', ]
+__all__ = ['Env_', 'Env', 'Wrapper_', 'Wrapper', 'Arg_', 'Arg', 'Cmd', ]
 
 
 @runtime_checkable
@@ -17,19 +20,19 @@ class Preset(Protocol):
 @runtime_checkable
 class PresetWithEnv(Preset, Protocol):
     # env to be set, usually comes before %command%
-    env: Env
+    env: Env_
 
 
 @runtime_checkable
 class PresetWithWrapper(Preset, Protocol):
     # wrapper to be set, usually comes before %command%
-    wrapper: Wrapper
+    wrapper: Wrapper_
 
 
 @runtime_checkable
 class PresetWithArg(Preset, Protocol):
     # arg to be set, usually comes after %command%
-    arg: Arg
+    arg: Arg_
 
 
 @runtime_checkable
