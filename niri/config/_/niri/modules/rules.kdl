@@ -40,3 +40,14 @@ window-rule  {
     match title="^Waiting" app-id="steam_app_244210"
     open-floating false
 }
+
+// tethering popup
+window-rule {
+    // match the custom class
+    match app-id="tethering-popup"
+    // floating by default
+    open-floating true
+    // Set width and height
+    default-column-width { proportion 0.4; }
+    default-window-height { proportion 0.5; }
+}
