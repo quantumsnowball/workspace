@@ -1,0 +1,8 @@
+#!/usr/bin/env xdg-open
+[Desktop Entry]
+Type=Application
+Name=Tethering - Interface Info
+Comment=Tethering Interface Info
+Exec=kitty --app-id tethering-popup --override hide_window_decorations=no -- zsh -i -c 'tethering.info; exec zsh;'
+Icon=network-wired
+Categories=Utility;Network;
