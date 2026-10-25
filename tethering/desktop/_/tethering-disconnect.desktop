@@ -3,6 +3,6 @@
 Type=Application
 Name=Tethering - Disconnect
 Comment=Disable Tethering
-Exec=kitty --app-id tethering-popup --override hide_window_decorations=no -- zsh -i -c 'tethering.disconnect; exec zsh'
+Exec=kitty --app-id tethering-popup --override hide_window_decorations=no -- zsh -i -c 'tethering.disconnect; sleep 5;'
 Icon=network-wired
 Categories=Utility;Network;
