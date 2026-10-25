@@ -1,0 +1,8 @@
+#!/usr/bin/env xdg-open
+[Desktop Entry]
+Type=Application
+Name=Tethering - s7
+Comment=Enable Tethering for S7FE
+Exec=kitty --app-id tethering-popup --override hide_window_decorations=no -- zsh -i -c 'tethering.connect s7; exec zsh'
+Icon=network-wired
+Categories=Utility;Network;

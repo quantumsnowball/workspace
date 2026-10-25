@@ -1,0 +1,8 @@
+#!/usr/bin/env xdg-open
+[Desktop Entry]
+Type=Application
+Name=Tethering - quest2
+Comment=Enable Tethering for Quest 2
+Exec=kitty --app-id tethering-popup --override hide_window_decorations=no -- zsh -i -c 'tethering.connect quest2; exec zsh'
+Icon=network-wired
+Categories=Utility;Network;
