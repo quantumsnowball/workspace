@@ -29,7 +29,7 @@
                     "undo": "niri.reset-outputs"
                 },
                 {
-                    "do": "niri msg create-virtual-output --name HEADLESS-1 --width 1920 --height 1200 --refresh-rate 60",
+                    "do": "niri msg create-virtual-output --name HEADLESS-1 --width 1920 --height 1200 --refresh-rate 62",
                     "undo": ""
                 }
             ],
@@ -50,7 +50,7 @@
                     "undo": "niri.reset-outputs"
                 },
                 {
-                    "do": "niri msg create-virtual-output --name HEADLESS-1 --width 2560 --height 1600 --refresh-rate 60",
+                    "do": "niri msg create-virtual-output --name HEADLESS-1 --width 2560 --height 1600 --refresh-rate 62",
                     "undo": ""
                 }
             ],
