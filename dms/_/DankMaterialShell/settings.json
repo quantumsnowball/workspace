@@ -1,7 +1,7 @@
 {
   "currentThemeName": "dynamic",
   "currentThemeCategory": "dynamic",
-  "matugenScheme": "scheme-expressive",
+  "matugenScheme": "scheme-vibrant",
   "niriLayoutGapsOverride": -2,
   "niriLayoutRadiusOverride": 12,
   "niriLayoutBorderSize": 4,
@@ -201,7 +201,6 @@
           "id": "separator",
           "enabled": true
         },
-        "music",
         "weather",
         {
           "id": "clock",
@@ -217,9 +216,9 @@
       "innerPadding": 4,
       "barInsetPadding": 4,
       "bottomGap": 0,
-      "transparency": 0.31,
+      "transparency": 0.5,
       "widgetTransparency": 0.15,
-      "squareCorners": true,
+      "squareCorners": false,
       "noBackground": false,
       "maximizeWidgetIcons": false,
       "maximizeWidgetText": false,
@@ -259,7 +258,10 @@
       "hoverPopoutDelay": 150,
       "followInterfaceStyle": false,
       "widgetFollowInterfaceStyle": false,
-      "dot": false
+      "dot": false,
+      "attachToScreenEdge": false,
+      "barLengthMode": "full",
+      "widgetStyle": "segments"
     },
     {
       "id": "dot1792966389561",
@@ -752,5 +754,7 @@
       }
     }
   ],
-  "avatarRing": "none"
+  "avatarRing": "none",
+  "matugenSpec": "dms",
+  "matugenSourceMode": "dominant"
 }
