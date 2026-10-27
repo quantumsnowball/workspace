@@ -3,6 +3,6 @@
 Type=Application
 Name=Tethering - s7
 Comment=Enable Tethering for S7FE
-Exec=kitty --app-id tethering-popup --override hide_window_decorations=no -- zsh -i -c 'tethering.connect s7; exec zsh'
+Exec=kitty --app-id tethering-popup --override hide_window_decorations=no -- zsh -i -c 'tethering.connect s7; sleep 10;'
 Icon=network-wired
 Categories=Utility;Network;

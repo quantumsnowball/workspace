@@ -3,6 +3,6 @@
 Type=Application
 Name=Tethering - Ping Test
 Comment=Tethering Ping Test
-Exec=kitty --app-id tethering-popup --override hide_window_decorations=no -- zsh -i -c 'tethering.ping-test; sleep 5'
+Exec=kitty --app-id tethering-popup --override hide_window_decorations=no -- zsh -i -c 'tethering.ping-test; sleep 5;'
 Icon=network-wired
 Categories=Utility;Network;

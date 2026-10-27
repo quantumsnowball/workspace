@@ -3,6 +3,6 @@
 Type=Application
 Name=Tethering - Interface Info
 Comment=Tethering Interface Info
-Exec=kitty --app-id tethering-popup --override hide_window_decorations=no -- zsh -i -c 'tethering.info; exec zsh;'
+Exec=kitty --app-id tethering-popup --override hide_window_decorations=no -- zsh -i -c 'tethering.info; sleep 10;'
 Icon=network-wired
 Categories=Utility;Network;
