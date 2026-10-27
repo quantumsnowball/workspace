@@ -5,7 +5,7 @@ import pkgutil
 from typing import Annotated
 
 import typer
-from typer import Argument, Exit
+from typer import Argument, Exit, Option
 
 import presets
 from main.types import (
@@ -57,6 +57,7 @@ def discover_presets() -> Registry:
 @app.command(context_settings={'allow_extra_args': True, 'ignore_unknown_options': True, })
 def main(
     steam_cmd: Annotated[list[str] | None, Argument(help="The target command vector passed by Steam's %command% expansion.",), ] = None,
+    preset_key: Annotated[str | None, Option('--key', help='Custom preset key to match against registry entries, overrides Steam app-id matching.',), ] = None,
 ) -> None:
     # extract %command%
     if steam_cmd is None:
@@ -64,10 +65,10 @@ def main(
         raise Exit(code=1)
 
     # parse key
-    key = os.environ.get('SteamAppId', 'default')
-    logger.debug(f'{key=}')
+    key = preset_key or os.environ.get('SteamAppId', 'default')
+    logger.debug(f'{key=} (source: {"--key flag" if preset_key else "env SteamAppId"})')
 
-    # discover presets dynamically and pick by matching app_id
+    # discover presets dynamically and pick by matching key
     registry = discover_presets()
     preset = registry.get(key)
     if preset is None:
