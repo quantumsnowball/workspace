@@ -2,7 +2,10 @@ import importlib
 import logging
 import os
 import pkgutil
-import sys
+from typing import Annotated
+
+import typer
+from typer import Argument, Exit
 
 import presets
 from main.types import (
@@ -23,6 +26,11 @@ Registry = dict[str, Preset]
 
 logging.basicConfig(level=logging.INFO, format='[ %(name)s ]: %(levelname)s: %(message)s')
 logger = logging.getLogger('steam-preset')
+
+app = typer.Typer(
+    name='steam-preset',
+    help='Intercept and modify Steam game launches with custom presets.',
+)
 
 
 def discover_presets() -> Registry:
@@ -46,13 +54,14 @@ def discover_presets() -> Registry:
     return registry
 
 
-# the main console script entry
-def main() -> None:
+@app.command()
+def main(
+    steam_cmd: Annotated[list[str] | None, Argument(help="The target command vector passed by Steam's %command% expansion.",), ] = None,
+) -> None:
     # extract %command%
-    steam_cmd = sys.argv[1:]
-    if not len(sys.argv) > 1:
+    if steam_cmd is None:
         logger.error('No %command% detected. Use `steam-preset %command%` as launch options.')
-        sys.exit(1)
+        raise Exit(code=1)
 
     # parse app_id
     app_id = os.environ.get('SteamAppId', 'default')
@@ -62,7 +71,7 @@ def main() -> None:
     registry = discover_presets()
     preset = registry.get(app_id)
     if preset is None:
-        logger.warning(f'No preset is loaded, steam-preset has no effect')
+        logger.warning('No preset is loaded, steam-preset has no effect')
     else:
         logger.debug(f'Preset loaded from registry: {preset=}')
 
