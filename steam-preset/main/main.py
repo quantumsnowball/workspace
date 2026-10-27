@@ -2,7 +2,10 @@ import importlib
 import logging
 import os
 import pkgutil
-import sys
+from typing import Annotated
+
+import typer
+from typer import Argument, Exit, Option
 
 import presets
 from main.types import (
@@ -24,6 +27,11 @@ Registry = dict[str, Preset]
 logging.basicConfig(level=logging.INFO, format='[ %(name)s ]: %(levelname)s: %(message)s')
 logger = logging.getLogger('steam-preset')
 
+app = typer.Typer(
+    name='steam-preset',
+    help='Intercept and modify Steam game launches with custom presets.',
+)
+
 
 def discover_presets() -> Registry:
     #
@@ -38,31 +46,42 @@ def discover_presets() -> Registry:
         module = importlib.import_module(full_name)
         logger.debug(f'Imported {module}')
 
-        # register module by its app_id attribute if defined
+        # register module by its key attribute if defined
         if isinstance(module, Preset):
-            registry[str(module.app_id)] = module
+            registry[str(module.key)] = module
             logger.info(f'Discovered {module}')
     #
     return registry
 
 
-# the main console script entry
-def run() -> None:
+# command with context settings
+# - docs: https://click.palletsprojects.com/en/stable/api/#context
+@app.command(context_settings=dict(
+    # preserve all %command% expansion
+    allow_extra_args=True,
+    # prevent %command% expansion crashing typer or click
+    ignore_unknown_options=True,
+    # after seeing the first non-option str, treat all remaining str as args, this preserves the end of options '--' marks in %command%
+    allow_interspersed_args=False,
+))
+def main(
+    steam_cmd: Annotated[list[str] | None, Argument(help="The target command vector passed by Steam's %command% expansion.",), ] = None,
+    preset_key: Annotated[str | None, Option('--key', help='Custom preset key to match against registry entries, overrides Steam app-id matching.',), ] = None,
+) -> None:
     # extract %command%
-    steam_cmd = sys.argv[1:]
-    if not len(sys.argv) > 1:
+    if steam_cmd is None:
         logger.error('No %command% detected. Use `steam-preset %command%` as launch options.')
-        sys.exit(1)
+        raise Exit(code=1)
 
-    # parse app_id
-    app_id = os.environ.get('SteamAppId', 'default')
-    logger.debug(f'{app_id=}')
+    # parse key
+    key = preset_key or os.environ.get('SteamAppId', 'default')
+    logger.debug(f'{key=} (source: {"--key flag" if preset_key else "env SteamAppId"})')
 
-    # discover presets dynamically and pick by matching app_id
+    # discover presets dynamically and pick by matching key
     registry = discover_presets()
-    preset = registry.get(app_id)
+    preset = registry.get(key)
     if preset is None:
-        logger.warning(f'No preset is loaded, steam-preset has no effect')
+        logger.warning('No preset is loaded, steam-preset has no effect')
     else:
         logger.debug(f'Preset loaded from registry: {preset=}')
 

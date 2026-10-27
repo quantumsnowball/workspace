@@ -1,0 +1,6 @@
+key = 'beat-saber'
+
+env = dict(
+    PRESSURE_VESSEL_IMPORT_OPENXR_1_RUNTIMES=1,
+    OXR_NO_TEXTURE_SOURCE_ALPHA=1,
+)
