@@ -47,7 +47,7 @@ def discover_presets() -> Registry:
 
 
 # the main console script entry
-def run() -> None:
+def main() -> None:
     # extract %command%
     steam_cmd = sys.argv[1:]
     if not len(sys.argv) > 1:

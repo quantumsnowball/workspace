@@ -19,7 +19,7 @@ dev = [
 ]
 
 [project.scripts]
-steam-preset = "main.main:run"
+steam-preset = "main.main:main"
 
 [tool.setuptools.packages.find]
 include = ["main*", "presets*"]
