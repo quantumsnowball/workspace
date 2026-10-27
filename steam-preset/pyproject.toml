@@ -19,6 +19,10 @@ steam-preset = "main.main:run"
 [tool.setuptools.packages.find]
 include = ["main*", "presets*"]
 
+[tool.pyright]
+venvPath = "."
+venv = ".venv"
+
 [tool.ruff.lint]
 # Q = flake8-quotes (surgical string fixing)
 # I = isort (import sorting)
