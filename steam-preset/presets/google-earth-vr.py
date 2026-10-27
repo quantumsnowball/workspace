@@ -1,4 +1,4 @@
-app_id = 348250
+key = 348250
 
 env = dict(
     PRESSURE_VESSEL_IMPORT_OPENXR_1_RUNTIMES=1,

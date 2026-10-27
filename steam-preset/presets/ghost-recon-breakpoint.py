@@ -1,6 +1,6 @@
 from pathlib import Path
 
-app_id = 2231380
+key = 2231380
 
 env = dict(
     PROTON_ENABLE_WAYLAND=0,

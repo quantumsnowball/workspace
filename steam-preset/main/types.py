@@ -14,7 +14,8 @@ __all__ = ['Env_', 'Env', 'Wrapper_', 'Wrapper', 'Arg_', 'Arg', 'Cmd', ]
 @runtime_checkable
 class Preset(Protocol):
     # uniquely identify a Steam game
-    app_id: int | str
+    # could be provided via the --key flag, or fall back to steam app id
+    key: int | str
 
 
 @runtime_checkable

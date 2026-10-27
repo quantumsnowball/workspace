@@ -46,9 +46,9 @@ def discover_presets() -> Registry:
         module = importlib.import_module(full_name)
         logger.debug(f'Imported {module}')
 
-        # register module by its app_id attribute if defined
+        # register module by its key attribute if defined
         if isinstance(module, Preset):
-            registry[str(module.app_id)] = module
+            registry[str(module.key)] = module
             logger.info(f'Discovered {module}')
     #
     return registry
@@ -63,13 +63,13 @@ def main(
         logger.error('No %command% detected. Use `steam-preset %command%` as launch options.')
         raise Exit(code=1)
 
-    # parse app_id
-    app_id = os.environ.get('SteamAppId', 'default')
-    logger.debug(f'{app_id=}')
+    # parse key
+    key = os.environ.get('SteamAppId', 'default')
+    logger.debug(f'{key=}')
 
     # discover presets dynamically and pick by matching app_id
     registry = discover_presets()
-    preset = registry.get(app_id)
+    preset = registry.get(key)
     if preset is None:
         logger.warning('No preset is loaded, steam-preset has no effect')
     else:

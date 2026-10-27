@@ -1,6 +1,6 @@
 from pathlib import Path
 
-app_id = 2221490
+key = 2221490
 
 env = dict(
     # division 2 in-game fps limiter is unclean, setting to 60 fps limit gives unstable 61-62 fps

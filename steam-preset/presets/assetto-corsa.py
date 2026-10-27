@@ -1,6 +1,6 @@
 from main.types import *
 
-app_id = 244210
+key = 244210
 
 
 def config(
