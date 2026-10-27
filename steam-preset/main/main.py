@@ -54,7 +54,7 @@ def discover_presets() -> Registry:
     return registry
 
 
-@app.command()
+@app.command(context_settings={'allow_extra_args': True, 'ignore_unknown_options': True, })
 def main(
     steam_cmd: Annotated[list[str] | None, Argument(help="The target command vector passed by Steam's %command% expansion.",), ] = None,
 ) -> None:
