@@ -54,7 +54,16 @@ def discover_presets() -> Registry:
     return registry
 
 
-@app.command(context_settings={'allow_extra_args': True, 'ignore_unknown_options': True, })
+# command with context settings
+# - docs: https://click.palletsprojects.com/en/stable/api/#context
+@app.command(context_settings=dict(
+    # preserve all %command% expansion
+    allow_extra_args=True,
+    # prevent %command% expansion crashing typer or click
+    ignore_unknown_options=True,
+    # after seeing the first non-option str, treat all remaining str as args, this preserves the end of options '--' marks in %command%
+    allow_interspersed_args=False,
+))
 def main(
     steam_cmd: Annotated[list[str] | None, Argument(help="The target command vector passed by Steam's %command% expansion.",), ] = None,
     preset_key: Annotated[str | None, Option('--key', help='Custom preset key to match against registry entries, overrides Steam app-id matching.',), ] = None,
