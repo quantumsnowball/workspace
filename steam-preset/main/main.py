@@ -8,6 +8,7 @@ import typer
 from typer import Argument, Exit, Option
 
 import presets
+from main import artwork
 from main.types import (
     Arg,
     Arg_,
@@ -67,6 +68,7 @@ def discover_presets() -> Registry:
 def main(
     steam_cmd: Annotated[list[str] | None, Argument(help="The target command vector passed by Steam's %command% expansion.",), ] = None,
     preset_key: Annotated[str | None, Option('--key', help='Custom preset key to match against registry entries, overrides Steam app-id matching.',), ] = None,
+    artwork_id: Annotated[str | None, Option('--artwork', help='The app-id used to fetch artwork and icon')] = None,
 ) -> None:
     # extract %command%
     if steam_cmd is None:
@@ -105,6 +107,9 @@ def main(
         cmd = preset_wrapper + steam_cmd + preset_arg
     logger.debug(f'{env=}')
     logger.info(f'{cmd=}')
+
+    # download artwork if necessary
+    artwork.download_if_necessary(artwork_id)
 
     # run the game
     os.execvpe(cmd[0], cmd, env)
