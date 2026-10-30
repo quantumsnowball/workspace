@@ -1,0 +1,1 @@
+key = 'taiko-no-tatsujin'
