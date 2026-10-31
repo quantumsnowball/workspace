@@ -49,3 +49,9 @@ class PresetConfigurable(Preset, Protocol):
         preset_arg: Arg,
     ) -> tuple[Env, Cmd]:
         ...
+
+
+@runtime_checkable
+class PresetInitializable(Preset, Protocol):
+    def init(self) -> None:
+        ...
