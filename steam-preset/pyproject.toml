@@ -11,6 +11,7 @@ authors = [
 ]
 dependencies = [
     "typer",
+    "evdev",
 ]
 requires-python = ">=3.14"
 
