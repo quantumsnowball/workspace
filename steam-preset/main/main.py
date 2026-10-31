@@ -8,7 +8,7 @@ import typer
 from typer import Argument, Exit, Option
 
 import presets
-from main import artwork
+from main import artwork, inputs
 from main.types import (
     Arg,
     Arg_,
@@ -19,6 +19,7 @@ from main.types import (
     PresetInitializable,
     PresetWithArg,
     PresetWithEnv,
+    PresetWithKeyMapper,
     PresetWithWrapper,
     Wrapper,
     Wrapper_,
@@ -108,6 +109,10 @@ def main(
         cmd = preset_wrapper + steam_cmd + preset_arg
     logger.debug(f'{env=}')
     logger.info(f'{cmd=}')
+
+    # run the key mapper if exists
+    if isinstance(preset, PresetWithKeyMapper):
+        inputs.remap(preset.key_mapper)
 
     # run the init script if exists
     if isinstance(preset, PresetInitializable):
