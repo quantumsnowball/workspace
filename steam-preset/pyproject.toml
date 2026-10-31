@@ -1,9 +1,10 @@
 [project]
-name = "steam-preset"
+name = "steam-preset-configs"
 version = "0.1.0"
 requires-python = ">=3.14"
-description = "steam-preset preset files for individual games"
+description = "steam-preset config files for individual games"
 dependencies = [
+    "steam-preset",
     "evdev",
 ]
 
@@ -12,6 +13,15 @@ dev = [
     "mypy",
 ]
 
+[tool.mypy]
+mypy_path = "../../../Projects/steam-preset/"
+
 [tool.pyright]
 venvPath = "."
 venv = ".venv"
+extraPaths = [
+    "../../../Projects/steam-preset/"
+]
+
+[tool.uv.sources]
+steam-preset = { path = "../../../Projects/steam-preset", editable = true }
