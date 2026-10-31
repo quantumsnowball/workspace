@@ -11,7 +11,7 @@ from evdev import ecodes as e
 target_device_name = 'Pure: kanata'
 
 key_map = {
-    e.KEY_APOSTROPHE: e.KEY_F,  # ' -> f
+    e.KEY_APOSTROPHE: e.KEY_K,  # ' -> k
     e.KEY_SLASH: e.KEY_J,       # / -> j
 }
 
@@ -30,7 +30,7 @@ def find_kanata_device() -> InputDevice | None:
 def process_events(dev: InputDevice, ui: UInput, stop_event: asyncio.Event) -> None:
     # synchronous worker running in a thread
     dev.grab()
-    print(f"intercepting '{dev.name}' for taiko remapping...", file=sys.stderr)
+    print(f"[ grabbed ]'{dev.name}' for taiko remapping", file=sys.stderr)
     try:
         for event in dev.read_loop():
             if stop_event.is_set():
@@ -44,6 +44,7 @@ def process_events(dev: InputDevice, ui: UInput, stop_event: asyncio.Event) -> N
     finally:
         try:
             dev.ungrab()
+            print(f"[ ungrabbed ]'{dev.name}' for taiko remapping", file=sys.stderr)
         except OSError:
             pass
         ui.close()
