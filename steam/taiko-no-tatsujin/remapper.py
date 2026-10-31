@@ -3,6 +3,7 @@
 # ///
 
 import asyncio
+import signal
 import sys
 
 from evdev import InputDevice, UInput, list_devices
@@ -28,9 +29,8 @@ def find_kanata_device() -> InputDevice | None:
 
 
 def process_events(dev: InputDevice, ui: UInput, stop_event: asyncio.Event) -> None:
-    # synchronous worker running in a thread
     dev.grab()
-    print(f"[ grabbed ]'{dev.name}' for taiko remapping", file=sys.stderr)
+    print(f"[ grabbed ] '{dev.name}' for taiko remapping", file=sys.stderr)
     try:
         for event in dev.read_loop():
             if stop_event.is_set():
@@ -44,7 +44,7 @@ def process_events(dev: InputDevice, ui: UInput, stop_event: asyncio.Event) -> N
     finally:
         try:
             dev.ungrab()
-            print(f"[ ungrabbed ]'{dev.name}' for taiko remapping", file=sys.stderr)
+            print(f"[ ungrabbed ] '{dev.name}' for taiko remapping", file=sys.stderr)
         except OSError:
             pass
         ui.close()
@@ -60,8 +60,15 @@ async def main() -> None:
     ui = UInput.from_device(dev, name='taiko-no-tatsujin remapper')
     stop_event = asyncio.Event()
 
+    # signal handler to break read_loop cleanly
+    def _handle_signal() -> None:
+        stop_event.set()
+
+    loop = asyncio.get_running_loop()
+    for sig in (signal.SIGINT, signal.SIGTERM):
+        loop.add_signal_handler(sig, _handle_signal)
+
     try:
-        # run blocking read_loop in asyncio default thread pool
         await asyncio.to_thread(process_events, dev, ui, stop_event)
     except (KeyboardInterrupt, SystemExit):
         stop_event.set()
