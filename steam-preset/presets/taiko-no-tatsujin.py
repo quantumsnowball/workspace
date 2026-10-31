@@ -1,11 +1,16 @@
-import subprocess as sh
-from pathlib import Path
+from evdev import ecodes as e
 
 key = 'taiko-no-tatsujin'
 
+key_mapper = dict(
+    source='Pure: kanata',
+    key_map={
+        # left
+        e.KEY_X: e.KEY_Z,
 
-def init() -> None:
-    sh.Popen([
-        'uv', 'run',
-        f'{Path.home()}/.config/workspace/steam/taiko-no-tatsujin/remapper.py'
-    ])
+        # right
+        e.KEY_APOSTROPHE: e.KEY_K,
+        e.KEY_DOT: e.KEY_J,
+        e.KEY_SLASH: e.KEY_J,
+    }
+)
