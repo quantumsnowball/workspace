@@ -12,8 +12,13 @@ from evdev import ecodes as e
 target_device_name = 'Pure: kanata'
 
 key_map = {
-    e.KEY_APOSTROPHE: e.KEY_K,  # ' -> k
-    e.KEY_SLASH: e.KEY_J,       # / -> j
+    # left
+    e.KEY_X: e.KEY_Z,
+
+    # right
+    e.KEY_APOSTROPHE: e.KEY_K,
+    e.KEY_DOT: e.KEY_J,
+    e.KEY_SLASH: e.KEY_J,
 }
 
 
