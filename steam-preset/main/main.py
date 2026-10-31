@@ -16,6 +16,7 @@ from main.types import (
     Env_,
     Preset,
     PresetConfigurable,
+    PresetInitializable,
     PresetWithArg,
     PresetWithEnv,
     PresetWithWrapper,
@@ -107,6 +108,11 @@ def main(
         cmd = preset_wrapper + steam_cmd + preset_arg
     logger.debug(f'{env=}')
     logger.info(f'{cmd=}')
+
+    # run the init script if exists
+    if isinstance(preset, PresetInitializable):
+        logger.info(f'running preset init function ...')
+        preset.init()
 
     # download artwork if necessary
     artwork.download_if_necessary(artwork_id)
