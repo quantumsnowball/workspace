@@ -1,4 +1,4 @@
-from typing import Protocol, runtime_checkable
+from typing import NotRequired, Protocol, TypedDict, runtime_checkable
 
 Env_ = dict[str, str | int]
 Env = dict[str, str]
@@ -7,8 +7,16 @@ Wrapper = list[str]
 Arg_ = list[str | int]
 Arg = list[str]
 Cmd = list[str]
+KeyMap = dict[int, int]
 
-__all__ = ['Env_', 'Env', 'Wrapper_', 'Wrapper', 'Arg_', 'Arg', 'Cmd', ]
+
+class KeyMapper(TypedDict):
+    source: str
+    target: NotRequired[str]
+    key_map: KeyMap
+
+
+__all__ = ['Env_', 'Env', 'Wrapper_', 'Wrapper', 'Arg_', 'Arg', 'Cmd', 'KeyMapper',]
 
 
 @runtime_checkable
@@ -34,6 +42,11 @@ class PresetWithWrapper(Preset, Protocol):
 class PresetWithArg(Preset, Protocol):
     # arg to be set, usually comes after %command%
     arg: Arg_
+
+
+@runtime_checkable
+class PresetWithKeyMapper(Preset, Protocol):
+    key_mapper: KeyMapper
 
 
 @runtime_checkable
