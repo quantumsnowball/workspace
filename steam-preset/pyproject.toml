@@ -1,45 +1,17 @@
-[build-system]
-requires = [ "setuptools" ]
-build-backend = "setuptools.build_meta"
-
 [project]
 name = "steam-preset"
 version = "0.1.0"
-description = "per-game launch option and environment manager for steam"
-authors = [
-    { name = "Quantum Snowball", email = "quantum.snowball@gmail.com" }
-]
+requires-python = ">=3.14"
+description = "steam-preset preset files for individual games"
 dependencies = [
-    "typer",
     "evdev",
 ]
-requires-python = ">=3.14"
 
 [dependency-groups]
 dev = [
     "mypy",
 ]
 
-[project.scripts]
-steam-preset = "main.main:app"
-
-[tool.setuptools.packages.find]
-include = ["main*", "presets*"]
-
 [tool.pyright]
 venvPath = "."
 venv = ".venv"
-
-[tool.ruff.lint]
-# Q = flake8-quotes (surgical string fixing)
-# I = isort (import sorting)
-# F401 = unused imports
-select = ["Q", "I", "F401"]
-
-[tool.ruff.lint.flake8-quotes]
-inline-quotes = "single"
-docstring-quotes = "single"
-multiline-quotes = "single"
-
-[tool.ruff.format]
-quote-style = "single"
