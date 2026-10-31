@@ -60,13 +60,20 @@ async def main() -> None:
     ui = UInput.from_device(dev, name='taiko-no-tatsujin remapper')
     stop_event = asyncio.Event()
 
-    # signal handler to break read_loop cleanly
-    def _handle_signal() -> None:
+    def cleanup_and_exit(*_) -> None:
         stop_event.set()
+        try:
+            dev.ungrab()
+            print(f"[ ungrabbed ] '{dev.name}' for taiko remapping", file=sys.stderr)
+        except OSError:
+            pass
+        ui.close()
+        print('remapper process terminated, device ungrabbed', file=sys.stderr)
+        sys.exit(0)
 
-    loop = asyncio.get_running_loop()
-    for sig in (signal.SIGINT, signal.SIGTERM):
-        loop.add_signal_handler(sig, _handle_signal)
+    # register signal handlers in the main thread
+    signal.signal(signal.SIGINT, cleanup_and_exit)
+    signal.signal(signal.SIGTERM, cleanup_and_exit)
 
     try:
         await asyncio.to_thread(process_events, dev, ui, stop_event)
