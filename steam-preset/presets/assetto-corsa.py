@@ -1,4 +1,4 @@
-from main.types import *
+from steam_preset.types import *
 
 key = 244210
 
