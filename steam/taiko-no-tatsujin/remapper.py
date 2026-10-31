@@ -19,7 +19,7 @@ KEY_MAP = {
 }
 
 
-def find_kanata_device():
+def find_kanata_device() -> InputDevice | None:
     for path in list_devices():
         try:
             dev = InputDevice(path)
@@ -30,14 +30,14 @@ def find_kanata_device():
     return None
 
 
-async def remap_loop(dev, ui):
+async def remap_loop(dev: InputDevice, ui: UInput) -> None:
     loop = asyncio.get_running_loop()
 
     # grab exclusive access to intercept kanata output
     dev.grab()
     print(f"intercepting '{dev.name}' for taiko remapping...", file=sys.stderr)
 
-    def on_read():
+    def on_read() -> None:
         for event in dev.read():
             if event.type == e.EV_KEY:
                 # remap target key or pass through untouched
@@ -66,7 +66,7 @@ async def remap_loop(dev, ui):
     print('remapper process terminated, device ungrabbed', file=sys.stderr)
 
 
-def main():
+def main() -> None:
     dev = find_kanata_device()
     if not dev:
         print(f"error: device '{TARGET_DEVICE_NAME}' not found", file=sys.stderr)
