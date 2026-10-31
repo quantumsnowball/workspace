@@ -2,6 +2,7 @@ import importlib
 import logging
 import os
 import pkgutil
+import subprocess as sh
 from typing import Annotated
 
 import typer
@@ -113,6 +114,7 @@ def main(
     # run the key mapper if exists
     if isinstance(preset, PresetWithKeyMapper):
         inputs.remap(preset.key_mapper)
+        logger.info(f'{preset.key_mapper=}')
 
     # run the init script if exists
     if isinstance(preset, PresetInitializable):
@@ -122,5 +124,6 @@ def main(
     # download artwork if necessary
     artwork.download_if_necessary(artwork_id)
 
-    # run the game
-    os.execvpe(cmd[0], cmd, env)
+    # run the game in subprocess
+    game_proc = sh.Popen(cmd, env=env)
+    game_proc.wait()
