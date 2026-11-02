@@ -61,8 +61,8 @@
     C-t         _         _         C-del     _         _         left      down      up        right     _         C-S-b     C-t                C-S-o
 ;;                                   delWord             prevWord                                          tgVTabW                               clPage
     _            _         _         C-del     _         C-left    home      pgdn      pgup      end       C-S-l     _                _          C-j
-;;
-    _         _         _                               _                               _                   _            _           _           _
+;;                                                      tgVTabW
+    _         _         _                               C-S-l                           _                   _            _           _           _
 )
 ;; media layer
 (deflayer media-layer
