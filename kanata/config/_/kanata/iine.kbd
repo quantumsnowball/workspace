@@ -10,6 +10,12 @@
     process-unmapped-keys yes
 )
 
+;; define aliases
+(defalias
+    z_layer (layer-while-held z-layer)
+    x_layer (layer-while-held x-layer)
+)
+
 ;; define source
 ;;   key names ref:
 ;;   https://github.com/jtroo/kanata/blob/main/parser/src/keys/mod.rs
@@ -30,6 +36,36 @@
 
 ;; default layer
 (deflayer default
+;;
+    _         _                   _                                       _                   _
+;;
+    _         _         _         _                             _         _                   @z_layer
+;;
+                        _         _                                                           @x_layer
+;;
+    _         _                             _         _         _         _                   _
+;;
+                        _         _                   _         _                   _         _
+;;
+    _         _                             _         _                             _         _
+)
+;; z layer
+(deflayer z-layer
+;;
+    _         _                   _                                       _                   _
+;;
+    _         _         _         _                             _         _                   _
+;;
+                        _         _                                                           _
+;;
+    _         _                             _         _         _         _                   _
+;;
+                        _         _                   _         _                   _         _
+;;
+    _         _                             _         _                             _         _
+)
+;; x layer
+(deflayer x-layer
 ;;
     _         _                   _                                       _                   _
 ;;
