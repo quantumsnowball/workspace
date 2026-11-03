@@ -67,15 +67,15 @@
 ;; x layer
 (deflayer x-layer
 ;;
-    x         _                   _                                       _                   _
+    x         _                   _                                       _                   x
 ;;
-    up        left      down      right                         p         f9                  _
+    up        left      down      right                         [         f9                  XX
 ;;
-                        f1        f5                                                          _
+                        f1        f5                                                          XX
 ;;
-    f4        f8                            f2        f6        l         f10                 _
+    f4        f8                            f2        f6        ]         f10                 XX
 ;;
-                        f3        f7                  _         _                   _         _
+                        f3        f7                  bspc      \                   XX        XX
 ;;
-    j         f12                           k         f11                           _         _
+    /         f12                           '         f11                           XX        XX
 )
