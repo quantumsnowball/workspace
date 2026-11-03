@@ -1,7 +1,7 @@
 (defcfg
     linux-dev-names-include ("WLS.Ltd Gaming TouchPad")
-    process-unmapped-keys yes
     linux-output-device-name "Kanata: WLS.Ltd Gaming TouchPad"
+    process-unmapped-keys yes
 )
 
 (defsrc
