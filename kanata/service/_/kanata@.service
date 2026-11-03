@@ -1,9 +1,9 @@
 [Unit]
-Description=Kanata Service
+Description=Kanata Service for %i
 After=default.target
 
 [Service]
-ExecStart=/usr/bin/kanata -c %h/.config/kanata/config.kbd
+ExecStart=/usr/bin/kanata -c %h/.config/kanata/%i.kbd
 Restart=always
 
 [Install]
