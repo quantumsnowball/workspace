@@ -52,17 +52,17 @@
 ;; z layer
 (deflayer z-layer
 ;;
-    z         _                   _                                       _                   _
+    z         _                   _                                       _                   z
 ;;
-    up        left      down      right                         o         _                   _
+    up        left      down      right                         ;         .                   XX
 ;;
-                        _         _                                                           _
+                        p         =                                                           XX
 ;;
-    _         _                             _         _         i         _                   _
+    u         9                             o         -         l         ,                   XX
 ;;
-                        _         _                   _         _                   _         _
+                        i         0                   y         `                   XX        XX
 ;;
-    y         _                             u         _                             _         _
+    j         n                             k         m                             XX        XX
 )
 ;; x layer
 (deflayer x-layer
