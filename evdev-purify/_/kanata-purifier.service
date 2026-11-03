@@ -1,12 +1,12 @@
 [Unit]
 Description=Kanata Purifier
 After=graphical-session.target
-BindsTo=kanata.service
-After=kanata.service
+BindsTo=kanata@bow.service
+After=kanata@bow.service
 
 [Service]
 Type=exec
-ExecStart=uv tool run evdev-purify keyboard kanata
+ExecStart=uv tool run evdev-purify keyboard "Kanata: BOW Keyboard"
 Restart=always
 RestartSec=1
 # Ensures logs show up immediately

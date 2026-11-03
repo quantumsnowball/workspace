@@ -1,8 +1,9 @@
 ;; select device
 (defcfg
-    linux-dev-names-include (
-        "  2.4G Wireless Device"
+    linux-dev (
+        "/dev/input/by-id/usb-_2.4G_Wireless_Device_EB60121120040902-event-kbd"
     )
+    linux-output-device-name "Kanata: BOW Keyboard"
     process-unmapped-keys yes
 )
 

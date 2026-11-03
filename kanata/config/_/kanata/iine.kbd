@@ -1,0 +1,13 @@
+(defcfg
+    linux-dev (
+        "/dev/input/by-id/usb-WLS.Ltd_Gaming_TouchPad_Motion_Game_Keyboard-event-kbd"
+    )
+    linux-output-device-name "Kanata: WLS.Ltd Gaming TouchPad"
+    process-unmapped-keys yes
+)
+
+(defsrc
+)
+
+(deflayer default
+)

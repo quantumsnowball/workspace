@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+
+systemctl --user daemon-reload
+systemctl --user enable --now kanata@bow.service
+systemctl --user enable --now kanata@iine.service
+systemctl --user daemon-reload
