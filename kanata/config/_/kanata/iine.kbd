@@ -1,3 +1,4 @@
+;; select device
 (defcfg
     linux-dev (
         "/dev/input/by-id/usb-WLS.Ltd_Gaming_TouchPad_Motion_Game_Keyboard-event-kbd"
@@ -9,8 +10,36 @@
     process-unmapped-keys yes
 )
 
+;; define source
+;;   key names ref:
+;;   https://github.com/jtroo/kanata/blob/main/parser/src/keys/mod.rs
 (defsrc
+;;
+    q         lctl                lsft                                    spc                 e
+;;
+    w         a         s         d                             tab       f1                  z
+;;
+                        1         5                                                           x
+;;
+    4         8                             2         6         m         f2                  lalt
+;;
+                        3         7                   esc       ret                 c         r
+;;
+    b         t                             g         h                             v         f
 )
 
+;; default layer
 (deflayer default
+;;
+    _         _                   _                                       _                   _
+;;
+    _         _         _         _                             _         _                   _
+;;
+                        _         _                                                           _
+;;
+    _         _                             _         _         _         _                   _
+;;
+                        _         _                   _         _                   _         _
+;;
+    _         _                             _         _                             _         _
 )
