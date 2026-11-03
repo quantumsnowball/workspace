@@ -4,6 +4,8 @@
         "/dev/input/by-id/usb-_2.4G_Wireless_Device_EB60121120040902-event-kbd"
     )
     linux-output-device-name "Kanata: BOW Keyboard"
+    windows-interception-keyboard-hwids (
+    )
     process-unmapped-keys yes
 )
 
