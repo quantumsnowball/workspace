@@ -1,8 +1,8 @@
 [Unit]
 Description=Kanata Purifier
 After=graphical-session.target
-BindsTo=kanata@bow-keyboard.service
-After=kanata@bow-keyboard.service
+BindsTo=kanata@bow.service
+After=kanata@bow.service
 
 [Service]
 Type=exec
