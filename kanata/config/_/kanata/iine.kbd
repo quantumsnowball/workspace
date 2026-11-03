@@ -69,13 +69,13 @@
 ;;
     x         _                   _                                       _                   _
 ;;
-    up        left      down      right                         p         _                   _
+    up        left      down      right                         p         f9                  _
 ;;
-                        _         _                                                           _
+                        f1        f5                                                          _
 ;;
-    _         _                             _         _         l         _                   _
+    f4        f8                            f2        f6        l         f10                 _
 ;;
-                        _         _                   _         _                   _         _
+                        f3        f7                  _         _                   _         _
 ;;
-    j         _                             k         _                             _         _
+    j         f12                           k         f11                           _         _
 )
