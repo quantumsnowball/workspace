@@ -113,7 +113,8 @@
         },
         {
           "id": "network_speed_monitor",
-          "enabled": true
+          "enabled": true,
+          "compactMode": true
         }
       ],
       "centerWidgets": [
