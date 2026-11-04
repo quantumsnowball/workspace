@@ -12,8 +12,8 @@
 
 ;; define aliases
 (defalias
-    z_layer (layer-while-held z-layer)
-    x_layer (layer-while-held x-layer)
+    z_layer (tap-dance 200 (z (layer-while-held z-layer)))
+    x_layer (tap-dance 200 (x (layer-while-held x-layer)))
 )
 
 ;; define source
