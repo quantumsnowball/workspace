@@ -1,3 +1,5 @@
+# runtime: DXVK
+
 from pathlib import Path
 
 key = 'battlefield1'

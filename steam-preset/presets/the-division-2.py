@@ -1,3 +1,5 @@
+# runtime: VKD3D
+
 from pathlib import Path
 
 key = 2221490
