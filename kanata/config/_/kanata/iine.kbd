@@ -52,7 +52,7 @@
 ;; z layer
 (deflayer z-layer
 ;;
-    z         M-m                 _                                       _                   z
+    M-a       _                   _                                       _                   z
 ;;
     up        left      down      right                         ;         .                   XX
 ;;
@@ -67,7 +67,7 @@
 ;; x layer
 (deflayer x-layer
 ;;
-    x         M-S-f                 _                                       _                   x
+    M-S-\     _                     _                                       _                   x
 ;;
     up        left      down      right                         [         f9                  XX
 ;;
