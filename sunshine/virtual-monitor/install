@@ -48,3 +48,6 @@ if ! sudo grep -nF "$cmdline_pattern" /boot/limine.conf; then
     exit 1
 fi
 echo "${GREEN}[OK] /boot/limine.conf contains generated cmdline pattern${RESET}"
+
+# done
+echo "${GREEN}[DONE] Please reboot the system for the new virtual display to activate${RESET}"
