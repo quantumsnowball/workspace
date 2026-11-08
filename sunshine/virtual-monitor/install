@@ -1,7 +1,9 @@
 #!/usr/bin/env bash
 
-src="$XDG_CONFIG_HOME/workspace/sunshine/virtual-monitor/edid/dp-1.hex"
-dst="/usr/lib/firmware/edid/dp-1.bin"
+name='dp-1'
+port='DP-1'
+src="$XDG_CONFIG_HOME/workspace/sunshine/virtual-monitor/edid/$name.hex"
+dst="/usr/lib/firmware/edid/$name.bin"
 
 # convert hex source to binary and save to firmware dir
 sudo xxd -revert -plain "$src" "$dst"
