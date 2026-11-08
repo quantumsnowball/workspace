@@ -48,3 +48,13 @@ bothering Niri's render loop.
     ```
     niri msg outputs
     ```
+
+# Supported Resolution
+
+- s7
+    - 1920x1200 120hz
+    - 2560x1600 120hz
+- quest2
+    - 1859x1487 120hz
+    - 1920x1440 120hz
+    - 2217x1247 120hz
