@@ -28,3 +28,7 @@ if ! grep -E "^KERNEL_CMDLINE" /etc/default/limine | grep -qF "$cmdline_pattern"
     exit 1
 fi
 echo "${GREEN}[OK] /etc/default/limine contains cmdline pattern: $cmdline_pattern${RESET}"
+
+# regenerate initramfs
+limine-mkinitcpio
+
