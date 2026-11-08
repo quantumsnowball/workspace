@@ -9,6 +9,12 @@ port='DP-1'
 src="$XDG_CONFIG_HOME/workspace/sunshine/virtual-monitor/edid/$name.hex"
 dst="/usr/lib/firmware/edid/$name.bin"
 
+# ensure the source hex file and is not empty
+if [[ ! -s "$src" ]]; then
+    echo "${RED}The $src must exists and must not be empty${RESET}"
+    exit 1
+fi
+
 # prompt for EDID confirmation
 echo "\n=== EDID Decoding Inspection ==="
 xxd -r -p "$src" | edid-decode
