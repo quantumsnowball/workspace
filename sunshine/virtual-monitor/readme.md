@@ -52,8 +52,8 @@ bothering Niri's render loop.
 # Supported Resolution
 
 - s7
-    - 1920x1200 120hz
-    - 2560x1600 120hz
+    - 1920x1200 60hz/120hz
+    - 2560x1600 60hz
 - quest2
     - 1859x1487 120hz
     - 1920x1440 120hz
