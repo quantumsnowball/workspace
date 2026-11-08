@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         EDID Editor Hex Copy Button
 // @namespace    http://tampermonkey.net/
-// @version      1.0
+// @version      1.1
 // @description  Adds a button to copy clean EDID hex content to clipboard without row offsets
 // @match        https://thyge.github.io/edid-editor/*
 // @grant        GM_setClipboard
@@ -13,7 +13,20 @@
     // create copy button element
     const btn = document.createElement('button');
     btn.textContent = 'Copy Hex';
-    btn.style.cssText = 'margin: 8px 0; padding: 6px 12px; cursor: pointer; border-radius: 4px; border: 1px solid #ccc; background: #f0f0f0; font-weight: bold;';
+    btn.style.cssText = `
+        display: block;
+        width: calc(100% - 10px);
+        box-sizing: border-box;
+        margin: 5px 5px 0px 5px;
+        padding: 5px;
+        cursor: pointer;
+        border-radius: 6px;
+        border: 1px solid #ccc;
+        background: #f0f0f0;
+        font-weight: bold;
+        font-size: 14px;
+        transition: background-color 0.2s ease, border-color 0.2s ease;
+    `;
 
     btn.addEventListener('click', () => {
         // extract all byte elements excluding line headers (.w-8)
