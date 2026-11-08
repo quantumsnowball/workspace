@@ -1,0 +1,59 @@
+#!/usr/bin/env zsh
+
+# any unhandled failures propagate immediately
+set -euo pipefail
+
+# vars
+name='dp-1'
+port='DP-1'
+src="$XDG_CONFIG_HOME/workspace/sunshine/virtual-monitor/edid/$name.hex"
+dst="/usr/lib/firmware/edid/$name.bin"
+
+# ensure the source hex file and is not empty
+if [[ ! -s "$src" ]]; then
+    echo "${RED}The $src must exists and must not be empty${RESET}"
+    exit 1
+fi
+
+# prompt for EDID confirmation
+echo "\n=== EDID Decoding Inspection ==="
+xxd -r -p "$src" | edid-decode
+echo -n "${YELLOW}Proceed with deployment? [y/N] ${RESET}"
+read -r confirm
+if [[ ! "$confirm" =~ ^[Yy]$ ]]; then
+    echo "${RED}Deployment aborted by user ${RESET}"
+    exit 1
+fi
+
+# convert hex source to binary and save to firmware dir
+sudo xxd -revert -plain "$src" "$dst"
+sudo chmod 644 "$dst"
+ls -l "$dst"
+
+# ensure /etc/mkinitcpio.conf contains the file path in FILES=(...)
+if ! grep -qE "FILES=\([^)]*\"?${dst}\"?([^)]*)?\)" /etc/mkinitcpio.conf && ! grep -qF "$dst" /etc/mkinitcpio.conf; then
+    echo "${RED}error: /etc/mkinitcpio.conf does not reference $dst${RESET}" >&2
+    exit 1
+fi
+echo "${GREEN}[OK] /etc/mkinitcpio.conf contains entry for: $dst${RESET}"
+
+# ensure /etc/default/limine line starting with KERNEL_CMDLINE contains the required substring
+cmdline_pattern="drm.edid_firmware=${port}:edid/${name}.bin video=${port}:e"
+if ! grep -E "^KERNEL_CMDLINE" /etc/default/limine | grep -qF "$cmdline_pattern"; then
+    echo "${RED}error: /etc/default/limine KERNEL_CMDLINE missing required string: $cmdline_pattern${RESET}" >&2
+    exit 1
+fi
+echo "${GREEN}[OK] /etc/default/limine contains cmdline pattern: $cmdline_pattern${RESET}"
+
+# regenerate initramfs
+limine-mkinitcpio
+
+# ensure /boot/limine.conf contains cmdline_pattern in at least one entry
+if ! sudo grep -nF "$cmdline_pattern" /boot/limine.conf; then
+    echo "${RED}error: /boot/limine.conf has no entries containing: $cmdline_pattern${RESET}" >&2
+    exit 1
+fi
+echo "${GREEN}[OK] /boot/limine.conf contains generated cmdline pattern${RESET}"
+
+# done
+echo "${GREEN}[DONE] Please reboot the system for the new virtual display to activate${RESET}"

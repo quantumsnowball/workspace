@@ -1,0 +1,4 @@
+output "DP-1" {
+    // turn off by default on startup
+    off
+}
