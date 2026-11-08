@@ -25,12 +25,12 @@
             "output": "",
             "prep-cmd": [
                 {
-                    "do": "niri.reset-outputs",
-                    "undo": "niri.reset-outputs"
+                    "do": "niri msg output DP-1 on",
+                    "undo": "niri msg output DP-1 off"
                 },
                 {
-                    "do": "niri msg create-virtual-output --name HEADLESS-1 --width 1920 --height 1200 --refresh-rate 60",
-                    "undo": ""
+                    "do": "niri msg output DP-1 mode 1920x1200",
+                    "undo": "niri msg output DP-1 mode 1920x1080"
                 }
             ],
             "wait-all": true
@@ -46,12 +46,12 @@
             "output": "",
             "prep-cmd": [
                 {
-                    "do": "niri.reset-outputs",
-                    "undo": "niri.reset-outputs"
+                    "do": "niri msg output DP-1 on",
+                    "undo": "niri msg output DP-1 off"
                 },
                 {
-                    "do": "niri msg create-virtual-output --name HEADLESS-1 --width 2560 --height 1600 --refresh-rate 60",
-                    "undo": ""
+                    "do": "niri msg output DP-1 mode 2560x1600",
+                    "undo": "niri msg output DP-1 mode 1920x1080"
                 }
             ],
             "wait-all": true
@@ -67,12 +67,12 @@
             "output": "",
             "prep-cmd": [
                 {
-                    "do": "niri.reset-outputs",
-                    "undo": "niri.reset-outputs"
+                    "do": "niri msg output DP-1 on",
+                    "undo": "niri msg output DP-1 off"
                 },
                 {
-                    "do": "niri msg create-virtual-output --name HEADLESS-1 --width 1859 --height 1487 --refresh-rate 60",
-                    "undo": ""
+                    "do": "niri msg output DP-1 mode 1859x1487",
+                    "undo": "niri msg output DP-1 mode 1920x1080"
                 }
             ],
             "wait-all": true
@@ -88,12 +88,12 @@
             "output": "",
             "prep-cmd": [
                 {
-                    "do": "niri.reset-outputs",
-                    "undo": "niri.reset-outputs"
+                    "do": "niri msg output DP-1 on",
+                    "undo": "niri msg output DP-1 off"
                 },
                 {
-                    "do": "niri msg create-virtual-output --name HEADLESS-1 --width 1920 --height 1440 --refresh-rate 60",
-                    "undo": ""
+                    "do": "niri msg output DP-1 mode 1920x1440",
+                    "undo": "niri msg output DP-1 mode 1920x1080"
                 }
             ],
             "wait-all": true
@@ -109,12 +109,12 @@
             "output": "",
             "prep-cmd": [
                 {
-                    "do": "niri.reset-outputs",
-                    "undo": "niri.reset-outputs"
+                    "do": "niri msg output DP-1 on",
+                    "undo": "niri msg output DP-1 off"
                 },
                 {
-                    "do": "niri msg create-virtual-output --name HEADLESS-1 --width 2217 --height 1247 --refresh-rate 60",
-                    "undo": ""
+                    "do": "niri msg output DP-1 mode 2217x1247",
+                    "undo": "niri msg output DP-1 mode 1920x1080"
                 }
             ],
             "wait-all": true
