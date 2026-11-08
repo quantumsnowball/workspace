@@ -32,3 +32,9 @@ echo "${GREEN}[OK] /etc/default/limine contains cmdline pattern: $cmdline_patter
 # regenerate initramfs
 limine-mkinitcpio
 
+# ensure /boot/limine.conf contains cmdline_pattern in at least one entry
+if ! sudo grep -nF "$cmdline_pattern" /boot/limine.conf; then
+    echo "${RED}error: /boot/limine.conf has no entries containing: $cmdline_pattern${RESET}" >&2
+    exit 1
+fi
+echo "${GREEN}[OK] /boot/limine.conf contains generated cmdline pattern${RESET}"
