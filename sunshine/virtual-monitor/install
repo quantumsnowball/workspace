@@ -1,5 +1,9 @@
-#!/usr/bin/env bash
+#!/usr/bin/env zsh
 
+# any unhandled failures propagate immediately
+set -euo pipefail
+
+# vars
 name='dp-1'
 port='DP-1'
 src="$XDG_CONFIG_HOME/workspace/sunshine/virtual-monitor/edid/$name.hex"
@@ -9,3 +13,18 @@ dst="/usr/lib/firmware/edid/$name.bin"
 sudo xxd -revert -plain "$src" "$dst"
 sudo chmod 644 "$dst"
 ls -l "$dst"
+
+# ensure /etc/mkinitcpio.conf contains the file path in FILES=(...)
+if ! grep -qE "FILES=\([^)]*\"?${dst}\"?([^)]*)?\)" /etc/mkinitcpio.conf && ! grep -qF "$dst" /etc/mkinitcpio.conf; then
+    echo "${RED}error: /etc/mkinitcpio.conf does not reference $dst${RESET}" >&2
+    exit 1
+fi
+echo "${GREEN}[OK] /etc/mkinitcpio.conf contains entry for: $dst${RESET}"
+
+# ensure /etc/default/limine line starting with KERNEL_CMDLINE contains the required substring
+cmdline_pattern="drm.edid_firmware=${port}:edid/${name}.bin video=${port}:e"
+if ! grep -E "^KERNEL_CMDLINE" /etc/default/limine | grep -qF "$cmdline_pattern"; then
+    echo "${RED}error: /etc/default/limine KERNEL_CMDLINE missing required string: $cmdline_pattern${RESET}" >&2
+    exit 1
+fi
+echo "${GREEN}[OK] /etc/default/limine contains cmdline pattern: $cmdline_pattern${RESET}"
