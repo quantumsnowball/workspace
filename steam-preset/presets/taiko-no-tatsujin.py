@@ -3,7 +3,7 @@ from evdev import ecodes as e
 key = 'taiko-no-tatsujin'
 
 key_mapper = dict(
-    source='Pure: kanata',
+    source='Pure: Kanata: BOW Keyboard',
     key_map={
         # left
         e.KEY_X: e.KEY_Z,
