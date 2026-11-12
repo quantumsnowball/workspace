@@ -2,12 +2,12 @@ from steam_preset import *
 
 
 def config(
-    steam_env: Env,
-    steam_cmd: Cmd,
-    preset_env: Env,
-    preset_wrapper: Wrapper,
-    preset_arg: Arg,
-) -> tuple[Env, Cmd]:
+    steam_env: Env_,
+    steam_cmd: Cmd_,
+    preset_env: Env_,
+    preset_wrapper: Wrapper_,
+    preset_arg: Arg_,
+) -> tuple[Env_, Cmd_]:
 
     # env
     env = steam_env | preset_env
