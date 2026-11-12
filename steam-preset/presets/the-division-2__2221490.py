@@ -2,8 +2,6 @@
 
 from steam_preset import *
 
-key = 2221490
-
 env: Env_ = dict(
     # division 2 in-game fps limiter is unclean, setting to 60 fps limit gives unstable 61-62 fps
     # setting DXVK_FRAME_RATE=60 or VKD3D_FRAME_RATE=60 enforce a clean 60 stable fps limiter

@@ -1,7 +1,5 @@
 from evdev import ecodes as e
 
-key = 'taiko-no-tatsujin'
-
 key_mapper = dict(
     source='Pure: Kanata: BOW Keyboard',
     key_map={

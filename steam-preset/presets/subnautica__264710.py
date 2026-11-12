@@ -1,5 +1,3 @@
-key = 264710
-
 env = dict(
     PRESSURE_VESSEL_IMPORT_OPENXR_1_RUNTIMES=1,
 )

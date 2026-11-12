@@ -1,7 +1,5 @@
 from steam_preset import *
 
-key = 244210
-
 
 def config(
     steam_env: Env,
