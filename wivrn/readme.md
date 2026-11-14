@@ -38,3 +38,7 @@ use the following launch options in Steam:
 ```
 PRESSURE_VESSEL_IMPORT_OPENXR_1_RUNTIMES=1 %command%
 ```
+
+Note:
+As of the Nov 2026, this env has already set when install wivrn-dashboard
+check `/usr/lib/environment.d/wivrn.conf` to confirm it is already set at startup
