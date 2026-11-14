@@ -1,3 +1,9 @@
+from steam_preset import *
+
 env = dict(
-    PRESSURE_VESSEL_IMPORT_OPENXR_1_RUNTIMES=1,
+    MANGOHUD_CONFIGFILE=XDG_CONFIG_HOME/'MangoHud/MangoHud-120fps.conf',
 )
+
+wrapper = [
+    'mangohud',
+]

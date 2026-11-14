@@ -1,4 +1,13 @@
 from evdev import ecodes as e
+from steam_preset import *
+
+env = dict(
+    MANGOHUD_CONFIGFILE=XDG_CONFIG_HOME/'MangoHud/MangoHud-60fps.conf',
+)
+
+wrapper = [
+    'mangohud',
+]
 
 key_mapper = dict(
     source='Pure: Kanata: BOW Keyboard',
