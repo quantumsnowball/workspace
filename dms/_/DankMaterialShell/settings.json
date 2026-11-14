@@ -757,5 +757,12 @@
   ],
   "avatarRing": "none",
   "matugenSpec": "dms",
-  "matugenSourceMode": "dominant"
+  "matugenSourceMode": "dominant",
+  "powerMenuBootEntries": [
+    {
+      "id": "0000",
+      "label": "Windows Boot Manager"
+    }
+  ],
+  "powerMenuFirmwareSetup": true
 }
