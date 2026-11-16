@@ -43,7 +43,7 @@ binds {
     }
 
     // overview
-    Super+Tab repeat=false { toggle-overview; }
+    Super+Apostrophe repeat=false { toggle-overview; }
 
     // monitors
     Super+Backslash { focus-monitor-next; }
