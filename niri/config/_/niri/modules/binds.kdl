@@ -65,6 +65,8 @@ binds {
     Super+End   { focus-column-last; }
     Super+Tab       { spawn-sh "niri.cycle-column-windows down"; }
     Super+Shift+Tab { spawn-sh "niri.cycle-column-windows up"; }
+    Super+Next      { spawn-sh "niri.cycle-column-windows down"; }
+    Super+Prior     { spawn-sh "niri.cycle-column-windows up"; }
 
     // viewport scrolling like
     Super+Alt+H     { spawn-sh "niri.with-center-one focus-column-left"; }
