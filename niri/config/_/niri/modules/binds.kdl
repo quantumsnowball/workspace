@@ -54,8 +54,8 @@ binds {
 
     // windows focus
     Super+H     { focus-column-left; }
-    Super+J     { focus-window-or-workspace-down; }
-    Super+K     { focus-window-or-workspace-up; }
+    Super+J     { focus-workspace-down; }
+    Super+K     { focus-workspace-up; }
     Super+L     { focus-column-right; }
     Super+Left  { focus-column-left; }
     Super+Down  { focus-window-or-workspace-down; }
