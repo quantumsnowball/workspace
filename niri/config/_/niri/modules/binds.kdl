@@ -42,6 +42,9 @@ binds {
     Super+I hotkey-overlay-title="Gemini" {
         spawn-sh "gtk-launch 'chrome-Google Gemini'";
     }
+    Mod+S {
+        spawn-sh "kitty --hold -e steam";
+    }
     Ctrl+Alt+Delete hotkey-overlay-title="Logout" {
         quit skip-confirmation=true;
     }
