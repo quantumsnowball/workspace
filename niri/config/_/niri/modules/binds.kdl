@@ -121,7 +121,7 @@ binds {
     Super+Return             { center-column; }
     Super+Alt+Return         { center-visible-columns; }
     Super+Comma              { consume-window-into-column; }
-    Super+Period             { spawn-sh "niri msg action expel-window-from-column && niri msg action focus-column-right && niri msg action focus-column-left"; }
+    Super+Period             { expel-window-from-column; }
     Super+Shift+Comma        { consume-or-expel-window-left; }
     Super+Shift+Period       { consume-or-expel-window-right; }
     Super+A                  { toggle-window-floating; }
