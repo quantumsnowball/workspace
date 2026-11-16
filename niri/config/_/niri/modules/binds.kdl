@@ -1,4 +1,8 @@
 binds {
+    //
+    // Install and run `wev` and press the key to see the key names
+    //
+
     // help
     Super+F1 { show-hotkey-overlay; }
 
