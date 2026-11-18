@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+
+direction="${1:-down}"
+
+if [ "$direction" = "up" ]; then
+    move_action="focus-window-up"
+    wrap_action="focus-window-bottom"
+else
+    move_action="focus-window-down"
+    wrap_action="focus-window-top"
+fi
+
+# get focused window id before moving
+before=$(niri msg -j focused-window | jq -r '.id')
+
+niri msg action "$move_action"
+
+# check if focus stayed on the same window
+after=$(niri msg -j focused-window | jq -r '.id')
+
+if [ "$before" = "$after" ]; then
+    niri msg action "$wrap_action"
+fi

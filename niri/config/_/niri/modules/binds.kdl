@@ -1,4 +1,8 @@
 binds {
+    //
+    // Install and run `wev` and press the key to see the key names
+    //
+
     // help
     Super+F1 { show-hotkey-overlay; }
 
@@ -38,12 +42,15 @@ binds {
     Super+I hotkey-overlay-title="Gemini" {
         spawn-sh "gtk-launch 'chrome-Google Gemini'";
     }
+    Mod+S {
+        spawn-sh "kitty --hold -e steam";
+    }
     Ctrl+Alt+Delete hotkey-overlay-title="Logout" {
         quit skip-confirmation=true;
     }
 
     // overview
-    Super+Tab repeat=false { toggle-overview; }
+    Super+Apostrophe repeat=false { toggle-overview; }
 
     // monitors
     Super+Backslash { focus-monitor-next; }
@@ -54,8 +61,8 @@ binds {
 
     // windows focus
     Super+H     { focus-column-left; }
-    Super+J     { focus-window-or-workspace-down; }
-    Super+K     { focus-window-or-workspace-up; }
+    Super+J     { focus-workspace-down; }
+    Super+K     { focus-workspace-up; }
     Super+L     { focus-column-right; }
     Super+Left  { focus-column-left; }
     Super+Down  { focus-window-or-workspace-down; }
@@ -63,6 +70,10 @@ binds {
     Super+Right { focus-column-right; }
     Super+Home  { focus-column-first; }
     Super+End   { focus-column-last; }
+    Super+Tab       { spawn-sh "niri.cycle-column-windows down"; }
+    Super+Shift+Tab { spawn-sh "niri.cycle-column-windows up"; }
+    Super+Next      { spawn-sh "niri.cycle-column-windows down"; }
+    Super+Prior     { spawn-sh "niri.cycle-column-windows up"; }
 
     // viewport scrolling like
     Super+Alt+H     { spawn-sh "niri.with-center-one focus-column-left"; }
@@ -119,7 +130,7 @@ binds {
     Super+Return             { center-column; }
     Super+Alt+Return         { center-visible-columns; }
     Super+Comma              { consume-window-into-column; }
-    Super+Period             { spawn-sh "niri.do expel-window-from-column focus-column-right focus-column-left center-visible-columns"; }
+    Super+Period             { expel-window-from-column; }
     Super+Shift+Comma        { consume-or-expel-window-left; }
     Super+Shift+Period       { consume-or-expel-window-right; }
     Super+A                  { toggle-window-floating; }
