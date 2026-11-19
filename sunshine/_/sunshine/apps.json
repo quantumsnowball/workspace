@@ -32,6 +32,27 @@
             "exclude-global-prep-cmd": false,
             "exit-timeout": 5,
             "image-path": "",
+            "name": "Standard - 64:27 / 2.37 (2560x1080)",
+            "output": "",
+            "prep-cmd": [
+                {
+                    "do": "niri msg output DP-1 on",
+                    "undo": "niri msg output DP-1 off"
+                },
+                {
+                    "do": "niri msg output DP-1 mode 2560x1080",
+                    "undo": "niri msg output DP-1 mode 2560x1080"
+                }
+            ],
+            "wait-all": true
+        },
+        {
+            "auto-detach": true,
+            "cmd": "",
+            "elevated": false,
+            "exclude-global-prep-cmd": false,
+            "exit-timeout": 5,
+            "image-path": "",
             "name": "s7 - 16:10 / 1.6 (1920x1200)",
             "output": "",
             "prep-cmd": [
