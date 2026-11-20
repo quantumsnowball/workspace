@@ -17,6 +17,7 @@ wrapper = (
         '-w', s.width, '-h', s.height,
         # '--borderless',
         '--fullscreen',
+        '--force-windows-fullscreen',
         '--',
         'mangohud',
     ]
