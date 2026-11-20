@@ -11,7 +11,7 @@
             "exclude-global-prep-cmd": false,
             "exit-timeout": 5,
             "image-path": "",
-            "name": "Standard - 16:9 / 1.78 (1920x1080)",
+            "name": "Standard HD - 16:9 / 1.78 (1920x1080)",
             "output": "",
             "prep-cmd": [
                 {
@@ -32,7 +32,7 @@
             "exclude-global-prep-cmd": false,
             "exit-timeout": 5,
             "image-path": "",
-            "name": "Standard - 64:27 / 2.37 (2560x1080)",
+            "name": "Standard UHD - 64:27 / 2.37 (2560x1080)",
             "output": "",
             "prep-cmd": [
                 {
@@ -42,6 +42,27 @@
                 {
                     "do": "niri msg output DP-1 mode 2560x1080",
                     "undo": "niri msg output DP-1 mode 2560x1080"
+                }
+            ],
+            "wait-all": true
+        },
+        {
+            "auto-detach": true,
+            "cmd": "",
+            "elevated": false,
+            "exclude-global-prep-cmd": false,
+            "exit-timeout": 5,
+            "image-path": "",
+            "name": "Standard 2K - 16:9 / 1.78 (2560x1440)",
+            "output": "",
+            "prep-cmd": [
+                {
+                    "do": "niri msg output DP-1 on",
+                    "undo": "niri msg output DP-1 off"
+                },
+                {
+                    "do": "niri msg output DP-1 mode 2560x1440",
+                    "undo": "niri msg output DP-1 mode 2560x1440"
                 }
             ],
             "wait-all": true
