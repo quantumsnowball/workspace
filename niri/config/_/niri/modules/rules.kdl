@@ -41,6 +41,13 @@ window-rule  {
     open-floating false
 }
 
+// forza horizon 6
+window-rule  {
+    match title="Forza Horizon 6"
+    open-floating false
+    open-fullscreen true
+}
+
 // tethering popup
 window-rule {
     // match the custom class
