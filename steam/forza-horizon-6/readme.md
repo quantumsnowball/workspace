@@ -1,5 +1,14 @@
 # Forza Horizon 6
 
+## Bypass xbox account login on linux
+- run `protontricks <app_id> regedit` to edit the steam pfx
+- go to the path `HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\GamingServices`
+- add dword `ForceUseInprocGameSaves` and set value to `1`
+- launch the game, try to go into settings, it will loading for a whole
+- then it say sync fail, and then prompt for Offline mode, click it and it will create an offline profile
+- you can then freely restore any other offline save files into the `ContainersRoot` dir
+- if save file are created using the same dummy account, it will decrypt it without problem
+
 ## About the ffb wheel not working well on Linux bug
 Half years after launch, the linux community has a new `universal-pidff` driver.
 Tested out it is supporting the ffb effect no problem anymore.
