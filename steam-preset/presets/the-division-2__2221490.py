@@ -12,6 +12,6 @@ env = dict(
 )
 
 wrapper = [
-    'taskset', '-c', '0-15',
+    # 'taskset', '-c', '0-15',
     'mangohud',
 ]
