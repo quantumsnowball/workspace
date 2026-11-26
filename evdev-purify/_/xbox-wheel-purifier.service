@@ -4,7 +4,7 @@ After=graphical-session.target
 
 [Service]
 Type=exec
-ExecStart=uv tool run evdev-purify xbox-wheel "Generic X-Box pad"
+ExecStart=%h/.local/bin/evdev-purify xbox-wheel "Generic X-Box pad"
 
 Restart=always
 RestartSec=1

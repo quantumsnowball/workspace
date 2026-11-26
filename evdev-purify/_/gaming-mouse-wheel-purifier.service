@@ -4,7 +4,7 @@ After=graphical-session.target
 
 [Service]
 Type=exec
-ExecStart=uv tool run evdev-purify mouse-wheel "WLS.Ltd Gaming TouchPad Mouse"
+ExecStart=%h/.local/bin/evdev-purify mouse-wheel "WLS.Ltd Gaming TouchPad Mouse"
 
 Restart=always
 RestartSec=1
