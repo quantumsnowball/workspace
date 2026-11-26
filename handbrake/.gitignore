@@ -2,5 +2,6 @@
 /_/ghb/*.pid.*
 /_/ghb/*.log
 /_/ghb/*.log.*
+/_/ghb/queue.*
 /_/ghb/EncodeLogs/
 /_/ghb/preferences.json
