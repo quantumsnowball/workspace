@@ -220,7 +220,7 @@
       "transparency": 0.5,
       "widgetTransparency": 0.15,
       "squareCorners": false,
-      "noBackground": false,
+      "noBackground": true,
       "maximizeWidgetIcons": false,
       "maximizeWidgetText": false,
       "widgetPadding": 3,
