@@ -152,7 +152,8 @@
           "groupWorkspaceApps": false,
           "showOccupiedWorkspacesOnly": true,
           "workspaceActiveAppHighlightEnabled": true,
-          "workspaceColorMode": "primaryContainer"
+          "workspaceColorMode": "primaryContainer",
+          "workspaceFocusedBorderEnabled": true
         },
         {
           "id": "separator",
