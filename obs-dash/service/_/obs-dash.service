@@ -10,6 +10,3 @@ Restart=always
 RestartSec=1
 # Ensures logs show up immediately
 Environment=PYTHONUNBUFFERED=1
-
-[Install]
-WantedBy=graphical-session.target
