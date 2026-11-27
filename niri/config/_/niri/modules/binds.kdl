@@ -145,7 +145,7 @@ binds {
 
     // OBS
     // store obs websocket password in ~/.obsws_password
-    Shift+F1 { spawn-sh "obs-cmd -w obsws://localhost:4455/$(cat $HOME/.obsws_password) recording toggle"; }
+    Shift+F1 { spawn-sh "obs-cmd -w obsws://localhost:4455/$(cat $HOME/.obs-studio-password) recording toggle"; }
     Shift+Alt+F1 { spawn-sh "obs-dash-toggle"; }
     Shift+Ctrl+F1 { spawn-sh "obs-dash-toggle"; }
 
